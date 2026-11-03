@@ -11,8 +11,6 @@ Hlášení závad a oznámení jsou nativní hodnota, bez které by App Store ap
 Konkurence (App Store, rešerše 3. 11. 2026; před psaním popisu ověř ručně):
 - Munipolis: push výstrahy, zprávy, hlášení závad, více obcí; 4,2/5 z 499 hodnocení, 153,4 MB, iOS 15+. Uděláme lépe: malá instalace (cíl do 60 MB, změř), AI asistent nad dokumenty obce, role úřad ve stejné aplikaci, stav budov.
 - V obraze: zprávy z webů obcí a desek, přes 2 600 organizací; 3,4/5 z 68 hodnocení, věk 16+. Uděláme lépe: hlášení závad se stavem, účet, deska s archivem podle pravidel.
-- Zlepšeme Česko: jen hlášení problémů s polohou.
-Hlášenku a Obec v mobilu rešerše neověřila, nepiš o nich jako o faktu.
 </kontext>
 
 <cil>
@@ -151,21 +149,20 @@ Smazání účtu: vysvětlení, potvrzení čerstvým kódem. Server smaže `obc
 - AI: čl. 50 AI Actu (platí od 2. 8. 2026): sdělení při první interakci a trvalý štítek; odpovědi se zdrojem; dotazy se neukládají k osobě.
 - Platby: přímo na účet obce, aplikace peníze nedrží (CLAUDE.md, pravidlo 3).
 - Google Play, vládní informace: aplikace není oficiální aplikací státu ani obce. V popisu „Neoficiální aplikace, provozuje CodeKom s.r.o. jménem obcí“ a zdroje (domény obcí); vyplň Government apps declaration, v poznámkách pro recenzenty doklad pověření pilotní obce `[DOPLNIT]`.
-- Apple 5.1.1(ix): aplikaci v regulované oblasti podává právnická osoba, účty vývojáře vede CodeKom s.r.o. (`[DOPLNIT: IČO, D-U-N-S]`). Do jeho založení jen interní testování (TestFlight, interní test Google Play).
+- Apple 5.1.1(ix): aplikaci v regulované oblasti podává právnická osoba, účty vede CodeKom s.r.o. (`[DOPLNIT: IČO, D-U-N-S]`); do jejího založení jen interní testování.
 - Přístupnost, zákon č. 99/2019 Sb.: povinným subjektem je obec, aplikace „vytvořená pro něj“ musí vyhovět nepřímo. Cíl EN 301 549 V3.2.1 (WCAG 2.1 AA), stavět podle WCAG 2.2 AA. Prohlášení uvádí aplikace, míru souladu, důvody nesouladu a způsob podání stížnosti; dozor DIA. Šablona `store/prohlaseni-o-pristupnosti.md`, zobrazená i v Profilu; obec ho zveřejní na webu.
 - Android: od 31. 8. 2026 musí nové aplikace a aktualizace cílit na API 36. Ověř, že výchozí `targetSdkVersion` SDK 58 to splňuje, jinak nastav v `expo-build-properties`.
 </pravidla>
 
 <design_a_pristupnost>
-Vzhled: pravidla unslop z CLAUDE.md. Barvy a typografie z `packages/tokeny`; akcent z palety obce (0–2); krizové úrovně pevně podle gov.cz (Informace `#F2F6FC`/`#0C1838`/`#00469B`, Výstraha `#FEF6D8`/`#2A1B00`/`#CA8504`, Krizová situace `#B00A0D`/`#FFFFFF`/`#6E0507`). Text 17 pt, systémové škálování. Prototyp používá Public Sans; ověř licenci a vyber písmo podle velikosti instalace. Světlý i tmavý režim, kontrast textu aspoň 4,5 : 1, ovládacích prvků 3 : 1.
+Vzhled: pravidla unslop z CLAUDE.md. Barvy a typografie z `packages/tokeny`; akcent z palety obce (0–2); krizové úrovně pevně podle gov.cz (Informace `#F2F6FC`/`#0C1838`/`#00469B`, Výstraha `#FEF6D8`/`#2A1B00`/`#CA8504`, Krizová situace `#B00A0D`/`#FFFFFF`/`#6E0507`). Text 17 pt, systémové škálování. Světlý i tmavý režim, kontrast textu aspoň 4,5 : 1, ovládacích prvků 3 : 1.
 
 - Každý interaktivní prvek má `accessibilityRole`, srozumitelný `accessibilityLabel`, `accessibilityState` a tam, kde výsledek není zřejmý, `accessibilityHint`. Dekorativní obrázky skryté, ostatní mají popis.
 - Cíle aspoň 44 × 44 pt (iOS) a 48 dp (Android), mezera mezi sousedními aspoň 8.
 - Dynamická velikost písma bez pevných výšek; `maxFontSizeMultiplier` jen u záložkové lišty (nejvýš 1,5). Ruční kontrola při 200 % na šířce 320 pt: nic se neořízne ani nepřekrývá.
 - Krizový banner čtečka přečte jako první na Domů; jeho změna za běhu se ohlásí (`accessibilityLiveRegion`, na iOS `announceForAccessibility`; u Krizové situace asertivně).
-- Pořadí fokusu odpovídá vizuálnímu; modální okna zachytí a vrátí fokus; chyby formulářů se oznámí a jsou spojené s polem.
-- Respektuj `AccessibilityInfo.isReduceMotionEnabled`; bez blikání; držení tlačítka má alternativu.
-- Barva není jediný nositel významu (úroveň, stav hlášení i budovy slovem).
+- Pořadí fokusu odpovídá vizuálnímu; modální okna fokus zachytí a vrátí; chyby formulářů se oznámí.
+- Respektuj `AccessibilityInfo.isReduceMotionEnabled`; bez blikání. Úroveň, stav hlášení i budovy jsou slovem, barva je doplněk.
 - Záložky: pro občana Domů, Deska, Hlásit, Asistent, Služby; Profil je ikona v záhlaví; pro pracovníka šestá záložka Úřad. Při velkém písmu popisek zalamuj, nezmenšuj.
 - VoiceOver a TalkBack projdi ručně a výsledek zapiš do `docs/verification-log.md`.
 </design_a_pristupnost>
@@ -177,13 +174,13 @@ Vzhled: pravidla unslop z CLAUDE.md. Barvy a typografie z `packages/tokeny`; akc
 - Certificate pinning neřešíme: komunikujeme s vlastním API na běžném veřejném certifikátu, který obmění hostitel; pevný pin by při rotaci nebo změně hostingu aplikaci vyřadil a oprava jde jen novou verzí z obchodu, což u krizových hlášení hrozí víc než útok, který pinning řeší. Zapiš do `docs/rozhodnuti.md`.
 - Validace: zod na všech vstupech (délky, výčty, formáty), limit těla, u nahrávání JPEG max 1,5 MB a 3 fotky, serverové překódování obrázku bez metadat (test s fixturou s GPS), kontrola, že `obec` a `casti` patří k sobě. Odkazy jen přes `bezpecnyOdkaz`, žádné HTML z API.
 - Rate limit na serveru: kód 5/h na e-mail a 20/h na IP, 5 pokusů na kód, hlášení závad 10/den na účet, asistent 30/h na IP, registrace zařízení 20/h na IP, zamčení pracovníka po 5 chybách.
-- Soukromí: poloha jen v popředí a jen při hlášení; foto a poloha jdou jen k obci; push token je identifikátor zařízení a patří do Data safety.
+- Soukromí: poloha jen v popředí a jen při hlášení; foto a poloha jdou jen k obci.
 - Demo pro recenzenty: kódem z e-mailu se recenzent nepřihlásí. Přes serverové proměnné povol jeden předem daný e-mail občana a jednoho demo pracovníka s pevným kódem bez skutečného 2FA, oba jen pro obec Javoří Lhota se seed daty, s vlastním rate limitem, ve výchozím stavu vypnuté (`[DOPLNIT: demo e-mail]`). Vědomý kompromis zapiš do `docs/rozhodnuti.md`.
 - Obchody: `PrivacyInfo.xcprivacy` (nic nesleduje, deklarované API podle knihoven; ověř ITMS-91056 při uploadu), App Privacy a Data safety v `store/`: e-mail (účet), přesná poloha (jen při hlášení, volitelná), fotky (volitelné), push token, diagnostika jen s opt-in; žádné sledování. Věkové hodnocení vyplň v obou obchodech s ohledem na fotky a AI chat; předpoklad je nízké, ověř. Popisy a poznámky pro recenzenty česky.
 </bezpecnost_a_soukromi>
 
 <testy>
-Cíl je ověřit pravidla, ne pokrytí řádků. Žádný test se nesmí přeskočit ani upravit, aby prošel.
+Ověřují se pravidla, ne pokrytí řádků. Žádný test se nepřeskakuje ani neupravuje, aby prošel.
 
 | Co | Nástroj |
 |---|---|
@@ -196,7 +193,7 @@ Cíl je ověřit pravidla, ne pokrytí řádků. Žádný test se nesmí přesko
 | Přístupnost | `eslint-plugin-react-native-a11y` jako chyba; test vykresleného stromu vyžaduje role, popisky a minimální rozměry z tokenů; ruční VoiceOver a TalkBack |
 | Typy, styl | `tsc --noEmit`, ESLint |
 
-Příjem notifikace: iOS `xcrun simctl push` s payloadem shodným s odesílačem a ťuknutí otevře detail; Android emulátor s obrazem Google Play a skutečným Expo tokenem. Dobu od publikace do doručení měří skript `scripts/push-latence.ts`, ne Maestro; možnosti Maestro u oznámení ověř v jeho dokumentaci.
+Příjem notifikace: iOS `xcrun simctl push` a ťuknutí otevře detail; Android emulátor s obrazem Google Play a skutečným Expo tokenem. Dobu od publikace do doručení měří skript `scripts/push-latence.ts`; možnosti Maestro u oznámení ověř v jeho dokumentaci.
 </testy>
 
 <postup>
@@ -251,8 +248,8 @@ Vše zapiš do `docs/verification-log.md` (zdroj, datum, závěr), nebo v kódu 
 | Mapa se špendlíkem: knihovna a poskytovatel dlaždic, licence, veřejný klíč (`[DOPLNIT: poskytovatel dlaždic]`) | docs a podmínky poskytovatele |
 | OWASP MASVS (aktuální verze) a MASTG | mas.owasp.org |
 | Čl. 50 AI Act a Digital Omnibus | eur-lex.europa.eu |
-| Zákon č. 99/2019 Sb., EN 301 549 V3.2.1 pro mobilní aplikace; zda DIA řeší soukromé dodavatele | e-Sbírka, dia.gov.cz; dotaz na DIA jako úkol pro zakladatele |
-| Hlášenka, Obec v mobilu, hodnocení konkurentů na Google Play | ruční průchod listingů |
+| Zákon č. 99/2019 Sb., EN 301 549 V3.2.1; zda DIA řeší soukromé dodavatele | e-Sbírka, dia.gov.cz; dotaz na DIA |
+| Hlášenka, Obec v mobilu a hodnocení konkurentů na Google Play (rešerše je neověřila) | ruční průchod listingů |
 | NIA pro soukromého dodavatele, EAA pro platby a rezervace, EU trader status v App Store | jen zapsat jako otevřené otázky pro DIA a právníka |
 </overit>
 
