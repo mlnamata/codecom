@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>09 Hřeben – Javoří Lhota</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&amp;display=swap">
+<style>
+body{margin:0;background:#ECECE8}
+*{box-sizing:border-box}
+.site a{color:var(--link)}
+.site a:hover{color:var(--ink)}
+.site :focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.site .deep :focus-visible{outline-color:var(--on-deep)}
+.site .on-primary :focus-visible{outline-color:var(--on-primary)}
+.site .deep .on-light :focus-visible{outline-color:var(--link)}
+.site .alert :focus-visible{outline-color:currentColor}
+.spec :focus-visible{outline:3px solid #1A1A18;outline-offset:2px}
+.site h1,.site h2,.site h3,.site h4{line-height:1.2;font-weight:500}
+.site strong,.site b,.site th{font-weight:600}
+.site footer a:not([style*="padding"]),.site nav a:not([style*="padding"]),.site td a,.site dd a,.site .hit{display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-narrow{display:none}
+@media (max-width:767.98px){
+.nav-wide{display:none!important}
+.nav-narrow{display:block;margin-left:auto}
+.nav-narrow[open]{flex-basis:100%}
+.nav-narrow>summary{list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer}
+.nav-narrow>summary::-webkit-details-marker{display:none}
+.nav-narrow nav{display:flex;flex-direction:column;padding:8px 0 4px}
+.nav-narrow nav a{margin-block:0;padding-block:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+</style>
+</helmet>
+<div>
+<section class="spec" aria-label="Barevná paleta šablony" style="background: #ECECE8; color: #1A1A18; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 14px; line-height: 1.45; border-bottom: 1px solid #CFCFC9">
+  <div style="padding: 20px clamp(16px, 4vw, 32px) 24px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px 24px">
+      <p style="margin: 0; max-width: 60ch"><span style="display: block; font-size: 18px; font-weight: 600">Šablona 09 Hřeben</span><span style="display: block; color: #55554F">Pro horské a turistické obce. Inspirace: Administration (axiomthemes) – obří titulek přes panoráma a číslované služby. Ukázka pro smyšlenou obec Javoří Lhota.</span></p>
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end">
+        <div role="group" aria-label="Barevná varianta" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px">
+          <span style="font-weight: 600; margin-right: 4px">Barevná varianta</span>
+          <sc-for list="{{variants}}" as="vr" hint-placeholder-count="3">
+            <button type="button" onClick="{{vr.pick}}" aria-pressed="{{vr.pressed}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #1A1A18; background: {{vr.bg}}; color: {{vr.ink}}; font: inherit; font-weight: 500; cursor: pointer"><span aria-hidden="true" style="display: inline-flex"><span style="width: 16px; height: 16px; border-radius: 50%; background: {{vr.a}}; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3)"></span><span style="width: 16px; height: 16px; border-radius: 50%; margin-left: -4px; background: {{vr.b}}; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9)"></span><span style="width: 16px; height: 16px; border-radius: 50%; margin-left: -4px; background: {{vr.d}}; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9)"></span></span>{{vr.name}}</button>
+          </sc-for>
+        </div>
+        <div role="group" aria-label="Krizový banner" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px">
+          <span style="font-weight: 600; margin-right: 4px">Krizový banner</span>
+          <sc-for list="{{alertOpts}}" as="ao" hint-placeholder-count="4">
+            <button type="button" onClick="{{ao.pick}}" aria-pressed="{{ao.pressed}}" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #1A1A18; background: {{ao.bg}}; color: {{ao.ink}}; font: inherit; font-weight: 500; cursor: pointer">{{ao.name}}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <ul aria-label="Barvy varianty {{paletteName}}" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(148px, 100%), 1fr)); gap: 8px">
+      <sc-for list="{{swatches}}" as="sw" hint-placeholder-count="12">
+        <li style="display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 8px; background: #FFFFFF">
+          <span aria-hidden="true" style="flex: 0 0 40px; height: 40px; border-radius: 6px; background: {{sw.hex}}; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16)"></span>
+          <span style="min-width: 0"><span style="display: block; font-weight: 600">{{sw.name}}</span><span style="display: block; color: #55554F; font-variant-numeric: tabular-nums">{{sw.hex}} {{sw.note}}</span></span>
+        </li>
+      </sc-for>
+    </ul>
+    <p style="margin: 0; color: #55554F">Písmo: Archivo v úzkých i běžných řezech. Barvy jsou tokeny, obec je může v editoru Advance přepsat vlastními. Návrhová pravidla: skill unslop od Damira Sokolovského (@heydamir), CC BY 4.0.</p>
+  </div>
+</section>
+<div class="site" style="{{vars}} background: var(--bg); color: var(--ink); font-family: 'Archivo', system-ui, sans-serif; font-size: 17px; line-height: 1.55">
+<sc-if value="{{alertOn}}" hint-placeholder-val="{{ true }}">
+<section class="alert" aria-labelledby="krize-titulek" style="background: {{al.bg}}; color: {{al.ink}}; border-bottom: 4px solid {{al.edge}}">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 12px clamp(16px, 4vw, 32px); display: flex; gap: 12px; align-items: flex-start">
+    <sc-if value="{{al.isInfo}}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 22px; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></sc-if>
+    <sc-if value="{{al.isWarn}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 22px; margin-top: 1px"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg></sc-if>
+    <div style="min-width: 0">
+      <h2 id="krize-titulek" style="margin: 0; font-size: 17px; line-height: 1.35; font-weight: 600">{{al.kind}}: {{al.title}}</h2>
+      <p style="margin: 2px 0 0; line-height: 1.5">{{al.text}} <a href="#" style="color: inherit; font-weight: 600">{{al.link}}</a></p>
+    </div>
+  </div>
+</section>
+</sc-if>
+<div class="deep" style="position: relative; background: var(--deep); color: #FFFFFF; overflow: hidden">
+  <svg viewBox="0 0 1440 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+    <path d="M0 520 L180 460 L300 490 L470 440 L620 470 L760 420 L900 440 L1060 300 L1220 390 L1440 330 V640 H0z" style="fill: var(--far)"></path>
+    <path d="M1060 300 L1024 332 L1046 328 L1062 342 L1080 324 L1100 336z" style="fill: var(--snow)"></path>
+    <rect x="1056" y="260" width="8" height="42" style="fill: var(--snow)"></rect><path d="M1046 266 h28 l-4 -10 h-20z" style="fill: var(--snow)"></path>
+    <path d="M0 580 L220 510 L360 540 L560 490 L760 530 L960 470 L1180 505 L1440 440 V640 H0z" style="fill: var(--near)"></path>
+    <g style="fill: var(--deep)" opacity="0.6"><path d="M120 560 l18 -54 l18 54z"></path><path d="M160 560 l14 -40 l14 40z"></path><path d="M1260 560 l18 -54 l18 54z"></path><path d="M1300 560 l14 -42 l14 42z"></path><path d="M1340 560 l18 -58 l18 58z"></path></g>
+  </svg>
+  <header style="position: relative; max-width: 1240px; margin: 0 auto; padding: 20px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; color: #FFFFFF; text-decoration: none"><svg width="30" height="36" viewBox="0 0 40 48" aria-hidden="true" style="flex: 0 0 auto"><path d="M2 2h36v20c0 12-8 20-18 24C10 42 2 34 2 22z" fill="#2E6B3F"></path><path d="M20 5l2.5 5.5 4-2-1 6 5-1.5-2.5 5 3.5 1.5-6 3 1 3.5-5-1V31h-3v-6l-5 1 1-3.5-6-3 3.5-1.5-2.5-5 5 1.5-1-6 4 2z" fill="#E2B33C"></path><path d="M10 37c2.2-1.6 4.4-1.6 6.7 0s4.4 1.6 6.7 0 4.4-1.6 6.6 0" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round"></path></svg><span style="font-weight: 600; font-size: 20px; font-stretch: 85%">Javoří Lhota</span></a>
+    <nav class="nav-wide" aria-label="Hlavní menu" style="display: flex; flex-wrap: wrap; gap: 0 24px; font-weight: 500">
+      <a href="#" style="color: #FFFFFF; text-decoration: none">Pro místní</a>
+      <a href="#" style="color: #FFFFFF; text-decoration: none">Pro návštěvníky</a>
+      <a href="#" style="color: #FFFFFF; text-decoration: none">Obecní úřad</a>
+      <a href="#" style="color: #FFFFFF">Hledat</a>
+    </nav>
+<details class="nav-narrow"><summary><svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="2"></path></svg>Menu</summary><nav aria-label="Hlavní menu"><a href="#">Pro místní</a><a href="#">Pro návštěvníky</a><a href="#">Obecní úřad</a><a href="#">Hledat</a></nav></details>
+  </header>
+  <section aria-labelledby="hreben-titulek" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 56px clamp(16px, 4vw, 32px) 40px">
+    <h1 id="hreben-titulek" style="margin: 0; font-weight: 500; font-stretch: 62%; font-size: clamp(72px, 17vw, 240px); line-height: 0.95; letter-spacing: -0.02em">Javorník</h1>
+    <p style="margin: 8px 0 0; max-width: 40ch; font-size: 20px; line-height: 1.45">Javoří Lhota pod hřebenem, 1 012 metrů nad mořem. Na hřebeni dnes 2. listopadu v 10:40.</p>
+    <dl style="margin: 160px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 8px">
+      <div style="padding: 16px 20px; border-radius: 12px; background: var(--bg); color: var(--ink)"><dt style="font-size: 15px; color: var(--muted)">Teplota na hřebeni</dt><dd style="margin: 4px 0 0; font-size: 36px; font-weight: 500; font-stretch: 75%; font-variant-numeric: tabular-nums">−1 °C</dd></div>
+      <div style="padding: 16px 20px; border-radius: 12px; background: var(--bg); color: var(--ink)"><dt style="font-size: 15px; color: var(--muted)">Sníh u rozhledny</dt><dd style="margin: 4px 0 0; font-size: 36px; font-weight: 500; font-stretch: 75%; font-variant-numeric: tabular-nums">8 cm</dd></div>
+      <div style="padding: 16px 20px; border-radius: 12px; background: var(--bg); color: var(--ink)"><dt style="font-size: 15px; color: var(--muted)">Vleky</dt><dd style="margin: 4px 0 0; font-size: 20px; font-weight: 500; line-height: 1.3">mimo provoz, sezona od 19. prosince</dd></div>
+      <div style="padding: 16px 20px; border-radius: 12px; background: var(--bg); color: var(--ink)"><dt style="font-size: 15px; color: var(--muted)">Silnice na Javorník</dt><dd style="margin: 4px 0 0; font-size: 20px; font-weight: 500; line-height: 1.3; color: var(--link)">sjízdná, ráno náledí</dd></div>
+    </dl>
+  </section>
+</div>
+
+<main>
+  <section class="deep" style="background: var(--deep); color: #FFFFFF">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 56px clamp(16px, 4vw, 32px); display: flex; flex-direction: column">
+      <div style="display: flex; flex-wrap: wrap; gap: 16px 48px; padding: 28px 0; border-top: 1px solid rgba(255, 255, 255, 0.2)">
+        <span style="flex: 0 0 64px; font-size: 20px; font-variant-numeric: tabular-nums; opacity: 0.8">01</span>
+        <h2 style="flex: 1 1 240px; margin: 0; font-size: 32px; font-stretch: 75%">Žiju tady</h2>
+        <p style="flex: 2 1 360px; margin: 0; display: flex; flex-wrap: wrap; gap: 0 24px"><a class="hit" href="#" style="color: #FFFFFF">Kdy se prohrnuje naše ulice</a><a class="hit" href="#" style="color: #FFFFFF">Parkovací karta pro místní</a><a class="hit" href="#" style="color: #FFFFFF">Zaplatit poplatek za odpad</a><a class="hit" href="#" style="color: #FFFFFF">Úřední deska</a></p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px 48px; padding: 28px 0; border-top: 1px solid rgba(255, 255, 255, 0.2); border-bottom: 1px solid rgba(255, 255, 255, 0.2)">
+        <span style="flex: 0 0 64px; font-size: 20px; font-variant-numeric: tabular-nums; opacity: 0.8">02</span>
+        <h2 style="flex: 1 1 240px; margin: 0; font-size: 32px; font-stretch: 75%">Přijel jsem na hory</h2>
+        <p style="flex: 2 1 360px; margin: 0; display: flex; flex-wrap: wrap; gap: 0 24px"><a class="hit" href="#" style="color: #FFFFFF">Webkamera na rozhledně</a><a class="hit" href="#" style="color: #FFFFFF">Kde zaparkovat a kolik to stojí</a><a class="hit" href="#" style="color: #FFFFFF">Ubytování v obci</a><a class="hit" href="#" style="color: #FFFFFF">Horská služba a lékař</a></p>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style="display: block; width: 100%; height: 80px"><path d="M0 80 L0 60 L120 30 L200 50 L320 10 L440 46 L560 24 L700 54 L820 20 L960 48 L1080 16 L1200 44 L1320 26 L1440 50 V80z" style="fill: var(--surface)"></path></svg>
+  </section>
+
+  <section aria-labelledby="aktuality" style="background: var(--surface)">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 24px clamp(16px, 4vw, 32px) 72px">
+      <h2 id="aktuality" style="margin: 0 0 24px; font-size: 40px; font-stretch: 75%">Z obce a z hor</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px">
+        <article style="padding: 24px; border-radius: 12px; background: var(--bg); display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 0 0 1px var(--line)"><p style="margin: 0; color: var(--muted); font-size: 15px">30. října</p><h3 style="margin: 0; font-size: 21px; font-weight: 600; line-height: 1.3"><a href="#" style="color: var(--ink); text-decoration: none">Vleky na Javorníku pojedou od 19. prosince</a></h3><p style="margin: 0">Pokud napadne aspoň 40 centimetrů sněhu. Permanentky prodává obecní úřad.</p></article>
+        <svg viewBox="0 0 280 220" role="img" aria-label="Rozhledna na Javorníku" style="width: 100%; height: 100%; min-height: 220px; border-radius: 12px; background: var(--near)"><path d="M0 170 L80 120 L140 150 L210 100 L280 140 V220 H0z" style="fill: var(--far)"></path><rect x="196" y="40" width="12" height="62" style="fill: var(--snow)"></rect><path d="M184 46 h36 l-6 -14 h-24z" style="fill: var(--snow)"></path></svg>
+        <article style="padding: 24px; border-radius: 12px; background: var(--bg); display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 0 0 1px var(--line)"><p style="margin: 0; color: var(--muted); font-size: 15px">20. října</p><h3 style="margin: 0; font-size: 21px; font-weight: 600; line-height: 1.3"><a href="#" style="color: var(--ink); text-decoration: none">Nové parkoviště pod Javorníkem má 40 míst</a></h3><p style="margin: 0">V zimě se platí 50 Kč za den, místní s kartou parkují zdarma.</p></article>
+        <article style="padding: 24px; border-radius: 12px; background: var(--deep); color: #FFFFFF; display: flex; flex-direction: column; gap: 8px" class="deep"><p style="margin: 0; font-size: 15px; opacity: 0.85">Úřední deska</p><h3 style="margin: 0; font-size: 21px; font-weight: 600; line-height: 1.3"><a href="#" style="color: #FFFFFF; text-decoration: none">Vyhláška o parkování v zimní sezoně</a></h3><p style="margin: 0">visí do 15. prosince</p></article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="deep" style="background: var(--deep); color: #FFFFFF">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 28px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; font-size: 15px">
+    <span>Obecní úřad Javoří Lhota, [TELEFON], horská služba 1210</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: #FFFFFF">Povinné informace</a><a href="#" style="color: #FFFFFF">Přístupnost</a><a href="#" style="color: #FFFFFF">Osobní údaje</a></nav>
+  </div>
+</footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"paleta": {"editor": "enum", "options": ["Hory", "Sníh", "Smrk"], "default": "Hory", "section": "Barvy"}, "$preview": {"width": 1280, "height": 2200}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = Object.assign({ v: null, alert: 'warning' }, {}); }
+  renderVals() {
+    const P = [{"bg": "#FFFFFF", "surface": "#EEF3F8", "ink": "#12202E", "muted": "#4A5868", "line": "#D2DCE6", "primary": "#1C3A57", "onPrimary": "#FFFFFF", "link": "#1F4E7A", "accent": "#B3541A", "onAccent": "#FFFFFF", "deep": "#1C3A57", "onDeep": "#FFFFFF", "name": "Hory", "x": {"far": "#2C5E8C", "near": "#3B6E9E", "snow": "#FFFFFF"}}, {"bg": "#FFFFFF", "surface": "#F2F5F7", "ink": "#101418", "muted": "#4D5560", "line": "#D9DEE3", "primary": "#0B6E8A", "onPrimary": "#FFFFFF", "link": "#0A6580", "accent": "#C7321F", "onAccent": "#FFFFFF", "deep": "#0E2A33", "onDeep": "#FFFFFF", "name": "Sníh", "x": {"far": "#155567", "near": "#1F7088", "snow": "#FFFFFF"}}, {"bg": "#FFFFFF", "surface": "#EEF4EF", "ink": "#122019", "muted": "#4A5C51", "line": "#CFDCD3", "primary": "#1F4A33", "onPrimary": "#FFFFFF", "link": "#1F4A33", "accent": "#D9A21B", "onAccent": "#122019", "deep": "#1F4A33", "onDeep": "#FFFFFF", "name": "Smrk", "x": {"far": "#2E6447", "near": "#3D7A58", "snow": "#F2F6F3"}}];
+    const names = P.map((p) => p.name);
+    const fromProp = names.indexOf(this.props.paleta);
+    const vi = this.state.v != null ? this.state.v : (fromProp >= 0 ? fromProp : 0);
+    const c = P[vi];
+    const lum = (h) => { const n = parseInt(h.slice(1), 16); const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2]; };
+    const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+    const fmt = (r) => r.toFixed(1).replace('.', ',') + ':1 ' + (r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : 'velký text');
+    const ROLES = [['bg', 'Pozadí', ''], ['surface', 'Plocha', ''], ['ink', 'Text', 'bg'], ['muted', 'Vedlejší text', 'bg'], ['link', 'Odkazy', 'bg'], ['line', 'Linky', ''], ['primary', 'Hlavní', ''], ['onPrimary', 'Text na hlavní', 'primary'], ['accent', 'Akcent', ''], ['onAccent', 'Text na akcentu', 'accent'], ['deep', 'Tmavý pás', ''], ['onDeep', 'Text na tmavém', 'deep']];
+    const swatches = ROLES.map((r) => ({ name: r[1], hex: c[r[0]], note: r[2] ? fmt(cr(c[r[0]], c[r[2]])) : '' }));
+    const variants = P.map((p, i) => ({ name: p.name, a: p.bg, b: p.primary, d: p.accent, pressed: i === vi ? 'true' : 'false', bg: i === vi ? '#1A1A18' : '#FFFFFF', ink: i === vi ? '#FFFFFF' : '#1A1A18', pick: () => this.setState({ v: i }) }));
+    const A = {
+      info: { kind: 'Informace obce', title: 'most přes Javornický potok je zavřený', text: 'Od 2. do 30. listopadu. Objížďka vede přes Hájek, autobus 431 staví u hájovny.', link: 'Mapa objížďky', bg: '#F2F6FC', ink: '#0C1838', edge: '#00469B', isInfo: true, isWarn: false },
+      warning: { kind: 'Výstraha', title: 'silný vítr ve čtvrtek 5. listopadu', text: 'ČHMÚ varuje od 14 do 22 hodin před nárazy větru až 90 km/h. Ukliďte věci ze zahrad a nechoďte do lesa.', link: 'Výstraha ČHMÚ', bg: '#FEF6D8', ink: '#2A1B00', edge: '#CA8504', isInfo: false, isWarn: true },
+      emergency: { kind: 'Krizová situace', title: 'nepijte vodu z obecního vodovodu', text: 'Rozbor z 1. listopadu našel bakterie. Vodu do odvolání převařujte. Cisterna s pitnou vodou stojí na návsi od 14 hodin.', link: 'Co dělat a kdy to skončí', bg: '#B00A0D', ink: '#FFFFFF', edge: '#6E0507', isInfo: false, isWarn: true }
+    };
+    const al = A[this.state.alert] || A.info;
+    const alertOpts = [['off', 'Vypnuto'], ['info', 'Informace'], ['warning', 'Výstraha'], ['emergency', 'Krize']].map((o) => ({ name: o[1], pressed: this.state.alert === o[0] ? 'true' : 'false', bg: this.state.alert === o[0] ? '#1A1A18' : '#FFFFFF', ink: this.state.alert === o[0] ? '#FFFFFF' : '#1A1A18', pick: () => this.setState({ alert: o[0] }) }));
+    const kebab = (s) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+    let vars = '';
+    Object.keys(c).forEach((k) => { if (k !== 'name' && k !== 'x') vars += '--' + kebab(k) + ': ' + c[k] + '; '; });
+    Object.keys(c.x || {}).forEach((k) => { vars += '--' + k + ': ' + c.x[k] + '; '; });
+    const extra = ((self, c) => { return {}; })(this, c);
+    return Object.assign({ c: c, vars: vars, swatches: swatches, variants: variants, paletteName: c.name, alertOn: this.state.alert !== 'off', al: al, alertOpts: alertOpts }, extra || {});
+  }
+}
+</script>
+</body>
+</html>

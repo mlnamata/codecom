@@ -1,0 +1,86 @@
+[[ALERT]]
+<header>
+  <div style="background: var(--surface); font-size: 14px">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 6px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px">
+      <span>Oficiální web obce Javoří Lhota</span>
+      <span>Úřad dnes otevřen 8 až 17 hodin</span>
+    </div>
+  </div>
+  <div class="deep" style="background: var(--primary); color: var(--on-primary)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 20px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px">
+      <a href="#" style="display: flex; align-items: center; gap: 14px; color: var(--on-primary); text-decoration: none">[[ZNAK 40]]<span style="display: flex; flex-direction: column; line-height: 1.2"><span style="font-weight: 600; font-size: 22px">Obec Javoří Lhota</span><span style="font-size: 15px">okres Klatovy, Plzeňský kraj</span></span></a>
+      <form role="search" onsubmit="return false" style="display: flex; flex: 0 1 420px; min-width: 0">
+        <label for="hledat20" class="sr">Hledat na webu obce</label>
+        <input id="hledat20" type="search" placeholder="Co hledáte, třeba odpad nebo pobyt" style="flex: 1; min-width: 0; min-height: 48px; padding: 0 14px; border: 2px solid var(--on-primary); border-right: 0; border-radius: 4px 0 0 4px; background: var(--bg); color: var(--ink); font: inherit">
+        <button type="submit" style="min-height: 48px; padding: 0 18px; border: 2px solid var(--on-primary); border-radius: 0 4px 4px 0; background: var(--deep); color: var(--on-deep); font: inherit; font-weight: 500; cursor: pointer">Hledat</button>
+      </form>
+    </div>
+    <nav class="nav-wide" aria-label="Hlavní menu" style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; gap: 0 28px; font-weight: 500">
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; box-shadow: inset 0 -4px 0 var(--on-primary); text-decoration: none">Životní situace</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Obecní úřad</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Úřední deska</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Samospráva</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Kontakty</a>
+    </nav>
+  </div>
+</header>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px clamp(16px, 4vw, 32px) 64px">
+  <nav aria-label="Drobečková navigace" style="font-size: 15px; margin-bottom: 16px"><a href="#" style="color: var(--link)">Úvod</a><span aria-hidden="true" style="margin: 0 8px; color: var(--muted)">/</span><span aria-current="page">Životní situace</span></nav>
+  <h1 style="margin: 0 0 8px; font-size: clamp(32px, 3.6vw, 44px); font-weight: 500; line-height: 1.15">Životní situace</h1>
+  <p style="margin: 0 0 28px; max-width: 62ch; font-size: 19px; color: var(--muted)">Vyberte, co se vám stalo. Ukážeme, co vyřídíte online, kdy musíte na úřad a co proběhne samo.</p>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+    <div role="group" aria-label="Vyberte životní situaci" style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; border-top: 1px solid var(--line)">
+      <sc-for list="{{situations}}" as="s" hint-placeholder-count="4">
+        <button type="button" onClick="{{s.pick}}" aria-pressed="{{s.pressed}}" style="min-height: 56px; padding: 12px 16px; border: 0; border-bottom: 1px solid var(--line); border-left: 4px solid {{s.edge}}; background: {{s.bg}}; color: var(--link); font: inherit; font-weight: 500; text-align: left; cursor: pointer">{{s.label}}</button>
+      </sc-for>
+    </div>
+
+    <section aria-live="polite" aria-labelledby="situace20" style="flex: 2.4 1 520px; min-width: 0; padding: 28px; border-radius: 4px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line)">
+      <h2 id="situace20" style="margin: 0 0 6px; font-size: 28px; font-weight: 500">{{cur.label}}</h2>
+      <p style="margin: 0 0 20px; color: var(--muted)">{{cur.who}}</p>
+      <ol style="margin: 0; padding: 0; list-style: none">
+        <sc-for list="{{cur.steps}}" as="st" hint-placeholder-count="4">
+          <li style="display: grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line)">
+            <span aria-hidden="true" style="display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 50%; background: var(--primary); color: var(--on-primary); font-weight: 600">{{st.n}}</span>
+            <div>
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px"><h3 style="margin: 0; font-size: 19px; font-weight: 600">{{st.title}}</h3><span style="padding: 2px 10px; border-radius: 4px; background: {{st.tagBg}}; color: {{st.tagInk}}; box-shadow: inset 0 0 0 1px {{st.tagLine}}; font-size: 14px; font-weight: 500">{{st.tag}}</span></div>
+              <p style="margin: 6px 0 0">{{st.text}}</p>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 32px; margin-top: 48px">
+    <section aria-labelledby="deska20" style="flex: 2 1 480px; min-width: 0">
+      <h2 id="deska20" style="margin: 0 0 12px; font-size: 26px; font-weight: 500">Úřední deska</h2>
+      <ul style="margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--primary)">
+        <li style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><a href="#" style="color: var(--link)">Návrh rozpočtu obce na rok 2027</a><span style="color: var(--muted); font-size: 15px">Rozpočet, visí do 11. 11. 2026</span></li>
+        <li style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><a href="#" style="color: var(--link)">Pozvánka na zasedání zastupitelstva 9. 11.</a><span style="color: var(--muted); font-size: 15px">Zastupitelstvo, visí do 9. 11. 2026</span></li>
+        <li style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><a href="#" style="color: var(--link)">Veřejná vyhláška: uzavírka mostu</a><span style="color: var(--muted); font-size: 15px">Doprava, visí do 30. 11. 2026</span></li>
+      </ul>
+      <a href="#" style="display: inline-block; margin-top: 12px; color: var(--link); font-weight: 500">Všechny dokumenty na úřední desce</a>
+    </section>
+    <section aria-labelledby="kontakt20" style="flex: 1 1 300px; min-width: 0; padding: 24px; background: var(--surface); border-radius: 4px">
+      <h2 id="kontakt20" style="margin: 0 0 12px; font-size: 22px; font-weight: 500">Obecní úřad</h2>
+      <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px">
+        <dt style="color: var(--muted)">Adresa</dt><dd style="margin: 0">Náves 1, [PSČ] Javoří Lhota</dd>
+        <dt style="color: var(--muted)">Po a St</dt><dd style="margin: 0">8 až 17 hodin</dd>
+        <dt style="color: var(--muted)">Út a Čt</dt><dd style="margin: 0">8 až 12 hodin</dd>
+        <dt style="color: var(--muted)">Datovka</dt><dd style="margin: 0">[ID DS]</dd>
+        <dt style="color: var(--muted)">E-mail</dt><dd style="margin: 0"><a href="#" style="color: var(--link)">obec@javorilhota.cz</a></dd>
+      </dl>
+    </section>
+  </div>
+  <p style="margin: 40px 0 0; color: var(--muted); font-size: 15px">Stránku spravuje Jana Malá, aktualizováno 26. 10. 2026</p>
+</main>
+
+<footer class="deep" style="background: var(--deep); color: var(--on-deep)">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 32px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; font-size: 15px">
+    <span>Obec Javoří Lhota, Náves 1, IČO [IČO], datová schránka [ID DS], účet [ČÍSLO ÚČTU]</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: var(--on-deep)">Povinně zveřejňované informace</a><a href="#" style="color: var(--on-deep)">Prohlášení o přístupnosti</a><a href="#" style="color: var(--on-deep)">Ochrana osobních údajů</a></nav>
+  </div>
+</footer>

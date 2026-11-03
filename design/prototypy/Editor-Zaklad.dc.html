@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Editor Základ – článek a úřední deska</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F5F5F0;font-family:'Public Sans',system-ui,sans-serif;color:#18211D}
+a{color:#1D5C4D}a:hover{color:#123D33}
+*{box-sizing:border-box}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F5F5F0; color: #18211D; font-family: 'Public Sans', system-ui, sans-serif; font-size: 15px">
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 24px; background: #FFFFFF; border-bottom: 1px solid #DAD9D2">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <div style="width: 32px; height: 32px; border-radius: 8px; background: #1D5C4D; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg></div>
+      <span style="font-weight: 700; font-size: 16px">Obec Horní Vzorov</span>
+      <span style="padding: 2px 10px; border-radius: 999px; background: #E8F0EC; color: #1D5C4D; font-size: 13px; font-weight: 700">Editor Základ</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px">
+      <a href="#" style="font-weight: 600; font-size: 14px">Zobrazit web</a>
+      <span style="width: 32px; height: 32px; border-radius: 50%; background: #DAD9D2; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px" aria-label="Přihlášená: Jana Nováková, správkyně">JN</span>
+    </div>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; align-items: stretch">
+    <nav aria-label="Administrace" style="flex: 1 1 220px; max-width: 240px; min-width: 0; padding: 16px 12px; background: #FFFFFF; border-right: 1px solid #DAD9D2; display: flex; flex-direction: column; gap: 2px">
+      <a href="#" style="padding: 10px 12px; border-radius: 8px; color: #18211D; text-decoration: none">Přehled</a>
+      <button type="button" onClick="{{toClanek}}" style="text-align: left; padding: 10px 12px; border-radius: 8px; border: 0; font: inherit; cursor: pointer; background: {{navClanekBg}}; color: {{navClanekInk}}; font-weight: 600">Obsah – články a akce</button>
+      <button type="button" onClick="{{toDeska}}" style="text-align: left; padding: 10px 12px; border-radius: 8px; border: 0; font: inherit; cursor: pointer; background: {{navDeskaBg}}; color: {{navDeskaInk}}; font-weight: 600">Úřední deska</button>
+      <a href="#" style="padding: 10px 12px; border-radius: 8px; color: #18211D; text-decoration: none">Stránky a menu</a>
+      <a href="#" style="padding: 10px 12px; border-radius: 8px; color: #18211D; text-decoration: none">Média</a>
+      <a href="#" style="padding: 10px 12px; border-radius: 8px; color: #18211D; text-decoration: none">Vzhled</a>
+      <a href="#" style="padding: 10px 12px; border-radius: 8px; color: #18211D; text-decoration: none">Uživatelé (2 ze 3)</a>
+      <a href="#" style="padding: 10px 12px; border-radius: 8px; color: #18211D; text-decoration: none">Nastavení obce</a>
+      <div style="margin-top: 16px; padding: 12px; border-radius: 8px; background: #F5F5F0; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 13px; font-weight: 700">Uzamčeno v Základu</span>
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #4A524D"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 018 0v4"></path></svg>Skladatel stránky</span>
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #4A524D"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 018 0v4"></path></svg>Schvalování</span>
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #4A524D"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 018 0v4"></path></svg>Podweby organizací</span>
+        <a href="#" style="font-size: 13px; font-weight: 700">Vyzkoušet Pokročilý 30 dní</a>
+      </div>
+    </nav>
+
+    <main style="flex: 999 1 640px; min-width: 0; padding: 24px">
+
+      <sc-if value="{{isClanek}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+          <section aria-label="Editor článku" style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+              <h1 style="margin: 0; font-size: 22px">Nový článek</h1>
+              <span style="font-size: 13px; color: #4A524D">Koncept uložen v 10:42</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <label for="z-title" style="font-weight: 600; font-size: 14px">Nadpis</label>
+              <input id="z-title" type="text" value="Oprava chodníku v Lipové ulici začne 3. listopadu" style="height: 44px; padding: 0 12px; border: 1px solid #BDBCB4; border-radius: 8px; font: inherit; font-size: 17px; font-weight: 600; background: #FFFFFF; color: #18211D">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <label for="z-perex" style="font-weight: 600; font-size: 14px">Perex (zobrazí se v aplikaci a v e-mailu)</label>
+              <textarea id="z-perex" rows="2" style="padding: 10px 12px; border: 1px solid #BDBCB4; border-radius: 8px; font: inherit; background: #FFFFFF; color: #18211D; resize: vertical">Chodník bude dva týdny uzavřený. Přecházejte prosím na druhou stranu ulice.</textarea>
+            </div>
+            <div style="display: flex; flex-direction: column; border: 1px solid #BDBCB4; border-radius: 8px; background: #FFFFFF">
+              <div role="toolbar" aria-label="Formátování" style="display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; border-bottom: 1px solid #DAD9D2">
+                <button type="button" style="min-width: 36px; height: 36px; border: 0; border-radius: 6px; background: transparent; font: inherit; font-weight: 700; cursor: pointer">B</button>
+                <button type="button" style="min-width: 36px; height: 36px; border: 0; border-radius: 6px; background: transparent; font: inherit; font-style: italic; cursor: pointer">I</button>
+                <button type="button" style="height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; font: inherit; cursor: pointer">Nadpis</button>
+                <button type="button" style="height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; font: inherit; cursor: pointer">Odkaz</button>
+                <button type="button" style="height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; font: inherit; cursor: pointer">Seznam</button>
+                <button type="button" style="height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; font: inherit; cursor: pointer">+ Obrázek</button>
+                <button type="button" style="height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; font: inherit; cursor: pointer">+ Dokument</button>
+              </div>
+              <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px; line-height: 1.6">
+                <p style="margin: 0">Od pondělí 3. listopadu začne firma opravovat chodník v Lipové ulici v úseku od čísla 12 po křižovatku se Školní. Práce potrvají přibližně dva týdny.</p>
+                <p style="margin: 0">Informace podá pan <span style="background: {{piiBg}}; border-bottom: 2px solid {{piiLine}}">{{piiText}}</span> z obecního úřadu.</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; padding: 12px; border: 1px dashed #BDBCB4; border-radius: 8px">
+                  <div style="width: 140px; height: 90px; border-radius: 6px; background: #DDE7CF; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #2E3A2E">[fotka chodníku]</div>
+                  <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px">
+                    <label for="z-alt" style="font-weight: 600; font-size: 13px">Popis obrázku pro nevidomé (alt text)</label>
+                    <input id="z-alt" type="text" value="Rozbitý betonový chodník podél plotu v Lipové ulici" style="height: 40px; padding: 0 10px; border: 1px solid #BDBCB4; border-radius: 6px; font: inherit; font-size: 14px">
+                    <span style="font-size: 12px; color: #4A524D">Navrhla AI, zkontrolujte ho.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 12px 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #DAD9D2; font-size: 14px; color: #4A524D">Rozvržení stránky je v Základu pevné: článek se zobrazí v šabloně Lípa. Bloky můžete skládat od úrovně Pokročilý.</div>
+          </section>
+
+          <aside aria-label="Zveřejnění" style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+            <div style="padding: 16px; border-radius: 12px; background: #FFFFFF; border: 1px solid #DAD9D2; display: flex; flex-direction: column; gap: 10px">
+              <h2 style="margin: 0; font-size: 16px">Kam to pošleme</h2>
+              <sc-for list="{{channels}}" as="ch" hint-placeholder-count="4">
+                <label style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 40px">
+                  <span style="display: flex; flex-direction: column"><span style="font-weight: 600">{{ch.label}}</span><span style="font-size: 12px; color: #4A524D">{{ch.note}}</span></span>
+                  <input type="checkbox" checked="{{ch.on}}" onChange="{{ch.toggle}}" style="width: 22px; height: 22px; accent-color: #1D5C4D">
+                </label>
+              </sc-for>
+            </div>
+
+            <div style="padding: 16px; border-radius: 12px; background: #FFFFFF; border: 1px solid #DAD9D2; display: flex; flex-direction: column; gap: 10px">
+              <h2 style="margin: 0; font-size: 16px">Kontrola před zveřejněním</h2>
+              <div style="display: flex; gap: 8px; align-items: flex-start"><span style="color: #1E7B46; font-weight: 700" aria-hidden="true">✓</span><span>Obrázek má popis</span></div>
+              <div style="display: flex; gap: 8px; align-items: flex-start"><span style="color: #1E7B46; font-weight: 700" aria-hidden="true">✓</span><span>Kontrast a nadpisy splňují WCAG AA</span></div>
+              <sc-if value="{{piiOpen}}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border-radius: 8px; background: #FFF4E5">
+                  <span style="font-weight: 700; color: #8A3B0C">Osobní údaj v textu</span>
+                  <span style="font-size: 14px; color: #5C2A0B">Text obsahuje soukromé telefonní číslo. Doporučujeme uvést číslo úřadu.</span>
+                  <button type="button" onClick="{{fixPii}}" style="align-self: flex-start; min-height: 40px; padding: 0 14px; border-radius: 8px; border: 1px solid #8A3B0C; background: #FFFFFF; color: #8A3B0C; font: inherit; font-weight: 700; cursor: pointer">Nahradit číslem úřadu</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{piiFixed}}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; gap: 8px; align-items: flex-start"><span style="color: #1E7B46; font-weight: 700" aria-hidden="true">✓</span><span>Bez osobních údajů</span></div>
+              </sc-if>
+            </div>
+
+            <div style="padding: 16px; border-radius: 12px; background: #FFFFFF; border: 1px solid #DAD9D2; display: flex; flex-direction: column; gap: 12px">
+              <div style="display: flex; gap: 8px">
+                <button type="button" onClick="{{setNow}}" style="flex: 1; min-height: 40px; border-radius: 8px; border: 1px solid #BDBCB4; font: inherit; font-weight: 600; cursor: pointer; background: {{nowBg}}; color: {{nowInk}}">Ihned</button>
+                <button type="button" onClick="{{setLater}}" style="flex: 1; min-height: 40px; border-radius: 8px; border: 1px solid #BDBCB4; font: inherit; font-weight: 600; cursor: pointer; background: {{laterBg}}; color: {{laterInk}}">Naplánovat</button>
+              </div>
+              <sc-if value="{{isLater}}" hint-placeholder-val="{{ false }}">
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Zveřejnit
+                  <input type="text" value="po 2. 11. 2026, 7:00" style="height: 40px; padding: 0 10px; border: 1px solid #BDBCB4; border-radius: 6px; font: inherit; font-weight: 400">
+                </label>
+              </sc-if>
+              <button type="button" onClick="{{publish}}" style="min-height: 48px; border-radius: 8px; border: 0; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; background: {{pubBg}}; color: #FFFFFF">{{pubLabel}}</button>
+              <sc-if value="{{blocked}}" hint-placeholder-val="{{ false }}">
+                <span role="alert" style="font-size: 14px; color: #B42318; font-weight: 600">Nejdřív vyřešte osobní údaj v textu. Bez toho článek nezveřejníme.</span>
+              </sc-if>
+              <sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+                <div role="status" style="padding: 10px 12px; border-radius: 8px; background: #E7F4EC; color: #155C34; font-weight: 600">{{doneText}}</div>
+              </sc-if>
+            </div>
+          </aside>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isDeska}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+          <section aria-label="Vyvěsit na úřední desku" style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 20px; border-radius: 12px; background: #FFFFFF; border: 1px solid #DAD9D2">
+            <h1 style="margin: 0; font-size: 22px">Vyvěsit na úřední desku</h1>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 16px; border: 2px dashed #BDBCB4; border-radius: 10px">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D5C4D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"></path><path d="M14 3v6h6"></path></svg>
+              <div style="display: flex; flex-direction: column"><span style="font-weight: 700">Navrh_rozpoctu_2027.pdf</span><span style="font-size: 13px; color: #4A524D">412 kB · PDF je přístupné (má text a záložky)</span></div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Kategorie
+                <select style="height: 40px; padding: 0 8px; border: 1px solid #BDBCB4; border-radius: 6px; font: inherit; font-weight: 400; background: #FFFFFF"><option>Rozpočet a finance</option><option>Zastupitelstvo</option><option>Vyhlášky a nařízení</option><option>Oznámení jiných úřadů</option></select>
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Vyvěsit od
+                <input type="text" value="20. 10. 2026" style="height: 40px; padding: 0 10px; border: 1px solid #BDBCB4; border-radius: 6px; font: inherit; font-weight: 400">
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Sejmout
+                <input type="text" value="5. 11. 2026" style="height: 40px; padding: 0 10px; border: 1px solid #BDBCB4; border-radius: 6px; font: inherit; font-weight: 400">
+              </label>
+            </div>
+            <span style="font-size: 13px; color: #4A524D">Návrh rozpočtu musí viset aspoň 15 dní před projednáním. Datum sejmutí jsme dopočítali, sejme se samo a dokument se přesune do archivu.</span>
+            <label style="display: flex; align-items: center; gap: 10px; min-height: 40px">
+              <input type="checkbox" checked="{{anon}}" onChange="{{toggleAnon}}" style="width: 22px; height: 22px; accent-color: #1D5C4D">
+              <span>Před vyvěšením zkontrolovat osobní údaje (AI navrhne začernění, potvrdíte vy)</span>
+            </label>
+            <button type="button" onClick="{{vyvesit}}" style="align-self: flex-start; min-height: 48px; padding: 0 24px; border-radius: 8px; border: 0; background: #1D5C4D; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Vyvěsit</button>
+            <sc-if value="{{vyveseno}}" hint-placeholder-val="{{ false }}">
+              <div role="status" style="padding: 12px 14px; border-radius: 8px; background: #E7F4EC; color: #155C34; display: flex; flex-direction: column; gap: 4px">
+                <span style="font-weight: 700">Vyvěšeno. Záznam o vyvěšení č. 2026/118 je uložen.</span>
+                <span style="font-size: 14px">Kdo: Jana Nováková · kdy: 27. 10. 2026 10:47 · záznam nejde upravit ani smazat.</span>
+              </div>
+            </sc-if>
+          </section>
+          <aside aria-label="Na desce právě visí" style="flex: 1 1 300px; min-width: 0; padding: 16px; border-radius: 12px; background: #FFFFFF; border: 1px solid #DAD9D2; display: flex; flex-direction: column; gap: 10px">
+            <h2 style="margin: 0; font-size: 16px">Na desce právě visí</h2>
+            <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 10px; border-bottom: 1px solid #DAD9D2"><span style="font-weight: 600">Oznámení o zasedání zastupitelstva</span><span style="font-size: 13px; color: #4A524D">sejme se 4. 11.</span></div>
+            <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 10px; border-bottom: 1px solid #DAD9D2"><span style="font-weight: 600">Veřejná vyhláška – uzavírka místní komunikace</span><span style="font-size: 13px; color: #8A3B0C; font-weight: 600">sejme se za 3 dny</span></div>
+            <a href="#" style="font-weight: 600; font-size: 14px">Archiv a export záznamů</a>
+          </aside>
+        </div>
+      </sc-if>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'clanek', ch: { web: true, push: true, mail: false, sms: false }, pii: false, later: false, tried: false, done: false, anon: true, vyveseno: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const chDefs = [
+      { k: 'web', label: 'Web obce', note: 'Aktuality a archiv' },
+      { k: 'push', label: 'Aplikace CodeKom', note: 'Push zpráva 214 odběratelům' },
+      { k: 'mail', label: 'E-mail', note: '96 odběratelů' },
+      { k: 'sms', label: 'SMS', note: 'Zbývá 340 kreditů' }
+    ];
+    const channels = chDefs.map((c) => ({ label: c.label, note: c.note, on: !!s.ch[c.k], toggle: () => { const n = Object.assign({}, s.ch); n[c.k] = !n[c.k]; this.setState({ ch: n }); } }));
+    const isClanek = s.tab === 'clanek';
+    const blocked = s.tried && !s.pii && !s.done;
+    const n = ['web', 'push', 'mail', 'sms'].filter((k) => s.ch[k]).length;
+    return {
+      isClanek: isClanek, isDeska: !isClanek,
+      toClanek: () => this.setState({ tab: 'clanek' }), toDeska: () => this.setState({ tab: 'deska' }),
+      navClanekBg: isClanek ? '#E8F0EC' : 'transparent', navClanekInk: isClanek ? '#1D5C4D' : '#18211D',
+      navDeskaBg: !isClanek ? '#E8F0EC' : 'transparent', navDeskaInk: !isClanek ? '#1D5C4D' : '#18211D',
+      channels: channels,
+      piiOpen: !s.pii, piiFixed: s.pii,
+      piiText: s.pii ? 'na čísle úřadu [TELEFON ÚŘADU]' : 'Novák na čísle 7xx 123 456',
+      piiBg: s.pii ? 'transparent' : '#FFE8C2', piiLine: s.pii ? 'transparent' : '#C2410C',
+      fixPii: () => this.setState({ pii: true, tried: false }),
+      isLater: s.later, setNow: () => this.setState({ later: false }), setLater: () => this.setState({ later: true }),
+      nowBg: s.later ? '#FFFFFF' : '#1D5C4D', nowInk: s.later ? '#18211D' : '#FFFFFF', laterBg: s.later ? '#1D5C4D' : '#FFFFFF', laterInk: s.later ? '#FFFFFF' : '#18211D',
+      pubLabel: s.done ? 'Zveřejněno' : (s.later ? 'Naplánovat zveřejnění' : 'Zveřejnit'),
+      pubBg: s.done ? '#155C34' : '#1D5C4D',
+      publish: () => { if (!s.pii) { this.setState({ tried: true }); } else { this.setState({ done: true, tried: false }); } },
+      blocked: blocked, done: s.done,
+      doneText: s.later ? 'Naplánováno na po 2. 11. 2026 v 7:00 do ' + n + ' kanálů.' : 'Zveřejněno na webu a odesláno do ' + n + ' kanálů.',
+      anon: s.anon, toggleAnon: () => this.setState({ anon: !s.anon }),
+      vyveseno: s.vyveseno, vyvesit: () => this.setState({ vyveseno: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+[[ALERT]]
+<header style="border-bottom: 1px solid var(--line)">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 16px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none">[[ZNAK 30]]<span style="font-weight: 600; font-size: 18px">Obec Javoří Lhota</span></a>
+    <nav class="nav-wide" aria-label="Hlavní menu" style="display: flex; flex-wrap: wrap; gap: 0 28px; font-weight: 500">
+      <a href="#" style="color: var(--ink); text-decoration: none">Potřebuji vyřídit</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Obec</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Úřad</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Kontakty</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section style="background: var(--surface)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 56px clamp(16px, 4vw, 32px) 64px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+      <div style="flex: 999 1 560px; min-width: 0">
+        <h1 style="margin: 0 0 24px; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(48px, 6vw, 76px); line-height: 1.05">Co potřebujete vyřídit?</h1>
+        <label for="q" style="display: block; margin-bottom: 8px; font-weight: 600">Napište, co hledáte</label>
+        <input id="q" type="text" value="{{q}}" onChange="{{setQ}}" placeholder="např. pes, sál, odpad" style="width: 100%; max-width: 640px; height: 56px; padding: 0 20px; border: 1px solid var(--ink); border-radius: 12px; font: inherit; font-size: 20px; background: var(--bg); color: var(--ink)">
+        <div role="group" aria-label="Rychlý výběr" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px">
+          <sc-for list="{{verbs}}" as="vb" hint-placeholder-count="5">
+            <button type="button" onClick="{{vb.pick}}" aria-pressed="{{vb.pressed}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--line); background: {{vb.bg}}; color: {{vb.ink}}; font: inherit; font-size: 16px; cursor: pointer">{{vb.label}}</button>
+          </sc-for>
+        </div>
+        <ul aria-live="polite" style="list-style: none; margin: 16px 0 0; padding: 0; max-width: 640px; display: flex; flex-direction: column; gap: 4px">
+          <sc-for list="{{hits}}" as="h" hint-placeholder-count="4">
+            <li><a href="#" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 16px; border-radius: 8px; background: var(--bg); color: var(--ink); text-decoration: none; box-shadow: inset 0 0 0 1px var(--line)"><span style="font-weight: 600">{{h.title}}</span><span style="color: var(--muted); font-size: 15px">{{h.how}}</span></a></li>
+          </sc-for>
+        </ul>
+        <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 16px; max-width: 640px"><p style="margin: 0 0 8px; font-weight: 600">Na „{{q}}“ jsme nic nenašli</p><p style="margin: 0 0 12px">Zkuste jiné slovo, nebo zavolejte na úřad, rádi poradíme: [TELEFON].</p><button type="button" onClick="{{clear}}" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--ink); background: var(--bg); color: var(--ink); font: inherit; font-size: 16px; cursor: pointer">Vymazat hledání</button></div>
+        </sc-if>
+      </div>
+      <aside aria-labelledby="dnes" style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+        <h2 id="dnes" style="margin: 0 0 4px; font-size: 18px; font-weight: 600">Dnes v Javoří Lhotě</h2>
+        <div style="padding: 16px 20px; border-radius: 12px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line)"><p style="margin: 0; font-weight: 600">Úřad má otevřeno</p><p style="margin: 0; color: var(--muted)">8 až 17 hodin, starostka od 15 hodin</p></div>
+        <div style="padding: 16px 20px; border-radius: 12px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line)"><p style="margin: 0; font-weight: 600">Zítra svoz plastů</p><p style="margin: 0; color: var(--muted)">žluté nádoby, ulice Za Humny a Polní</p></div>
+        <div style="padding: 16px 20px; border-radius: 12px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line)"><p style="margin: 0; font-weight: 600">Rozhlas v 9:00</p><p style="margin: 0; color: var(--muted)">Ve čtvrtek nepoteče voda v Hlavní ulici. <a href="#">Poslechnout</a></p></div>
+      </aside>
+    </div>
+  </section>
+
+  <section aria-labelledby="sluzba" style="max-width: 1200px; margin: 0 auto; padding: 64px clamp(16px, 4vw, 32px) 0">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px 56px; padding: 32px clamp(20px, 3vw, 40px); border-radius: 16px; box-shadow: inset 0 0 0 1px var(--line)">
+      <div style="flex: 1 1 280px; min-width: 0">
+        <p style="margin: 0 0 4px; color: var(--muted)">Nejčastější služba v říjnu</p>
+        <h2 id="sluzba" style="margin: 0 0 12px; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1.1">Poplatek za odpad</h2>
+        <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 8px; background: var(--primary); color: var(--on-primary); text-decoration: none; font-weight: 600">Zaplatit kartou online</a>
+        <p style="margin: 16px 0 0; font-size: 15px; color: var(--muted)">Stránku spravuje Jana Malá, účetní obce. Aktualizováno 26. 10. 2026.</p>
+      </div>
+      <dl style="flex: 2 1 420px; min-width: 0; margin: 0; display: grid; grid-template-columns: minmax(120px, 180px) 1fr; border-top: 1px solid var(--line)">
+        <dt style="padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted)">Kdo platí</dt><dd style="margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line)">každý s trvalým pobytem v obci a majitelé chalup</dd>
+        <dt style="padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted)">Kolik</dt><dd style="margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums">900 Kč na osobu a rok, chalupa 900 Kč</dd>
+        <dt style="padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted)">Do kdy</dt><dd style="margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line)">31. května</dd>
+        <dt style="padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted)">Úleva</dt><dd style="margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line)">děti do 3 let a lidé starší 80 let neplatí</dd>
+        <dt style="padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted)">Jinak</dt><dd style="margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line)">převodem nebo hotově na úřadě</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section style="max-width: 1200px; margin: 0 auto; padding: 64px clamp(16px, 4vw, 32px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px">
+    <div>
+      <h2 style="margin: 0 0 12px; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 34px">Aktuality</h2>
+      <ul style="list-style: none; margin: 0; padding: 0">
+        <li style="display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line)"><span style="color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums">26. 10.</span><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Nové hřiště za školou je otevřené</a></li>
+        <li style="display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line)"><span style="color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums">21. 10.</span><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Oprava chodníku v Lipové začne v dubnu</a></li>
+        <li style="display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line)"><span style="color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums">18. 10.</span><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Hasiči vyhráli okrskovou soutěž</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 style="margin: 0 0 12px; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 34px">Úřední deska</h2>
+      <ul style="list-style: none; margin: 0; padding: 0">
+        <li style="padding: 12px 0; border-top: 1px solid var(--line)"><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Pozvánka na zasedání zastupitelstva 9. 11.</a><span style="display: block; color: var(--muted); font-size: 15px">visí do 9. 11.</span></li>
+        <li style="padding: 12px 0; border-top: 1px solid var(--line)"><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Návrh rozpočtu obce na rok 2027</a><span style="display: block; color: var(--muted); font-size: 15px">visí do 11. 11.</span></li>
+        <li style="padding: 12px 0; border-top: 1px solid var(--line)"><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Uzavírka mostu přes Javornický potok</a><span style="display: block; color: var(--muted); font-size: 15px">visí do 30. 11.</span></li>
+      </ul>
+    </div>
+    <div>
+      <h2 style="margin: 0 0 12px; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 34px">Akce</h2>
+      <ul style="list-style: none; margin: 0; padding: 0">
+        <li style="display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.1">7. 11.</span><span><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Lampionový průvod</a><span style="display: block; color: var(--muted); font-size: 15px">od hasičárny v 17 hodin</span></span></li>
+        <li style="display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.1">14. 11.</span><span><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Výlov Mlýnského rybníka</a><span style="display: block; color: var(--muted); font-size: 15px">od 9 hodin na hrázi</span></span></li>
+        <li style="display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.1">28. 11.</span><span><a class="hit" href="#" style="font-weight: 600; color: var(--ink); text-decoration: none">Rozsvícení stromu</a><span style="display: block; color: var(--muted); font-size: 15px">pod lípou na návsi</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="spolky" style="border-top: 1px solid var(--line)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px clamp(16px, 4vw, 32px) 56px; display: flex; flex-wrap: wrap; gap: 4px 32px; align-items: baseline">
+      <h2 id="spolky" style="margin: 0 16px 0 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 34px">Spolky</h2>
+      <a class="hit" href="#" style="font-weight: 600">Hasiči</a><a class="hit" href="#" style="font-weight: 600">TJ Sokol</a><a class="hit" href="#" style="font-weight: 600">Myslivci</a><a class="hit" href="#" style="font-weight: 600">Spolek rodičů</a><a class="hit" href="#" style="font-weight: 600">Klub seniorů</a><a class="hit" href="#" style="font-weight: 600">Knihovna</a>
+    </div>
+  </section>
+</main>
+
+<footer class="deep" style="background: var(--deep); color: var(--on-deep)">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 32px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; font-size: 15px">
+    <span>Obecní úřad Javoří Lhota, Náves 1, [PSČ], [TELEFON]</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: var(--on-deep)">Povinné informace</a><a href="#" style="color: var(--on-deep)">Prohlášení o přístupnosti</a><a href="#" style="color: var(--on-deep)">Osobní údaje</a><a href="#" style="color: var(--on-deep)">Cookies</a></nav>
+  </div>
+</footer>

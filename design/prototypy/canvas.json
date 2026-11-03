@@ -1,0 +1,345 @@
+{
+ "v": 3,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-10-27T10:30:00Z"
+ },
+ "title": "CodeKom – prototypy",
+ "launch": {
+  "view": "canvas",
+  "page": "sablony"
+ },
+ "pages": [
+  {
+   "id": "sablony",
+   "name": "Šablony webů"
+  },
+  {
+   "id": "editor",
+   "name": "Admin editor"
+  },
+  {
+   "id": "iot",
+   "name": "IoT dashboard"
+  },
+  {
+   "id": "aplikace",
+   "name": "Mobilní aplikace"
+  }
+ ],
+ "boards": {
+  "Main.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 1280,
+   "h": 1960,
+   "title": "01 Náves – vesnice do 500 obyvatel",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S02-Zvonice.dc.html": {
+   "x": 1360,
+   "y": 0,
+   "w": 1280,
+   "h": 2640,
+   "title": "02 Zvonice – vesnice, kde starosta chce minimum práce",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S03-Studanka.dc.html": {
+   "x": 2720,
+   "y": 0,
+   "w": 1280,
+   "h": 2000,
+   "title": "03 Studánka – rekreační obce s chalupáři",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S04-Lipa.dc.html": {
+   "x": 4080,
+   "y": 0,
+   "w": 1280,
+   "h": 2160,
+   "title": "04 Lípa – výchozí šablona pro obce 500 až 2 000 obyvatel",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S05-Majka.dc.html": {
+   "x": 0,
+   "y": 2800,
+   "w": 1280,
+   "h": 2240,
+   "title": "05 Májka – obce s bohatým spolkovým životem",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S06-Hnizdo.dc.html": {
+   "x": 1360,
+   "y": 2800,
+   "w": 1280,
+   "h": 2100,
+   "title": "06 Hnízdo – obce s mladými rodinami",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S07-Hranice.dc.html": {
+   "x": 2720,
+   "y": 2800,
+   "w": 1280,
+   "h": 1880,
+   "title": "07 Hranice – obce u hranice, česky i německy",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S08-Vinice.dc.html": {
+   "x": 4080,
+   "y": 2800,
+   "w": 1280,
+   "h": 2180,
+   "title": "08 Vinice – vinařské obce a obce s místními výrobci",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S09-Hreben.dc.html": {
+   "x": 0,
+   "y": 5200,
+   "w": 1280,
+   "h": 2120,
+   "title": "09 Hřeben – horské a turistické obce",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S10-Rynek.dc.html": {
+   "x": 1360,
+   "y": 5200,
+   "w": 1280,
+   "h": 1940,
+   "title": "10 Rynek – historická městečka a obce s náměstím",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S11-Radnice.dc.html": {
+   "x": 2720,
+   "y": 5200,
+   "w": 1280,
+   "h": 2260,
+   "title": "11 Radnice – města od 2 000 do 10 000 obyvatel",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S12-Kolonada.dc.html": {
+   "x": 4080,
+   "y": 5200,
+   "w": 1280,
+   "h": 2060,
+   "title": "12 Kolonáda – lázeňská a kulturní místa",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S13-Mlyn.dc.html": {
+   "x": 0,
+   "y": 7620,
+   "w": 1280,
+   "h": 2300,
+   "title": "13 Mlýn – průmyslové a pracovní obce",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S14-Hraz.dc.html": {
+   "x": 1360,
+   "y": 7620,
+   "w": 1280,
+   "h": 2160,
+   "title": "14 Hráz – obce u rybníků a přehrad",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S15-Lupa.dc.html": {
+   "x": 2720,
+   "y": 7620,
+   "w": 1280,
+   "h": 2140,
+   "title": "15 Lupa – obce se staršími obyvateli, důraz na přístupnost",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S16-Kompas.dc.html": {
+   "x": 4080,
+   "y": 7620,
+   "w": 1280,
+   "h": 1500,
+   "title": "16 Kompas – obce, které chtějí hlavně mapu služeb",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S17-Magistrat.dc.html": {
+   "x": 0,
+   "y": 10080,
+   "w": 1280,
+   "h": 1960,
+   "title": "17 Magistrát – obce, které chtějí odpovídat i mimo úřední hodiny",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S18-Zpravodaj.dc.html": {
+   "x": 1360,
+   "y": 10080,
+   "w": 1280,
+   "h": 1780,
+   "title": "18 Zpravodaj – obce, které hodně komunikují",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S19-Mikroregion.dc.html": {
+   "x": 2720,
+   "y": 10080,
+   "w": 1280,
+   "h": 2060,
+   "title": "19 Mikroregion – svazky obcí a obce s více částmi",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "S20-Urad.dc.html": {
+   "x": 4080,
+   "y": 10080,
+   "w": 1280,
+   "h": 2000,
+   "title": "20 Úřad – obce, které chtějí vzhled podle gov.cz",
+   "page": "sablony",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Editor-Zaklad.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 980,
+   "title": "Editor Základ – píšu obsah",
+   "page": "editor",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Editor-Pokrocily.dc.html": {
+   "x": 1520,
+   "y": 0,
+   "w": 1440,
+   "h": 980,
+   "title": "Editor Pokročilý – skládám stránky",
+   "page": "editor",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Editor-Advance.dc.html": {
+   "x": 3040,
+   "y": 0,
+   "w": 1440,
+   "h": 980,
+   "title": "Editor Advance – upravuji skoro vše",
+   "page": "editor",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "IoT-Dashboard.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 1100,
+   "title": "IoT dashboard – budovy obce",
+   "page": "iot",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "App-Obcan.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Aplikace – role občan",
+   "page": "aplikace",
+   "is_interactive": true
+  },
+  "App-Urad.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Aplikace – role úřad",
+   "page": "aplikace",
+   "is_interactive": true
+  }
+ },
+ "order": [
+  "Main.dc.html",
+  "S02-Zvonice.dc.html",
+  "S03-Studanka.dc.html",
+  "S04-Lipa.dc.html",
+  "S05-Majka.dc.html",
+  "S06-Hnizdo.dc.html",
+  "S07-Hranice.dc.html",
+  "S08-Vinice.dc.html",
+  "S09-Hreben.dc.html",
+  "S10-Rynek.dc.html",
+  "S11-Radnice.dc.html",
+  "S12-Kolonada.dc.html",
+  "S13-Mlyn.dc.html",
+  "S14-Hraz.dc.html",
+  "S15-Lupa.dc.html",
+  "S16-Kompas.dc.html",
+  "S17-Magistrat.dc.html",
+  "S18-Zpravodaj.dc.html",
+  "S19-Mikroregion.dc.html",
+  "S20-Urad.dc.html",
+  "Editor-Zaklad.dc.html",
+  "Editor-Pokrocily.dc.html",
+  "Editor-Advance.dc.html",
+  "IoT-Dashboard.dc.html",
+  "App-Obcan.dc.html",
+  "App-Urad.dc.html"
+ ],
+ "notes": {
+  "sablonyTitle": {
+   "x": 0,
+   "y": -300,
+   "text": "20 šablon webů obcí",
+   "kind": "title1",
+   "maxW": 5360,
+   "page": "sablony"
+  },
+  "editorTitle": {
+   "x": 0,
+   "y": -300,
+   "text": "Admin editor – tři úrovně",
+   "kind": "title1",
+   "maxW": 4480,
+   "page": "editor"
+  },
+  "appTitle": {
+   "x": 0,
+   "y": -300,
+   "text": "Mobilní aplikace",
+   "kind": "title1",
+   "maxW": 860,
+   "page": "aplikace"
+  }
+ },
+ "designSystems": []
+}

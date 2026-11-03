@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>20 Úřad – Javoří Lhota</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#ECECE8}
+*{box-sizing:border-box}
+.site a{color:var(--link)}
+.site a:hover{color:var(--ink)}
+.site :focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.site .deep :focus-visible{outline-color:var(--on-deep)}
+.site .on-primary :focus-visible{outline-color:var(--on-primary)}
+.site .deep .on-light :focus-visible{outline-color:var(--link)}
+.site .alert :focus-visible{outline-color:currentColor}
+.spec :focus-visible{outline:3px solid #1A1A18;outline-offset:2px}
+.site h1,.site h2,.site h3,.site h4{line-height:1.2;font-weight:500}
+.site strong,.site b,.site th{font-weight:600}
+.site footer a:not([style*="padding"]),.site nav a:not([style*="padding"]),.site td a,.site dd a,.site .hit{display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-narrow{display:none}
+@media (max-width:767.98px){
+.nav-wide{display:none!important}
+.nav-narrow{display:block;margin-left:auto}
+.nav-narrow[open]{flex-basis:100%}
+.nav-narrow>summary{list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer}
+.nav-narrow>summary::-webkit-details-marker{display:none}
+.nav-narrow nav{display:flex;flex-direction:column;padding:8px 0 4px}
+.nav-narrow nav a{margin-block:0;padding-block:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+</style>
+</helmet>
+<div>
+<section class="spec" aria-label="Barevná paleta šablony" style="background: #ECECE8; color: #1A1A18; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 14px; line-height: 1.45; border-bottom: 1px solid #CFCFC9">
+  <div style="padding: 20px clamp(16px, 4vw, 32px) 24px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px 24px">
+      <p style="margin: 0; max-width: 60ch"><span style="display: block; font-size: 18px; font-weight: 600">Šablona 20 Úřad</span><span style="display: block; color: #55554F">Pro obce, které chtějí vzhled podle gov.cz. Inspirace: Design systém gov.cz – hlavička, hledání, životní situace a deska. Ukázka pro smyšlenou obec Javoří Lhota.</span></p>
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end">
+        <div role="group" aria-label="Barevná varianta" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px">
+          <span style="font-weight: 600; margin-right: 4px">Barevná varianta</span>
+          <sc-for list="{{variants}}" as="vr" hint-placeholder-count="3">
+            <button type="button" onClick="{{vr.pick}}" aria-pressed="{{vr.pressed}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #1A1A18; background: {{vr.bg}}; color: {{vr.ink}}; font: inherit; font-weight: 500; cursor: pointer"><span aria-hidden="true" style="display: inline-flex"><span style="width: 16px; height: 16px; border-radius: 50%; background: {{vr.a}}; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3)"></span><span style="width: 16px; height: 16px; border-radius: 50%; margin-left: -4px; background: {{vr.b}}; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9)"></span><span style="width: 16px; height: 16px; border-radius: 50%; margin-left: -4px; background: {{vr.d}}; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9)"></span></span>{{vr.name}}</button>
+          </sc-for>
+        </div>
+        <div role="group" aria-label="Krizový banner" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px">
+          <span style="font-weight: 600; margin-right: 4px">Krizový banner</span>
+          <sc-for list="{{alertOpts}}" as="ao" hint-placeholder-count="4">
+            <button type="button" onClick="{{ao.pick}}" aria-pressed="{{ao.pressed}}" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #1A1A18; background: {{ao.bg}}; color: {{ao.ink}}; font: inherit; font-weight: 500; cursor: pointer">{{ao.name}}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <ul aria-label="Barvy varianty {{paletteName}}" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(148px, 100%), 1fr)); gap: 8px">
+      <sc-for list="{{swatches}}" as="sw" hint-placeholder-count="12">
+        <li style="display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 8px; background: #FFFFFF">
+          <span aria-hidden="true" style="flex: 0 0 40px; height: 40px; border-radius: 6px; background: {{sw.hex}}; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16)"></span>
+          <span style="min-width: 0"><span style="display: block; font-weight: 600">{{sw.name}}</span><span style="display: block; color: #55554F; font-variant-numeric: tabular-nums">{{sw.hex}} {{sw.note}}</span></span>
+        </li>
+      </sc-for>
+    </ul>
+    <p style="margin: 0; color: #55554F">Písmo: Roboto (nadpisy i text, jako gov.cz). Barvy jsou tokeny, obec je může v editoru Advance přepsat vlastními. Návrhová pravidla: skill unslop od Damira Sokolovského (@heydamir), CC BY 4.0.</p>
+  </div>
+</section>
+<div class="site" style="{{vars}} background: var(--bg); color: var(--ink); font-family: 'Roboto', Arial, sans-serif; font-size: 17px; line-height: 1.55">
+<sc-if value="{{alertOn}}" hint-placeholder-val="{{ true }}">
+<section class="alert" aria-labelledby="krize-titulek" style="background: {{al.bg}}; color: {{al.ink}}; border-bottom: 4px solid {{al.edge}}">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 12px clamp(16px, 4vw, 32px); display: flex; gap: 12px; align-items: flex-start">
+    <sc-if value="{{al.isInfo}}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 22px; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></sc-if>
+    <sc-if value="{{al.isWarn}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 22px; margin-top: 1px"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg></sc-if>
+    <div style="min-width: 0">
+      <h2 id="krize-titulek" style="margin: 0; font-size: 17px; line-height: 1.35; font-weight: 600">{{al.kind}}: {{al.title}}</h2>
+      <p style="margin: 2px 0 0; line-height: 1.5">{{al.text}} <a href="#" style="color: inherit; font-weight: 600">{{al.link}}</a></p>
+    </div>
+  </div>
+</section>
+</sc-if>
+<header>
+  <div style="background: var(--surface); font-size: 14px">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 6px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px">
+      <span>Oficiální web obce Javoří Lhota</span>
+      <span>Úřad dnes otevřen 8 až 17 hodin</span>
+    </div>
+  </div>
+  <div class="deep" style="background: var(--primary); color: var(--on-primary)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 20px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px">
+      <a href="#" style="display: flex; align-items: center; gap: 14px; color: var(--on-primary); text-decoration: none"><svg width="40" height="48" viewBox="0 0 40 48" aria-hidden="true" style="flex: 0 0 auto"><path d="M2 2h36v20c0 12-8 20-18 24C10 42 2 34 2 22z" fill="#2E6B3F"></path><path d="M20 5l2.5 5.5 4-2-1 6 5-1.5-2.5 5 3.5 1.5-6 3 1 3.5-5-1V31h-3v-6l-5 1 1-3.5-6-3 3.5-1.5-2.5-5 5 1.5-1-6 4 2z" fill="#E2B33C"></path><path d="M10 37c2.2-1.6 4.4-1.6 6.7 0s4.4 1.6 6.7 0 4.4-1.6 6.6 0" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round"></path></svg><span style="display: flex; flex-direction: column; line-height: 1.2"><span style="font-weight: 600; font-size: 22px">Obec Javoří Lhota</span><span style="font-size: 15px">okres Klatovy, Plzeňský kraj</span></span></a>
+      <form role="search" onsubmit="return false" style="display: flex; flex: 0 1 420px; min-width: 0">
+        <label for="hledat20" class="sr">Hledat na webu obce</label>
+        <input id="hledat20" type="search" placeholder="Co hledáte, třeba odpad nebo pobyt" style="flex: 1; min-width: 0; min-height: 48px; padding: 0 14px; border: 2px solid var(--on-primary); border-right: 0; border-radius: 4px 0 0 4px; background: var(--bg); color: var(--ink); font: inherit">
+        <button type="submit" style="min-height: 48px; padding: 0 18px; border: 2px solid var(--on-primary); border-radius: 0 4px 4px 0; background: var(--deep); color: var(--on-deep); font: inherit; font-weight: 500; cursor: pointer">Hledat</button>
+      </form>
+    </div>
+    <nav class="nav-wide" aria-label="Hlavní menu" style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; gap: 0 28px; font-weight: 500">
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; box-shadow: inset 0 -4px 0 var(--on-primary); text-decoration: none">Životní situace</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Obecní úřad</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Úřední deska</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Samospráva</a>
+      <a href="#" style="color: var(--on-primary); padding: 12px 0; text-decoration: none">Kontakty</a>
+    </nav>
+<details class="nav-narrow"><summary><svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="2"></path></svg>Menu</summary><nav aria-label="Hlavní menu"><a href="#">Životní situace</a><a href="#">Obecní úřad</a><a href="#">Úřední deska</a><a href="#">Samospráva</a><a href="#">Kontakty</a></nav></details>
+  </div>
+</header>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 24px clamp(16px, 4vw, 32px) 64px">
+  <nav aria-label="Drobečková navigace" style="font-size: 15px; margin-bottom: 16px"><a href="#" style="color: var(--link)">Úvod</a><span aria-hidden="true" style="margin: 0 8px; color: var(--muted)">/</span><span aria-current="page">Životní situace</span></nav>
+  <h1 style="margin: 0 0 8px; font-size: clamp(32px, 3.6vw, 44px); font-weight: 500; line-height: 1.15">Životní situace</h1>
+  <p style="margin: 0 0 28px; max-width: 62ch; font-size: 19px; color: var(--muted)">Vyberte, co se vám stalo. Ukážeme, co vyřídíte online, kdy musíte na úřad a co proběhne samo.</p>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+    <div role="group" aria-label="Vyberte životní situaci" style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; border-top: 1px solid var(--line)">
+      <sc-for list="{{situations}}" as="s" hint-placeholder-count="4">
+        <button type="button" onClick="{{s.pick}}" aria-pressed="{{s.pressed}}" style="min-height: 56px; padding: 12px 16px; border: 0; border-bottom: 1px solid var(--line); border-left: 4px solid {{s.edge}}; background: {{s.bg}}; color: var(--link); font: inherit; font-weight: 500; text-align: left; cursor: pointer">{{s.label}}</button>
+      </sc-for>
+    </div>
+
+    <section aria-live="polite" aria-labelledby="situace20" style="flex: 2.4 1 520px; min-width: 0; padding: 28px; border-radius: 4px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line)">
+      <h2 id="situace20" style="margin: 0 0 6px; font-size: 28px; font-weight: 500">{{cur.label}}</h2>
+      <p style="margin: 0 0 20px; color: var(--muted)">{{cur.who}}</p>
+      <ol style="margin: 0; padding: 0; list-style: none">
+        <sc-for list="{{cur.steps}}" as="st" hint-placeholder-count="4">
+          <li style="display: grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line)">
+            <span aria-hidden="true" style="display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 50%; background: var(--primary); color: var(--on-primary); font-weight: 600">{{st.n}}</span>
+            <div>
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px"><h3 style="margin: 0; font-size: 19px; font-weight: 600">{{st.title}}</h3><span style="padding: 2px 10px; border-radius: 4px; background: {{st.tagBg}}; color: {{st.tagInk}}; box-shadow: inset 0 0 0 1px {{st.tagLine}}; font-size: 14px; font-weight: 500">{{st.tag}}</span></div>
+              <p style="margin: 6px 0 0">{{st.text}}</p>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 32px; margin-top: 48px">
+    <section aria-labelledby="deska20" style="flex: 2 1 480px; min-width: 0">
+      <h2 id="deska20" style="margin: 0 0 12px; font-size: 26px; font-weight: 500">Úřední deska</h2>
+      <ul style="margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--primary)">
+        <li style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><a href="#" style="color: var(--link)">Návrh rozpočtu obce na rok 2027</a><span style="color: var(--muted); font-size: 15px">Rozpočet, visí do 11. 11. 2026</span></li>
+        <li style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><a href="#" style="color: var(--link)">Pozvánka na zasedání zastupitelstva 9. 11.</a><span style="color: var(--muted); font-size: 15px">Zastupitelstvo, visí do 9. 11. 2026</span></li>
+        <li style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line)"><a href="#" style="color: var(--link)">Veřejná vyhláška: uzavírka mostu</a><span style="color: var(--muted); font-size: 15px">Doprava, visí do 30. 11. 2026</span></li>
+      </ul>
+      <a href="#" style="display: inline-block; margin-top: 12px; color: var(--link); font-weight: 500">Všechny dokumenty na úřední desce</a>
+    </section>
+    <section aria-labelledby="kontakt20" style="flex: 1 1 300px; min-width: 0; padding: 24px; background: var(--surface); border-radius: 4px">
+      <h2 id="kontakt20" style="margin: 0 0 12px; font-size: 22px; font-weight: 500">Obecní úřad</h2>
+      <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px">
+        <dt style="color: var(--muted)">Adresa</dt><dd style="margin: 0">Náves 1, [PSČ] Javoří Lhota</dd>
+        <dt style="color: var(--muted)">Po a St</dt><dd style="margin: 0">8 až 17 hodin</dd>
+        <dt style="color: var(--muted)">Út a Čt</dt><dd style="margin: 0">8 až 12 hodin</dd>
+        <dt style="color: var(--muted)">Datovka</dt><dd style="margin: 0">[ID DS]</dd>
+        <dt style="color: var(--muted)">E-mail</dt><dd style="margin: 0"><a href="#" style="color: var(--link)">obec@javorilhota.cz</a></dd>
+      </dl>
+    </section>
+  </div>
+  <p style="margin: 40px 0 0; color: var(--muted); font-size: 15px">Stránku spravuje Jana Malá, aktualizováno 26. 10. 2026</p>
+</main>
+
+<footer class="deep" style="background: var(--deep); color: var(--on-deep)">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 32px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; font-size: 15px">
+    <span>Obec Javoří Lhota, Náves 1, IČO [IČO], datová schránka [ID DS], účet [ČÍSLO ÚČTU]</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: var(--on-deep)">Povinně zveřejňované informace</a><a href="#" style="color: var(--on-deep)">Prohlášení o přístupnosti</a><a href="#" style="color: var(--on-deep)">Ochrana osobních údajů</a></nav>
+  </div>
+</footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"paleta": {"editor": "enum", "options": ["Státní modrá", "Krajská zelená", "Grafitová"], "default": "Státní modrá", "section": "Barvy"}, "$preview": {"width": 1280, "height": 2200}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = Object.assign({ v: null, alert: 'info' }, { sit: 'stehovani' }); }
+  renderVals() {
+    const P = [{"bg": "#FFFFFF", "surface": "#EBF1F8", "ink": "#1F2328", "muted": "#4E5864", "line": "#D5DEE8", "primary": "#2362A2", "onPrimary": "#FFFFFF", "link": "#2362A2", "accent": "#1D7A3A", "onAccent": "#FFFFFF", "deep": "#1A4A7C", "onDeep": "#FFFFFF", "name": "Státní modrá", "x": {}}, {"bg": "#FFFFFF", "surface": "#E9F3EE", "ink": "#1A2420", "muted": "#4C5A54", "line": "#D1E2D9", "primary": "#17694A", "onPrimary": "#FFFFFF", "link": "#17694A", "accent": "#2362A2", "onAccent": "#FFFFFF", "deep": "#0E4A33", "onDeep": "#FFFFFF", "name": "Krajská zelená", "x": {}}, {"bg": "#FFFFFF", "surface": "#EEF0F2", "ink": "#1B1F24", "muted": "#4F5862", "line": "#D6DADF", "primary": "#3A4552", "onPrimary": "#FFFFFF", "link": "#2C5B8C", "accent": "#1D7A3A", "onAccent": "#FFFFFF", "deep": "#22282F", "onDeep": "#FFFFFF", "name": "Grafitová", "x": {}}];
+    const names = P.map((p) => p.name);
+    const fromProp = names.indexOf(this.props.paleta);
+    const vi = this.state.v != null ? this.state.v : (fromProp >= 0 ? fromProp : 0);
+    const c = P[vi];
+    const lum = (h) => { const n = parseInt(h.slice(1), 16); const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2]; };
+    const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+    const fmt = (r) => r.toFixed(1).replace('.', ',') + ':1 ' + (r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : 'velký text');
+    const ROLES = [['bg', 'Pozadí', ''], ['surface', 'Plocha', ''], ['ink', 'Text', 'bg'], ['muted', 'Vedlejší text', 'bg'], ['link', 'Odkazy', 'bg'], ['line', 'Linky', ''], ['primary', 'Hlavní', ''], ['onPrimary', 'Text na hlavní', 'primary'], ['accent', 'Akcent', ''], ['onAccent', 'Text na akcentu', 'accent'], ['deep', 'Tmavý pás', ''], ['onDeep', 'Text na tmavém', 'deep']];
+    const swatches = ROLES.map((r) => ({ name: r[1], hex: c[r[0]], note: r[2] ? fmt(cr(c[r[0]], c[r[2]])) : '' }));
+    const variants = P.map((p, i) => ({ name: p.name, a: p.bg, b: p.primary, d: p.accent, pressed: i === vi ? 'true' : 'false', bg: i === vi ? '#1A1A18' : '#FFFFFF', ink: i === vi ? '#FFFFFF' : '#1A1A18', pick: () => this.setState({ v: i }) }));
+    const A = {
+      info: { kind: 'Informace obce', title: 'most přes Javornický potok je zavřený', text: 'Od 2. do 30. listopadu. Objížďka vede přes Hájek, autobus 431 staví u hájovny.', link: 'Mapa objížďky', bg: '#F2F6FC', ink: '#0C1838', edge: '#00469B', isInfo: true, isWarn: false },
+      warning: { kind: 'Výstraha', title: 'silný vítr ve čtvrtek 5. listopadu', text: 'ČHMÚ varuje od 14 do 22 hodin před nárazy větru až 90 km/h. Ukliďte věci ze zahrad a nechoďte do lesa.', link: 'Výstraha ČHMÚ', bg: '#FEF6D8', ink: '#2A1B00', edge: '#CA8504', isInfo: false, isWarn: true },
+      emergency: { kind: 'Krizová situace', title: 'nepijte vodu z obecního vodovodu', text: 'Rozbor z 1. listopadu našel bakterie. Vodu do odvolání převařujte. Cisterna s pitnou vodou stojí na návsi od 14 hodin.', link: 'Co dělat a kdy to skončí', bg: '#B00A0D', ink: '#FFFFFF', edge: '#6E0507', isInfo: false, isWarn: true }
+    };
+    const al = A[this.state.alert] || A.info;
+    const alertOpts = [['off', 'Vypnuto'], ['info', 'Informace'], ['warning', 'Výstraha'], ['emergency', 'Krize']].map((o) => ({ name: o[1], pressed: this.state.alert === o[0] ? 'true' : 'false', bg: this.state.alert === o[0] ? '#1A1A18' : '#FFFFFF', ink: this.state.alert === o[0] ? '#FFFFFF' : '#1A1A18', pick: () => this.setState({ alert: o[0] }) }));
+    const kebab = (s) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+    let vars = '';
+    Object.keys(c).forEach((k) => { if (k !== 'name' && k !== 'x') vars += '--' + kebab(k) + ': ' + c[k] + '; '; });
+    Object.keys(c.x || {}).forEach((k) => { vars += '--' + k + ': ' + c.x[k] + '; '; });
+    const extra = ((self, c) => { const T = {
+      online: { tag: 'Online', bg: c.surface, ink: c.ink, line: c.accent },
+      urad: { tag: 'Na úřadě', bg: c.bg, ink: c.ink, line: c.primary },
+      samo: { tag: 'Proběhne samo', bg: c.bg, ink: c.muted, line: c.line }
+    };
+    const S = [
+      { id: 'stehovani', label: 'Stěhuji se do Javoří Lhoty', who: 'Poradí evidence obyvatel, kancelář č. 2, telefon [TELEFON].', steps: [
+        ['Přihlaste se k trvalému pobytu', 'urad', 'Přijďte s občanským průkazem a dokladem, že na adrese smíte bydlet, například nájemní smlouvou. Poplatek je 50 Kč, děti do 15 let ho neplatí.'],
+        ['Přihlaste se k poplatku za odpad', 'online', 'Formulář vyplníte na webu do 15 dnů. Poplatek je 900 Kč na osobu a rok, popelnici vydáme na úřadě.'],
+        ['Máte psa? Přihlaste ho', 'online', 'Poplatek ze psů je 200 Kč na rok. Známku vám pošleme poštou.'],
+        ['Zapište děti do školy nebo školky', 'urad', 'ZŠ a MŠ Javoří Lhota má 1. až 5. ročník. Zápis do první třídy je v dubnu, do školky v květnu.']
+      ] },
+      { id: 'narozeni', label: 'Narodilo se nám dítě', who: 'Poradí matrika, kancelář č. 1, telefon [TELEFON].', steps: [
+        ['Porodnice ohlásí narození matrice', 'samo', 'Rodný list vystaví matrika podle místa porodu.'],
+        ['Dítě získá trvalý pobyt u matky', 'samo', 'Nic nevyplňujete, údaj se propíše z registru obyvatel.'],
+        ['Přihlaste dítě k poplatku za odpad', 'online', 'Stačí doplnit jméno do vašeho přihlášení, do 15 dnů od narození.'],
+        ['Přijďte na vítání občánků', 'online', 'Pozvánku pošleme, když nám k tomu dáte souhlas. Souhlas můžete kdykoli odvolat.']
+      ] },
+      { id: 'stavba', label: 'Stavím nebo opravuji dům', who: 'Stavby povoluje stavební úřad v [ORP]. Na obci poradí místostarosta, telefon [TELEFON].', steps: [
+        ['Podívejte se do územního plánu', 'online', 'Mapa s územním plánem je na webu. Ukáže, co se na pozemku smí stavět.'],
+        ['Podejte žádost přes Portál stavebníka', 'online', 'Stavební řízení se vede digitálně. Žádost vyřizuje stavební úřad, ne obec.'],
+        ['Domluvte připojení na vodovod a kanalizaci', 'urad', 'Smlouvu uzavřete s obcí. Technik se nejdřív podívá na místo.'],
+        ['Ohlaste lešení nebo kontejner na ulici', 'online', 'Zábor obecního pozemku ohlaste předem. Platí se místní poplatek podle vyhlášky.']
+      ] },
+      { id: 'umrti', label: 'Zemřel nám blízký člověk', who: 'Poradí matrika, kancelář č. 1, telefon [TELEFON].', steps: [
+        ['Lékař vystaví list o prohlídce zemřelého', 'samo', 'List předá matrice a pohřební službě.'],
+        ['Matrika vystaví úmrtní list', 'urad', 'Vydává ho matrika podle místa úmrtí. Často ho vyřídí pohřební služba za vás.'],
+        ['Domluvte hrobové místo', 'urad', 'Nájem hrobu na hřbitově u kostela sv. Václava uzavřete s obcí.'],
+        ['Poplatky se upraví', 'samo', 'Obec údaje převezme z registru obyvatel. Nemusíte nic odhlašovat.']
+      ] }
+    ];
+    const cur = S.find((x) => x.id === self.state.sit) || S[0];
+    return {
+      situations: S.map((x) => ({ label: x.label, pressed: x.id === cur.id ? 'true' : 'false', bg: x.id === cur.id ? c.bg : 'transparent', edge: x.id === cur.id ? c.primary : 'transparent', pick: () => self.setState({ sit: x.id }) })),
+      cur: { label: cur.label, who: cur.who, steps: cur.steps.map((s, i) => ({ n: String(i + 1), title: s[0], tag: T[s[1]].tag, tagBg: T[s[1]].bg, tagInk: T[s[1]].ink, tagLine: T[s[1]].line, text: s[2] })) }
+    }; })(this, c);
+    return Object.assign({ c: c, vars: vars, swatches: swatches, variants: variants, paletteName: c.name, alertOn: this.state.alert !== 'off', al: al, alertOpts: alertOpts }, extra || {});
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Tokens follow the gov.cz design system. Crisis colours match its Infobar and alerts. */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --color-ink: #1f2328;
+  --color-muted: #4e5864;
+  --color-line: #d5dee8;
+  --color-surface: #ebf1f8;
+  --color-primary: #2362a2;
+  --color-primary-dark: #1a4a7c;
+  --color-link: #2362a2;
+
+  --color-krize-info: #f2f6fc;
+  --color-krize-info-ink: #0c1838;
+  --color-krize-info-edge: #00469b;
+  --color-krize-warning: #fef6d8;
+  --color-krize-warning-ink: #2a1b00;
+  --color-krize-warning-edge: #ca8504;
+  --color-krize-emergency: #b00a0d;
+  --color-krize-emergency-ink: #ffffff;
+  --color-krize-emergency-edge: #6e0507;
+
+  --color-stav-visi: #1d7a3a;
+  --color-stav-sejmuto: #4e5864;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,73 @@
+[[ALERT]]
+<header style="border-bottom: 1px solid var(--line)">
+  <div style="max-width: 1360px; margin: 0 auto; padding: 14px clamp(16px, 3vw, 28px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none">[[ZNAK 30]]<span style="font-family: 'Red Hat Display', system-ui, sans-serif; font-weight: 600; font-size: 20px">Javoří Lhota</span></a>
+    <nav class="nav-wide" aria-label="Hlavní menu" style="display: flex; flex-wrap: wrap; gap: 0 24px; font-weight: 500">
+      <a href="#" style="color: var(--ink); text-decoration: none">Mapa obce</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Úřad</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Úřední deska</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Nahlásit závadu</a>
+    </nav>
+  </div>
+</header>
+
+<main style="max-width: 1360px; margin: 0 auto; padding: 28px clamp(16px, 3vw, 28px) 56px">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px 32px; margin-bottom: 20px">
+    <h1 style="margin: 0; font-family: 'Red Hat Display', system-ui, sans-serif; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.1">Kde co v obci najdete</h1>
+    <p style="margin: 0; color: var(--muted); max-width: 52ch">Vyberte vrstvy a klikněte na bod. Stejné údaje jsou pod mapou i jako seznam.</p>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+    <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+      <fieldset style="margin: 0; padding: 16px; border: 1px solid var(--line); border-radius: 14px">
+        <legend style="padding: 0 6px; font-weight: 600">Co ukázat na mapě</legend>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <sc-for list="{{layers}}" as="l" hint-placeholder-count="5">
+            <button type="button" onClick="{{l.toggle}}" aria-pressed="{{l.pressed}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 2px solid {{l.color}}; background: {{l.bg}}; color: {{l.ink}}; font: inherit; font-weight: 500; cursor: pointer"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: {{l.dot}}"></span>{{l.label}}</button>
+          </sc-for>
+        </div>
+      </fieldset>
+      <section aria-live="polite" aria-labelledby="vybrane16" style="padding: 20px; border-radius: 14px; background: var(--surface); border-top: 6px solid {{sel.color}}">
+        <p style="margin: 0; color: var(--muted); font-size: 15px">{{sel.layerLabel}}</p>
+        <h2 id="vybrane16" style="margin: 4px 0 8px; font-family: 'Red Hat Display', system-ui, sans-serif; font-size: 24px; line-height: 1.2">{{sel.title}}</h2>
+        <p style="margin: 0">{{sel.info}}</p>
+        <p style="margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 0 20px"><a href="#" style="color: var(--link); font-weight: 600">Navigovat sem</a><a href="#" style="color: var(--link); font-weight: 600">Nahlásit problém na tomto místě</a></p>
+      </section>
+    </div>
+
+    <div role="region" aria-label="Mapa obce Javoří Lhota" style="flex: 2.2 1 560px; min-width: 0; position: relative; min-height: 520px; border-radius: 14px; overflow: hidden; background: var(--land); box-shadow: inset 0 0 0 1px var(--line)">
+      <svg viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%">
+        <path d="M520 520 C540 440 600 400 680 380 S800 340 800 300 V520z" style="fill: var(--water)"></path>
+        <path d="M0 360 C140 340 260 400 360 380 S520 330 560 360 C600 390 640 440 700 520" style="fill: none; stroke: var(--water)" stroke-width="14" stroke-linecap="round"></path>
+        <g style="fill: none; stroke: var(--road)" stroke-linecap="round" stroke-linejoin="round"><path d="M0 230 C200 220 300 240 400 250 S640 230 800 170" stroke-width="22"></path><path d="M400 250 C410 320 440 380 470 520" stroke-width="18"></path><path d="M160 0 C170 90 150 160 160 226" stroke-width="14"></path><path d="M400 250 C470 200 560 150 640 110" stroke-width="12"></path></g>
+        <g style="fill: var(--bld)"><rect x="300" y="186" width="42" height="30" rx="3"></rect><rect x="350" y="180" width="30" height="36" rx="3"></rect><rect x="420" y="190" width="46" height="28" rx="3"></rect><rect x="420" y="272" width="36" height="30" rx="3"></rect><rect x="330" y="270" width="52" height="34" rx="3"></rect><rect x="210" y="300" width="70" height="40" rx="3"></rect><rect x="480" y="140" width="34" height="28" rx="3"></rect><rect x="600" y="112" width="40" height="30" rx="3"></rect><rect x="650" y="150" width="30" height="26" rx="3"></rect><rect x="250" y="250" width="34" height="26" rx="3"></rect></g>
+        <circle cx="400" cy="250" r="34" style="fill: none; stroke: var(--bld)" stroke-width="10"></circle>
+        <text x="400" y="235" text-anchor="middle" style="fill: var(--ink); font-family: 'Red Hat Text', sans-serif; font-size: 14px; font-weight: 600">Náves</text>
+        <text x="680" y="460" text-anchor="middle" style="fill: var(--ink); font-family: 'Red Hat Text', sans-serif; font-size: 14px; font-weight: 500">Mlýnský rybník</text>
+        <text x="40" y="390" style="fill: var(--ink); font-family: 'Red Hat Text', sans-serif; font-size: 13px; font-weight: 500">Javornický potok</text>
+        <text x="186" y="40" style="fill: var(--ink); font-family: 'Red Hat Text', sans-serif; font-size: 13px; font-weight: 500">na Javorník</text>
+        <text x="676" y="96" style="fill: var(--ink); font-family: 'Red Hat Text', sans-serif; font-size: 13px; font-weight: 500">Podjavoří</text>
+      </svg>
+      <sc-for list="{{pins}}" as="p" hint-placeholder-count="6">
+        <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" aria-label="{{p.title}}" style="position: absolute; left: {{p.x}}; top: {{p.y}}; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><span aria-hidden="true" style="display: block; width: {{p.size}}; height: {{p.size}}; border-radius: 50%; background: {{p.color}}; box-shadow: 0 0 0 3px var(--pin-ring), 0 0 0 6px {{p.ring}}"></span></button>
+      </sc-for>
+      <p style="position: absolute; right: 12px; bottom: 12px; margin: 0; padding: 4px 10px; border-radius: 6px; background: var(--bg); color: var(--muted); font-size: 13px">Podklad: ilustrační mapa, v provozu ČÚZK a OpenStreetMap</p>
+    </div>
+  </div>
+
+  <section aria-labelledby="seznam16" style="margin-top: 32px">
+    <h2 id="seznam16" style="margin: 0 0 12px; font-family: 'Red Hat Display', system-ui, sans-serif; font-size: 26px">Místa na mapě jako seznam</h2>
+    <ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 0 28px">
+      <sc-for list="{{pins}}" as="p" hint-placeholder-count="6">
+        <li style="border-top: 1px solid var(--line)"><button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 8px 0; border: 0; background: transparent; color: var(--link); font: inherit; font-weight: 500; text-align: left; cursor: pointer; text-decoration: underline; text-underline-offset: 3px"><span aria-hidden="true" style="flex: none; width: 12px; height: 12px; border-radius: 50%; background: {{p.color}}"></span>{{p.title}}</button></li>
+      </sc-for>
+    </ul>
+  </section>
+</main>
+
+<footer style="border-top: 1px solid var(--line); background: var(--surface)">
+  <div style="max-width: 1360px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 28px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; font-size: 15px">
+    <span>Obecní úřad Javoří Lhota, Náves 1, [TELEFON]</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: var(--link)">Povinné informace</a><a href="#" style="color: var(--link)">Přístupnost</a><a href="#" style="color: var(--link)">Osobní údaje</a></nav>
+  </div>
+</footer>

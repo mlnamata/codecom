@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.env
+.env.local
+*.tsbuildinfo
+__pycache__/
+research/snimky/
+research/varianty/
+.DS_Store

@@ -1,0 +1,65 @@
+[[ALERT]]
+<header class="deep" style="background: var(--deep); color: var(--on-deep)">
+  <a class="skip" href="#obsah15">Přeskočit na obsah</a>
+  <div style="max-width: 1040px; margin: 0 auto; padding: 0.8em clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.6em 1.2em">
+    <a href="#" style="display: flex; align-items: center; gap: 0.6em; color: var(--on-deep); text-decoration: none; font-weight: 600; font-size: 1.2em">[[ZNAK 36]]Javoří Lhota</a>
+    <div role="group" aria-label="Velikost písma" style="display: flex; align-items: center; gap: 0.4em">
+      <span aria-hidden="true" style="font-size: 0.85em">Písmo</span>
+      <sc-for list="{{sizes}}" as="z" hint-placeholder-count="3">
+        <button type="button" onClick="{{z.pick}}" aria-pressed="{{z.pressed}}" aria-label="{{z.name}}" style="min-width: 48px; min-height: 48px; padding: 0 0.6em; border: 2px solid var(--on-deep); border-radius: 4px; background: {{z.bg}}; color: {{z.ink}}; font: inherit; font-weight: 600; cursor: pointer">{{z.label}}</button>
+      </sc-for>
+    </div>
+  </div>
+  <div style="border-top: 1px solid rgba(255, 255, 255, 0.3)">
+    <nav class="nav-wide" aria-label="Hlavní menu" style="max-width: 1040px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; gap: 0 1.4em; font-weight: 500">
+      <a href="#" style="color: var(--on-deep); padding: 0.6em 0">Co chci vyřídit</a>
+      <a href="#" style="color: var(--on-deep); padding: 0.6em 0">Úřad a kontakty</a>
+      <a href="#" style="color: var(--on-deep); padding: 0.6em 0">Hlášení rozhlasu</a>
+      <a href="#" style="color: var(--on-deep); padding: 0.6em 0">Úřední deska</a>
+    </nav>
+  </div>
+</header>
+
+<main id="obsah15" style="max-width: 1040px; margin: 0 auto; padding: 2em clamp(16px, 4vw, 32px) 3em">
+  <h1 style="margin: 0 0 0.3em; font-size: 2.2em; line-height: 1.15; font-weight: 600">Obec Javoří Lhota</h1>
+  <p style="margin: 0 0 1.6em; font-size: 1.15em; max-width: 40ch">Na tomto webu najdete, co potřebujete vyřídit, kdy jezdí popelnice a co hlásil rozhlas.</p>
+
+  <div style="padding: 1em 1.2em; margin-bottom: 2em; border-left: 0.4em solid var(--primary); background: var(--surface); color: var(--ink)">
+    <p style="margin: 0; font-weight: 600">Úřad je dnes otevřený od 8 do 17 hodin</p>
+    <p style="margin: 0.3em 0 0">Zavolejte nám: <a href="#" style="color: inherit; font-weight: 600">[TELEFON]</a>. Telefon bereme i mimo úřední hodiny, od 7 do 18.</p>
+  </div>
+
+  <section aria-labelledby="ukoly15">
+    <h2 id="ukoly15" style="margin: 0 0 0.5em; font-size: 1.6em; font-weight: 600">Co chcete udělat?</h2>
+    <ul style="margin: 0 0 2.4em; padding: 0; list-style: none; border-top: 2px solid var(--ink)">
+      <li style="border-bottom: 2px solid var(--line)"><a href="#" style="display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: 0.8em 0; color: var(--link); font-weight: 600; font-size: 1.1em">Zaplatit poplatek za odpad<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a></li>
+      <li style="border-bottom: 2px solid var(--line)"><a href="#" style="display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: 0.8em 0; color: var(--link); font-weight: 600; font-size: 1.1em">Zjistit, kdy se vyváží popelnice<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a></li>
+      <li style="border-bottom: 2px solid var(--line)"><a href="#" style="display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: 0.8em 0; color: var(--link); font-weight: 600; font-size: 1.1em">Objednat se na úřad<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a></li>
+      <li style="border-bottom: 2px solid var(--line)"><a href="#" style="display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: 0.8em 0; color: var(--link); font-weight: 600; font-size: 1.1em">Nahlásit, že nesvítí lampa nebo je díra v cestě<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a></li>
+      <li style="border-bottom: 2px solid var(--line)"><a href="#" style="display: flex; justify-content: space-between; align-items: center; gap: 1em; padding: 0.8em 0; color: var(--link); font-weight: 600; font-size: 1.1em">Objednat odvoz k lékaři obecním autem<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="rozhlas15" style="margin-bottom: 2.4em">
+    <h2 id="rozhlas15" style="margin: 0 0 0.3em; font-size: 1.6em; font-weight: 600">Co hlásil rozhlas</h2>
+    <p style="margin: 0 0 0.8em; color: var(--muted)">Každé hlášení tu je i napsané. Nemusíte stát u okna.</p>
+    <ol style="margin: 0; padding: 0; list-style: none">
+      <li style="display: grid; grid-template-columns: minmax(5.5em, auto) 1fr; gap: 0.2em 1em; padding: 0.8em 0; border-top: 1px solid var(--line)"><span style="font-weight: 600; font-variant-numeric: tabular-nums">Dnes 9:00</span><span>Ve čtvrtek 5. listopadu od 8 do 14 hodin nepoteče voda v ulicích Hlavní a K Javorníku. Cisterna s pitnou vodou bude stát na návsi.</span></li>
+      <li style="display: grid; grid-template-columns: minmax(5.5em, auto) 1fr; gap: 0.2em 1em; padding: 0.8em 0; border-top: 1px solid var(--line)"><span style="font-weight: 600; font-variant-numeric: tabular-nums">Dnes 8:00</span><span>Most přes Javornický potok je zavřený do 30. listopadu. Autobus 431 staví u hájovny.</span></li>
+      <li style="display: grid; grid-template-columns: minmax(5.5em, auto) 1fr; gap: 0.2em 1em; padding: 0.8em 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line)"><span style="font-weight: 600; font-variant-numeric: tabular-nums">Pá 17:00</span><span>V sobotu 7. listopadu od 9 do 11 hodin se u hasičárny sbírá nebezpečný odpad: barvy, oleje, baterie a léky.</span></li>
+    </ol>
+    <p style="margin: 0.8em 0 0"><a href="#" class="hit" style="color: var(--link); font-weight: 600">Chci hlášení dostávat SMS zprávou</a></p>
+  </section>
+
+  <section aria-labelledby="pomoc15" style="padding: 1.2em; border: 2px solid var(--ink); border-radius: 4px">
+    <h2 id="pomoc15" style="margin: 0 0 0.3em; font-size: 1.3em; font-weight: 600">Nevíte si s webem rady?</h2>
+    <p style="margin: 0">Zavolejte paní Janě Malé na <a href="#" style="color: var(--link); font-weight: 600">[TELEFON]</a>. Provede vás krok za krokem, nebo to vyřídí s vámi na úřadě.</p>
+  </section>
+</main>
+
+<footer class="deep" style="background: var(--deep); color: var(--on-deep)">
+  <div style="max-width: 1040px; margin: 0 auto; padding: 1.4em clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6em 1.4em">
+    <span>Obecní úřad Javoří Lhota, Náves 1</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 1.2em"><a href="#" style="color: var(--on-deep)">Prohlášení o přístupnosti</a><a href="#" style="color: var(--on-deep)">Povinné informace</a><a href="#" style="color: var(--on-deep)">Osobní údaje</a></nav>
+  </div>
+</footer>

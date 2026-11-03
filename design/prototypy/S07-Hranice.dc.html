@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>07 Hranice – Javoří Lhota</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500&amp;display=swap">
+<style>
+body{margin:0;background:#ECECE8}
+*{box-sizing:border-box}
+.site a{color:var(--link)}
+.site a:hover{color:var(--ink)}
+.site :focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.site .deep :focus-visible{outline-color:var(--on-deep)}
+.site .on-primary :focus-visible{outline-color:var(--on-primary)}
+.site .deep .on-light :focus-visible{outline-color:var(--link)}
+.site .alert :focus-visible{outline-color:currentColor}
+.spec :focus-visible{outline:3px solid #1A1A18;outline-offset:2px}
+.site h1,.site h2,.site h3,.site h4{line-height:1.2;font-weight:500}
+.site strong,.site b,.site th{font-weight:600}
+.site footer a:not([style*="padding"]),.site nav a:not([style*="padding"]),.site td a,.site dd a,.site .hit{display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nav-narrow{display:none}
+@media (max-width:767.98px){
+.nav-wide{display:none!important}
+.nav-narrow{display:block;margin-left:auto}
+.nav-narrow[open]{flex-basis:100%}
+.nav-narrow>summary{list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer}
+.nav-narrow>summary::-webkit-details-marker{display:none}
+.nav-narrow nav{display:flex;flex-direction:column;padding:8px 0 4px}
+.nav-narrow nav a{margin-block:0;padding-block:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:767.98px){.border-line{display:none}}
+</style>
+</helmet>
+<div>
+<section class="spec" aria-label="Barevná paleta šablony" style="background: #ECECE8; color: #1A1A18; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 14px; line-height: 1.45; border-bottom: 1px solid #CFCFC9">
+  <div style="padding: 20px clamp(16px, 4vw, 32px) 24px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px 24px">
+      <p style="margin: 0; max-width: 60ch"><span style="display: block; font-size: 18px; font-weight: 600">Šablona 07 Hranice</span><span style="display: block; color: #55554F">Pro obce u hranice, česky i německy. Inspirace: Pressville (LSVRthemes) – znak a serifový název přes panoráma, lišta s jazyky. Ukázka pro smyšlenou obec Javoří Lhota.</span></p>
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end">
+        <div role="group" aria-label="Barevná varianta" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px">
+          <span style="font-weight: 600; margin-right: 4px">Barevná varianta</span>
+          <sc-for list="{{variants}}" as="vr" hint-placeholder-count="3">
+            <button type="button" onClick="{{vr.pick}}" aria-pressed="{{vr.pressed}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #1A1A18; background: {{vr.bg}}; color: {{vr.ink}}; font: inherit; font-weight: 500; cursor: pointer"><span aria-hidden="true" style="display: inline-flex"><span style="width: 16px; height: 16px; border-radius: 50%; background: {{vr.a}}; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3)"></span><span style="width: 16px; height: 16px; border-radius: 50%; margin-left: -4px; background: {{vr.b}}; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9)"></span><span style="width: 16px; height: 16px; border-radius: 50%; margin-left: -4px; background: {{vr.d}}; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9)"></span></span>{{vr.name}}</button>
+          </sc-for>
+        </div>
+        <div role="group" aria-label="Krizový banner" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px">
+          <span style="font-weight: 600; margin-right: 4px">Krizový banner</span>
+          <sc-for list="{{alertOpts}}" as="ao" hint-placeholder-count="4">
+            <button type="button" onClick="{{ao.pick}}" aria-pressed="{{ao.pressed}}" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #1A1A18; background: {{ao.bg}}; color: {{ao.ink}}; font: inherit; font-weight: 500; cursor: pointer">{{ao.name}}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <ul aria-label="Barvy varianty {{paletteName}}" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(148px, 100%), 1fr)); gap: 8px">
+      <sc-for list="{{swatches}}" as="sw" hint-placeholder-count="12">
+        <li style="display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 8px; background: #FFFFFF">
+          <span aria-hidden="true" style="flex: 0 0 40px; height: 40px; border-radius: 6px; background: {{sw.hex}}; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16)"></span>
+          <span style="min-width: 0"><span style="display: block; font-weight: 600">{{sw.name}}</span><span style="display: block; color: #55554F; font-variant-numeric: tabular-nums">{{sw.hex}} {{sw.note}}</span></span>
+        </li>
+      </sc-for>
+    </ul>
+    <p style="margin: 0; color: #55554F">Písmo: IBM Plex Serif (nadpisy) a IBM Plex Sans (text). Barvy jsou tokeny, obec je může v editoru Advance přepsat vlastními. Návrhová pravidla: skill unslop od Damira Sokolovského (@heydamir), CC BY 4.0.</p>
+  </div>
+</section>
+<div class="site" style="{{vars}} background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.55">
+<sc-if value="{{alertOn}}" hint-placeholder-val="{{ true }}">
+<section class="alert" aria-labelledby="krize-titulek" style="background: {{al.bg}}; color: {{al.ink}}; border-bottom: 4px solid {{al.edge}}">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 12px clamp(16px, 4vw, 32px); display: flex; gap: 12px; align-items: flex-start">
+    <sc-if value="{{al.isInfo}}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 22px; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg></sc-if>
+    <sc-if value="{{al.isWarn}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 22px; margin-top: 1px"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18v.5"></path></svg></sc-if>
+    <div style="min-width: 0">
+      <h2 id="krize-titulek" style="margin: 0; font-size: 17px; line-height: 1.35; font-weight: 600">{{al.kind}}: {{al.title}}</h2>
+      <p style="margin: 2px 0 0; line-height: 1.5">{{al.text}} <a href="#" style="color: inherit; font-weight: 600">{{al.link}}</a></p>
+    </div>
+  </div>
+</section>
+</sc-if>
+<header>
+  <div class="on-primary" style="position: relative; background: var(--primary); color: var(--on-primary); overflow: hidden">
+    <svg viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+      <path d="M0 160 C200 110 360 140 520 120 S860 70 1040 100 S1320 140 1440 110 V300 H0z" fill="#FFFFFF" opacity="0.08"></path>
+      <path d="M0 220 C260 190 520 210 760 200 S1200 170 1440 190 V300 H0z" fill="#FFFFFF" opacity="0.1"></path>
+      <g fill="#FFFFFF" opacity="0.14"><path d="M1060 240 l26 -80 l26 80z"></path><path d="M1110 240 l20 -60 l20 60z"></path><path d="M1160 240 l30 -96 l30 96z"></path><path d="M1220 240 l22 -66 l22 66z"></path><path d="M160 240 l24 -70 l24 70z"></path><path d="M210 240 l30 -92 l30 92z"></path></g>
+      <path d="M720 0 V300" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="6 10" opacity="0.4"></path>
+    </svg>
+    <div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 48px clamp(16px, 4vw, 32px) 56px; display: flex; align-items: center; gap: 20px">
+      <svg width="64" height="77" viewBox="0 0 40 48" aria-hidden="true" style="flex: 0 0 auto"><path d="M2 2h36v20c0 12-8 20-18 24C10 42 2 34 2 22z" fill="#2E6B3F"></path><path d="M20 5l2.5 5.5 4-2-1 6 5-1.5-2.5 5 3.5 1.5-6 3 1 3.5-5-1V31h-3v-6l-5 1 1-3.5-6-3 3.5-1.5-2.5-5 5 1.5-1-6 4 2z" fill="#E2B33C"></path><path d="M10 37c2.2-1.6 4.4-1.6 6.7 0s4.4 1.6 6.7 0 4.4-1.6 6.6 0" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round"></path></svg>
+      <div>
+        <p style="margin: 0; font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 500; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.1">Obec Javoří Lhota</p>
+        <p lang="de" style="margin: 4px 0 0; font-size: 18px">Gemeinde Javoří Lhota, 4 Kilometer bis zur Grenze</p>
+      </div>
+    </div>
+  </div>
+  <div class="deep" style="background: var(--deep); color: var(--on-deep)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px">
+      <p style="margin: 0; font-size: 15px; display: flex; flex-wrap: wrap; gap: 0 16px"><span>Úřad dnes 8 až 17 hodin</span><span lang="de">Gemeindeamt heute 8 bis 17 Uhr</span></p>
+      <div role="group" aria-label="Jazyk obsahu" style="display: flex; gap: 4px; padding: 4px; border-radius: 8px; box-shadow: inset 0 0 0 1px var(--on-deep)">
+        <sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
+          <button type="button" onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" lang="{{l.lang}}" style="min-height: 40px; padding: 0 14px; border-radius: 6px; border: 0; background: {{l.bg}}; color: {{l.ink}}; font: inherit; font-size: 15px; font-weight: 500; cursor: pointer">{{l.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  <div style="background: var(--bg); border-bottom: 1px solid var(--line)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px">
+      <nav class="nav-wide" aria-label="Hlavní menu" style="display: flex; flex-wrap: wrap; gap: 0 28px; font-weight: 500">
+        <a href="#" style="color: var(--ink); text-decoration: none">Obec</a>
+        <a href="#" style="color: var(--ink); text-decoration: none">Úřad</a>
+        <a href="#" style="color: var(--ink); text-decoration: none">Přes hranici</a>
+        <a href="#" style="color: var(--ink); text-decoration: none">Akce</a>
+        <a href="#" style="color: var(--ink); text-decoration: none">Kontakty</a>
+      </nav>
+<details class="nav-narrow"><summary><svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="2"></path></svg>Menu</summary><nav aria-label="Hlavní menu"><a href="#">Obec</a><a href="#">Úřad</a><a href="#">Přes hranici</a><a href="#">Akce</a><a href="#">Kontakty</a></nav></details>
+      <a href="#" aria-label="Hledat" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 8px; background: var(--primary); color: var(--on-primary)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1 class="sr">Obec Javoří Lhota, Gemeinde Javoří Lhota</h1>
+  <section style="max-width: 1200px; margin: 0 auto; padding: 56px clamp(16px, 4vw, 32px); display: grid; grid-template-columns: {{cols}}; gap: 40px 72px; position: relative">
+    <sc-if value="{{showCs}}" hint-placeholder-val="{{ true }}">
+      <div lang="cs">
+        <h2 style="margin: 0 0 12px; font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 500; font-size: clamp(32px, 3.6vw, 46px); line-height: 1.12">Obec, ze které je to do Bavorska 4 kilometry</h2>
+        <p style="margin: 0 0 20px; max-width: 46ch">Žijeme u hranice s Bavorskem. Co platí u nás, co za hranicí a co děláme společně s obcí Waldkirchen am Grenzbach.</p>
+        <p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Zaplatit poplatky</a><a class="hit" href="#">Úřední deska</a><a class="hit" href="#">Práce a lékař v Německu</a></p>
+      </div>
+    </sc-if>
+    <sc-if value="{{showBoth}}" hint-placeholder-val="{{ true }}">
+      <div aria-hidden="true" class="border-line" style="position: absolute; top: 56px; bottom: 56px; left: 50%; border-left: 2px dashed var(--line)"><span style="position: absolute; top: 0; left: -9px; width: 16px; height: 22px; border-radius: 4px 4px 0 0; background: var(--primary)"></span><span style="position: absolute; bottom: 0; left: -9px; width: 16px; height: 22px; border-radius: 4px 4px 0 0; background: var(--primary)"></span></div>
+    </sc-if>
+    <sc-if value="{{showDe}}" hint-placeholder-val="{{ true }}">
+      <div lang="de">
+        <h2 style="margin: 0 0 12px; font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 500; font-size: clamp(32px, 3.6vw, 46px); line-height: 1.12">Ein Dorf, vier Kilometer von Bayern entfernt</h2>
+        <p style="margin: 0 0 20px; max-width: 46ch">Wir leben an der Grenze zu Bayern. Was bei uns gilt, was drüben gilt und was wir gemeinsam mit Waldkirchen am Grenzbach machen.</p>
+        <p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Wanderwege und Radwege</a><a class="hit" href="#">Unterkunft im Dorf</a><a class="hit" href="#">Notdienst und Ärzte</a></p>
+      </div>
+    </sc-if>
+  </section>
+
+  <section aria-labelledby="spolecne" style="background: var(--surface)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 56px clamp(16px, 4vw, 32px)">
+      <h2 id="spolecne" style="margin: 0 0 24px; font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 500; font-size: 34px">Společně <span lang="de" style="color: var(--muted)">/ Gemeinsam</span></h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px">
+        <article style="padding: 24px; border-radius: 4px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); display: flex; gap: 16px"><span aria-hidden="true" style="flex: 0 0 56px; height: 64px; border-radius: 4px; background: var(--primary); color: var(--on-primary); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1"><span style="font-size: 24px; font-weight: 600">11</span><span style="font-size: 13px">lis</span></span><span><a class="hit" href="#" style="font-weight: 600; color: var(--ink)">Svatomartinský průvod přes hranici</a><span style="display: block; font-size: 15px; color: var(--muted)">od hraničního kamene v 17 hodin</span><span lang="de" style="display: block; font-size: 15px; color: var(--muted)">Martinsumzug über die Grenze</span></span></article>
+        <article style="padding: 24px; border-radius: 4px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); display: flex; gap: 16px"><span aria-hidden="true" style="flex: 0 0 56px; height: 64px; border-radius: 4px; background: var(--primary); color: var(--on-primary); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1"><span style="font-size: 24px; font-weight: 600">29</span><span style="font-size: 13px">lis</span></span><span><a class="hit" href="#" style="font-weight: 600; color: var(--ink)">Adventní trh obou obcí</a><span style="display: block; font-size: 15px; color: var(--muted)">náves Javoří Lhoty, od 14 hodin</span><span lang="de" style="display: block; font-size: 15px; color: var(--muted)">Gemeinsamer Adventsmarkt</span></span></article>
+        <article style="padding: 24px; border-radius: 4px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); display: flex; gap: 16px"><span aria-hidden="true" style="flex: 0 0 56px; height: 64px; border-radius: 4px; background: var(--primary); color: var(--on-primary); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1"><span style="font-size: 24px; font-weight: 600">1</span><span style="font-size: 13px">pro</span></span><span><a class="hit" href="#" style="font-weight: 600; color: var(--ink)">Zimní uzávěra cesty k hraničnímu přechodu</a><span style="display: block; font-size: 15px; color: var(--muted)">pěší přechod zůstává otevřený</span><span lang="de" style="display: block; font-size: 15px; color: var(--muted)">Wintersperre des Weges</span></span></article>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1200px; margin: 0 auto; padding: 56px clamp(16px, 4vw, 32px) 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 40px">
+    <div><h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 600">Úřední deska</h2><p style="margin: 0 0 4px; color: var(--muted); font-size: 15px">Úřední dokumenty jsou česky. <span lang="de">Amtliche Dokumente erscheinen auf Tschechisch.</span></p><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Návrh rozpočtu obce na rok 2027</a><a class="hit" href="#">Uzavírka mostu přes Javornický potok</a></p></div>
+    <div><h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 600">Přes hranici</h2><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Práce v Bavorsku a pojištění</a><a class="hit" href="#">Lékařská pohotovost na obou stranách</a><a class="hit" href="#">Autobus do Waldkirchenu</a></p></div>
+    <div><h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 600">Napište nám <span lang="de" style="color: var(--muted); font-weight: 500">/ Schreiben Sie uns</span></h2><p style="margin: 0">Náves 1, Javoří Lhota<br>[TELEFON]<br><a href="#">obec@javorilhota.cz</a><br>Mluvíme česky a německy.</p></div>
+  </section>
+</main>
+
+<footer class="deep" style="background: var(--deep); color: var(--on-deep)">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 28px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; font-size: 15px">
+    <span>Obecní úřad Javoří Lhota, Náves 1</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: var(--on-deep)">Povinné informace</a><a href="#" style="color: var(--on-deep)">Přístupnost</a><a href="#" lang="de" style="color: var(--on-deep)">Impressum</a></nav>
+  </div>
+</footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"paleta": {"editor": "enum", "options": ["Šumava", "Bavorsko", "Hraniční kámen"], "default": "Šumava", "section": "Barvy"}, "$preview": {"width": 1280, "height": 2200}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = Object.assign({ v: null, alert: 'info' }, { lang: 'both' }); }
+  renderVals() {
+    const P = [{"bg": "#FFFFFF", "surface": "#EEF3F6", "ink": "#13202B", "muted": "#4A5866", "line": "#CCD7DF", "primary": "#1D4E6F", "onPrimary": "#FFFFFF", "link": "#1D4E6F", "accent": "#F2C14E", "onAccent": "#13202B", "deep": "#2F5233", "onDeep": "#FFFFFF", "name": "Šumava", "x": {}}, {"bg": "#FFFFFF", "surface": "#EDF4FB", "ink": "#0F1E2E", "muted": "#45576A", "line": "#C8D8E8", "primary": "#1460A8", "onPrimary": "#FFFFFF", "link": "#0F5596", "accent": "#9FC9F0", "onAccent": "#0F1E2E", "deep": "#0F2E4D", "onDeep": "#FFFFFF", "name": "Bavorsko", "x": {}}, {"bg": "#FAFAF8", "surface": "#EFEEE9", "ink": "#1F1E1A", "muted": "#56544C", "line": "#D6D3C9", "primary": "#7A2E2E", "onPrimary": "#FFFFFF", "link": "#7A2E2E", "accent": "#D9B26A", "onAccent": "#1F1E1A", "deep": "#2E2D29", "onDeep": "#FAFAF8", "name": "Hraniční kámen", "x": {}}];
+    const names = P.map((p) => p.name);
+    const fromProp = names.indexOf(this.props.paleta);
+    const vi = this.state.v != null ? this.state.v : (fromProp >= 0 ? fromProp : 0);
+    const c = P[vi];
+    const lum = (h) => { const n = parseInt(h.slice(1), 16); const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2]; };
+    const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+    const fmt = (r) => r.toFixed(1).replace('.', ',') + ':1 ' + (r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : 'velký text');
+    const ROLES = [['bg', 'Pozadí', ''], ['surface', 'Plocha', ''], ['ink', 'Text', 'bg'], ['muted', 'Vedlejší text', 'bg'], ['link', 'Odkazy', 'bg'], ['line', 'Linky', ''], ['primary', 'Hlavní', ''], ['onPrimary', 'Text na hlavní', 'primary'], ['accent', 'Akcent', ''], ['onAccent', 'Text na akcentu', 'accent'], ['deep', 'Tmavý pás', ''], ['onDeep', 'Text na tmavém', 'deep']];
+    const swatches = ROLES.map((r) => ({ name: r[1], hex: c[r[0]], note: r[2] ? fmt(cr(c[r[0]], c[r[2]])) : '' }));
+    const variants = P.map((p, i) => ({ name: p.name, a: p.bg, b: p.primary, d: p.accent, pressed: i === vi ? 'true' : 'false', bg: i === vi ? '#1A1A18' : '#FFFFFF', ink: i === vi ? '#FFFFFF' : '#1A1A18', pick: () => this.setState({ v: i }) }));
+    const A = {
+      info: { kind: 'Informace obce', title: 'most přes Javornický potok je zavřený', text: 'Od 2. do 30. listopadu. Objížďka vede přes Hájek, autobus 431 staví u hájovny.', link: 'Mapa objížďky', bg: '#F2F6FC', ink: '#0C1838', edge: '#00469B', isInfo: true, isWarn: false },
+      warning: { kind: 'Výstraha', title: 'silný vítr ve čtvrtek 5. listopadu', text: 'ČHMÚ varuje od 14 do 22 hodin před nárazy větru až 90 km/h. Ukliďte věci ze zahrad a nechoďte do lesa.', link: 'Výstraha ČHMÚ', bg: '#FEF6D8', ink: '#2A1B00', edge: '#CA8504', isInfo: false, isWarn: true },
+      emergency: { kind: 'Krizová situace', title: 'nepijte vodu z obecního vodovodu', text: 'Rozbor z 1. listopadu našel bakterie. Vodu do odvolání převařujte. Cisterna s pitnou vodou stojí na návsi od 14 hodin.', link: 'Co dělat a kdy to skončí', bg: '#B00A0D', ink: '#FFFFFF', edge: '#6E0507', isInfo: false, isWarn: true }
+    };
+    const al = A[this.state.alert] || A.info;
+    const alertOpts = [['off', 'Vypnuto'], ['info', 'Informace'], ['warning', 'Výstraha'], ['emergency', 'Krize']].map((o) => ({ name: o[1], pressed: this.state.alert === o[0] ? 'true' : 'false', bg: this.state.alert === o[0] ? '#1A1A18' : '#FFFFFF', ink: this.state.alert === o[0] ? '#FFFFFF' : '#1A1A18', pick: () => this.setState({ alert: o[0] }) }));
+    const kebab = (s) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+    let vars = '';
+    Object.keys(c).forEach((k) => { if (k !== 'name' && k !== 'x') vars += '--' + kebab(k) + ': ' + c[k] + '; '; });
+    Object.keys(c.x || {}).forEach((k) => { vars += '--' + k + ': ' + c.x[k] + '; '; });
+    const extra = ((self, c) => { const L = self.state.lang;
+    const opts = [['cs', 'Česky'], ['both', 'Obojí'], ['de', 'Deutsch']].map((o) => ({ label: o[1], lang: o[0] === 'de' ? 'de' : 'cs', pressed: L === o[0] ? 'true' : 'false', bg: L === o[0] ? c.onDeep : 'transparent', ink: L === o[0] ? c.deep : c.onDeep, pick: () => self.setState({ lang: o[0] }) }));
+    return { langs: opts, showCs: L !== 'de', showDe: L !== 'cs', showBoth: L === 'both', cols: L === 'both' ? 'repeat(auto-fit, minmax(min(420px, 100%), 1fr))' : 'minmax(0, 1fr)' }; })(this, c);
+    return Object.assign({ c: c, vars: vars, swatches: swatches, variants: variants, paletteName: c.name, alertOn: this.state.alert !== 'off', al: al, alertOpts: alertOpts }, extra || {});
+  }
+}
+</script>
+</body>
+</html>

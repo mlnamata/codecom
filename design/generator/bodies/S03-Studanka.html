@@ -1,0 +1,95 @@
+[[ALERT]]
+<aside aria-label="Kontakt na úřad" class="deep" style="background: var(--deep); color: var(--on-deep); font-size: 15px">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; gap: 4px 24px">
+    <span>Úřad dnes 8 až 17 hodin</span><span>[TELEFON]</span><a href="#" style="color: var(--on-deep)">obec@javorilhota.cz</a>
+  </div>
+</aside>
+<header style="background: var(--surface); border-bottom: 1px solid var(--line)">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 16px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none">[[ZNAK 36]]<span><span style="display: block; font-family: 'Alegreya', Georgia, serif; font-weight: 600; font-size: 22px; line-height: 1.2">Javoří Lhota</span><span style="display: block; font-size: 15px; color: var(--muted)">pro ty, kdo tu žijí, i pro chalupáře</span></span></a>
+    <nav class="nav-wide" aria-label="Hlavní menu" style="display: flex; flex-wrap: wrap; gap: 0 24px; font-weight: 500">
+      <a href="#" style="color: var(--ink); text-decoration: none">Pro chalupáře</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Obec a úřad</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Příroda a výlety</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Kontakty</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section style="display: flex; flex-wrap: wrap">
+    <svg viewBox="0 0 720 460" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Studánka u kaple svaté Anny pod Javorníkem" style="flex: 1 1 480px; min-width: 0; min-height: 360px; display: block">
+      <rect width="720" height="460" style="fill: {{sky}}"></rect>
+      <path d="M0 230 C140 170 260 110 380 96 S600 150 720 170 V460 H0z" style="fill: var(--tree2)" opacity="0.35"></path>
+      <path d="M60 360 l60 -190 l60 190z" style="fill: var(--tree)"></path><path d="M150 360 l46 -150 l46 150z" style="fill: var(--tree2)"></path>
+      <path d="M520 360 l64 -210 l64 210z" style="fill: var(--tree)"></path><path d="M460 360 l42 -136 l42 136z" style="fill: var(--tree2)"></path><path d="M620 360 l40 -120 l40 120z" style="fill: var(--tree2)"></path>
+      <rect y="350" width="720" height="110" style="fill: {{ground}}"></rect>
+      <path d="M290 330 h140 v44 h-140z" style="fill: var(--tree2)"></path>
+      <path d="M272 300 l88 -58 l88 58z" style="fill: var(--ink)"></path><rect x="296" y="300" width="10" height="34" style="fill: var(--ink)"></rect><rect x="414" y="300" width="10" height="34" style="fill: var(--ink)"></rect>
+      <path d="M190 400 q50 -12 100 0 t100 0 t100 0 t100 0" stroke-width="8" fill="none" stroke-linecap="round" style="stroke: var(--water)"></path>
+      <path d="M250 424 q50 -10 100 0 t100 0 t100 0" stroke-width="5" fill="none" stroke-linecap="round" style="stroke: var(--water)"></path>
+      <g style="opacity: {{snowOn}}; fill: #FFFFFF"><circle cx="90" cy="80" r="4"></circle><circle cx="220" cy="140" r="3"></circle><circle cx="330" cy="60" r="4"></circle><circle cx="460" cy="120" r="3"></circle><circle cx="610" cy="70" r="4"></circle><circle cx="680" cy="200" r="3"></circle><circle cx="40" cy="200" r="3"></circle></g>
+    </svg>
+    <div class="deep" style="flex: 1 1 400px; min-width: 0; background: var(--deep); color: var(--on-deep); padding: clamp(32px, 5vw, 64px) clamp(24px, 4vw, 56px); display: flex; flex-direction: column; justify-content: center; gap: 20px">
+      <h1 style="margin: 0; font-family: 'Alegreya', Georgia, serif; font-weight: 500; font-size: clamp(40px, 4.4vw, 60px); line-height: 1.1"><span style="font-weight: 600">Dobrý den,</span> vítejte v Javoří Lhotě</h1>
+      <p style="margin: 0; max-width: 40ch; font-size: 19px; line-height: 1.5">Na stránkách najdete, co platí právě teď, ať tu bydlíte celý rok, nebo jen o víkendech.</p>
+      <div role="group" aria-label="Roční období" style="display: inline-flex; align-self: flex-start; padding: 4px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--on-deep)">
+        <button type="button" onClick="{{toLeto}}" aria-pressed="{{letoOn}}" style="min-height: 44px; padding: 0 20px; border-radius: 8px; border: 0; font: inherit; font-weight: 500; cursor: pointer; background: {{letoBg}}; color: {{letoInk}}">Léto</button>
+        <button type="button" onClick="{{toZima}}" aria-pressed="{{zimaOn}}" style="min-height: 44px; padding: 0 20px; border-radius: 8px; border: 0; font: inherit; font-weight: 500; cursor: pointer; background: {{zimaBg}}; color: {{zimaInk}}">Zima</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+    <form role="search" onsubmit="return false" style="flex: 1 1 300px; min-width: 0; margin-top: -48px; padding: 28px; border-radius: 4px; background: var(--accent); color: var(--on-accent); display: flex; flex-direction: column; gap: 12px; position: relative">
+      <h2 style="margin: 0; font-family: 'Alegreya', Georgia, serif; font-size: 26px">Hledáte něco?</h2>
+      <label for="q03" style="font-weight: 500">Hledat na webu obce</label>
+      <div style="display: flex; gap: 8px">
+        <input id="q03" type="search" placeholder="např. vodoměr" style="flex: 1; min-width: 0; height: 48px; padding: 0 12px; border: 1px solid var(--on-accent); border-radius: 8px; font: inherit; background: var(--surface); color: var(--ink)">
+        <button type="submit" aria-label="Hledat" style="width: 48px; height: 48px; border: 0; border-radius: 8px; background: var(--on-accent); color: var(--accent); display: inline-flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></button>
+      </div>
+    </form>
+    <nav aria-label="Rozcestník" style="flex: 3 1 560px; min-width: 0; padding: 32px 0 8px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 24px 32px">
+      <div><h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M3 11l9-7 9 7v9H3z"></path><path d="M10 20v-6h4v6"></path></svg>Pro chalupáře</h2><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Poplatek za rekreační objekt</a><a class="hit" href="#">Odečet vodoměru</a></p></div>
+      <div><h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 21V9l8-5 8 5v12"></path><path d="M9 21v-7h6v7"></path></svg>Obecní úřad</h2><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Úřední deska</a><a class="hit" href="#">Zastupitelstvo</a></p></div>
+      <div><h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"></path></svg>Odpady a voda</h2><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Kalendář svozu</a><a class="hit" href="#">Rozbor pitné vody</a></p></div>
+      <div><h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M12 3l3 7h-6z"></path><path d="M12 8l5 10H7z"></path><path d="M12 18v3"></path></svg>Příroda a výlety</h2><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Rozhledna na Javorníku</a><a class="hit" href="#">Mlýnský rybník</a></p></div>
+      <div><h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18"></path></svg>Poplatky</h2><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Zaplatit kartou online</a><a class="hit" href="#">Kolik a do kdy</a></p></div>
+      <div><h2 style="margin: 0 0 4px; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--muted)"><path d="M4 5h16v12H8l-4 4z"></path></svg>Kontakty</h2><p style="margin: 0; display: flex; flex-direction: column"><a class="hit" href="#">Starostka a úřad</a><a class="hit" href="#">Odebírat zprávy e-mailem</a></p></div>
+    </nav>
+  </section>
+
+  <section aria-labelledby="sezona" style="max-width: 1240px; margin: 0 auto; padding: 64px clamp(16px, 4vw, 32px)">
+    <h2 id="sezona" style="margin: 0 0 4px; font-family: 'Alegreya', Georgia, serif; font-size: 36px">{{seasonTitle}}</h2>
+    <p style="margin: 0 0 32px; color: var(--muted)">{{seasonLead}}</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px">
+      <sc-for list="{{items}}" as="it" hint-placeholder-count="4">
+        <div style="padding-top: 16px; border-top: 3px solid var(--deep)">
+          <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600">{{it.title}}</h3>
+          <p style="margin: 0">{{it.text}}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-wrap: wrap; background: var(--surface)">
+    <div style="flex: 1 1 400px; min-width: 0; padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px); background: var(--primary); color: var(--on-primary)" class="deep">
+      <h2 style="margin: 0 0 12px; font-family: 'Alegreya', Georgia, serif; font-size: 36px">Výlety z Javoří Lhoty</h2>
+      <p style="margin: 0 0 24px; max-width: 44ch">Na rozhlednu na Javorníku je to z návsi 50 minut po žluté. Kolem Mlýnského rybníka vede naučná stezka dlouhá 4 kilometry.</p>
+      <a href="#" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 8px; background: var(--on-primary); color: var(--primary); text-decoration: none; font-weight: 600">Mapa výletů</a>
+    </div>
+    <div style="flex: 1 1 400px; min-width: 0; padding: 48px clamp(24px, 5vw, 64px); display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-family: 'Alegreya', Georgia, serif; font-size: 28px">Zprávy z obce</h2>
+      <p style="margin: 0"><a class="hit" href="#" style="font-weight: 600">Nové hřiště za školou je otevřené</a><span style="display: block; color: var(--muted); font-size: 15px">26. října</span></p>
+      <p style="margin: 0"><a class="hit" href="#" style="font-weight: 600">Rozbor vody ze studánky: voda je pitná</a><span style="display: block; color: var(--muted); font-size: 15px">22. října</span></p>
+      <p style="margin: 0"><a class="hit" href="#" style="font-weight: 600">Svoz bioodpadu končí 20. listopadu</a><span style="display: block; color: var(--muted); font-size: 15px">20. října</span></p>
+    </div>
+  </section>
+</main>
+
+<footer class="deep" style="background: var(--deep); color: var(--on-deep)">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 32px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; font-size: 15px">
+    <span>Obecní úřad Javoří Lhota, Náves 1, IČO [IČO]</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: var(--on-deep)">Povinné informace</a><a href="#" style="color: var(--on-deep)">Přístupnost</a><a href="#" style="color: var(--on-deep)">Osobní údaje</a></nav>
+  </div>
+</footer>

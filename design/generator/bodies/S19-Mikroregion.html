@@ -1,0 +1,70 @@
+[[ALERT]]
+<header style="background: var(--surface); border-bottom: 1px solid var(--line)">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 16px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+    <a href="#" style="display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none">[[ZNAK 32]]<span style="display: flex; flex-direction: column; line-height: 1.15"><span style="font-weight: 600; font-size: 20px">Javoří Lhota</span><span style="font-size: 14px; color: var(--muted)">obec se čtyřmi částmi</span></span></a>
+    <nav class="nav-wide" aria-label="Hlavní menu" style="display: flex; flex-wrap: wrap; gap: 0 24px; font-weight: 500">
+      <a href="#" style="color: var(--ink); text-decoration: none">Části obce</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Osadní výbory</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Úřad</a>
+      <a href="#" style="color: var(--ink); text-decoration: none">Úřední deska</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section aria-labelledby="casti19" style="max-width: 1280px; margin: 0 auto; padding: 48px clamp(16px, 4vw, 32px) 0">
+    <h1 id="casti19" style="margin: 0; font-size: clamp(36px, 4.4vw, 60px); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch">Javoří Lhota, Podjavoří, Hájek a Na Rovném</h1>
+    <p style="margin: 14px 0 28px; max-width: 56ch; font-size: 19px; color: var(--muted)">Jedna obec, čtyři části, 684 obyvatel. Vyberte svou část a uvidíte, co se v ní teď děje a kdo vám v ní poradí.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+      <div style="flex: 1.3 1 480px; min-width: 0; border-radius: 20px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); padding: 16px">
+        <svg viewBox="40 40 480 390" aria-hidden="true" style="display: block; width: 100%; height: auto">
+          <sc-for list="{{shapes}}" as="sh" hint-placeholder-count="4">
+            <g onClick="{{sh.pick}}" style="cursor: pointer"><path d="{{sh.d}}" style="fill: {{sh.fill}}; stroke: var(--surface)" stroke-width="4" stroke-linejoin="round"></path><text x="{{sh.lx}}" y="{{sh.ly}}" text-anchor="middle" style="fill: {{sh.ink}}; font-family: 'Familjen Grotesk', sans-serif; font-size: 17px; font-weight: 600">{{sh.name}}</text></g>
+          </sc-for>
+        </svg>
+      </div>
+      <div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <div role="group" aria-label="Vyberte část obce" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <sc-for list="{{parts}}" as="pt" hint-placeholder-count="4">
+            <button type="button" onClick="{{pt.pick}}" aria-pressed="{{pt.pressed}}" style="min-height: 52px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: {{pt.bg}}; color: {{pt.ink}}; font: inherit; font-weight: 600; text-align: left; cursor: pointer">{{pt.name}}</button>
+          </sc-for>
+        </div>
+        <section aria-live="polite" aria-labelledby="cast19" style="flex: 1; padding: 24px; border-radius: 20px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line)">
+          <h2 id="cast19" style="margin: 0; font-size: 30px">{{cur.name}}</h2>
+          <p style="margin: 6px 0 16px; color: var(--muted)">{{cur.facts}}</p>
+          <p style="margin: 0; padding: 14px 16px; border-radius: 12px; background: var(--accent); color: var(--on-accent)"><span style="display: block; font-weight: 600">Teď se tu děje</span>{{cur.now}}</p>
+          <p style="margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 0 20px"><a href="#" style="color: var(--link); font-weight: 600">Svoz odpadu v této části</a><a href="#" style="color: var(--link); font-weight: 600">Osadní výbor</a></p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="vybory19" style="max-width: 1280px; margin: 0 auto; padding: 64px clamp(16px, 4vw, 32px) 0">
+    <h2 id="vybory19" style="margin: 0 0 20px; font-size: 34px">Kdo vám v části poradí</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line)">
+      <div style="padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface)"><p style="margin: 0; color: var(--muted); font-size: 15px">Javoří Lhota</p><h3 style="margin: 4px 0 6px; font-size: 21px">Marie Šťastná</h3><p style="margin: 0">starostka, Út a Čt 8 až 12 na úřadě</p><a href="#" style="display: inline-block; margin-top: 8px; color: var(--link)">starostka@javorilhota.cz</a></div>
+      <div style="padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface)"><p style="margin: 0; color: var(--muted); font-size: 15px">Podjavoří</p><h3 style="margin: 4px 0 6px; font-size: 21px">Tomáš Brož</h3><p style="margin: 0">předseda osadního výboru, sraz první úterý v měsíci</p><a href="#" style="display: inline-block; margin-top: 8px; color: var(--link)">podjavori@javorilhota.cz</a></div>
+      <div style="padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface)"><p style="margin: 0; color: var(--muted); font-size: 15px">Hájek</p><h3 style="margin: 4px 0 6px; font-size: 21px">Alena Krejčí</h3><p style="margin: 0">předsedkyně osadního výboru, hájovna</p><a href="#" style="display: inline-block; margin-top: 8px; color: var(--link)">hajek@javorilhota.cz</a></div>
+      <div style="padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface)"><p style="margin: 0; color: var(--muted); font-size: 15px">Na Rovném</p><h3 style="margin: 4px 0 6px; font-size: 21px">Josef Vávra</h3><p style="margin: 0">předseda osadního výboru a kronikář</p><a href="#" style="display: inline-block; margin-top: 8px; color: var(--link)">narovnem@javorilhota.cz</a></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="spolecne19" style="max-width: 1280px; margin: 0 auto; padding: 64px clamp(16px, 4vw, 32px) 72px">
+    <h2 id="spolecne19" style="margin: 0 0 12px; font-size: 34px">Pro celou obec</h2>
+    <ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 0 32px">
+      <li style="padding: 6px 0; border-top: 1px solid var(--line)"><a href="#" class="hit" style="color: var(--link); font-weight: 500">Zaplatit poplatek za odpad</a></li>
+      <li style="padding: 6px 0; border-top: 1px solid var(--line)"><a href="#" class="hit" style="color: var(--link); font-weight: 500">Zasedání zastupitelstva 9. 11.</a></li>
+      <li style="padding: 6px 0; border-top: 1px solid var(--line)"><a href="#" class="hit" style="color: var(--link); font-weight: 500">Spolkový autobus na akce v částech</a></li>
+      <li style="padding: 6px 0; border-top: 1px solid var(--line)"><a href="#" class="hit" style="color: var(--link); font-weight: 500">Hlášení rozhlasu ve všech částech</a></li>
+      <li style="padding: 6px 0; border-top: 1px solid var(--line)"><a href="#" class="hit" style="color: var(--link); font-weight: 500">Úřední deska</a></li>
+      <li style="padding: 6px 0; border-top: 1px solid var(--line)"><a href="#" class="hit" style="color: var(--link); font-weight: 500">Nahlásit závadu</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer style="background: var(--deep); color: var(--on-deep)" class="deep">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 28px clamp(16px, 4vw, 32px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; font-size: 15px">
+    <span>Obecní úřad Javoří Lhota, Náves 1, [TELEFON]</span>
+    <nav aria-label="Povinné informace" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="#" style="color: var(--on-deep)">Povinné informace</a><a href="#" style="color: var(--on-deep)">Přístupnost</a><a href="#" style="color: var(--on-deep)">Osobní údaje</a></nav>
+  </div>
+</footer>
