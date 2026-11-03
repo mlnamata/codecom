@@ -37,6 +37,10 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 2. 11. 2026 | Krizový banner: na webu vždy jen jedno hlášení, to nejzávažnější. Úroveň je napsaná slovem, barva je jen doplněk. Krizovou situaci nejde zavřít, informaci a výstrahu ano. | Podle USWDS Site alert, GOV.UK Notification banner a gov.cz Infobar. |
 | 2. 11. 2026 | Úřední deska: dny „visí od“ a „visí do“ se ukládají jako 12:00 UTC daného dne. Zveřejněný dokument, který už visel, nejde smazat (pojistka v databázi), změny se ukládají jako verze. | Obec musí doložit, co a kdy viselo. Poledne nepřekročí hranici dne v ČR. |
 | 2. 11. 2026 | Doporučení: volbu „Po sejmutí nezveřejňovat v archivu“ zapnout jako výchozí. | Dokumenty s osobními údaji nemají po sejmutí zůstat na webu. |
+| 3. 11. 2026 | Monorepo pnpm + Turborepo: apps/web, apps/mobile, apps/prezentace, apps/ai, apps/brana, packages/typy, packages/tokeny. Obec je tenant (plugin multi-tenant Payloadu). | Jeden kód pro všechny obce, sdílené typy mezi webem a aplikací. |
+| 3. 11. 2026 | Mobilní aplikace na Expo SDK 58, web na Vercelu v regionu `fra1`. | SDK 58 je aktuální stabilní (npm, vydáno 29. 9. 2026). Výchozí region Vercelu je v USA. |
+| 3. 11. 2026 | Telemetrie budov v Postgresu s pg_partman, ne v TimescaleDB. | TimescaleDB na Supabase s PG17 skončila. |
+| 3. 11. 2026 | Vektory a dotazy AI asistenta zůstávají na AI serveru v ČR (Postgres + pgvector tam), dokumenty obcí se tam synchronizují z webu. | Dotazy občanů neopustí ČR. |
 | 3. 11. 2026 | Prompty pro vývoj jsou pro **Claude Code**, česky, doménové názvy v kódu česky (`uredniDeska`, `vyvesenoOd`), technické anglicky. Jeden velký prompt na každou část. | Navazuje na rozpracovaný kód a čte se snadno. |
 
 ## Právo

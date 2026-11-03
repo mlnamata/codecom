@@ -34,7 +34,7 @@ Před instalací ověř aktuální verzi přes `npm view <balíček> version`. P
 | Data | Supabase Postgres v regionu eu-central-1 (Frankfurt), schéma `obec`, mimo Data API |
 | Soubory | Supabase Storage přes S3 API |
 | UI | Tailwind CSS 4.3, shadcn/ui, tokeny podle design systému gov.cz |
-| Mobil | Expo SDK 57 (React Native 0.86, nová architektura, Hermes), Expo Router, TanStack Query |
+| Mobil | Expo SDK 58 (vyšlo 29. 9. 2026, nová architektura, Hermes), Expo Router, TanStack Query |
 | AI | open-weight model přes vLLM s OpenAI API, embeddingy bge-m3, pgvector na AI serveru v ČR |
 | Hosting | Vercel s funkcemi v regionu `fra1` (výchozí `iad1` je v USA, proto ho vždy přepiš), nebo vlastní server v EU |
 | Testy | Vitest, Testing Library, Playwright, axe-core, PGlite pro migrace |
