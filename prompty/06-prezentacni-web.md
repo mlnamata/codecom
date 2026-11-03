@@ -6,11 +6,11 @@ Závisí na: `apps/web` (endpoint `POST /api/poptavky`, tj. webový prompt; bez 
 <kontext>
 CodeKom prodává obcím web s úřední deskou, aplikaci pro občany, digitální úřad, správu budov a AI asistenta. Prezentační web (`apps/prezentace`) je to, co uvidí starosta, účetní nebo správce webu, když ho někdo doporučí nebo když si CodeKom vyhledá. Musí během pár minut odpovědět na otázky, které si starosta klade: kolik to stojí, co řekne kontrola a jak se z toho dostanu, když to nebude fungovat.
 
-Čtenáři: starosta malé obce (často neuvolněný, čte po večerech na telefonu, bojí se špatného rozhodnutí), účetní nebo administrativní pracovnice, která web spravuje a podklady přeposílá radě, a správce webu nebo externí dodavatel, který chce vidět šablony a technické záruky.
+Čtenáři: starosta malé obce (často neuvolněný, čte na telefonu, bojí se špatného rozhodnutí), účetní, která web spravuje a podklady přeposílá radě, a správce webu nebo externí dodavatel.
 
 Obec nenakupuje jako firma. Rozhoduje rada nebo zastupitelstvo, potřebuje písemnou nabídku, vzorovou smlouvu a podklad pro usnesení, a nákup se řeší hlavně při schvalování rozpočtu na podzim a v prosinci. Web je proto sada podkladů, které starosta přepošle radě, ne jen leták.
 
-Přečti si před začátkem:
+Přečti si:
 - `CLAUDE.md` (stack, design, pravidla domény, kontrola hotovo; neopisuj ho), `brand/README.md` a soubory v `brand/`,
 - `docs/rozhodnuti.md`, `docs/navrh-platformy/01`, `03`, `04`, `docs/pravni-dokumenty.md` (A, B, D),
 - `research/poznamky/web_obce_a_prodej.md` a `research/zprava-podklady-pro-prompty.md`, sekce 6.
@@ -35,7 +35,7 @@ Mimo rozsah: vlastní CMS pro prezentaci; skutečné reference, počty obcí, ci
 </rozsah>
 
 <architektura>
-**Volba obsahu: MDX v repozitáři, ne Payload.** Důvody, které zapiš do `docs/rozhodnuti.md`:
+**Volba obsahu: MDX v repozitáři, ne Payload.** Důvody zapiš do `docs/rozhodnuti.md`:
 - obsah mění zakladatel a Claude Code, ne obecní redaktoři, takže editor v prohlížeči nikdo nepotřebuje,
 - každá změna textu projde gitem, kontrolou obsahu a review, což potřebujeme u tvrzení s právním dopadem,
 - stránka je statická bez závislosti na databázi: výpadek `apps/web` nesmí shodit prezentaci,
@@ -55,7 +55,7 @@ apps/prezentace/
   scripts/         sablony-z-navrhu, snimky-sablon, logo-svg, pdf, kontrola-obsahu, kontrola-doplnit
   tests/           Playwright, axe, odkazy
 ```
-**Nasazení.** Vercel, `vercel.json` s `"regions": ["fra1"]`. Stránky se generují staticky (`generateStaticParams`, bez `dynamic = "force-dynamic"`). Dynamické jsou jen klientské prvky formuláře. Žádná proměnná prostředí s tajnou hodnotou v klientu. Hlavičky v `next.config.ts`: `Content-Security-Policy` (jen vlastní původ a API `apps/web`, žádné skripty třetích stran), `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` bez kamery, mikrofonu a polohy. Písma self-hosted přes `next/font/local`, nikdy z Google Fonts (přenos IP návštěvníka do USA bez souhlasu).
+**Nasazení.** Vercel, `vercel.json` s `"regions": ["fra1"]`. Stránky se generují staticky (`generateStaticParams`, bez `dynamic = "force-dynamic"`). Dynamické jsou jen klientské prvky formuláře. Hlavičky v `next.config.ts`: `Content-Security-Policy` (jen vlastní původ a API `apps/web`, žádné skripty třetích stran), `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` bez kamery, mikrofonu a polohy. Písma self-hosted přes `next/font/local`, nikdy z Google Fonts (přenos IP návštěvníka do USA bez souhlasu).
 
 **Proměnné** (`.env.example` s popisem): `NEXT_PUBLIC_API_URL` (základ `apps/web`), `NEXT_PUBLIC_SITE_URL` [DOPLNIT: doména CodeKom], `NEXT_PUBLIC_DEMO_URL` (základ dema Javoří Lhota; prázdné = žádné odkazy na demo, zůstanou snímky), `CENIK_ZVEREJNIT` (výchozí `false`).
 
@@ -117,7 +117,7 @@ Jen typované datové soubory v `src/data/` (zod validace při buildu; build sel
 
 **Ceník.** Dvě osy: velikost obce (do 500, 500–2 000, 2 000–10 000 obyvatel) a úroveň webu, plus moduly Digitální úřad a Chytré budovy (za budovu). Tabulka a pod ní kalkulačka (velikost, úroveň, moduly, počet budov, způsob platby) s výsledkem v `aria-live="polite"`. Platba: roční licence fakturou (splatnost 30 dní, doklad do datové schránky), nebo měsíčně kartou (A, čl. 3). Pod tabulkou podmínky z A bez zkrášlení: výpověď kdykoli bez udání důvodu, výpovědní doba 3 měsíce u roční a 1 měsíc u měsíční platby, 30 dní zkušební doba s vrácením celé ceny, vrácení nevyčerpaných měsíců u roční licence, úřední deska běží i při neplacení, export dat zdarma, po skončení 30 dní jen pro čtení, cena roste nejvýš o inflaci a jednou ročně. Při `CENIK_ZVEREJNIT=false` nebo ceně `hypoteza` ukáže produkce místo čísla „Cenu pošleme s nabídkou“ a náhled číslo se štítkem „hypotéza“.
 
-Rozpor v podkladech: návrh 04 uvádí založení webu zdarma při smlouvě na 24 měsíců a návrh 01 pilot na 6 měsíců zdarma. Smlouva A je na dobu neurčitou s výpovědí kdykoli a 30denní zkušební dobou, proto tyto nabídky na web nedávej a rozpor uveď v závěru.
+Rozpor: návrh 04 uvádí založení zdarma při smlouvě na 24 měsíců a návrh 01 pilot na 6 měsíců zdarma, ale smlouva A je na dobu neurčitou s výpovědí kdykoli a 30denní zkušební dobou. Tyto nabídky na web nedávej a rozpor uveď v závěru.
 
 **Přechod na CodeKom.** Kroky: výběr šablony a přizpůsobení znaku a fotkám (návrh uvádí do 5 pracovních dnů, jen jako [OVĚŘIT]), převod obsahu ze starého webu, převod úřední desky tak, aby evidence vyvěšení nezanikla, přesměrování starých adres, školení podle úrovně editoru, podpora (lhůty z A, čl. 5), co obec dodá (znak, kontakty, přístup k doméně). Kontrolní seznam ke stažení. Čas migrace neslibuj, dokud ho zakladatel nepotvrdí.
 
@@ -146,19 +146,19 @@ Rozpor v podkladech: návrh 04 uvádí založení webu zdarma při smlouvě na 2
 - Font: název vypadá jako geometrický bezpatkový font typu Montserrat, přesný font a řez [OVĚŘIT u zakladatele]. Do potvrzení se nadpisy sází Montserratem 500 a 600 (soubor pod licencí OFL), tělo Inter 400 a 500, nikde těžší než 600. Název v logu zůstává vektorový z PNG. Zkus překrytí SVG a vykresleného Montserratu a výsledek zapiš do `docs/rozhodnuti.md`.
 - Favicon: `icon.svg` (bílý monogram na černém čtverci; pod 24 px jen písmena CK bez rámečku, v souladu s `brand/README.md`), `favicon.ico` 16/32/48, `apple-touch-icon.png` 180, `icon-192.png`, `icon-512.png`, `manifest.ts`.
 - OpenGraph: `opengraph-image.tsx` 1200 × 630, černé pozadí, bílé logo s heslem, vlastní písmo ze souboru; `/ukazky/[klic]` má obrázek se snímkem šablony. Každá stránka má `title` (do 60 znaků), `description` (do 155), `canonical`, `og:locale cs_CZ`.
-- Pravidla loga z `brand/README.md`: jen černá a bílá, volné místo aspoň na šířku čáry rámečku, žádné natahování, stíny ani přechody, znak aspoň 24 px na výšku.
+- Dodrž pravidla loga z `brand/README.md` (černá a bílá, volné místo, bez natahování a stínů, znak aspoň 24 px).
 </funkce>
 
 <pravidla>
 **Tvrdá pravidla pro texty (kontroluje `scripts/kontrola-obsahu`, build selže):**
-- Heslo je přesně `Tvoříme kódy pro lidi.` včetně tečky a nikde se neupravuje (žádné „Tvoříme kód pro lidi“, žádné psaní velkými písmeny, žádné přidání vykřičníku). Je to značka, tečka u hesla je výjimka z pravidla o krátkých popiscích.
-- Zakázáno: vykřičník, emoji, šipka „→“ v textu a odkazech, řetězce „A · B“, věty nadpisů psané samými velkými písmeny, přívlastky „revoluční“, „inovativní“, „nejlepší“, „snadno a rychle“, „komplexní řešení“, pokuty a sankce („pokuta“, „sankce“, „penále“), „zaručujeme dotaci“, „garantujeme“, procento úspory, počet obcí nebo uživatelů bez záznamu v registru tvrzení.
-- Jména konkurence se na webu nevyskytují (Munipolis, Mobilní rozhlas, Vismo, WEBHOUSE, Galileo, Antee, Obce na webu a další). Rozlišení se děje tím, co CodeKom dělá a slibuje: jeden systém místo čtyř dodavatelů, data v EU a AI server v ČR, přístupnost ve výchozím stavu, nesmazatelná evidence úřední desky, cena viditelně a férové podmínky (výpověď kdykoli, export zdarma). Žádná srovnávací tabulka s cizími produkty.
-- Každé číslo, zákon nebo termín na webu má řádek v `docs/tvrzeni-prezentace.md` (tvrzení, stránka, zdroj, datum ověření, stav). Neověřené věty se na produkci nezobrazí, nebo se zobrazí s datem a odkazem na zdroj, jak určuje sekce overit.
-- Zbylé `[DOPLNIT: …]` a `[OVĚŘIT]` v zobrazených textech: v náhledu (preview) se zobrazí zvýrazněně, na produkci (`VERCEL_ENV=production`) `scripts/kontrola-doplnit` selže. Hotovo tedy neznamená prázdná místa, ale to, že jsou všechna vypsaná.
+- Heslo je přesně `Tvoříme kódy pro lidi.` včetně tečky a nikde se neupravuje (žádné „Tvoříme kód pro lidi“, žádné psaní velkými písmeny, žádné přidání vykřičníku). Tečka je výjimka z pravidla o popiscích bez tečky.
+- Zakázáno: vykřičník, emoji, šipka „→“, řetězce „A · B“, nadpisy psané velkými písmeny, přívlastky „revoluční“, „inovativní“, „nejlepší“, „komplexní řešení“, slova „pokuta“, „sankce“, „penále“, „garantujeme“, „zaručujeme dotaci“, procento úspory, počet obcí nebo uživatelů bez záznamu v registru tvrzení.
+- Jména konkurence se na webu nevyskytují (Munipolis, Mobilní rozhlas, Vismo, WEBHOUSE, Galileo, Antee, Obce na webu a další). Rozlišení stojí na tom, co CodeKom dělá: jeden systém místo několika dodavatelů, data v EU a AI server v ČR, přístupnost ve výchozím stavu, nesmazatelná evidence úřední desky, cena viditelně a férové podmínky (výpověď kdykoli, export zdarma).
+- Každé číslo, zákon nebo termín na webu má řádek v `docs/tvrzeni-prezentace.md` (tvrzení, stránka, zdroj, datum ověření, stav). Neověřené věty se na produkci nezobrazí.
+- Zbylé `[DOPLNIT: …]` a `[OVĚŘIT]` v zobrazených textech: v náhledu (preview) se zobrazí zvýrazněně, na produkci (`VERCEL_ENV=production`) `scripts/kontrola-doplnit` selže.
 - Odkazy na předpisy vedou na e-Sbírku a mají datum ověření (zákony č. 99/2019, 106/1999, 134/2016, 340/2015, 480/2004 § 7, 127/2005 § 89 odst. 3, 264/2025 Sb., vyhláška č. 515/2020 Sb., čl. 28 GDPR, čl. 50 AI Actu).
 
-**Pravidla unslop** (Damir Sokolovsky, CC BY 4.0, viz `CLAUDE.md`): řezy do 600, věty velkým písmenem a bez vykřičníku, krátké popisky bez tečky, žádné přechody, záře, stíny ani emoji, mřížka po 4 px, tenké linky. Navíc pro tento web:
+**Pravidla unslop** (Damir Sokolovsky, CC BY 4.0, viz `CLAUDE.md`): řezy do 600, věty velkým písmenem a bez vykřičníku, krátké popisky bez tečky, žádné přechody, záře, stíny ani emoji, mřížka po 4 px, tenké linky. Navíc:
 - Značka je černobílá, takže rozhraní má jen černou, bílou a stupně šedi (text na bílé nejméně `#595959` pro 4,5 : 1). Jediný „akcent“ je podtržení odkazů a plná černá tlačítka. Barvy mají jen snímky šablon a vzorky palet.
 - Místo kartiček ze SaaS šablon: seznamy s tenkými linkami, tabulky, dvousloupcové texty, velký řádkový text. Žádné ikonky v kolečku, žádné „tři karty vedle sebe s ikonou“, žádný hrdinský obrázek s přechodem, žádná fotografie z fotobanky.
 - Obrazy jsou snímky šablon a schémata v SVG.
@@ -169,12 +169,12 @@ Rozpor v podkladech: návrh 04 uvádí založení webu zdarma při smlouvě na 2
 
 <design_a_pristupnost>
 - Layout: sloupec textu 640 px, širší prvky do 1 120 px, okraje 16 px na 375 px, mřížka 4 px. Text 17 px, řádkování 1,55; h1 40 px (na 375 px 32 px), h2 28 px, h3 20 px, Montserrat 600.
-- Navigace: hlavička s logem vlevo, 6 odkazů a tlačítko „Napište nám“. Na menším než 768 px tlačítko Menu (`<details>` nebo `button` s `aria-expanded`), celá navigace dosažitelná bez JavaScriptu. Odkaz „Přeskočit na obsah“ první na stránce.
+- Navigace: logo vlevo, 6 odkazů a tlačítko „Napište nám“; pod 768 px tlačítko Menu (`<details>` nebo `button` s `aria-expanded`), navigace dosažitelná i bez JavaScriptu; první odkaz „Přeskočit na obsah“.
 - Fokus: viditelný vždy, 3 px, kontrast 3 : 1 proti okolí (na bílém černý, na černém bílý), neztratí se pod sticky hlavičkou (`scroll-margin-top`).
 - Cíle dotyku nejméně 44 × 44 px včetně odkazů v patičce a tabulkách. Odkazy podtržené, rozlišitelné od textu i bez barvy.
 - Kontrast textu aspoň 4,5 : 1 (velký text 3 : 1), prvky rozhraní 3 : 1.
 - Pohyb: žádná animace nutná k porozumění, `prefers-reduced-motion` vypíná přechody.
-- Formuláře: viditelné popisky nad poli (ne placeholder místo popisku), `autocomplete` (`name`, `organization`, `email`, `tel`), chyby u pole a v souhrnu s `role="alert"`, povinná pole označená slovy „povinné“. Chybové texty říkají, co opravit („Zadejte e-mail ve tvaru jmeno@obec.cz“).
+- Formuláře: viditelné popisky nad poli (ne placeholder), `autocomplete`, chyby u pole a v souhrnu s `role="alert"`, povinná pole označená slovy, chyby říkají, co opravit („Zadejte e-mail ve tvaru jmeno@obec.cz“).
 - Tabulky: `<caption>`, `<th scope>`, na 375 px vodorovné posouvání v popsaném kontejneru nebo přeskládání do seznamu; stránka nikdy neposouvá vodorovně.
 - Galerie: tlačítka palet jsou skupina s popiskem „Barevná varianta“, změna se oznámí přes `aria-live`. Snímky mají `width` a `height`, `loading="lazy"` kromě prvního.
 - Struktura: `lang="cs"`, unikátní `<title>` a jedna `h1`, nadpisy bez přeskakování úrovní, `<main>`, `<nav aria-label>`, `<footer>`.
@@ -183,23 +183,22 @@ Rozpor v podkladech: návrh 04 uvádí založení webu zdarma při smlouvě na 2
 </design_a_pristupnost>
 
 <bezpecnost_a_soukromi>
-- Správcem údajů z formuláře je CodeKom (D). Formulář sbírá minimum a každé pole má účel. Nepřijímej rodná čísla ani citlivé údaje; do textového pole uživatele upozorni, ať je nepíše.
-- Žádné skripty třetích stran, žádný reCAPTCHA ani Turnstile (přenos do třetích zemí). Ochrana proti spamu: honeypot, minimální čas vyplnění, rate limit na serveru a zod validace na serveru i v klientu.
+- Správcem údajů z formuláře je CodeKom (D). Formulář sbírá minimum; do textového pole upozorni, ať uživatel nepíše rodná čísla ani citlivé údaje.
+- Žádné skripty třetích stran, ani reCAPTCHA či Turnstile. Spam: honeypot, minimální čas vyplnění, rate limit a zod validace na serveru i v klientu.
 - Odpověď serveru nesmí prozradit, zda e-mail už v databázi je.
 - V klientu jen `NEXT_PUBLIC_*`. Tajné klíče a e-mailovou službu drží `apps/web`. `.env` v `.gitignore`.
 - Odkazy ven mají `rel="noopener noreferrer"`. CSP bez `unsafe-eval` a bez `unsafe-inline` u skriptů (nonce nebo hash podle Next 16, ověř v dokumentaci).
-- Soubory ke stažení bez metadat o autorovi (vyčisti nástrojem PDF).
 - Seznam podzpracovatelů na webu je shodný s přílohou B2. Pokud se liší, platí příloha B2 a rozdíl zapiš do závěru.
 </bezpecnost_a_soukromi>
 
 <testy>
 Nástroje: Vitest (data, kontrola obsahu, kalkulačka), Playwright (viewporty 375 a 1280), `@axe-core/playwright`, Lighthouse CI (`@lhci/cli`), kontrola odkazů (vlastní skript nad `out`/`.next` nebo `lychee`).
 
-1. **Playwright, klíčové cesty** (na 375 i 1280):
-   - Poptávka: vyplnit, odeslat proti mock serveru (`page.route`), vidět potvrzení; chybná pole, nepředzaškrtnuté newsletterové pole, honeypot vyplněný = odmítnuto, výpadek sítě = zpráva zachována a viditelný telefon.
-   - Ceník: změna velikosti obce a úrovně přepočítá výsledek a `aria-live` ho ohlásí; hypotetická cena se v produkčním režimu nezobrazí; podmínky z A jsou na stránce.
-   - Ukázky: otevře se detail šablony, přepnutí palet změní snímek, alt text a stav `aria-pressed`; odkaz na demo se zobrazí jen s `NEXT_PUBLIC_DEMO_URL`.
-   - Ke stažení: všech 5 PDF vrací 200 a `application/pdf`; navigace jen klávesnicí projde hlavičkou, formulářem a patičkou.
+1. **Playwright, klíčové cesty** (375 a 1280 px):
+   - Poptávka: vyplnění a odeslání proti mock serveru (`page.route`) s potvrzením; chyby polí; newsletterové pole nepředzaškrtnuté; vyplněný honeypot odmítnut; výpadek sítě zachová text a ukáže telefon.
+   - Ceník: změna velikosti a úrovně přepočítá výsledek a ohlásí ho `aria-live`; hypotetická cena se v produkčním režimu nezobrazí; podmínky z A jsou na stránce.
+   - Ukázky: detail šablony, přepnutí palet změní snímek, alt a `aria-pressed`; odkaz na demo jen s `NEXT_PUBLIC_DEMO_URL`.
+   - Ke stažení: 5 PDF vrací 200 a `application/pdf`; hlavičku, formulář a patičku lze projít jen klávesnicí.
 2. **axe:** všechny stránky ze sitemapy, tagy WCAG 2.0, 2.1 a 2.2 A a AA a best-practice, nula chyb.
 3. **Lighthouse CI:** `lighthouserc.json`, mobilní profil, 3 běhy, prahy 0,95 pro čtyři kategorie, LCP a CLS podle sekce design; úvod, Ceník, Ukázky, detail šablony, Kontakt.
 4. **Odkazy:** interní odkazy a kotvy vrací 200; externí (zákony, výzvy) se kontrolují zvlášť a selhání je varování, ne pád buildu.
@@ -259,11 +258,11 @@ Doplnit musí zakladatel: domény (prezentace, demo Javoří Lhota, záložní d
 </overit>
 
 <zaver>
-Na konci napiš krátké shrnutí v tomto pořadí:
-1. Co je hotové a čím je to ověřené: přesné příkazy a jejich výsledky, skóre Lighthouse čtyř kategorií, počet stránek v axe, podíl odlišných pixelů SVG proti PNG.
-2. Co zbývá: milníky nebo položky, které nedošly do konce, a proč.
-3. Místa `[DOPLNIT]` a `[OVĚŘIT]`: soubor a řádek, celkový počet.
-4. Rozpory v podkladech, které potřebují rozhodnutí zakladatele: 24měsíční smlouva a pilot zdarma proti smlouvě na dobu neurčitou, řádek měření v D, rozdíl v přílohách B2.
+Na konci napiš shrnutí:
+1. Co je hotové a čím: příkazy a výsledky, skóre Lighthouse, počet stránek v axe, podíl odlišných pixelů SVG proti PNG.
+2. Co zbývá a proč.
+3. Místa `[DOPLNIT]` a `[OVĚŘIT]`: soubor, řádek, počet.
+4. Rozpory v podkladech k rozhodnutí zakladatele: 24měsíční smlouva a pilot zdarma proti smlouvě na dobu neurčitou, řádek měření v D, odlišnosti od přílohy B2.
 5. Odkaz na náhledové nasazení.
-Nepiš, že je něco hotové, co kontroly neprošly. Nic neodesílej do veřejnosti a nenasazuj na produkční doménu.
+Nepiš, že je něco hotové, co kontroly neprošly. Nic nezveřejňuj na produkční doméně.
 </zaver>
