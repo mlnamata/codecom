@@ -20,9 +20,9 @@ Na konci stojí v `apps/mobile` aplikace v Expo SDK 58, kterou jde pomocí EAS p
 <vychozi_stav>
 - `apps/web` existuje (Next.js 16 + Payload 3, npm, kolekce aktuality, uredni-deska, kategorie-desky, krizova-hlaseni, zastupitele, dokumenty, media, users; migrace v `src/migrations`; logika banneru v `src/lib/krize.ts`: `vyberBanner`, `lzeSkryt`, `klicSkryti`, `bezpecnyOdkaz`, `UROVNE`). Čisté funkce přesuň do `packages/typy` (bez změny chování, testy webu projdou) a importuj v obou aplikacích.
 - `apps/mobile`, `packages/typy`, `packages/tokeny` a pnpm workspace zatím nemusí existovat. Pokud chybí, založ minimální kostru (pnpm workspace, Turborepo `turbo.json`, `packages/typy`, `packages/tokeny` s barvami krizových úrovní podle CLAUDE.md). Nepřepisuj to, co už tam z jiných promptů je.
-- Role v `users` jsou dnes `admin` a `redaktor`; sdílené zadání říká `superadmin`, `spravce obce`, `redaktor` a pole `obec`. Role čti na serveru jedinou funkcí `rolePracovnika(user, obecId)`, aby šla změnit na jednom místě; zapiš do `docs/rozhodnuti.md`.
+- Role v `users` jsou dnes `admin` a `redaktor`; sdílené zadání říká `superadmin`, `spravce`, `redaktor` a pole `obec`; prompt 01 hodnotu `admin` datovou migrací přejmenuje na `spravce`. Role čti na serveru jedinou funkcí `rolePracovnika(user, obecId)`, aby šla změnit na jednom místě; zapiš do `docs/rozhodnuti.md`.
 - Chybí-li `GET /api/krize/aktivni`, `GET /api/obce/<slug>/prehled`, `POST /api/hlaseni-zavad` nebo kolekce `hlaseni-zavad`, postav minimální verzi přesně podle kontraktu v <architektura>, označ ji komentářem `// MINIMUM z promptu 02, rozšíří prompt 03` a neimplementuj nic navíc.
-- Krizové hlášení dostane vztah `casti` (na `castiObce`) místo textu `tykaSe`. Pokud ho web ještě nemá, přidej ho novou migrací (starou neměň) a `tykaSe` ponech jako zastaralé nepovinné pole.
+- Krizové hlášení dostane vztah `casti` (na `castiObce`) místo textu `tykaSe`. Prompt 01 `tykaSe` nahrazuje polem `casti` (pole slugů z `obce.castiObce`, datová migrace spáruje staré texty). Pokud to web ještě nemá, udělej totéž novou migrací (starou neměň) a `tykaSe` ponech jako zastaralé nepovinné pole.
 </vychozi_stav>
 
 <rozsah>
@@ -32,7 +32,7 @@ Postav:
 3. Backend v `apps/web`: `obcane`, `mobilni-zarizeni`, endpointy `/api/mobilni/*`, úloha odeslání push, kontrola receiptů, mazání neplatných tokenů, stránka pro smazání účtu a odkaz na zásady.
 4. Podklady pro obchody v `apps/mobile/store/`: popisy v češtině, odpovědi pro App Privacy a Google Play Data safety, poznámky pro recenzenty, šablona prohlášení o přístupnosti aplikace.
 5. Testy podle <testy>.
-6. Seed ukázkové obce Javoří Lhota (obec, 3 části obce, 5 aktualit, 5 dokumentů desky, jedno informační hlášení, demo občan, demo pracovník), spustitelný jedním příkazem (`pnpm --filter web seed:demo`).
+6. Seed ukázkové obce Javoří Lhota (obec, 4 části obce (Javoří Lhota, Podjavoří, Hájek, Na Rovném), 5 aktualit, 5 dokumentů desky, jedno informační hlášení, demo občan, demo pracovník), spustitelný jedním příkazem (`pnpm --filter web seed:demo`).
 
 Mimo rozsah (nedělej, jen zapiš do `docs/rozhodnuti.md`, že se neřešilo):
 - přihlášení přes NIA a mobilní klíč eGovernmentu (pro čtení a hlášení není důvod ověřovat totožnost; do produkce NIA jen subjekty s právní povinností),
@@ -103,9 +103,9 @@ Přístup: občan čte a mění jen sebe; personál obce nevidí `obcane` vůbec
 
 `push-tikety`: zarizeni, hlaseni, ticketId, stav, vytvoreno; smazat po vyřízení receiptu nebo po 24 hodinách.
 
-`krizova-hlaseni` (rozšíření): `casti` (vztah na části obce, hasMany, prázdné = celá obec), `pushOdeslanoVe` (date, jen čtení), `pushStatistika` {zamereno, prijato, chyby, neplatnych}, `upozornitZnovu` (boolean, po odeslání se vynuluje).
+`krizova-hlaseni` (rozšíření): `casti` (pole slugů z `obce.castiObce`, prázdné = celá obec, validace vůči obci, shodně s promptem 01), `pushOdeslanoVe` (date, jen čtení), `pushStatistika` {zamereno, prijato, chyby, neplatnych}, `upozornitZnovu` (boolean, po odeslání se vynuluje).
 
-`hlaseni-zavad` (pouze minimum, pokud ještě neexistuje; rozšíří prompt 03): obec, obcan, cislo (`2026-047`), kategorie, popis(max 1000), poloha {lat, lng}, cast, fotky (relace na `media`, max 3), stav (prijato, prevzato, reseni, vyreseno, zamitnuto), odpoved, prirazeno (vztah na `users` téže obce), idempotencyKey (unikátní), vytvoreno.
+`hlaseni-zavad` (pouze minimum, pokud ještě neexistuje; rozšíří prompt 03): obec, obcan, cislo (`2026-047`), kategorie, popis(max 1000), poloha {lat, lng}, cast (slug z `castiObce`, nepovinné), fotky (relace na `media`, max 3), stav (`nove`, `prijato`, `v_reseni`, `vyreseno`, `zamitnuto`, shodně s promptem 03), verejnaOdpoved, prirazenoUzivateli (vztah na `users` téže obce), idempotencyKey (unikátní), vytvoreno. Pole a stavy drž přesně podle promptu 03, aby ho rozšířil bez přejmenování.
 
 `mobilni-audit`: kdo, role, akce, objekt, cas (přihlášení pracovníka, krizová hlášení, změny stavu, smazání účtu; bez dalších osobních údajů). `mobilni-limity`: klic, pocet, oknoOd (rate limit v Postgresu, bez další služby).
 </datovy_model>
@@ -119,7 +119,7 @@ Obecně: každá obrazovka má stavy načítání (kostra s popiskem pro čtečk
 
 **Úřední deska.** Seznam s filtrem kategorie, detail s přílohami (PDF v systémovém prohlížeči, na požádání uložit offline). Cache se při každé úspěšné synchronizaci nahrazuje, ne slučuje, takže sejmutý dokument s volbou „Po sejmutí nezveřejňovat“ zmizí z telefonu i s uloženou přílohou. Offline se dokument po `vyvesenoDo` skryje bez serveru.
 
-**Hlásit závadu** (účet; bez něj výzva k přihlášení a pokračování po něm). Kroky: kategorie, fotky (kamera nebo galerie, až 3), popis, poloha. Fotka: `expo-image-picker` s `exif: false`, pak `expo-image-manipulator` (delší strana 1600 px, JPEG 0,7), čímž zmizí i GPS; před odesláním upozornění, že se nemají fotit lidé ani SPZ (dokument E, 3.4). Poloha volitelná, jen „při používání“, dotaz až po klepnutí na „Použít moji polohu“; jinak špendlík na mapě posunutý ručně, jinak textový popis místa; nikdy na pozadí; posílá se jako pole `poloha`. Odeslání: `POST /api/hlaseni-zavad` jako multipart s hlavičkou `Idempotency-Key` (UUID z otevření návrhu, opakování nevytvoří duplicitu). Offline se hlášení uloží jako návrh (text v šifrované cache, fotky v souborovém úložišti aplikace), obrazovka říká „Čeká na odeslání“ a odešle se po obnovení sítě. Po úspěchu číslo a stav. „Moje hlášení“: přijato, převzato, řeší se, vyřešeno, zamítnuto, s odpovědí obce. Upozornění: nouzi nehlaste, volejte 112, 150, 155, 158; hlášení není úřední podání (dokument E, 3.2, 3.3). Aplikace nezobrazuje cizí hlášení, takže Apple 1.2 (UGC) se nespouští; ověř, a přidá-li prompt 03 veřejnou mapu, doplň nahlášení obsahu a blokaci.
+**Hlásit závadu** (účet; bez něj výzva k přihlášení a pokračování po něm). Kroky: kategorie, fotky (kamera nebo galerie, až 3), popis, poloha. Fotka: `expo-image-picker` s `exif: false`, pak `expo-image-manipulator` (delší strana 1600 px, JPEG 0,7), čímž zmizí i GPS; před odesláním upozornění, že se nemají fotit lidé ani SPZ (dokument E, 3.4). Poloha volitelná, jen „při používání“, dotaz až po klepnutí na „Použít moji polohu“; jinak špendlík na mapě posunutý ručně, jinak textový popis místa; nikdy na pozadí; posílá se jako pole `poloha`. Odeslání: `POST /api/hlaseni-zavad` jako multipart s hlavičkou `Idempotency-Key` (UUID z otevření návrhu, opakování nevytvoří duplicitu). Offline se hlášení uloží jako návrh (text v šifrované cache, fotky v souborovém úložišti aplikace), obrazovka říká „Čeká na odeslání“ a odešle se po obnovení sítě. Po úspěchu číslo (odpověď promptu 03 je `{cislo, sledovaciKod}`, počáteční stav `nove`). „Moje hlášení“: stavy `nove` (text Přijato), `prijato` (Převzato), `v_reseni` (Řeší se), `vyreseno` (Vyřešeno), `zamitnuto` (Zamítnuto), s odpovědí obce. Upozornění: nouzi nehlaste, volejte 112, 150, 155, 158; hlášení není úřední podání (dokument E, 3.2, 3.3). Aplikace nezobrazuje cizí hlášení, takže Apple 1.2 (UGC) se nespouští; ověř, a přidá-li prompt 03 veřejnou mapu, doplň nahlášení obsahu a blokaci.
 
 **Asistent.** Při první interakci celá obrazovka: je to umělá inteligence, ne úředník; běží na serveru CodeKom v ČR; odpovídá z dokumentů obce a cituje je; může se mýlit; nepsat rodná čísla ani zdravotní údaje. Souhlas se pamatuje lokálně s verzí textu. Štítek „AI asistent“ trvale v záhlaví a u každé odpovědi. Odpověď má zdroje a jistotu; při nízké nabídne kontakt na úřad. Dotaz jde bez identity uživatele; historie jen v paměti. Před odesláním lokální kontrola vzoru rodného čísla a čísla účtu s varováním. Model je na vlastním serveru, ne u třetí strany (Apple 5.1.2(i)); ověř a uveď v poznámkách pro recenzenty.
 
@@ -214,7 +214,7 @@ Na začátku sepiš plán a seznam úkolů (`docs/progress.json`) a průběžně
 <hotovo_kdyz>
 Příkazy (všechny bez chyb, bez přeskočených testů):
 - `pnpm --filter mobile typecheck`, `pnpm --filter mobile lint`, `pnpm --filter mobile test`
-- `pnpm --filter web typecheck`, `pnpm --filter web test` (testy backendu a netknuté testy úřední desky a banneru)
+- `pnpm --filter web typecheck`, `pnpm --filter web test` (testy backendu a testy úřední desky a banneru z promptu 01, pokud už existují; v repu dnes žádné nejsou)
 - `pnpm --filter mobile e2e` (Maestro: onboarding, hlášení závady, příjem notifikace)
 - `pnpm --filter mobile a11y` (a11y lint a test stromu)
 - `npx expo-doctor` v `apps/mobile` bez chyb
@@ -237,7 +237,7 @@ Vše zapiš do `docs/verification-log.md` (zdroj, datum, závěr), nebo v kódu 
 
 | Bod | Jak ověřit |
 |---|---|
-| SDK 58 (`expo@58.0.23`, vyšlo 29. 9. 2026): verze React Native, minimální iOS a Xcode, breaking changes, Hermes v1 regrese (opravená v 57.0.9), scene lifecycle pro iOS 27 | `npm view expo version`, `https://expo.dev/changelog/sdk-58.md`, `npx expo install --fix`, `npx expo-doctor`; návrat na 57 jen s písemným zdůvodněním |
+| SDK 58 (`expo@58.0.0` vyšlo 29. 9. 2026, dist-tag latest `58.0.23` k 3. 11. 2026): verze React Native, minimální iOS a Xcode, breaking changes, Hermes v1 regrese (opravená v 57.0.9), scene lifecycle pro iOS 27 | `npm view expo version`, `https://expo.dev/changelog/sdk-58.md`, `npx expo install --fix`, `npx expo-doctor`; návrat na 57 jen s písemným zdůvodněním |
 | TanStack Query v5 a `react-native-mmkv` s RN pro SDK 58 (záloha: perzistence přes `expo-sqlite`); knihovna i18n | `npm view`, README, zkušební build |
 | Expo Router bez React Navigation: deep linking, univerzální odkazy, Native Tabs a jejich přístupnost | docs.expo.dev/router |
 | EAS Update vůči Apple 3.3.2; `eas update` vyžaduje `--environment` | docs.expo.dev/eas-update, App Review Guidelines |

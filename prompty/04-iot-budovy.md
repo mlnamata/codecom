@@ -79,7 +79,7 @@ Broker v EU s mTLS a ACL podle CN certifikátu (brána smí jen svůj prefix): [
 
 **Rozhraní na ostatní části.** Moduly: vše pod `/api/iot` a v administraci se zobrazuje jen obcím s `moduly` obsahujícím `iot`. Rezervace: kolekce `rezervace` a `prostory` vzniká v digitálním úřadu. Pokud ještě neexistují, definuj v `lib/iot/zdroje/rezervace.ts` rozhraní `RezervaceZdroj` (`potvrzeneVOkne(budovaId, od, do)`, událost změny) s fixturou pro testy a s hákem `afterChange`, který se zapojí, jakmile kolekce existují. Předpoklad: `prostory.budova` je vztah na `budovy`. Oznámení: funkce `poslatOznameni({obec, prijemci, druh, text, kanaly})` v `lib/iot/oznameni.ts` posílá e-mail [DOPLNIT: e-mailová služba] a push přes registr z `POST /api/mobilni-zarizeni`, pokud existuje; SMS jen přes adaptér [DOPLNIT: SMS brána]. Žádný z nich nevolej napřímo z jiných míst.
 
-**API pro dashboard a aplikaci** (session přihlášeného uživatele, vždy omezeno na jeho obce):
+**API pro dashboard a aplikaci** (session přihlášeného uživatele, vždy omezeno na jeho obce). Pro aplikaci vystav tenký adaptér `GET /api/mobilni/urad/budovy` (název vlastní prompt 02, ověřuje tokeny aplikace), který volá stejné funkce z `lib/iot` jako `GET /api/iot/obce/<slug>/prehled` a bez modulu `iot` vrací `{dostupne:false}`:
 
 | Endpoint | Účel |
 |---|---|
@@ -143,7 +143,7 @@ Všechny kolekce Payloadu mají pole `obec` (multi-tenant plugin) a přístup om
 
 | Role | Doporučení | Poznámka |
 |---|---|---|
-| Hlavice | Danfoss Ally přímo přes Zigbee (bez Ally Gateway, ta vyžaduje internet) | funkce okna a předehřevu jsou v hlavici; chování přes ZHA ověř |
+| Hlavice | Danfoss Ally přímo přes Zigbee (bez Ally Gateway, ta vyžaduje internet) | funkce okna a předehřevu v hlavici jsou [OVĚŘIT] (rešerše potvrzuje jen regulaci na nastavenou teplotu při ztrátě spojení); chování přes ZHA ověř |
 | Hlavice, varianta | Shelly BLU TRV s lokálním RPC přes BLU Gateway Gen3 | nejlépe doložená lokální cesta (`TRV.SetTarget`, webhooky) |
 | Čidla | teplota a vlhkost, CO2, zaplavení, kontakt okna přes Zigbee | konkrétní modely [DOPLNIT] |
 | Elektřina | Shelly Pro EM (nebo Pro 3EM podle návrhu) | LAN, lokální API |
@@ -229,7 +229,7 @@ Projdou `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm e2e` (375 a 1280 px), 
 - [ ] Výpadek internetu na 1 h: brána dál vykonává plán, kód v oknem platnosti otevře zámek, protimrazové pravidlo zareaguje; po obnově je v `mereni` všech 60 vzorků na metriku bez mezery a bez duplicity a audit obsahuje otevření kódem.
 - [ ] Příkaz vydaný při výpadku (otevření dveří) vyprší a po obnově spojení se neprovede; uživatel vidí stav Vypršelo a vznikne alarm.
 - [ ] Mráz v Sokolovně (scénář 4 °C) vyvolá místní protimrazové topení, alarm, e-mail a push; alarm lze převzít s poznámkou; po návratu teploty se ukončí.
-- [ ] Dálkové otevření dveří vyžaduje roli `dvere`, čerstvé 2FA a důvod; jinak endpoint vrátí 403; audit zapíše pokus i výsledek.
+- [ ] Dálkové otevření dveří vyžaduje právo `dvere` (`users.iotPrava`), čerstvé 2FA a důvod; jinak endpoint vrátí 403; audit zapíše pokus i výsledek.
 - [ ] Dashboard: Přehled řekne do 5 sekund, zda je vše v pořádku; všechny stavy jsou čitelné i bez barvy; axe bez chyb; mobilní Úřad ukazuje jen Přehled a Budovy.
 - [ ] Energie: srovnání s předchozím obdobím a odhad úspory v Kč s uvedenou metodou a cenou zadanou obcí.
 - [ ] `docs/iot/` obsahuje instalaci brány, bezpečnostní přílohu, postup hlášení zranitelností, podklad k soukromí a seznam zařízení; CI vytváří SBOM.

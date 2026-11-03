@@ -76,7 +76,7 @@ Plugin `@payloadcms/plugin-multi-tenant`: `tenantsSlug: 'obce'`, pole tenanta `o
 | `dokumenty` | stávající plus `obec`, `urceni` (`deska`, `verejny`), `typ` (`obecny`, `vyhlaska`, `rozpocet`, `zaverecny-ucet`, `vyhled`, `zapis`, `zpravodaj`), `rok`, `sha256` (počítá hook při nahrání). Soubor navázaný na vyvěšenou desku nejde nahradit, jen přidat nový dokument |
 | `media` | stávající plus `obec`, `altSchvaleno`, `altSchvalil` |
 | `galerie` | `nazev`, `slug`, `datum`, `obrazky[]` (`media`). Publikovat jde, jen když mají všechny obrázky `altSchvaleno` |
-| `povinne-informace` | jeden dokument na obec, 14 pevných položek s `kod` (1 až 14, podpoložky 4.1 až 4.8, 8.1 až 8.2, 11.1 až 11.2, 12.1 až 12.2, 13.1 až 13.2), názvy zamčené v kódu, editovatelný je `obsah` a příznak `nepouziva` |
+| `povinne-informace` | jeden dokument na obec, 14 pevných položek s `kod` (1 až 14, podpoložky 4.1 až 4.8 a 8.1 až 8.2; členění položek 11 až 13 na podpoložky [OVĚŘIT] v textu vyhlášky, rešerše je nepotvrzuje), názvy zamčené v kódu, editovatelný je `obsah` a příznak `nepouziva` |
 | `popisy-ukonu` | pole Přílohy č. 2 vyhlášky 515/2020 (přesný seznam z textu vyhlášky, odhad kolem 21), vzory úkonů (odpady, pes, hrobové místo, ověření podpisu) označené „vzor k úpravě obcí“ |
 | `prohlaseni-pristupnosti` | jeden dokument na obec: `stavSouladu` (`uplny`, `castecny`, `nesoulad`), `nepristupnyObsah[{popis, duvod, nahradniReseni}]`, `datumSestaveni`, `datumPrezkumu`, `textUpraveny` (volitelný) |
 
