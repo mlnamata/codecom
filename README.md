@@ -14,6 +14,7 @@ Projekt je ve fázi návrhu. V repozitáři jsou podklady, návrhy, rozpracovan�
 | [`docs/pravni-dokumenty.md`](docs/pravni-dokumenty.md) | Smlouva s obcí, smlouva o zpracování, vzor informací pro obec, zásady CodeKomu, podmínky aplikace |
 | [`docs/rozhodnuti.md`](docs/rozhodnuti.md) | Záznam rozhodnutí a jejich důvodů |
 | [`research/`](research) | Rešerše k promptům (zpráva a poznámky) a rozbor šablon z ThemeForestu |
+| [`brand/`](brand) | Logo CodeKom ve všech variantách a pravidla použití |
 | [`apps/web/`](apps/web) | Rozpracovaný web obce: Next.js 16 + Payload 3 + Supabase, kolekce, migrace, pravidla v databázi |
 | [`design/prototypy/`](design/prototypy) | Klikací návrhy: 20 šablon webu pro smyšlenou obec Javoří Lhota, editor ve 3 úrovních, IoT dashboard, mobilní aplikace |
 | [`design/generator/`](design/generator) | Generátor šablon: palety, texty šablon, sestavení `.dc.html` |
