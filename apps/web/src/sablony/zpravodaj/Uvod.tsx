@@ -1,10 +1,11 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S18-Zpravodaj.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -14,24 +15,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
         {' '}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "32px" }}>
           <article style={{ flex: "2.2 1 560px", minWidth: "0" }}>
-            {foto ? (
-              <Foto sablona="zpravodaj" styl={{ display: "block", width: "100%", height: "auto", aspectRatio: "720 / 300", background: "var(--paper)" }} />
-            ) : (
-              <svg viewBox="0 0 720 300" role="img" aria-label="Ilustrace: zavřený most přes Javornický potok a objížďka přes Hájek" style={{ display: "block", width: "100%", height: "auto", aspectRatio: "720 / 300", background: "var(--paper)" }}>
-                <path d="M0 210 C160 190 260 240 400 220 S620 180 720 200 V300 H0z" style={{ fill: "var(--river)" }}></path>
-                <path d="M240 150 h240 v20 h-240z" style={{ fill: "var(--ink)" }}></path>
-                <path d="M260 170 v60 M460 170 v60" style={{ stroke: "var(--ink)" }} strokeWidth="10"></path>
-                <g style={{ fill: "var(--accent)" }}>
-                  <rect x="230" y="116" width="36" height="34"></rect>
-                  <rect x="454" y="116" width="36" height="34"></rect>
-                </g>
-                <g style={{ stroke: "var(--bg)" }} strokeWidth="5">
-                  <path d="M232 122 l32 22 M488 122 l-32 22"></path>
-                </g>
-                <path d="M120 150 C140 60 300 40 360 60 S600 60 600 150" style={{ fill: "none", stroke: "var(--ink)" }} strokeWidth="3" strokeDasharray="10 8"></path>
-                <text x="360" y="44" textAnchor="middle" style={{ fill: "var(--ink)", fontFamily: "var(--font-libre-franklin), sans-serif", fontSize: "16px", fontWeight: "600" }}>objížďka přes Hájek</text>
-              </svg>
-            )}
+            <FotoDlazdice soubor="sablona-13-mlyn.webp" alt={POPISY_FOTEK.mlyn ?? ""} styl={{ width: "100%", aspectRatio: "720 / 300", background: "var(--paper)" }} />
             {' '}
             <p style={{ margin: "14px 0 4px", fontSize: "14px", color: "var(--muted)" }}>Doprava, 2. listopadu</p>
             {' '}
@@ -56,7 +40,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             </div>
           </article>
           {' '}
-          <aside aria-labelledby="formulare18" style={{ flex: "1 1 280px", minWidth: "0", paddingLeft: "28px", borderLeft: "1px solid var(--line)" }}>
+          <aside aria-labelledby="formulare18" className="z-boky" style={{ flex: "1 1 280px", minWidth: "0", paddingLeft: "28px", borderLeft: "1px solid var(--line)" }}>
             <h2 id="formulare18" style={{ margin: "0 0 4px", fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: "500", fontSize: "28px" }}>Formuláře</h2>
             {' '}
             <p style={{ margin: "0 0 12px", color: "var(--muted)", fontSize: "14px" }}>Vyplníte online, nebo si je vytiskněte</p>
@@ -84,12 +68,16 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
               </li>
             </ul>
             {' '}
-            <div style={{ marginTop: "24px", padding: "16px", background: "var(--paper)" }}>
+            <div style={{ marginTop: "24px", background: "var(--paper)" }}>
+              <FotoDlazdice soubor="sablona-18-zpravodaj.webp" alt={POPISY_FOTEK.zpravodaj ?? ""} styl={{ width: "100%", aspectRatio: "16 / 9" }} />
+              {' '}
+              <div style={{ padding: "16px" }}>
               <p style={{ margin: "0", fontWeight: "600" }}>Zpravodaj e-mailem</p>
               {' '}
               <p style={{ margin: "4px 0 8px", fontSize: "15px" }}>{"Pošleme ho první den v měsíci. Odhlásit se jde jedním klikem."}</p>
               {' '}
-              <a href="/aktuality" style={{ color: "var(--link)", fontWeight: "600" }}>Chci zpravodaj e-mailem</a>
+              <a href="/aktuality" className="hit" style={{ color: "var(--link)", fontWeight: "600" }}>Chci zpravodaj e-mailem</a>
+              </div>
             </div>
           </aside>
         </div>
