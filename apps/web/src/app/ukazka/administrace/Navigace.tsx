@@ -16,6 +16,12 @@ const IKONY: Record<string, ReactNode> = {
       <rect x="3" y="14" width="7" height="7" rx="1" />
     </svg>
   ),
+  'Řídicí panel': (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m12 14 4-4" />
+      <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+    </svg>
+  ),
   'Obecní e-mail a pošta': (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -120,12 +126,6 @@ const IKONY: Record<string, ReactNode> = {
       <path d="M17 19h4" />
     </svg>
   ),
-  'Řídicí panel a mapa': (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z" />
-      <path d="M9 3v15M15 6v15" />
-    </svg>
-  ),
   'IoT čidla a živá data': (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -174,6 +174,7 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
     id: 'sk-obsah',
     polozky: [
       { nazev: 'Přehled', href: Z, od: 'zaklad' },
+      { nazev: 'Řídicí panel', href: `${Z}/panel`, od: 'zaklad' },
       { nazev: 'Obecní e-mail a pošta', href: `${Z}/posta`, od: 'zaklad' },
       { nazev: 'Rozhlas, SMS a zpravodaj', href: `${Z}/rozhlas`, od: 'zaklad' },
       { nazev: 'Nová aktualita', href: `${Z}/aktuality`, od: 'zaklad' },
@@ -207,7 +208,6 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
     nadpis: 'Chytrá obec a majetek',
     id: 'sk-chytra-obec',
     polozky: [
-      { nazev: 'Řídicí panel a mapa', href: '/ukazka/panel', od: 'zaklad' },
       { nazev: 'IoT čidla a živá data', href: `${Z}/chytra-obec`, od: 'zaklad' },
       { nazev: 'Komunita a půjčovna', href: `${Z}/komunita`, od: 'zaklad' },
       { nazev: 'Majetek a energetika', href: `${Z}/majetek`, od: 'pokrocily' },

@@ -240,7 +240,7 @@ export function PrepinacUkazky({ sablony, sablona, paleta, krize, vynuceno, appU
 
           <nav aria-label="Další části ukázky" className="lista__odkazy">
             <a href="/ukazka/administrace">Administrace</a>
-            <a href="/ukazka/panel">Řídicí panel</a>
+            <a href="/ukazka/administrace/panel">Řídicí panel</a>
             {appUrl ? <a href={appUrl}>Aplikace</a> : null}
           </nav>
         </div>

@@ -220,58 +220,20 @@ export function PanelObce({ obec, telefon, uredniHodiny, stav, objekty, odjezdy,
 
   return (
     <div className="panel">
-      <a className="preskocit" href="#panel-obsah">
-        Přeskočit na obsah
-      </a>
-      <header className="panel-hlavicka">
-        <p className="panel-nazev">
-          <span className="panel-nazev__male">Řídicí panel obce</span>
-          <span className="panel-nazev__obec">{obec}</span>
-        </p>
-        <ul className="panel-stavy" aria-label="Stav obce">
-          <li>{stav.teplota.toLocaleString('cs-CZ')} °C</li>
-          <li>Ovzduší: {stav.ovzdusi}</li>
-          <li>Potok: {stav.potok}</li>
-        </ul>
-        <nav aria-label="Ukázka" className="panel-odkazy">
-          <a href="/ukazka/administrace">Administrace</a>
-          <a href="/" className="panel-tlacitko">
-            Zobrazit web
-          </a>
-        </nav>
-      </header>
-
-      <div className="panel-telo">
-        <nav aria-label="Řídicí panel" className="panel-menu">
-          <ul>
-            <li>
-              <a href="#mapa" aria-current="true">
-                Mapa obce
-              </a>
-            </li>
-            <li>
-              <a href="#doprava">Doprava a jízdní řády</a>
-            </li>
-            <li>
-              <a href="#parkovani">Parkování</a>
-            </li>
-            <li>
-              <a href="#zavady">Hlášení závad</a>
-            </li>
-            <li>
-              <a href="/ukazka/administrace/chytra-obec">IoT čidla a technika</a>
-            </li>
+        <div className="panel-obsah">
+          <h1>Řídicí panel obce {obec}</h1>
+          <ul className="panel-stavy" aria-label="Stav obce">
+            <li>{stav.teplota.toLocaleString('cs-CZ')} °C</li>
+            <li>Ovzduší: {stav.ovzdusi}</li>
+            <li>Potok: {stav.potok}</li>
           </ul>
-        </nav>
-
-        <main id="panel-obsah" tabIndex={-1} className="panel-obsah">
           <p className="sr-only" aria-live="polite">
             {oznameni}
           </p>
 
           <section id="mapa" aria-labelledby="mapa-nadpis" className="panel-karta panel-karta--mapa">
             <div className="panel-karta__hlava">
-              <h1 id="mapa-nadpis">Mapa obce</h1>
+              <h2 id="mapa-nadpis">Mapa obce</h2>
               <p className="panel-pozn">Data k {aktualizovano}. Klikněte na kameru, čidlo nebo zámek.</p>
             </div>
             <div className="panel-vrstvy" role="group" aria-label="Vrstvy mapy">
@@ -459,8 +421,7 @@ export function PanelObce({ obec, telefon, uredniHodiny, stav, objekty, odjezdy,
           <p className="panel-fallback">
             Když něco nefunguje, volejte obecní úřad: {telefon}, úřední hodiny {uredniHodiny}.
           </p>
-        </main>
-      </div>
+        </div>
     </div>
   )
 }

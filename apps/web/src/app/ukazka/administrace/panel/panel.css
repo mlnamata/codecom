@@ -16,10 +16,7 @@
   --p-ok: #0b7a3e;
   --p-varovani: #8a5a00;
   --p-porucha: #b42318;
-  min-height: 100vh;
-  background: var(--p-ram);
-  color: var(--p-ram-text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--p-text);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -88,7 +85,7 @@
   padding: 6px 12px;
   border: 1px solid var(--p-ram-2);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
+  background: #ffffff;
   font-size: 14px;
 }
 .panel-odkazy {
@@ -162,7 +159,6 @@
 }
 .panel-obsah {
   min-width: 0;
-  padding: 24px;
 }
 
 /* Karty */
@@ -494,7 +490,7 @@
   padding-left: 18px;
 }
 .panel-fallback {
-  color: var(--p-ram-tlumeny);
+  color: var(--p-tlumeny);
 }
 
 /* Telefon */

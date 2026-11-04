@@ -76,7 +76,7 @@ for (const uroven of ['zaklad', 'pokrocily', 'advance']) {
 }
 
 test('axe: správa CodeKom', async ({ page }) => {
-  for (const cesta of ['/ukazka/panel', '/ukazka/codekom', '/ukazka/codekom/obce', '/ukazka/codekom/obce/javori-lhota', '/ukazka/codekom/faktury']) {
+  for (const cesta of ['/ukazka/codekom', '/ukazka/codekom/obce', '/ukazka/codekom/obce/javori-lhota', '/ukazka/codekom/faktury']) {
     await page.goto(cesta)
     await zkontroluj(page, cesta)
   }
