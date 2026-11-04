@@ -93,7 +93,7 @@ Na repozitáři pracuje víc instancí Claude současně. Aby měly přehled jed
 
 1. Po každém ověřeném kroku (kontroly prošly) hned commitni a pushni na `main`. Nečekej na konec celé práce.
 2. Do commitu přidávej jen soubory, které jsi změnil ty (`git add <cesty>`, nikdy `git add -A`). Cizí rozdělané změny v pracovním stromu nech být.
-3. Před pushem `git pull --rebase origin main`. Při konfliktu se zastav a napiš, s čím je konflikt. Nikdy nepoužívej force push.
+3. Před pushem `git pull --rebase --autostash origin main` (`--autostash` odloží rozdělané změny ostatních ve stejném pracovním stromu). Při konfliktu se zastav a napiš, s čím je konflikt. Nikdy nepoužívej force push.
 4. Na začátku práce si stáhni `main` a podívej se do `docs/progress.md`, kdo na čem pracuje. Svůj úkol tam zapiš (stav, oblast souborů) a při každém commitu ho aktualizuj.
 5. Drž se své oblasti souborů. Když potřebuješ měnit sdílený soubor (`globals.css`, `package.json`, lockfile), udělej to malým samostatným commitem a hned ho pushni.
 
