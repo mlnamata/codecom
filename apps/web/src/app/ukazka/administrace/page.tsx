@@ -78,7 +78,7 @@ export default function Prehled() {
                   background: noveZavady > 0 ? '#fef7e0' : '#e6f4ea',
                 }}
               >
-                {noveZavady} nových
+                {noveZavady} {noveZavady === 1 ? "nové" : noveZavady >= 2 && noveZavady <= 4 ? "nové" : "nových"}
               </span>
             </div>
             <p className="admin-kpi-hodnota">{noveZavady}</p>

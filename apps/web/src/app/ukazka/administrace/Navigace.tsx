@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { NAZEV_UROVNE, staci, type Uroven } from '@/ukazka/uroven'
 import { RozbalovaciNavigace } from '../RozbalovaciNavigace'
 
@@ -182,43 +182,59 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
   },
 ]
 
+function Skupina({ skupina, uroven, cesta }: { skupina: (typeof SKUPINY)[number]; uroven: Uroven; cesta: string }) {
+  const [otevrena, setOtevrena] = useState(true)
+  const idSeznamu = `${skupina.id}-seznam`
+  return (
+    <div className="admin__sekce">
+      <button
+        type="button"
+        id={skupina.id}
+        className="admin__skupina"
+        aria-expanded={otevrena}
+        aria-controls={idSeznamu}
+        onClick={() => setOtevrena((o) => !o)}
+      >
+        <span>{skupina.nadpis}</span>
+        <svg className="admin__skupina-sipka" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <ul id={idSeznamu} aria-labelledby={skupina.id} hidden={!otevrena}>
+        {skupina.polozky.map((p) => {
+          const odemceno = staci(uroven, p.od)
+          return (
+            <li key={p.href}>
+              <a href={p.href} aria-current={cesta === p.href ? 'page' : undefined} className={odemceno ? undefined : 'zamceno'}>
+                <span className="admin__nav-ikona" aria-hidden="true">
+                  {IKONY[p.nazev]}
+                </span>
+                <span className="admin__nav-nazev">{p.nazev}</span>
+                {odemceno ? null : (
+                  <span className="admin__od">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    <span>od {NAZEV_UROVNE[p.od]}</span>
+                  </span>
+                )}
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+}
+
 export function Navigace({ uroven }: { uroven: Uroven }) {
   const cesta = usePathname()
   const aktualni = SKUPINY.flatMap((s) => s.polozky).find((p) => p.href === cesta)?.nazev
   return (
     <RozbalovaciNavigace popisek="Administrace" aktualni={aktualni}>
       {SKUPINY.map((s) => (
-        <div key={s.id}>
-          <p className="admin__skupina" id={s.id}>
-            {s.nadpis}
-          </p>
-          <ul aria-labelledby={s.id}>
-            {s.polozky.map((p) => {
-              const odemceno = staci(uroven, p.od)
-              return (
-                <li key={p.href}>
-                  <a href={p.href} aria-current={cesta === p.href ? 'page' : undefined} className={odemceno ? undefined : 'zamceno'}>
-                    <span className="admin__nav-polozka">
-                      <span className="admin__nav-ikona" aria-hidden="true">
-                        {IKONY[p.nazev]}
-                      </span>
-                      <span className="admin__nav-nazev">{p.nazev}</span>
-                    </span>
-                    {odemceno ? null : (
-                      <span className="admin__od">
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ marginRight: 3 }}>
-                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                        </svg>
-                        od {NAZEV_UROVNE[p.od]}
-                      </span>
-                    )}
-                  </a>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <Skupina key={s.id} skupina={s} uroven={uroven} cesta={cesta} />
       ))}
     </RozbalovaciNavigace>
   )

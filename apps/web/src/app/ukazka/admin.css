@@ -1029,3 +1029,347 @@
   padding: 20px 24px;
   background: #ffffff;
 }
+
+/* ==========================================================================
+   Navigace a záhlaví administrace, verze 2 (4. 11. 2026).
+   Přebíjí starší pravidla výše i v globals.css. Mřížka po 4 px, cíle aspoň 44 px.
+   ========================================================================== */
+.admin {
+  --admin-sirka-menu: 264px;
+  --admin-vyska-hlavicky: 64px;
+  --admin-akcent: #1d4ed8;
+  --admin-akcent-svetly: #eff4ff;
+  --admin-text: #0f172a;
+  --admin-tlumeny: #475569;
+  --admin-linka: #e2e8f0;
+  background: #f8fafc;
+}
+
+/* Záhlaví: jeden řádek na počítači, dva kompaktní řádky na telefonu. */
+.admin .admin__hlavicka {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  min-height: var(--admin-vyska-hlavicky);
+  padding: 8px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--admin-linka);
+}
+.admin .admin__nazev {
+  margin: 0;
+  margin-right: auto;
+}
+.admin .admin__nazev a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--admin-text);
+  text-decoration: none;
+  font-size: 16px;
+}
+.admin .admin__urovne a {
+  min-height: 36px;
+}
+.admin .admin__akce {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Tělo: lepivé boční menu s vlastním posuvníkem vedle obsahu. */
+.admin .admin__telo {
+  display: grid;
+  grid-template-columns: var(--admin-sirka-menu) minmax(0, 1fr);
+  align-items: start;
+  gap: 0;
+}
+.admin .admin__navigace {
+  position: sticky;
+  top: var(--admin-vyska-hlavicky);
+  max-width: none;
+  width: auto;
+  min-width: 0;
+  height: calc(100vh - var(--admin-vyska-hlavicky));
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-right: 1px solid var(--admin-linka);
+}
+.admin .admin__navigace-obsah {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px 12px 24px;
+  scrollbar-width: thin;
+}
+.admin .admin__navigace-hlava,
+.admin .admin__menu,
+.admin .admin__clona {
+  display: none;
+}
+.admin .admin__navigace ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.admin .admin__sekce + .admin__sekce {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--admin-linka);
+}
+
+/* Nadpis skupiny je tlačítko, které skupinu sbalí. */
+.admin .admin__skupina {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 36px;
+  margin: 4px 0 0;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--admin-tlumeny);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-align: left;
+  cursor: pointer;
+}
+.admin .admin__skupina:hover {
+  background: #f1f5f9;
+  color: var(--admin-text);
+}
+.admin .admin__skupina-sipka {
+  transition: transform 0.15s ease;
+}
+.admin .admin__skupina[aria-expanded="false"] .admin__skupina-sipka {
+  transform: rotate(-90deg);
+}
+
+/* Položka menu: ikona, název, případně zámek s úrovní. */
+.admin .admin__navigace a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  margin: 2px 0;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: var(--admin-text);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+}
+.admin .admin__navigace a:hover {
+  background: #f1f5f9;
+}
+.admin .admin__navigace a[aria-current="page"] {
+  background: var(--admin-akcent-svetly);
+  color: var(--admin-akcent);
+  font-weight: 600;
+}
+.admin .admin__navigace a[aria-current="page"]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--admin-akcent);
+}
+.admin .admin__navigace a[aria-current="page"] .admin__nav-ikona {
+  color: var(--admin-akcent);
+}
+.admin .admin__nav-ikona {
+  display: inline-flex;
+  width: 20px;
+  justify-content: center;
+  flex: none;
+  color: var(--admin-tlumeny);
+}
+.admin .admin__nav-nazev {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.admin .admin__navigace a.zamceno {
+  color: var(--admin-tlumeny);
+}
+.admin .admin__od {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  padding: 2px 8px;
+  border: 1px solid var(--admin-linka);
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 500;
+}
+.admin .admin__navigace :focus-visible {
+  outline: 3px solid var(--admin-akcent);
+  outline-offset: -3px;
+}
+
+.admin .admin__obsah {
+  min-width: 0;
+  padding: 24px 32px 48px;
+}
+
+/* Telefon a tablet: tlačítko Menu a vysouvací panel přes obsah. */
+@media (max-width: 899.98px) {
+  .admin .admin__hlavicka {
+    position: static;
+    padding: 8px 16px;
+  }
+  .admin .admin__urovne {
+    order: 3;
+    width: 100%;
+    display: flex;
+  }
+  .admin .admin__urovne a {
+    flex: 1 1 0;
+    justify-content: center;
+    min-height: 44px;
+  }
+  .admin .admin__akce {
+    order: 2;
+  }
+  .admin .admin__stitek {
+    display: none;
+  }
+  .admin .admin__telo {
+    display: block;
+  }
+  .admin .admin__navigace {
+    position: sticky;
+    top: 0;
+    z-index: 25;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--admin-linka);
+    padding: 8px 16px;
+  }
+  .admin .admin__menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    border: 1px solid var(--admin-linka);
+    border-radius: 10px;
+    background: #ffffff;
+    color: var(--admin-text);
+    font: inherit;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .admin .admin__menu-titulek {
+    font-weight: 600;
+  }
+  .admin .admin__menu-stranka {
+    min-width: 0;
+    margin-left: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--admin-tlumeny);
+  }
+  .admin .admin__navigace-obsah {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    width: min(320px, 88vw);
+    height: auto;
+    padding: 0 12px 24px;
+    background: #ffffff;
+    box-shadow: 0 0 0 1px var(--admin-linka), 0 16px 48px rgba(15, 23, 42, 0.24);
+    transform: translateX(-105%);
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0.2s;
+  }
+  .admin .admin__navigace-obsah[data-otevreno="true"] {
+    transform: none;
+    visibility: visible;
+  }
+  .admin .admin__navigace-hlava {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    margin: 0 -12px 8px;
+    padding: 0 12px 0 24px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--admin-linka);
+    font-weight: 600;
+  }
+  .admin .admin__zavrit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--admin-linka);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--admin-text);
+    font: inherit;
+    cursor: pointer;
+  }
+  .admin .admin__clona {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: rgba(15, 23, 42, 0.45);
+  }
+  .admin .admin__obsah {
+    padding: 16px 16px 48px;
+  }
+}
+html.admin-menu-otevreno {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .admin .admin__navigace-obsah,
+  .admin .admin__skupina-sipka {
+    transition: none;
+  }
+}
+/* Dlouhé názvy se raději zalomí, než aby se ořízly vedle zámku s úrovní. */
+.admin .admin__navigace .admin__nav-nazev {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  line-height: 1.25;
+  padding: 8px 0;
+}
+/* Správa CodeKom má tmavé záhlaví, aby se nepletla s administrací obce. */
+.admin .admin__hlavicka.codekom-hlavicka {
+  background: #0b1220;
+  border-bottom-color: #000000;
+}
+.admin .admin__hlavicka.codekom-hlavicka .admin__nazev a {
+  color: #ffffff;
+}

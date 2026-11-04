@@ -1,31 +1,65 @@
 'use client'
 
-import { useId, useState, type ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 
 /**
- * Boční navigace administrace. Na širokém displeji je vždy vidět, na telefonu se sbalí
- * pod tlačítko Menu s názvem otevřené stránky, aby obsah nebyl až pod dlouhým seznamem.
+ * Boční navigace administrace. Na širokém displeji je to lepivý panel s vlastním posuvníkem.
+ * Na telefonu ji otevře tlačítko Menu jako vysouvací panel přes obsah: Esc a tlačítko Zavřít
+ * ho zavřou, fokus se vrátí na tlačítko Menu, po přechodu na jinou stránku se zavře sám.
  */
 export function RozbalovaciNavigace({ popisek, aktualni, children }: { popisek: string; aktualni?: string; children: ReactNode }) {
-  const [otevreno, setOtevreno] = useState(false)
   const id = useId()
+  const tlacitko = useRef<HTMLButtonElement>(null)
+  const panel = useRef<HTMLDivElement>(null)
+  const cesta = usePathname()
+  // Panel si pamatuje stránku, na které se otevřel; po přechodu jinam je tím zavřený.
+  const [otevrenoNa, setOtevrenoNa] = useState<string | null>(null)
+  const otevreno = otevrenoNa === cesta
+  const setOtevreno = (o: boolean) => setOtevrenoNa(o ? cesta : null)
+
+  useEffect(() => {
+    if (!otevreno) return
+    panel.current?.querySelector<HTMLElement>('a, button')?.focus()
+    const priKlavese = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOtevreno(false)
+        tlacitko.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', priKlavese)
+    document.documentElement.classList.add('admin-menu-otevreno')
+    return () => {
+      document.removeEventListener('keydown', priKlavese)
+      document.documentElement.classList.remove('admin-menu-otevreno')
+    }
+  }, [otevreno])
+
+  const zavri = () => {
+    setOtevreno(false)
+    tlacitko.current?.focus()
+  }
+
   return (
     <nav aria-label={popisek} className="admin__navigace">
-      <button type="button" className="admin__menu" aria-expanded={otevreno} aria-controls={id} onClick={() => setOtevreno((o) => !o)}>
-        <span className="admin__menu-titulek">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-          <span>Menu</span>
-        </span>
-        {aktualni ? <span className="admin__menu-stranka">{aktualni}</span> : null}
-        <svg className="admin__menu-sipka" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ transform: otevreno ? 'rotate(180deg)' : undefined, transition: 'transform 0.15s ease' }}>
-          <polyline points="6 9 12 15 18 9" />
+      <button ref={tlacitko} type="button" className="admin__menu" aria-expanded={otevreno} aria-controls={id} onClick={() => setOtevreno(!otevreno)}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
         </svg>
+        <span className="admin__menu-titulek">Menu</span>
+        {aktualni ? <span className="admin__menu-stranka">{aktualni}</span> : null}
       </button>
-      <div id={id} className="admin__navigace-obsah" data-otevreno={otevreno ? 'true' : 'false'}>
+      {otevreno ? <div className="admin__clona" aria-hidden="true" onClick={zavri} /> : null}
+      <div ref={panel} id={id} className="admin__navigace-obsah" data-otevreno={otevreno ? 'true' : 'false'}>
+        <div className="admin__navigace-hlava">
+          <span>{popisek}</span>
+          <button type="button" className="admin__zavrit" onClick={zavri}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+            Zavřít
+          </button>
+        </div>
         {children}
       </div>
     </nav>
