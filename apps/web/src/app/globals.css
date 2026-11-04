@@ -1,4 +1,7 @@
-@import "tailwindcss";
+/* Bez preflightu: šablony jsou navržené nad výchozími styly prohlížeče. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 /* Tokens follow the gov.cz design system. Crisis colours match its Infobar and alerts. */
 @theme {
@@ -195,6 +198,7 @@ body {
 }
 .stranka a {
   color: var(--link);
+  text-decoration: underline;
   text-underline-offset: 2px;
 }
 .stranka a:hover {

@@ -11,7 +11,7 @@ const modul: ModulSablony = {
   klic: 'hranice',
   tridyPisem,
   pismo: "var(--font-ibm-plex-sans), system-ui, sans-serif",
-  temaHlavicky: 'deep',
+  temaHlavicky: 'bg',
   Hlavicka,
   Paticka,
   Uvod: Uvod as ModulSablony['Uvod'],

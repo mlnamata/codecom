@@ -55,6 +55,29 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 4. 11. 2026 | `POST /api/mobilni-zarizeni` je vlastní route handler před catch-all Payloadu, REST kolekce je jen pro superadmina. Nový veřejný `GET /api/obce` vrací seznam obcí s aplikací (jen veřejná pole). | Vyřešení kolize endpointu a chybějícího rozhraní z kontroly promptů. |
 | 4. 11. 2026 | Prezentační web nepoužívá frázi „mobilní rozhlas“ (jméno konkurence). Prompty se nezkracují. | Výsledek kontroly promptů (`prompty/KONTROLA.md`). |
 
+## Prototyp webu (prompt 07)
+
+| Datum | Rozhodnutí | Proč |
+| --- | --- | --- |
+| 4. 11. 2026 | Ukázka webu Javoří Lhoty se nasazuje na Vercel (region `fra1`), i když dřívější rozhodnutí říkalo „bez nasazení“. | Zakladatel chce ukázku vidět online. Ukázka nemá databázi ani osobní údaje. |
+| 4. 11. 2026 | pnpm 10.34.9 místo nejnovějšího 12.x, TypeScript 5.9.3 a Vitest 3.2.7 místo nových major verzí (7.x, 5.x). | Vercel spolehlivě podporuje pnpm 10 a lockfile 9; nové major verze TS a Vitestu nejsou ověřené s Next 16.4 a Payloadem 3.92. |
+| 4. 11. 2026 | Payload (`withPayload`) se v `next.config.ts` zapíná jen s `CODEKOM_ZDROJ=payload`. Veřejné stránky Payload neimportují (pravidlo ESLintu). | `next build` musí projít bez `DATABASE_URI`. |
+| 4. 11. 2026 | Šablony jsou převedené skriptem `design/generator/do-tsx.py`; od převodu jsou TSX zdrojem pravdy, `design/` zůstává návrh. Logika interaktivních šablon je ručně v `logika.ts`. | Skript je deterministický a testovaný, ruční logika potřebuje typy a data ze serveru. |
+| 4. 11. 2026 | CSS šablon nepoužívá nesting: skript dává selektorům předponu `.sablona-<klic>`. | Funguje ve všech prohlížečích a nezávisí na zpracování nestingu při buildu. |
+| 4. 11. 2026 | Napojení seznamů úvodu na data dělá skript jen tam, kde se titulky z návrhu shodují s daty (Zvonice: aktuality a celá deska přes logiku). Ostatní seznamy zůstávají statický text návrhu. | Titulky v návrzích se od obsahu obce liší; skript nenapojí seznam, kde by se opakoval špatný text. Ruční napojení zbývajících seznamů je v otevřených bodech. |
+| 4. 11. 2026 | Fotografický úvod mají šablony, kde skript najde širokou úvodní ilustraci (9 z 20). | U ostatních je úvod bez velké ilustrace; varianta s fotkou tam zatím není. |
+| 4. 11. 2026 | Fotky se označují vždy „Ilustrační fotografie vytvořená umělou inteligencí“. | Opatrná volba, zda to čl. 50 odst. 4 AI Actu vyžaduje, je [OVĚŘIT]. |
+| 4. 11. 2026 | PDF dokumentů desky vznikají z textu přes `pdf-lib` s písmem Noto Sans (OFL) ve dvou podmnožinách (latinka, rozšířená latinka), znak po znaku. Handler `/uredni-deska/[id]/soubor` vrací PDF jen veřejného dokumentu. | Diakritika ověřená extrakcí textu. Produkční soubory budou v privátním úložišti za stejným handlerem. |
+| 4. 11. 2026 | Velikosti ukázkových PDF (`src/lib/data/generovano/velikosti.json`) jsou v gitu, PDF v `public/demo` ne. | PDF mají pevná metadata, velikosti jsou deterministické; typecheck a testy nepotřebují krok přípravy. |
+| 4. 11. 2026 | Šablona Magistrát ukazuje odpovědi z `asistent-ukazka.json` místo textů návrhu. | Odpovědi začínají větou, že odpovídá umělá inteligence, a citují dokumenty desky (pravidlo 4). |
+| 4. 11. 2026 | Studánka uvádí poplatek za rekreační objekt 900 Kč podle dat obce (návrh měl 600 Kč). | Data mají přednost, viz `obsah/javori-lhota/README.md`. |
+| 4. 11. 2026 | Alegreya Sans se načítá bez řezu 600, který Google Fonts nemá. | Prohlížeč použije nejbližší řez. |
+| 4. 11. 2026 | Navíc oproti zadání: stránky `/sluzby` a `/hlaseni-rozhlasu` a endpointy `GET /api/hlaseni-zavad`, `POST /api/krize`, `PATCH /api/hlaseni-zavad/<id>`. | Odkazy z návrhů vedou na služby a rozhlas; endpointy potřebuje prototyp aplikace (08). |
+| 4. 11. 2026 | Variabilní symbol ukázky: rok, číslo popisné na 4 místa, pořadí poplatku na 2 místa. [DOPLNIT: pravidlo variabilních symbolů obce] | Ukázkové schéma podle zadání. |
+| 4. 11. 2026 | Kolekce Payloadu (`tykaSe` v krizových hlášeních) se v prototypu nemění; sdílená pravidla používají `casti`. Změnu kolekce udělá prompt 01. | Aplikované migrace se nemění. |
+| 4. 11. 2026 | `loading.tsx` jen u stránek bez dynamického detailu. | Streamování by u detailu skrytého dokumentu vrátilo stav 200 místo 404. |
+| 4. 11. 2026 | Úložiště ukázky je v paměti procesu. Na Vercelu může mít každá instance funkce vlastní kopii, změny z administrace se nemusí projevit všude a po studeném startu zmizí. | Prototyp nemá databázi; trvalá data dodá prompt 01 (Supabase). |
+
 ## Právo
 
 | Datum | Rozhodnutí | Proč |
@@ -67,7 +90,8 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 ## Otevřené
 
 - Záložka AI v návrhu platformy je zatím jen osnova.
-- Krizový banner a výpis úřední desky v `apps/web` nejsou dopsané, chybí stránky a testy. Dopíše je prompt 07.
+- Seznamy na úvodu většiny šablon jsou statický text návrhu, napojit je ručně na data (prompt 07, zbývá).
+- Snímky šablon pro galerii (`pnpm --filter codekom-web snimky`) zatím nevznikly.
 - Skutečné ceny, holding a jeho název, první skutečná obec pro pilot.
 - Údaje CodeKomu pro prezentační web: IČO, sídlo, kontakty, jména pro stránku O nás (`[DOPLNIT]` v `obsah/prezentace`).
 - Kontrola právních dokumentů advokátem před podpisem s první obcí.

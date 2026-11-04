@@ -712,6 +712,9 @@ def ma_mustache(n):
 
 def hlavicka_tema(header):
     """Pozadí hlavičky na vnitřních stránkách: hlavička stojí v úvodu na ilustraci, tady potřebuje vlastní pás."""
+    # Hlavička, jejíž přímé části mají vlastní pozadí, si barvy řídí sama.
+    if any('background' in (c.attr('style') or '') for c in header.elements()):
+        return 'bg'
     s = json.dumps([v for n in header.iter() for _, v in n.attrs])
     if 'var(--on-deep)' in s:
         return 'deep'

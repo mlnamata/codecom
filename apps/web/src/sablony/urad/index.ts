@@ -11,7 +11,7 @@ const modul: ModulSablony = {
   klic: 'urad',
   tridyPisem,
   pismo: "var(--font-roboto), Arial, sans-serif",
-  temaHlavicky: 'deep',
+  temaHlavicky: 'bg',
   Hlavicka,
   Paticka,
   Uvod: Uvod as ModulSablony['Uvod'],

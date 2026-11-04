@@ -64,7 +64,7 @@ export default async function Hledat({ searchParams }: { searchParams: SearchPar
     <>
       <Drobecky polozky={[{ nazev: 'Hledat' }]} />
       <h1>Hledat na webu obce</h1>
-      <form method="get" action="/hledat" role="search" className="panel">
+      <form method="get" action="/hledat" role="search" aria-label="Hledat na webu obce" className="panel">
         <div className="pole">
           <label htmlFor="hledat-q">Co hledáte</label>
           <span id="hledat-napoveda" className="napoveda">
@@ -76,9 +76,9 @@ export default async function Hledat({ searchParams }: { searchParams: SearchPar
       </form>
       {q ? (
         <>
-          <h2 role="status">
-            {nalezy.length === 0 ? `Na „${q}“ jsme nic nenašli` : `Výsledky pro „${q}“: ${nalezy.length}`}
-          </h2>
+          <div role="status">
+            <h2>{nalezy.length === 0 ? `Na „${q}“ jsme nic nenašli` : `Výsledky pro „${q}“: ${nalezy.length}`}</h2>
+          </div>
           {nalezy.length === 0 ? (
             <KontaktUradu obec={obec} />
           ) : (

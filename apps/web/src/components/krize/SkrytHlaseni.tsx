@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 
 const read = (key: string): boolean => {
   try {
@@ -23,15 +23,17 @@ const write = (key: string): void => {
  * so visitors without JavaScript never see a button that does nothing. The dismissal is
  * remembered per alert version: an edited alert shows again.
  */
+const bezOdberu = () => () => {}
+
 export function SkrytHlaseni({ klic, titulek }: { klic: string; titulek: string }) {
-  const [ready, setReady] = useState(false)
+  // Na serveru false, po hydrataci true: tlačítko bez JavaScriptu nevznikne.
+  const ready = useSyncExternalStore(bezOdberu, () => true, () => false)
   const [button, setButton] = useState<HTMLButtonElement | null>(null)
 
   useEffect(() => {
     const section = button?.closest('section')
     if (!section) return
     section.hidden = read(klic)
-    setReady(true)
   }, [button, klic])
 
   return (

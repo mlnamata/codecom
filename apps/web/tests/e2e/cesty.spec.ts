@@ -1,0 +1,108 @@
+import { expect, test } from '@playwright/test'
+import { bezVodorovnehoPosunu, obnovUkazku, sleduj } from './pomocne'
+
+test.beforeEach(async ({ page }) => {
+  await obnovUkazku(page)
+})
+
+test('nahlásit závadu a dohledat ji podle kódu', async ({ page }) => {
+  await page.goto('/sluzby/nahlasit-zavadu?krize=off')
+  await page.getByRole('button', { name: 'Odeslat hlášení' }).click()
+  await expect(page.getByRole('heading', { name: 'Formulář obsahuje chyby' })).toBeVisible()
+  await page.getByLabel('Čeho se závada týká').selectOption({ label: 'Výmol' })
+  await page.getByLabel('Popis závady').fill('Hluboký výmol před školou, auta ho objíždějí.')
+  await page.getByLabel('Kde závada je').fill('Lipová 3')
+  await page.getByRole('button', { name: 'Odeslat hlášení' }).click()
+  await expect(page.getByRole('heading', { name: 'Závadu jsme přijali' })).toBeVisible()
+  const kod = (await page.locator('.uspech strong').nth(1).textContent())?.trim() ?? ''
+  expect(kod).toMatch(/^[2-9A-HJKMNP-Z]{8}$/)
+  await page.goto(`/sluzby/nahlasit-zavadu?kod=${kod}`)
+  await expect(page.getByText('Přijato', { exact: true })).toBeVisible()
+  await bezVodorovnehoPosunu(page)
+})
+
+test('zaplatit: QR kód a „Ukázka, neplaťte“', async ({ page }) => {
+  await page.goto('/sluzby/platby?krize=off')
+  await page.getByLabel('Číslo popisné').fill('12')
+  await page.getByRole('button', { name: 'Vytvořit QR kód' }).click()
+  await expect(page.getByText('Ukázka, neplaťte')).toBeVisible()
+  await expect(page.locator('.qr svg')).toBeVisible()
+  await expect(page.getByText('CZ0000000000000000000000')).toBeVisible()
+  await bezVodorovnehoPosunu(page)
+})
+
+test('rezervace: kolize a čekající žádost', async ({ page }) => {
+  await page.goto('/sluzby/rezervace?krize=off')
+  await page.locator('#pole-den').fill('2026-11-04')
+  await page.locator('#pole-od').fill('19:00')
+  await page.locator('#pole-do').fill('21:00')
+  await page.getByLabel('Účel').fill('Oslava narozenin')
+  await page.getByLabel('Jméno nebo spolek').fill('Jan Novák')
+  await page.getByLabel('Telefon nebo e-mail').fill('[E-MAIL]')
+  await page.getByRole('button', { name: 'Poslat žádost' }).click()
+  await expect(page.getByText(/už rezervovaný/).first()).toBeVisible()
+  await page.locator('#pole-den').fill('2026-11-20')
+  await page.locator('#pole-od').fill('14:00')
+  await page.locator('#pole-do').fill('18:00')
+  await page.getByRole('button', { name: 'Poslat žádost' }).click()
+  await expect(page.getByRole('heading', { name: 'Žádost čeká na schválení' })).toBeVisible()
+})
+
+test('úřední deska: filtr v URL, stránkování a prázdný stav', async ({ page }) => {
+  await page.goto('/uredni-deska?krize=off')
+  await page.getByLabel('Kategorie').selectOption({ label: 'Doprava' })
+  await page.getByRole('button', { name: 'Použít filtr' }).click()
+  await expect(page).toHaveURL(/kategorie=doprava/)
+  await page.goto('/uredni-deska?q=neexistujici-dokument')
+  await expect(page.getByText('Žádný dokument neodpovídá filtru.')).toBeVisible()
+  await page.goto('/uredni-deska?stav=vse&strana=99')
+  await expect(page.locator('table')).toHaveCount(0)
+  await bezVodorovnehoPosunu(page)
+})
+
+test('sejmutý skrytý dokument vrací 404 i pro soubor', async ({ page, request }) => {
+  const detail = await page.goto('/uredni-deska/ulozeni-pisemnosti')
+  expect(detail?.status()).toBe(404)
+  await expect(page.getByText('Dokument už není na úřední desce zveřejněn.')).toBeVisible()
+  expect((await request.get('/uredni-deska/ulozeni-pisemnosti/soubor')).status()).toBe(404)
+  const pdf = await request.get('/uredni-deska/uzavirka-mostu/soubor')
+  expect(pdf.status()).toBe(200)
+  expect(pdf.headers()['content-type']).toBe('application/pdf')
+})
+
+test('administrace vyvěsí dokument a vydá krizi, krize je na webu i v API', async ({ page, request }) => {
+  await page.goto('/ukazka/administrace/deska')
+  await page.getByLabel('Název').fill('Oznámení o zkoušce sirén')
+  await page.getByLabel('Kategorie').selectOption({ label: 'Oznámení' })
+  await page.getByLabel('Číslo jednací').fill('OU/99/2026')
+  await page.getByLabel('Text dokumentu').fill('Ve středu proběhne zkouška sirén.')
+  await page.getByLabel('Dokument neobsahuje osobní údaje').check()
+  await page.getByRole('button', { name: 'Vyvěsit na úřední desku' }).click()
+  await expect(page.getByText(/Dokument je vyvěšený/)).toBeVisible()
+  await page.goto('/uredni-deska?q=sirén')
+  await expect(page.getByRole('link', { name: 'Oznámení o zkoušce sirén', exact: true })).toBeVisible()
+
+  await page.goto('/ukazka/administrace/krize')
+  await page.getByLabel('Krizová situace').check()
+  await page.getByLabel('Titulek').fill('evakuace školy kvůli úniku plynu')
+  await page.getByLabel('Text', { exact: true }).fill('Žáci jsou v sokolovně, rodiče je vyzvednou tam.')
+  await page.getByRole('button', { name: 'Vydat hlášení' }).click()
+  await expect(page.getByText(/je vydané/)).toBeVisible()
+  await page.goto('/?krize=auto')
+  await expect(page.locator('section.alert h2')).toHaveText('Krizová situace: evakuace školy kvůli úniku plynu')
+  const api = await (await request.get('/api/krize/aktivni?obec=javori-lhota')).json()
+  expect(api.hlavni.titulek).toBe('evakuace školy kvůli úniku plynu')
+})
+
+test('informaci a výstrahu jde skrýt, krize tlačítko nemá', async ({ page }) => {
+  const { chyby } = await sleduj(page)
+  await page.goto('/?krize=emergency')
+  await expect(page.locator('section.alert')).toBeVisible()
+  await expect(page.getByRole('button', { name: /Skrýt hlášení/ })).toHaveCount(0)
+  await page.goto('/?krize=warning')
+  await page.getByRole('button', { name: /Skrýt hlášení/ }).click()
+  await expect(page.locator('section.alert')).toBeHidden()
+  await page.reload()
+  await expect(page.locator('section.alert')).toBeHidden()
+  expect(chyby).toEqual([])
+})

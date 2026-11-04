@@ -1,4 +1,4 @@
-/** `Výlov Mlýnského rybníka 2026` → `vylov-mlynskeho-rybnika-2026` */
+/** `Výlov Mlýnského rybníka 2026` na `vylov-mlynskeho-rybnika-2026` */
 export function slugify(text: string): string {
   return text
     .normalize('NFD')

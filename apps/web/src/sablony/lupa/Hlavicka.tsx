@@ -22,7 +22,10 @@ export function Hlavicka() {
           {' '}
           {v.sizes.map((z, i) => (
             <Fragment key={i}>
-              <button type="button" onClick={z.pick} aria-pressed={z.pressed} aria-label={z.name} style={{ minWidth: "48px", minHeight: "48px", padding: "0 0.6em", border: "2px solid var(--on-deep)", borderRadius: "4px", background: z.bg, color: z.ink, font: "inherit", fontWeight: "600", cursor: "pointer" }}>{z.label}</button>
+              <button type="button" onClick={z.pick} aria-pressed={z.pressed} style={{ minWidth: "48px", minHeight: "48px", padding: "0 0.6em", border: "2px solid var(--on-deep)", borderRadius: "4px", background: z.bg, color: z.ink, font: "inherit", fontWeight: "600", cursor: "pointer" }}>
+                {z.label}
+                <span className="sr">{z.name}</span>
+              </button>
             </Fragment>
           ))}
         </div>

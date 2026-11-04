@@ -6,7 +6,7 @@
     <div role="group" aria-label="Velikost písma" style="display: flex; align-items: center; gap: 0.4em">
       <span aria-hidden="true" style="font-size: 0.85em">Písmo</span>
       <sc-for list="{{sizes}}" as="z" hint-placeholder-count="3">
-        <button type="button" onClick="{{z.pick}}" aria-pressed="{{z.pressed}}" aria-label="{{z.name}}" style="min-width: 48px; min-height: 48px; padding: 0 0.6em; border: 2px solid var(--on-deep); border-radius: 4px; background: {{z.bg}}; color: {{z.ink}}; font: inherit; font-weight: 600; cursor: pointer">{{z.label}}</button>
+        <button type="button" onClick="{{z.pick}}" aria-pressed="{{z.pressed}}" style="min-width: 48px; min-height: 48px; padding: 0 0.6em; border: 2px solid var(--on-deep); border-radius: 4px; background: {{z.bg}}; color: {{z.ink}}; font: inherit; font-weight: 600; cursor: pointer">{{z.label}}<span class="sr"> {{z.name}}</span></button>
       </sc-for>
     </div>
   </div>
