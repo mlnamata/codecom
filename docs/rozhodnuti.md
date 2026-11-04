@@ -88,6 +88,7 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 4. 11. 2026 | PDF ke stažení tiskne Chromium (`page.pdf`, `tagged: true`): označená struktura, jazyk cs, název a osnova. veraPDF jsem nespouštěl. | Ověřeno jen přítomností StructTreeRoot a /Lang v testu; kontrolu PDF/UA veraPDF udělat před nasazením. |
 | 4. 11. 2026 | Snímky šablon jsou z produkčního buildu s fotkami, velikost do 179 kB (cíl 120 kB překračují snímky s fotkou). | Nepřegenerovávám, jen hlásím podle promptu 06. |
 | 4. 11. 2026 | Prezentační web má moderní vzhled podle vzoru dom-ino.cz: tmavý úvod přes celou obrazovku s fotkou, písmo Inter až 800, skleněné plochy (backdrop-filter), jemná záře, animace při posouvání. Kontrola unslop se na `apps/prezentace` nespouští. | Zakladatel označil černobílou i časopiseckou verzi za zastaralou. Kontrast, přístupnost a omezený pohyb zůstávají povinné. |
+| 4. 11. 2026 | Firemní prezentační web se přesunul do samostatného repozitáře `mlnamata/codekom_web` (s texty `obsah/prezentace` a registrem tvrzení). Tady zůstává platforma a ukázka obce, aplikace a IoT jsou v `mlnamata/codecom_app`. | Zakladatel chce firemní web nasadit samostatně na codekom.vercel.app. Tokeny, snímky, fotky a logo jsou v `codekom_web` jako kopie, zdrojem pravdy zůstává tento repozitář. |
 
 ## Právo
 
@@ -103,5 +104,5 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 - Záložka AI v návrhu platformy je zatím jen osnova.
 - Seznamy na úvodu většiny šablon jsou statický text návrhu, napojit je ručně na data (prompt 07, zbývá).
 - Skutečné ceny, holding a jeho název, první skutečná obec pro pilot.
-- Údaje CodeKomu pro prezentační web: IČO, sídlo, kontakty, jména pro stránku O nás (`[DOPLNIT]` v `obsah/prezentace`).
+- Údaje CodeKomu pro prezentační web: IČO, sídlo, kontakty, jména pro stránku O nás (`[DOPLNIT]` v `codekom_web/obsah/prezentace`).
 - Kontrola právních dokumentů advokátem před podpisem s první obcí.

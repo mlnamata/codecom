@@ -6,10 +6,12 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 | --- | --- | --- | --- |
 | Lišta „Ukázka CodeKom“ (nastavení ukázky webu obce) | komponenta lišty v `apps/web/src` | rozpracováno | přehlednější, na telefonu sbalitelná |
 | Ukázka administrace a interní správy | `apps/web/src/app/ukazka/**`, `admin.css` | rozpracováno | podle `design/prototypy/Editor-*.dc.html` |
-| IoT brána | repozitář `mlnamata/codecom_app` | rozpracováno | vlastní `docs/progress.md` tam |
-| Firemní landing na codekom.vercel.app | nastavení Vercelu | čeká na zakladatele | projekt `codecom_web`: Root Directory `apps/prezentace` |
+| Aplikace a IoT | repozitář `mlnamata/codecom_app` | předáno jiné session | zadání v `codecom_app/docs/zadani` |
+| Firemní landing na codekom.vercel.app | repozitář `mlnamata/codekom_web` | čeká na zakladatele | Vercel projekt napojit na `codekom_web` |
 
 ## Hotovo
+
+- Firemní web přesunutý do `mlnamata/codekom_web` a smazaný odsud (`apps/prezentace`, `obsah/prezentace`, `docs/tvrzeni-prezentace.md`).
 
 - Prezentační web: karusel šablon, úpravy pro telefony, produkční adresy (`main`, 4. 11. 2026).
 - Šablony obce: čitelné záhlaví nad fotkou (Náves, Hřeben).
