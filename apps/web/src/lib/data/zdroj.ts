@@ -43,6 +43,7 @@ export interface ZdrojDat {
   rezervace(obec: string, prostor: string): Promise<Pick<Rezervace, 'den' | 'od' | 'do' | 'stav'>[]>
   hlaseniZavad(obec: string, kod: string): Promise<HlaseniZavad | null>
   kategorieZavad(obec: string): Promise<{ id: string; nazev: string }[]>
+  stavyZavad(obec: string): Promise<{ id: HlaseniZavad['stav']; nazev: string }[]>
 }
 
 export type Zdroj = 'demo' | 'payload'

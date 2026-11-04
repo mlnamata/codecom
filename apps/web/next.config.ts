@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
   transpilePackages: ['@codekom/tokeny', '@codekom/typy', '@codekom/demo-data'],
   turbopack: { root: koren },
   outputFileTracingRoot: koren,
+  // Písmo pro PDF úřední desky čte handler souboru ze svého adresáře.
+  outputFileTracingIncludes: { '/uredni-deska/[id]/soubor': ['./public/demo/pismo/**'] },
   async headers() {
     return [
       {

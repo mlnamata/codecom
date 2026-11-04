@@ -459,3 +459,131 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Ukázka administrace: neutrální vzhled, stejná pravidla přístupnosti. */
+.admin {
+  --bg: #ffffff;
+  --surface: #f3f3f0;
+  --ink: #1a1a18;
+  --muted: #55554f;
+  --line: #cfcfc9;
+  --primary: #1f3f7a;
+  --on-primary: #ffffff;
+  --link: #1f3f7a;
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+}
+.admin a {
+  color: var(--link);
+}
+.admin :focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 2px;
+}
+.admin__hlavicka {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 12px clamp(16px, 4vw, 32px);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.admin__hlavicka a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.admin__nazev {
+  margin: 0;
+  font-weight: 600;
+}
+.admin__nazev a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.admin__stitek {
+  margin: 0;
+  padding: 4px 12px;
+  border: 2px solid #8a5a00;
+  border-radius: 4px;
+  color: #5c3c00;
+  background: #fff6db;
+  font-weight: 600;
+}
+.admin .tlacitko.druhe,
+.admin__hlavicka button {
+  min-height: 44px;
+}
+.admin__hlavicka button {
+  padding: 0 16px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin__hlavicka button[type="submit"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+.admin__telo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.admin__navigace {
+  flex: 1 1 220px;
+  max-width: 280px;
+  padding: 16px clamp(16px, 2vw, 24px);
+}
+.admin__navigace ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.admin__navigace a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 6px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.admin__navigace a[aria-current="page"] {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.admin__navigace a[aria-current="page"]:focus-visible {
+  outline-color: var(--ink);
+}
+.admin__zamcene-nadpis {
+  margin: 24px 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.admin__zamcene li {
+  padding: 6px 12px;
+  color: var(--muted);
+}
+.admin__obsah {
+  flex: 999 1 560px;
+  min-width: 0;
+  margin: 16px;
+  border-radius: 8px;
+}
+@media (max-width: 767.98px) {
+  .admin__navigace {
+    max-width: none;
+  }
+}

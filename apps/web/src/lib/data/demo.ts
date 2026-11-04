@@ -133,6 +133,10 @@ export const demoZdroj: ZdrojDat = {
   async kategorieZavad(obec) {
     return prava(obec) ? uloziste().kategorieZavad : []
   },
+
+  async stavyZavad(obec) {
+    return prava(obec) ? uloziste().stavyZavad : []
+  },
 }
 
 function vydana(): KrizoveHlaseni[] {
