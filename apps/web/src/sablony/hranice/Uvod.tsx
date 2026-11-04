@@ -1,12 +1,23 @@
 'use client'
-/** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S07-Hranice.html. */
+/**
+ * Úvod šablony Capella: velká fotka hraničního kamene přes celou šířku a přes její spodní
+ * okraj dvojjazyčný panel (česky a německy vedle sebe, mezi nimi jen tenká linka).
+ * Text leží vždy na plné ploše, ne přímo na fotce. Štítek AI je v pravém horním rohu fotky.
+ */
 
 import type { ReactNode } from 'react'
-import { FotoDlazdice } from '../sdilene/FotoDlazdice'
-import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
+import { Foto } from '../sdilene/Foto'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
+
+const SERIF = 'var(--font-ibm-plex-serif), Georgia, serif'
+
+const AKCE = [
+  { den: '11', mesic: 'lis', href: '/obecni-urad', nazev: 'Svatomartinský průvod přes hranici', popis: 'od hraničního kamene v 17 hodin', de: 'Martinsumzug über die Grenze' },
+  { den: '29', mesic: 'lis', href: '/akce', nazev: 'Adventní trh obou obcí', popis: 'náves Javoří Lhoty, od 14 hodin', de: 'Gemeinsamer Adventsmarkt' },
+  { den: '1', mesic: 'pro', href: '/obecni-urad', nazev: 'Zimní uzávěra cesty k hraničnímu přechodu', popis: 'pěší přechod zůstává otevřený', de: 'Wintersperre des Weges' },
+]
 
 export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
@@ -15,142 +26,114 @@ export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
       {banner}
       <Hlavicka />
       <main id="obsah" tabIndex={-1}>
-        <FotoDlazdice soubor="sablona-07-hranice.webp" alt={POPISY_FOTEK.hranice ?? ""} styl={{ width: "100%", height: "clamp(200px, 24vw, 340px)" }} />
-        {' '}
         <h1 className="sr">Obec Javoří Lhota, Gemeinde Javoří Lhota</h1>
-        {' '}
-        <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px)", display: "grid", gridTemplateColumns: v.cols, gap: "40px 72px", position: "relative" }}>
-          {v.showCs ? (
-            <>
-              <div lang="cs">
-                <h2 style={{ margin: "0 0 12px", fontFamily: "var(--font-ibm-plex-serif), Georgia, serif", fontWeight: "500", fontSize: "clamp(32px, 3.6vw, 46px)", lineHeight: "1.12" }}>Obec, ze které je to do Bavorska 4 kilometry</h2>
-                {' '}
-                <p style={{ margin: "0 0 20px", maxWidth: "46ch" }}>
-                  {"Žijeme u hranice s Bavorskem. Co platí u nás, co za hranicí a co děláme společně s obcí Waldkirchen am Grenzbach."}
+        <div className="capella-foto">
+          <Foto sablona="hranice" styl={{ width: '100%', height: 'clamp(320px, 46vw, 600px)' }} />
+        </div>
+        <div className="capella-pod">
+          <section
+            className="capella-panel"
+            aria-label="Úvod obce, česky a německy"
+            data-oba={v.showBoth ? '' : undefined}
+            style={{ background: 'var(--bg)', boxShadow: '0 0 0 1px var(--line)' }}
+          >
+            {v.showCs ? (
+              <div lang="cs" className="capella-sloupec">
+                <p className="capella-jazyk-popis" style={{ color: 'var(--muted)' }}>Česky</p>
+                <h2 className="capella-titulek" style={{ fontFamily: SERIF }}>Obec, ze které je to do Bavorska 4 kilometry</h2>
+                <p style={{ margin: '0 0 16px', maxWidth: '46ch' }}>
+                  {'Žijeme u hranice s Bavorskem. Co platí u nás, co za hranicí a co děláme společně s obcí Waldkirchen am Grenzbach.'}
                 </p>
-                {' '}
-                <p style={{ margin: "0", display: "flex", flexDirection: "column" }}>
+                <p style={{ margin: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                   <a className="hit" href="/sluzby/platby">Zaplatit poplatky</a>
                   <a className="hit" href="/uredni-deska">Úřední deska</a>
-                  <a className="hit" href="/obecni-urad">{"Práce a lékař v Německu"}</a>
+                  <a className="hit" href="/obecni-urad">{'Práce a lékař v Německu'}</a>
                 </p>
               </div>
-            </>
-          ) : null}
-          {' '}
-          {v.showBoth ? (
-            <>
-              <div aria-hidden="true" className="border-line" style={{ position: "absolute", top: "56px", bottom: "56px", left: "50%", borderLeft: "2px dashed var(--line)" }}>
-                <span style={{ position: "absolute", top: "0", left: "-9px", width: "16px", height: "22px", borderRadius: "4px 4px 0 0", background: "var(--primary)" }}></span>
-                <span style={{ position: "absolute", bottom: "0", left: "-9px", width: "16px", height: "22px", borderRadius: "4px 4px 0 0", background: "var(--primary)" }}></span>
-              </div>
-            </>
-          ) : null}
-          {' '}
-          {v.showDe ? (
-            <>
-              <div lang="de">
-                <h2 style={{ margin: "0 0 12px", fontFamily: "var(--font-ibm-plex-serif), Georgia, serif", fontWeight: "500", fontSize: "clamp(32px, 3.6vw, 46px)", lineHeight: "1.12" }}>Ein Dorf, vier Kilometer von Bayern entfernt</h2>
-                {' '}
-                <p style={{ margin: "0 0 20px", maxWidth: "46ch" }}>
+            ) : null}
+            {v.showDe ? (
+              <div lang="de" className="capella-sloupec">
+                <p className="capella-jazyk-popis" style={{ color: 'var(--muted)' }}>Deutsch</p>
+                <h2 className="capella-titulek" style={{ fontFamily: SERIF }}>Ein Dorf, vier Kilometer von Bayern entfernt</h2>
+                <p style={{ margin: '0 0 16px', maxWidth: '46ch' }}>
                   Wir leben an der Grenze zu Bayern. Was bei uns gilt, was drüben gilt und was wir gemeinsam mit Waldkirchen am Grenzbach machen.
                 </p>
-                {' '}
-                <p style={{ margin: "0", display: "flex", flexDirection: "column" }}>
+                <p style={{ margin: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                   <a className="hit" href="/obecni-urad">Wanderwege und Radwege</a>
                   <a className="hit" href="/obecni-urad">Unterkunft im Dorf</a>
                   <a className="hit" href="/obecni-urad">Notdienst und Ärzte</a>
                 </p>
               </div>
-            </>
-          ) : null}
-        </section>
-        {' '}
-        <section aria-labelledby="spolecne" style={{ background: "var(--surface)" }}>
-          <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px)" }}>
-            <h2 id="spolecne" style={{ margin: "0 0 24px", fontFamily: "var(--font-ibm-plex-serif), Georgia, serif", fontWeight: "500", fontSize: "34px" }}>
-              {"Společně "}
-              <span lang="de" style={{ color: "var(--muted)" }}>/ Gemeinsam</span>
-            </h2>
-            {' '}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "16px" }}>
-              <article style={{ padding: "24px", borderRadius: "4px", background: "var(--bg)", boxShadow: "inset 0 0 0 1px var(--line)", display: "flex", gap: "16px" }}>
-                <span aria-hidden="true" style={{ flex: "0 0 56px", height: "64px", borderRadius: "4px", background: "var(--primary)", color: "var(--on-primary)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: "1.1" }}>
-                  <span style={{ fontSize: "24px", fontWeight: "600" }}>11</span>
-                  <span style={{ fontSize: "13px" }}>lis</span>
-                </span>
-                <span>
-                  <a className="hit" href="/obecni-urad" style={{ fontWeight: "600", color: "var(--ink)" }}>Svatomartinský průvod přes hranici</a>
-                  <span style={{ display: "block", fontSize: "15px", color: "var(--muted)" }}>{"od hraničního kamene v 17 hodin"}</span>
-                  <span lang="de" style={{ display: "block", fontSize: "15px", color: "var(--muted)" }}>Martinsumzug über die Grenze</span>
-                </span>
-              </article>
-              {' '}
-              <article style={{ padding: "24px", borderRadius: "4px", background: "var(--bg)", boxShadow: "inset 0 0 0 1px var(--line)", display: "flex", gap: "16px" }}>
-                <span aria-hidden="true" style={{ flex: "0 0 56px", height: "64px", borderRadius: "4px", background: "var(--primary)", color: "var(--on-primary)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: "1.1" }}>
-                  <span style={{ fontSize: "24px", fontWeight: "600" }}>29</span>
-                  <span style={{ fontSize: "13px" }}>lis</span>
-                </span>
-                <span>
-                  <a className="hit" href="/akce" style={{ fontWeight: "600", color: "var(--ink)" }}>Adventní trh obou obcí</a>
-                  <span style={{ display: "block", fontSize: "15px", color: "var(--muted)" }}>náves Javoří Lhoty, od 14 hodin</span>
-                  <span lang="de" style={{ display: "block", fontSize: "15px", color: "var(--muted)" }}>Gemeinsamer Adventsmarkt</span>
-                </span>
-              </article>
-              {' '}
-              <article style={{ padding: "24px", borderRadius: "4px", background: "var(--bg)", boxShadow: "inset 0 0 0 1px var(--line)", display: "flex", gap: "16px" }}>
-                <span aria-hidden="true" style={{ flex: "0 0 56px", height: "64px", borderRadius: "4px", background: "var(--primary)", color: "var(--on-primary)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: "1.1" }}>
-                  <span style={{ fontSize: "24px", fontWeight: "600" }}>1</span>
-                  <span style={{ fontSize: "13px" }}>pro</span>
-                </span>
-                <span>
-                  <a className="hit" href="/obecni-urad" style={{ fontWeight: "600", color: "var(--ink)" }}>{"Zimní uzávěra cesty k hraničnímu přechodu"}</a>
-                  <span style={{ display: "block", fontSize: "15px", color: "var(--muted)" }}>pěší přechod zůstává otevřený</span>
-                  <span lang="de" style={{ display: "block", fontSize: "15px", color: "var(--muted)" }}>Wintersperre des Weges</span>
-                </span>
-              </article>
-            </div>
-          </div>
-        </section>
-        {' '}
-        <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 72px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "40px" }}>
-          <div>
-            <h2 style={{ margin: "0 0 12px", fontSize: "22px", fontWeight: "600" }}>Úřední deska</h2>
-            <p style={{ margin: "0 0 4px", color: "var(--muted)", fontSize: "15px" }}>
-              {"Úřední dokumenty jsou česky. "}
+            ) : null}
+          </section>
+          <section aria-labelledby="deska" className="capella-deska">
+            <h2 id="deska" style={{ margin: '0 0 8px', fontFamily: SERIF, fontSize: '28px' }}>Úřední deska</h2>
+            <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: '15px' }}>
+              {'Úřední dokumenty jsou česky. '}
               <span lang="de">Amtliche Dokumente erscheinen auf Tschechisch.</span>
             </p>
-            <p style={{ margin: "0", display: "flex", flexDirection: "column" }}>
-              <a className="hit" href="/uredni-deska/navrh-rozpoctu-2027">Návrh rozpočtu obce na rok 2027</a>
-              <a className="hit" href="/uredni-deska/uzavirka-mostu">Uzavírka mostu přes Javornický potok</a>
-            </p>
+            <ul style={{ listStyle: 'none', margin: '0', padding: '0' }}>
+              <li style={{ borderTop: '1px solid var(--line)', padding: '4px 0' }}>
+                <a className="hit" href="/uredni-deska/navrh-rozpoctu-2027">Návrh rozpočtu obce na rok 2027</a>
+              </li>
+              <li style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '4px 0' }}>
+                <a className="hit" href="/uredni-deska/uzavirka-mostu">Uzavírka mostu přes Javornický potok</a>
+              </li>
+            </ul>
+          </section>
+        </div>
+        <section aria-labelledby="spolecne" style={{ background: 'var(--surface)' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '56px clamp(16px, 4vw, 32px)' }}>
+            <h2 id="spolecne" style={{ margin: '0 0 24px', fontFamily: SERIF, fontSize: 'clamp(28px, 3vw, 34px)' }}>
+              {'Společně '}
+              <span lang="de" style={{ color: 'var(--muted)' }}>/ Gemeinsam</span>
+            </h2>
+            <ul className="capella-akce" style={{ listStyle: 'none', margin: '0', padding: '0' }}>
+              {AKCE.map((a) => (
+                <li key={a.nazev} style={{ borderTop: '1px solid var(--ink)', paddingTop: '16px', display: 'flex', gap: '16px' }}>
+                  <span style={{ flex: '0 0 48px', fontFamily: SERIF, lineHeight: '1.1', color: 'var(--ink)' }}>
+                    <span style={{ display: 'block', fontSize: '32px', fontVariantNumeric: 'tabular-nums' }}>{a.den}</span>
+                    <span style={{ display: 'block', fontSize: '15px', color: 'var(--muted)' }}>{a.mesic}</span>
+                  </span>
+                  <span style={{ minWidth: 0 }}>
+                    <a className="hit" href={a.href} style={{ fontWeight: '600', color: 'var(--ink)' }}>
+                      {a.nazev}
+                    </a>
+                    <span style={{ display: 'block', fontSize: '15px', color: 'var(--muted)' }}>{a.popis}</span>
+                    <span lang="de" style={{ display: 'block', fontSize: '15px', color: 'var(--muted)' }}>
+                      {a.de}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
-          {' '}
-          <div>
-            <h2 style={{ margin: "0 0 12px", fontSize: "22px", fontWeight: "600" }}>Přes hranici</h2>
-            <p style={{ margin: "0", display: "flex", flexDirection: "column" }}>
-              <a className="hit" href="/obecni-urad">{"Práce v Bavorsku a pojištění"}</a>
+        </section>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '56px clamp(16px, 4vw, 32px) 72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', gap: '40px' }}>
+          <section aria-labelledby="pres-hranici">
+            <h2 id="pres-hranici" style={{ margin: '0 0 8px', fontSize: '22px', fontWeight: '600' }}>Přes hranici</h2>
+            <p style={{ margin: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <a className="hit" href="/obecni-urad">{'Práce v Bavorsku a pojištění'}</a>
               <a className="hit" href="/obecni-urad">Lékařská pohotovost na obou stranách</a>
               <a className="hit" href="/obecni-urad">Autobus do Waldkirchenu</a>
             </p>
-          </div>
-          {' '}
-          <div>
-            <h2 style={{ margin: "0 0 12px", fontSize: "22px", fontWeight: "600" }}>
-              {"Napište nám "}
-              <span lang="de" style={{ color: "var(--muted)", fontWeight: "500" }}>/ Schreiben Sie uns</span>
+          </section>
+          <section aria-labelledby="napiste">
+            <h2 id="napiste" style={{ margin: '0 0 8px', fontSize: '22px', fontWeight: '600' }}>
+              {'Napište nám '}
+              <span lang="de" style={{ color: 'var(--muted)', fontWeight: '500' }}>/ Schreiben Sie uns</span>
             </h2>
-            <p style={{ margin: "0" }}>
+            <p style={{ margin: '0' }}>
               Náves 1, Javoří Lhota
               <br />
               [TELEFON]
               <br />
-              <a href="/obecni-urad">[E-MAIL]</a>
+              <a className="hit" href="/obecni-urad">[E-MAIL]</a>
               <br />
-              {"Mluvíme česky a německy."}
+              {'Mluvíme česky a německy.'}
             </p>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
       <Paticka />
     </>

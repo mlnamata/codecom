@@ -1,4 +1,4 @@
-/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+/* Základ vygenerovaný skriptem design/generator/do-tsx.py z build.py a tpls.py. */
 .sablona-hranice * { box-sizing:border-box }
 .sablona-hranice a { color:var(--link) }
 .sablona-hranice a:hover { color:var(--ink) }
@@ -33,6 +33,31 @@
 @media (prefers-reduced-motion:reduce) {
 .sablona-hranice * { transition:none!important;animation:none!important }
 }
+/* Capella (psáno ručně): jedno bílé záhlaví, velká fotka a dvojjazyčný panel přes její spodní okraj. */
+.sablona-hranice .capella-radek { max-width:1200px;margin:0 auto;padding:12px clamp(16px, 4vw, 32px);display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px }
+.sablona-hranice .capella-radek-maly { padding-block:4px;justify-content:space-between }
+.sablona-hranice .capella-znacka { display:flex;align-items:center;gap:12px;flex:1 1 220px;min-width:0;margin-right:auto }
+.sablona-hranice .capella-nazev { display:block;font-family:var(--font-ibm-plex-serif), Georgia, serif;font-weight:500;font-size:clamp(20px, 2.4vw, 28px);line-height:1.2 }
+.sablona-hranice .capella-jazyk { display:flex;gap:4px;padding:4px;border-radius:4px }
+.sablona-hranice .capella-jazyk button { min-height:44px;min-width:44px;padding:0 16px;border:0;border-radius:4px;font:inherit;font-size:15px;font-weight:500;cursor:pointer }
+.sablona-hranice .capella-foto figcaption { top:12px!important;bottom:auto!important }
+.sablona-hranice .capella-foto img { object-position:50% 40% }
+.sablona-hranice .capella-pod { max-width:1200px;margin:0 auto;padding:0 clamp(16px, 4vw, 32px) }
+.sablona-hranice .capella-panel { position:relative;margin-top:-48px;border-radius:4px;padding:clamp(20px, 3vw, 36px);display:grid;grid-template-columns:minmax(0, 1fr);gap:24px 40px }
+.sablona-hranice .capella-panel[data-oba] .capella-sloupec + .capella-sloupec { border-top:1px solid var(--line);padding-top:24px }
+.sablona-hranice .capella-jazyk-popis { margin:0 0 8px;font-size:15px }
+.sablona-hranice .capella-titulek { margin:0 0 12px;font-weight:500;font-size:clamp(28px, 3vw, 40px);line-height:1.15 }
+.sablona-hranice .capella-deska { padding-top:40px }
+.sablona-hranice .capella-akce { display:grid;grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr));gap:24px 32px }
 @media (max-width:767.98px) {
-.sablona-hranice .border-line { display:none }
+.sablona-hranice .capella-znacka { flex:1 1 0 }
+}
+@media (min-width:720px) {
+.sablona-hranice .capella-panel[data-oba] { grid-template-columns:repeat(2, minmax(0, 1fr)) }
+.sablona-hranice .capella-panel[data-oba] .capella-sloupec + .capella-sloupec { border-top:0;padding-top:0;border-left:1px solid var(--line);padding-left:40px }
+}
+@media (min-width:1024px) {
+.sablona-hranice .capella-pod { display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 780px);gap:0 48px;align-items:start }
+.sablona-hranice .capella-panel { grid-column:2;grid-row:1;margin-top:-200px }
+.sablona-hranice .capella-deska { grid-column:1;grid-row:1 }
 }

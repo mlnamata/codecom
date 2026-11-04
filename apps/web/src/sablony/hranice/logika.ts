@@ -20,21 +20,20 @@ const VOLBY: [Jazyk, string][] = [
   ['de', 'Deutsch'],
 ]
 
-export function hodnoty(self: Self, c: C, _data: DataUvodu) {
+export function hodnoty(self: Self, _c: C, _data: DataUvodu) {
   const L = self.state.lang
   return {
     langs: VOLBY.map(([k, label]) => ({
       label,
       lang: k === 'de' ? 'de' : 'cs',
       pressed: L === k,
-      bg: L === k ? c.onDeep : 'transparent',
-      ink: L === k ? c.deep : c.onDeep,
+      bg: L === k ? 'var(--primary)' : 'transparent',
+      ink: L === k ? 'var(--on-primary)' : 'var(--ink)',
       pick: () => self.setState({ lang: k }),
     })),
     showCs: L !== 'de',
     showDe: L !== 'cs',
     showBoth: L === 'both',
-    cols: L === 'both' ? 'repeat(auto-fit, minmax(min(420px, 100%), 1fr))' : 'minmax(0, 1fr)',
   }
 }
 

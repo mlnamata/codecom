@@ -4,7 +4,7 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 
 | Úkol | Oblast souborů | Stav | Poznámka |
 | --- | --- | --- | --- |
-| Přepracování vzhledu šablony 07 Capella (jen fotka v úvodu, jednodušší záhlaví, bez kresby hranice) | `apps/web/src/sablony/hranice` | rozpracováno | agent šablony 07 |
+| Přepracování vzhledu šablony 07 Capella (jen fotka v úvodu, jednodušší záhlaví, bez kresby hranice) | `apps/web/src/sablony/hranice` | hotovo | agent šablony 07; snímky 375, 768 a 1280 px prošly |
 | Dotažení šablon 11 Antares, 12 Regulus a 13 Procyon (fotky místo kreseb, cíle, 375 px) | `apps/web/src/sablony/{radnice,kolonada,mlyn}` | hotovo | agent šablon 11 až 13; plánek parcel Procyonu nahradila fotka, stav parcel je v seznamu |
 | Koordinace dotažení šablon 08 až 20, potom srovnat seznam šablon v `codekom_web` (hvězdné názvy, skleněné 21 až 23, snímky) | `docs/progress.md`; potom repozitář `mlnamata/codekom_web` | rozpracováno | hlavní session; 4 agenti v samostatných worktree pushují po každé šabloně; 01 až 07 hotovo dřív |
 | Dotažení šablon 08 Rigel, 09 Aldebaran a 10 Spica (fotky, oblasti, cíle, 375 px) | `apps/web/src/sablony/{vinice,hreben,rynek}` | rozpracováno | agent šablon 08 až 10 |
