@@ -2,13 +2,14 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S17-Magistrat.html. */
 
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -64,7 +65,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" style={{ flex: "none", color: "var(--muted)" }}>
                           <path d="M6 3h9l4 4v14H6z"></path>
                         </svg>
-                        <a href={v.sourcesOdkazy[i] ?? '#'} style={{ color: "var(--link)" }}>{src}</a>
+                        <a href={v.sourcesOdkazy[i] ?? '#'} style={{ display: "inline-block", padding: "4px 0", color: "var(--link)" }}>{src}</a>
                       </li>
                     </Fragment>
                   ))}
@@ -78,7 +79,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
           </div>
         </section>
         {' '}
-        {foto ? <Foto sablona="magistrat" styl={{ width: "100%", height: "clamp(220px, 26vw, 360px)" }} /> : null}
+        <FotoDlazdice soubor="sablona-17-magistrat.webp" alt={POPISY_FOTEK.magistrat ?? ""} styl={{ width: "100%", height: "clamp(220px, 26vw, 360px)" }} />
         {' '}
         <section aria-labelledby="casti17" style={{ maxWidth: "1240px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 0" }}>
           <h2 id="casti17" style={{ margin: "0 0 20px", fontSize: "32px" }}>Části obce</h2>
