@@ -5,7 +5,7 @@ import { obnovit } from '../lib/revalidate'
 
 const poZacatku: DateFieldValidation = (value, { siblingData }) => {
   const od = (siblingData as { platiOd?: string | null }).platiOd
-  if (value && od && new Date(value as string).getTime() <= new Date(od).getTime()) {
+  if (value && od && new Date(value).getTime() <= new Date(od).getTime()) {
     return 'Konec platnosti musí být později než začátek.'
   }
   return true
