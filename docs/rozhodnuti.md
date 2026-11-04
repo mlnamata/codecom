@@ -90,6 +90,8 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 4. 11. 2026 | Prezentační web má moderní vzhled podle vzoru dom-ino.cz: tmavý úvod přes celou obrazovku s fotkou, písmo Inter až 800, skleněné plochy (backdrop-filter), jemná záře, animace při posouvání. Kontrola unslop se na `apps/prezentace` nespouští. | Zakladatel označil černobílou i časopiseckou verzi za zastaralou. Kontrast, přístupnost a omezený pohyb zůstávají povinné. |
 | 4. 11. 2026 | Firemní prezentační web se přesunul do samostatného repozitáře `mlnamata/codekom_web` (s texty `obsah/prezentace` a registrem tvrzení). Tady zůstává platforma a ukázka obce, aplikace a IoT jsou v `mlnamata/codecom_app`. | Zakladatel chce firemní web nasadit samostatně na codekom.vercel.app. Tokeny, snímky, fotky a logo jsou v `codekom_web` jako kopie, zdrojem pravdy zůstává tento repozitář. |
 
+- Šablony v `apps/web/src/sablony` se po převodu dotahují ručně, generátor `do-tsx.py` je už nepřepisuje. Test generátoru proto zapisuje do dočasné složky (`CODEKOM_SABLONY_VYSTUP`) a ověřuje, že dva běhy dají stejný výstup a že výstup odpovídá snímku. Dřív při `pnpm test` přepsal ručně dotaženou šablonu Sirius kreslenou verzí (4. 11. 2026).
+
 ## Právo
 
 | Datum | Rozhodnutí | Proč |

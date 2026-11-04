@@ -26,6 +26,9 @@ ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 WEB = os.path.join(ROOT, 'apps', 'web', 'src', 'sablony')
 OBSAH = os.path.join(ROOT, 'obsah', 'javori-lhota')
 FOTO = os.path.join(ROOT, 'design', 'obrazky', 'foto')
+# Kam zapsat složky šablon. Šablony v apps/web jsou už ručně dotažené, test generátoru
+# proto zapisuje do dočasné složky, aby je nepřepsal.
+VYSTUP = os.environ.get('CODEKOM_SABLONY_VYSTUP', WEB)
 
 VOID = {'br', 'input', 'img', 'hr', 'meta', 'link', 'area', 'source', 'col', 'wbr'}
 BEZ_MEZER = {'table', 'thead', 'tbody', 'tfoot', 'tr', 'ul', 'ol', 'dl', 'svg', 'g', 'defs', 'select', 'pattern'}
@@ -858,7 +861,7 @@ def preved(key, odkazy, data, chybejici, log):
     uvod = '\n'.join(out_u.deti(root, r, '      '))
     uvod = '    <>\n' + uvod + '\n    </>'
 
-    d = os.path.join(WEB, klic)
+    d = os.path.join(VYSTUP, klic)
     hlav = '/** Vygenerováno skriptem design/generator/do-tsx.py z bodies/%s.html. */\n' % key
     zapis(os.path.join(d, 'Hlavicka.tsx'), komponenta('Hlavicka', hdr, out, interaktivni, '', []).replace("'use client'\n", "'use client'\n" + hlav, 1) if interaktivni and 'v.' in hdr else hlav + komponenta('Hlavicka', hdr, out, interaktivni, '', []))
     zapis(os.path.join(d, 'Paticka.tsx'), (komponenta('Paticka', ftr, out_f, interaktivni, '', []).replace("'use client'\n", "'use client'\n" + hlav, 1)) if interaktivni and 'v.' in ftr else hlav + komponenta('Paticka', ftr, out_f, interaktivni, '', []))

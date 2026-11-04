@@ -1,4 +1,4 @@
-import { execFileSync, spawnSync } from 'node:child_process'
+import { spawnSync } from 'node:child_process'
 import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -27,13 +27,25 @@ describe('unslop', () => {
 describe('převod šablon do-tsx.py', () => {
   const skript = path.join(ROOT, 'design', 'generator', 'do-tsx.py')
 
+  /** Spustí generátor pro naves do dočasné složky, ručně dotažené šablony v apps/web nepřepíše. */
+  function generuj(): { status: number | null; stderr: string; soubory: string[] } {
+    const vystup = mkdtempSync(path.join(tmpdir(), 'sablony-'))
+    try {
+      const r = spawnSync(PYTHON, [skript, 'naves'], { cwd: ROOT, encoding: 'utf8', env: { ...process.env, CODEKOM_SABLONY_VYSTUP: vystup } })
+      const soubory = r.status === 0 ? SOUBORY.map((f) => readFileSync(path.join(vystup, 'naves', f), 'utf8')) : []
+      return { status: r.status, stderr: r.stderr, soubory }
+    } finally {
+      rmSync(vystup, { recursive: true, force: true })
+    }
+  }
+  const SOUBORY = ['Hlavicka.tsx', 'Uvod.tsx', 'Paticka.tsx', 'styly.css', 'fonty.ts', 'index.ts']
+
   it('je idempotentní a výstup šablony naves odpovídá snímku', () => {
-    const soubory = ['Hlavicka.tsx', 'Uvod.tsx', 'Paticka.tsx', 'styly.css', 'fonty.ts', 'index.ts'].map((f) => path.join(WEB, 'src', 'sablony', 'naves', f))
-    const pred = soubory.map((f) => readFileSync(f, 'utf8'))
-    execFileSync(PYTHON, [skript, 'naves'], { cwd: ROOT })
-    const po = soubory.map((f) => readFileSync(f, 'utf8'))
-    expect(po).toEqual(pred)
-    expect(po[1]).toMatchSnapshot()
+    const prvni = generuj()
+    const druhy = generuj()
+    expect(prvni.status, prvni.stderr).toBe(0)
+    expect(druhy.soubory).toEqual(prvni.soubory)
+    expect(prvni.soubory[1]).toMatchSnapshot()
   })
 
   it('neznámý text odkazu převod zastaví', () => {
@@ -43,13 +55,12 @@ describe('převod šablon do-tsx.py', () => {
     try {
       const text = readFileSync(odkazy, 'utf8').replace('"Kontakty": "/obecni-urad",', '')
       writeFileSync(odkazy, text)
-      const r = spawnSync(PYTHON, [skript, 'naves'], { cwd: ROOT, encoding: 'utf8' })
+      const r = generuj()
       expect(r.status).toBe(1)
       expect(r.stderr).toContain('Kontakty')
     } finally {
       copyFileSync(zaloha, odkazy)
       rmSync(path.dirname(zaloha), { recursive: true, force: true })
-      execFileSync(PYTHON, [skript, 'naves'], { cwd: ROOT })
     }
   })
 })
