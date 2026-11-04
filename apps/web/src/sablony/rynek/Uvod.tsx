@@ -1,10 +1,10 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S10-Rynek.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -26,38 +26,9 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             </div>
             {' '}
             <div style={{ flex: "1 1 460px", minWidth: "0", display: "grid", gridTemplateColumns: "repeat(5, minmax(0, 1fr))", gridTemplateRows: "auto auto", gap: "12px" }}>
-              <svg viewBox="0 0 360 260" role="img" aria-label="Roubenky na návsi" style={{ gridColumn: "1 / 4", gridRow: "1 / 3", width: "100%", height: "100%", borderRadius: "16px", background: "var(--bg)" }}>
-                <rect y="210" width="360" height="50" style={{ fill: "var(--f4)" }}></rect>
-                <path d="M10 210 V130 h100 V210z" style={{ fill: "var(--f1)" }}></path>
-                <path d="M0 132 l60 -60 l60 60z" style={{ fill: "var(--f3)" }}></path>
-                <g style={{ fill: "var(--bg)" }}>
-                  <rect x="26" y="150" width="20" height="24"></rect>
-                  <rect x="74" y="150" width="20" height="24"></rect>
-                </g>
-                <rect x="50" y="180" width="20" height="30" style={{ fill: "var(--f2)" }}></rect>
-                <path d="M130 210 V120 h100 V210z" style={{ fill: "var(--f4)" }}></path>
-                <path d="M120 122 l60 -66 l60 66z" style={{ fill: "var(--f2)" }}></path>
-                <g style={{ fill: "var(--f2)" }}>
-                  <rect x="146" y="140" width="20" height="24"></rect>
-                  <rect x="194" y="140" width="20" height="24"></rect>
-                </g>
-                <path d="M162 210 v-30 a18 18 0 0 1 36 0 v30z" style={{ fill: "var(--f2)" }}></path>
-                <path d="M250 210 V136 h100 V210z" style={{ fill: "var(--f1)" }}></path>
-                <path d="M240 138 l60 -58 l60 58z" style={{ fill: "var(--f3)" }}></path>
-                <g style={{ fill: "var(--bg)" }}>
-                  <rect x="266" y="156" width="20" height="24"></rect>
-                  <rect x="314" y="156" width="20" height="24"></rect>
-                </g>
-                <g style={{ stroke: "var(--f2)" }} strokeWidth="2">
-                  <path d="M10 150 H110 M10 196 H110 M250 176 H350 M250 196 H350"></path>
-                </g>
-              </svg>
+              <FotoDlazdice soubor="sablona-10-rynek.webp" alt="Řada opravených roubených domů se šindelovými střechami na památkově chráněné návsi." styl={{ gridColumn: "1 / 4", gridRow: "1 / 3", minHeight: "280px", borderRadius: "16px" }} />
               {' '}
-              <svg viewBox="0 0 200 120" role="img" aria-label="Věž kostela svatého Václava" style={{ gridColumn: "4 / 6", width: "100%", height: "auto", borderRadius: "16px", background: "var(--f2)" }}>
-                <rect x="84" y="40" width="32" height="80" style={{ fill: "var(--f4)" }}></rect>
-                <path d="M84 42 l16 -36 l16 36z" style={{ fill: "var(--f3)" }}></path>
-                <circle cx="100" cy="58" r="6" style={{ fill: "var(--f2)" }}></circle>
-              </svg>
+              <FotoDlazdice soubor="sablona-01-naves.webp" alt="Náves s barokním kostelem a starou lípou, za ní zalesněný kopec." styl={{ gridColumn: "4 / 6", aspectRatio: "5 / 3", borderRadius: "16px" }} />
               {' '}
               <div className="on-primary" style={{ gridColumn: "4 / 6", padding: "20px", borderRadius: "16px", background: "var(--primary)", color: "var(--on-primary)", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "8px" }}>
                 <span style={{ fontFamily: "var(--font-vollkorn), Georgia, serif", fontSize: "48px", lineHeight: "1", fontVariantNumeric: "tabular-nums" }}>23</span>
@@ -68,7 +39,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
           </div>
         </section>
         {' '}
-        <section aria-labelledby="sluzby10" style={{ maxWidth: "1240px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 0" }}>
+        <section aria-labelledby="sluzby10" style={{ maxWidth: "1240px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 56px" }}>
           <h2 id="sluzby10" className="sr">Nejčastější služby</h2>
           {' '}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(240px, 100%), 1fr))", border: "1px solid var(--line)", borderRadius: "16px", overflow: "hidden" }}>
@@ -110,16 +81,8 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
           </div>
         </section>
         {' '}
-        {foto ? (
-          <Foto sablona="rynek" styl={{ display: "block", width: "100%", height: "90px", marginTop: "56px" }} />
-        ) : (
-          <svg viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true" style={{ display: "block", width: "100%", height: "90px", marginTop: "56px" }}>
-            <path d="M0 90 V60 h80 l40 -40 l40 40 h60 V40 h20 V20 h20 V40 h20 v20 h80 l50 -50 l50 50 h90 l36 -36 l36 36 h120 l44 -44 l44 44 h100 V30 h24 V10 h24 V30 h24 v30 h120 l40 -40 l40 40 H1440 V90z" style={{ fill: "var(--surface)" }}></path>
-          </svg>
-        )}
-        {' '}
         <section style={{ background: "var(--surface)" }}>
-          <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "24px clamp(16px, 4vw, 32px) 72px", display: "flex", flexWrap: "wrap", gap: "48px" }}>
+          <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "48px clamp(16px, 4vw, 32px) 72px", display: "flex", flexWrap: "wrap", gap: "48px" }}>
             <div style={{ flex: "2 1 520px", minWidth: "0" }}>
               <h2 style={{ margin: "0 0 24px", fontFamily: "var(--font-vollkorn), Georgia, serif", fontWeight: "500", fontSize: "40px" }}>{"Z radnice"}</h2>
               {' '}
