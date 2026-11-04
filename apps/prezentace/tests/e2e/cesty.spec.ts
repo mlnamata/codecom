@@ -9,6 +9,20 @@ test('úvod vede na šablony a úrovně', async ({ page }) => {
   await expect(page.locator('main li a[href^="/ukazky/"]')).toHaveCount(20)
 })
 
+test('karusel šablon se posouvá tlačítky', async ({ page }) => {
+  await page.goto('/ukazky')
+  const karusel = page.getByRole('region', { name: 'Karusel šablon' })
+  const predchozi = karusel.getByRole('button', { name: 'Předchozí' })
+  const dalsi = karusel.getByRole('button', { name: 'Další' })
+  const pas = karusel.getByRole('list', { name: 'Seznam 20 šablon' })
+  await expect(predchozi).toBeDisabled()
+  await dalsi.click()
+  await expect.poll(() => pas.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0)
+  await expect(predchozi).toBeEnabled()
+  await predchozi.click()
+  await expect.poll(() => pas.evaluate((el) => el.scrollLeft)).toBe(0)
+})
+
 test('přepínač palet změní snímek a odkaz do ukázky', async ({ page }) => {
   await page.goto('/ukazky/lipa')
   await page.getByRole('button', { name: 'Obloha' }).click()

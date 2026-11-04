@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Karusel } from '@/komponenty/Karusel'
 import { Markdown } from '@/komponenty/Markdown'
 import { Snimek } from '@/komponenty/Snimek'
 import { casti, naHtml, nactiStranku } from '@/lib/obsah'
@@ -21,9 +22,10 @@ export default function Ukazky() {
         <h2 id="sablony" className="text-[28px]">
           Šablony
         </h2>
-        <ul className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <p className="mt-3 text-[#333]">Šablony listujte tlačítky Předchozí a Další, posunutím prstem nebo šipkami na klávesnici.</p>
+        <Karusel popis="Karusel šablon" popisPasu="Seznam 20 šablon">
           {sablonyGalerie().map((s, i) => (
-            <li key={s.klic}>
+            <li key={s.klic} className="w-[85%] shrink-0 snap-start sm:w-[calc(50%-12px)] lg:w-[calc((100%-48px)/3)]">
               <Link href={`/ukazky/${s.klic}`} className="group block no-underline">
                 <Snimek
                   src={s.palety[0]!.snimek}
@@ -46,7 +48,7 @@ export default function Ukazky() {
               </Link>
             </li>
           ))}
-        </ul>
+        </Karusel>
       </section>
       {vyber ? (
         <div className="obal mt-16">
