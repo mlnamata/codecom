@@ -1,10 +1,11 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S12-Kolonada.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -30,22 +31,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             </div>
             {' '}
             <div style={{ flex: "0 1 400px", minWidth: "0", margin: "0 auto" }}>
-              {foto ? (
-                <Foto sablona="kolonada" styl={{ width: "100%", height: "auto", aspectRatio: "400 / 480", borderRadius: "200px 200px 0 0", display: "block" }} />
-              ) : (
-                <svg viewBox="0 0 400 480" role="img" aria-label="Ilustrace: starostka v oblouku kolonády u pramene" style={{ width: "100%", height: "auto", aspectRatio: "400 / 480", borderRadius: "200px 200px 0 0", display: "block" }}>
-                  <path d="M20 480 V200 a180 180 0 0 1 360 0 V480z" style={{ fill: "var(--bg)" }}></path>
-                  <path d="M44 480 V204 a156 156 0 0 1 312 0 V480z" style={{ fill: "var(--primary)" }} opacity="0.14"></path>
-                  <circle cx="200" cy="210" r="58" style={{ fill: "var(--primary)" }} opacity="0.85"></circle>
-                  <path d="M146 214 a54 60 0 0 1 108 0 c0 -50 -22 -78 -54 -78 s-54 28 -54 78z" style={{ fill: "var(--ink)" }} opacity="0.85"></path>
-                  <path d="M84 480 c0 -96 52 -150 116 -150 s116 54 116 150z" style={{ fill: "var(--primary)" }}></path>
-                  <path d="M176 334 l24 40 l24 -40" style={{ fill: "none", stroke: "var(--bg)" }} strokeWidth="4" strokeLinejoin="round"></path>
-                  <g style={{ stroke: "var(--accent)" }} strokeWidth="2" fill="none">
-                    <path d="M20 200 a180 180 0 0 1 360 0"></path>
-                    <path d="M20 480 V200 M380 480 V200"></path>
-                  </g>
-                </svg>
-              )}
+              <FotoDlazdice soubor="sablona-04-lipa.webp" alt={POPISY_FOTEK.lipa ?? ""} styl={{ width: "100%", aspectRatio: "400 / 480", borderRadius: "200px 200px 0 0" }} />
             </div>
           </div>
         </section>
@@ -80,7 +66,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             <article style={{ padding: "28px", borderRadius: "4px", background: "var(--bg)", boxShadow: "0 1px 2px rgba(16, 24, 40, 0.08), inset 0 0 0 1px var(--line)" }}>
               <p style={{ margin: "0 0 8px", color: "var(--muted)", fontSize: "15px" }}>24. října</p>
               <h3 style={{ margin: "0 0 8px", fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "28px", lineHeight: "1.15" }}>
-                <a href="/aktuality/socha-svateho-jana-zpatky-na-sloupu" style={{ color: "var(--ink)", textDecoration: "none" }}>Socha svatého Jana je zpátky na sloupu</a>
+                <a href="/aktuality/socha-svateho-jana-zpatky-na-sloupu" style={{ display: "inline-block", paddingBlock: "2px", color: "var(--ink)", textDecoration: "none" }}>Socha svatého Jana je zpátky na sloupu</a>
               </h3>
               <p style={{ margin: "0" }}>Restaurování stálo 380 tisíc korun, většinu zaplatilo ministerstvo kultury.</p>
             </article>
@@ -88,7 +74,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             <article style={{ padding: "28px", borderRadius: "4px", background: "var(--bg)", boxShadow: "0 1px 2px rgba(16, 24, 40, 0.08), inset 0 0 0 1px var(--line)" }}>
               <p style={{ margin: "0 0 8px", color: "var(--muted)", fontSize: "15px" }}>12. října</p>
               <h3 style={{ margin: "0 0 8px", fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "28px", lineHeight: "1.15" }}>
-                <a href="/obecni-urad" style={{ color: "var(--ink)", textDecoration: "none" }}>{"Rozbor vody z Anenského pramene: vhodná k pití"}</a>
+                <a href="/obecni-urad" style={{ display: "inline-block", paddingBlock: "2px", color: "var(--ink)", textDecoration: "none" }}>{"Rozbor vody z Anenského pramene: vhodná k pití"}</a>
               </h3>
               <p style={{ margin: "0" }}>{"Další rozbor bude v lednu. Výsledky visí u altánu a na webu."}</p>
             </article>
@@ -96,7 +82,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             <article style={{ padding: "28px", borderRadius: "4px", background: "var(--bg)", boxShadow: "0 1px 2px rgba(16, 24, 40, 0.08), inset 0 0 0 1px var(--line)" }}>
               <p style={{ margin: "0 0 8px", color: "var(--muted)", fontSize: "15px" }}>Úřední deska</p>
               <h3 style={{ margin: "0 0 8px", fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "28px", lineHeight: "1.15" }}>
-                <a href="/uredni-deska/navrh-rozpoctu-2027" style={{ color: "var(--ink)", textDecoration: "none" }}>Návrh rozpočtu na rok 2027</a>
+                <a href="/uredni-deska/navrh-rozpoctu-2027" style={{ display: "inline-block", paddingBlock: "2px", color: "var(--ink)", textDecoration: "none" }}>Návrh rozpočtu na rok 2027</a>
               </h3>
               <p style={{ margin: "0" }}>Visí do 11. listopadu, připomínky přijímá úřad.</p>
             </article>
@@ -111,21 +97,21 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
               <li style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: "16px", padding: "16px 0", borderTop: "1px solid var(--line)" }}>
                 <span style={{ fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "26px", color: "var(--link)", fontVariantNumeric: "lining-nums" }}>7. 11.</span>
                 <span>
-                  <a href="/akce#lampionovy-pruvod" style={{ color: "var(--ink)", fontWeight: "600" }}>Lampionový průvod</a>
+                  <a href="/akce#lampionovy-pruvod" className="hit" style={{ color: "var(--ink)", fontWeight: "600" }}>Lampionový průvod</a>
                   <span style={{ display: "block", color: "var(--muted)" }}>od hasičárny ke kapli svaté Anny, 17 hodin</span>
                 </span>
               </li>
               <li style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: "16px", padding: "16px 0", borderTop: "1px solid var(--line)" }}>
                 <span style={{ fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "26px", color: "var(--link)", fontVariantNumeric: "lining-nums" }}>15. 11.</span>
                 <span>
-                  <a href="/akce#varhanni-koncert" style={{ color: "var(--ink)", fontWeight: "600" }}>Varhanní koncert</a>
+                  <a href="/akce#varhanni-koncert" className="hit" style={{ color: "var(--ink)", fontWeight: "600" }}>Varhanní koncert</a>
                   <span style={{ display: "block", color: "var(--muted)" }}>kostel svatého Václava, 18 hodin, vstupné dobrovolné</span>
                 </span>
               </li>
               <li style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: "16px", padding: "16px 0", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }}>
                 <span style={{ fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "26px", color: "var(--link)", fontVariantNumeric: "lining-nums" }}>28. 11.</span>
                 <span>
-                  <a href="/akce#rozsviceni-vanocniho-stromu" style={{ color: "var(--ink)", fontWeight: "600" }}>Rozsvícení vánočního stromu</a>
+                  <a href="/akce#rozsviceni-vanocniho-stromu" className="hit" style={{ color: "var(--ink)", fontWeight: "600" }}>Rozsvícení vánočního stromu</a>
                   <span style={{ display: "block", color: "var(--muted)" }}>{"náves u lípy, 17 hodin, zpívají děti ze školy"}</span>
                 </span>
               </li>
@@ -133,13 +119,9 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
           </section>
           {' '}
           <aside aria-labelledby="pramen12" style={{ flex: "2 1 320px", minWidth: "0", padding: "28px", borderRadius: "200px 200px 4px 4px", background: "var(--surface)", textAlign: "center" }}>
-            <svg viewBox="0 0 120 90" aria-hidden="true" style={{ width: "120px", height: "90px", margin: "12px auto 0", display: "block" }}>
-              <path d="M10 88 V40 a50 30 0 0 1 100 0 V88" style={{ fill: "none", stroke: "var(--primary)" }} strokeWidth="3"></path>
-              <path d="M30 88 V48 M60 88 V44 M90 88 V48" style={{ stroke: "var(--primary)" }} strokeWidth="3"></path>
-              <path d="M56 70 q4 -10 8 0 q-4 6 -8 0z" style={{ fill: "var(--primary)" }}></path>
-            </svg>
+            <FotoDlazdice soubor="sablona-12-kolonada.webp" alt={POPISY_FOTEK.kolonada ?? ""} styl={{ width: "100%", aspectRatio: "4 / 3", borderRadius: "172px 172px 4px 4px" }} />
             {' '}
-            <h2 id="pramen12" style={{ margin: "12px 0 8px", fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "32px" }}>Anenský pramen</h2>
+            <h2 id="pramen12" style={{ margin: "20px 0 8px", fontFamily: "var(--font-cormorant-garamond), Georgia, serif", fontSize: "32px" }}>Anenský pramen</h2>
             {' '}
             <p style={{ margin: "0 auto", maxWidth: "30ch" }}>{"Altán pod kaplí svaté Anny, 15 minut pěšky z návsi. Voda teče celý rok."}</p>
             {' '}
