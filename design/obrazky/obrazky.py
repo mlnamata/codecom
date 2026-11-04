@@ -11,11 +11,12 @@ ale výsledkem jsou soubory PNG, ne text:
 Použití:
     python obrazky.py prompty.txt --env ~/Downloads/.env
     python obrazky.py prompty.txt --env ~/Downloads/.env --jen sablona-09-hreben sablona-14-hraz
+    python obrazky.py prompty.txt --env ../../.env --foto foto     # navíc WebP do foto/<nazev>.webp
 
 Klíč se čte z proměnné GEMINI_API_KEY nebo ze souboru .env (--env).
 Klíč se nikam nevypisuje.
 
-Instalace: pip install google-genai
+Instalace: pip install google-genai pillow (pillow jen pro --foto)
 """
 
 import argparse
@@ -84,6 +85,19 @@ def vygeneruj(client, types, model: str, text: str, pomer: str, pokusy: int = 3)
     raise posledni or RuntimeError("neznámá chyba")
 
 
+def uloz_webp(png: bytes, cil: Path, sirka: int = 1600, kvalita: int = 80) -> None:
+    """Uloží obrázek jako WebP zmenšený na danou šířku (menší obrázky nezvětšuje)."""
+    from io import BytesIO
+
+    from PIL import Image
+
+    obr = Image.open(BytesIO(png)).convert("RGB")
+    if obr.width > sirka:
+        obr = obr.resize((sirka, round(obr.height * sirka / obr.width)), Image.LANCZOS)
+    cil.parent.mkdir(parents=True, exist_ok=True)
+    obr.save(cil, "WEBP", quality=kvalita, method=6)
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description="Vygeneruje obrázky z bloků === přes Gemini.")
     p.add_argument("soubor")
@@ -92,6 +106,7 @@ def main() -> None:
     p.add_argument("--pomer", default="16:9", help="poměr stran, např. 16:9 nebo 1:1")
     p.add_argument("--vystup", default=None, help="kořen výstupů (výchozí: vystupy vedle .env)")
     p.add_argument("--jen", nargs="*", default=None, help="vygeneruj jen tyto bloky")
+    p.add_argument("--foto", default=None, help="složka, kam uložit WebP <nazev>.webp (šířka 1600 px, kvalita 80)")
     a = p.parse_args()
 
     env = Path(a.env).expanduser() if a.env else Path(a.soubor).resolve().parent / ".env"
@@ -117,6 +132,13 @@ def main() -> None:
     cil.mkdir(parents=True, exist_ok=True)
     print(f"Model: {a.model} | obrázků: {len(bloky)} | složka: {cil}", flush=True)
 
+    if a.foto:
+        try:
+            import PIL  # noqa: F401
+        except ImportError:
+            sys.exit("Pro --foto chybí knihovna: pip install pillow")
+    foto = Path(a.foto).expanduser() if a.foto else None
+
     client = genai.Client(api_key=klic)
     souhrn = []
     for i, (nazev, text) in enumerate(bloky, 1):
@@ -125,6 +147,8 @@ def main() -> None:
         try:
             data = vygeneruj(client, types, a.model, text, a.pomer)
             (cil / f"{jmeno}.png").write_bytes(data)
+            if foto:
+                uloz_webp(data, foto / f"{nazev}.webp")
             souhrn.append(f"OK\t{jmeno}.png\t{nazev}")
         except Exception as e:  # noqa: BLE001
             (cil / f"{jmeno}_chyba.txt").write_text(f"{nazev}\n\n{text}\n\nCHYBA: {e}\n", encoding="utf-8")
