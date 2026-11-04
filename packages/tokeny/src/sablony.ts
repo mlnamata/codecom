@@ -5,7 +5,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "naves",
     "cislo": "01",
-    "nazev": "Náves",
+    "nazev": "Sirius",
     "podtitul": "Pro vesnice do 500 obyvatel.",
     "inspirace": "TownPress (LSVRthemes) – portál ve třech sloupcích přes panoráma obce",
     "pismo": {
@@ -95,7 +95,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "zvonice",
     "cislo": "02",
-    "nazev": "Zvonice",
+    "nazev": "Vega",
     "podtitul": "Pro vesnice, kde starosta chce minimum práce.",
     "inspirace": "GOV.UK Design System – jeden sloupec a úřední deska s filtrem",
     "pismo": {
@@ -180,7 +180,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "studanka",
     "cislo": "03",
-    "nazev": "Studánka",
+    "nazev": "Altair",
     "podtitul": "Pro rekreační obce s chalupáři.",
     "inspirace": "Wordbench (LSVRthemes) – dělený úvod, karta hledání a rozcestník",
     "pismo": {
@@ -282,7 +282,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "lipa",
     "cislo": "04",
-    "nazev": "Lípa",
+    "nazev": "Deneb",
     "podtitul": "Výchozí šablona pro obce 500 až 2 000 obyvatel.",
     "inspirace": "BetterLocalGov a Town Hall – úkoly slovesem a informační karty",
     "pismo": {
@@ -364,7 +364,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "majka",
     "cislo": "05",
-    "nazev": "Májka",
+    "nazev": "Polaris",
     "podtitul": "Pro obce s bohatým spolkovým životem.",
     "inspirace": "Pressville (LSVRthemes) – akce s velkým bledým slovem a karty plakátů",
     "pismo": {
@@ -475,7 +475,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "hnizdo",
     "cislo": "06",
-    "nazev": "Hnízdo",
+    "nazev": "Arktur",
     "podtitul": "Pro obce s mladými rodinami.",
     "inspirace": "CityGov (Dannci) – teplé dlaždice přes spodní hranu úvodu",
     "pismo": {
@@ -558,7 +558,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "hranice",
     "cislo": "07",
-    "nazev": "Hranice",
+    "nazev": "Capella",
     "podtitul": "Pro obce u hranice, česky i německy.",
     "inspirace": "Pressville (LSVRthemes) – znak a serifový název přes panoráma, lišta s jazyky",
     "pismo": {
@@ -642,7 +642,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "vinice",
     "cislo": "08",
-    "nazev": "Vinice",
+    "nazev": "Rigel",
     "podtitul": "Pro vinařské obce a obce s místními výrobci.",
     "inspirace": "CityGov (AncoraThemes) – editoriální koláž, bledý nápis a šachovnice karet",
     "pismo": {
@@ -736,7 +736,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "hreben",
     "cislo": "09",
-    "nazev": "Hřeben",
+    "nazev": "Aldebaran",
     "podtitul": "Pro horské a turistické obce.",
     "inspirace": "Administration (axiomthemes) – obří titulek přes panoráma a číslované služby",
     "pismo": {
@@ -826,7 +826,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "rynek",
     "cislo": "10",
-    "nazev": "Rynek",
+    "nazev": "Spica",
     "podtitul": "Pro historická městečka a obce s náměstím.",
     "inspirace": "Administration varianta 2 – dvoubarevný titulek, koláž a karta s číslem",
     "pismo": {
@@ -925,7 +925,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "radnice",
     "cislo": "11",
-    "nazev": "Radnice",
+    "nazev": "Antares",
     "podtitul": "Pro města od 2 000 do 10 000 obyvatel.",
     "inspirace": "Town Hall Municipal Portal (cmsmasters) – živý pruh zpráv a karty přes úvod",
     "pismo": {
@@ -1002,7 +1002,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "kolonada",
     "cislo": "12",
-    "nazev": "Kolonáda",
+    "nazev": "Regulus",
     "podtitul": "Pro lázeňská a kulturní místa.",
     "inspirace": "Town Hall City Mayor (cmsmasters) – dělený úvod s portrétem a čísla na pásu",
     "pismo": {
@@ -1086,7 +1086,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "mlyn",
     "cislo": "13",
-    "nazev": "Mlýn",
+    "nazev": "Procyon",
     "podtitul": "Pro průmyslové a pracovní obce.",
     "inspirace": "CityGov Downtown (Dannci) – úzký obří titulek a kruhové razítko",
     "pismo": {
@@ -1170,7 +1170,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "hraz",
     "cislo": "14",
-    "nazev": "Hráz",
+    "nazev": "Kastor",
     "podtitul": "Pro obce u rybníků a přehrad.",
     "inspirace": "EGovt (ovatheme) – dlaždice služeb přes hranu úvodu a pás čísel",
     "pismo": {
@@ -1253,7 +1253,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "lupa",
     "cislo": "15",
-    "nazev": "Lupa",
+    "nazev": "Pollux",
     "podtitul": "Pro obce se staršími obyvateli, důraz na přístupnost.",
     "inspirace": "gov.cz a GOV.UK – přístupnost na prvním místě",
     "pismo": {
@@ -1330,7 +1330,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "kompas",
     "cislo": "16",
-    "nazev": "Kompas",
+    "nazev": "Mira",
     "podtitul": "Pro obce, které chtějí hlavně mapu služeb.",
     "inspirace": "TownPress (LSVRthemes) – zajímavá místa, tady jako mapa služeb",
     "pismo": {
@@ -1432,7 +1432,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "magistrat",
     "cislo": "17",
-    "nazev": "Magistrát",
+    "nazev": "Alkor",
     "podtitul": "Pro obce, které chtějí odpovídat i mimo úřední hodiny.",
     "inspirace": "Civica (AwaikenThemes) – tmavý úvod, místo hesla otázka pro asistenta",
     "pismo": {
@@ -1509,7 +1509,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "zpravodaj",
     "cislo": "18",
-    "nazev": "Zpravodaj",
+    "nazev": "Mizar",
     "podtitul": "Pro obce, které hodně komunikují.",
     "inspirace": "TownPress (LSVRthemes) – zprávy a důležité formuláře, novinová hlavička",
     "pismo": {
@@ -1603,7 +1603,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "mikroregion",
     "cislo": "19",
-    "nazev": "Mikroregion",
+    "nazev": "Fomalhaut",
     "podtitul": "Pro svazky obcí a obce s více částmi.",
     "inspirace": "Town Hall (cmsmasters) – mřížka odborů, tady části obce s mapou",
     "pismo": {
@@ -1695,7 +1695,7 @@ export const SABLONY: readonly Sablona[] = [
   {
     "klic": "urad",
     "cislo": "20",
-    "nazev": "Úřad",
+    "nazev": "Betelgeuse",
     "podtitul": "Pro obce, které chtějí vzhled podle gov.cz.",
     "inspirace": "Design systém gov.cz – hlavička, hledání, životní situace a deska",
     "pismo": {

@@ -9,11 +9,25 @@ export interface StavUkazky {
   /** Vynucený stav banneru. Chybí-li, banner se řídí daty obce. */
   krize?: KrizeUkazky
   foto?: boolean
+  /** Vlastní hlavní barva šablony (#rrggbb). */
+  barva?: string
+  /** Vlastní doplňková barva šablony (#rrggbb). */
+  akcent?: string
+  /** Vlastní písmo (klíč z PISMA_UKAZKY). */
+  pismo?: KlicPisma
+  /** Zvětšení celého webu. */
+  velikost?: VelikostUkazky
 }
+
+export const PISMA_UKAZKY = ['inter', 'dmsans', 'atkinson', 'sourceserif', 'lora'] as const
+export type KlicPisma = (typeof PISMA_UKAZKY)[number]
+export const VELIKOSTI = ['bezna', 'vetsi', 'nejvetsi'] as const
+export type VelikostUkazky = (typeof VELIKOSTI)[number]
+const HEX = /^#[0-9a-f]{6}$/i
 
 export const COOKIE_UKAZKY = 'ukazka'
 export const HLAVICKA_UKAZKY = 'x-codekom-ukazka'
-export const PARAMETRY = ['sablona', 'paleta', 'krize', 'foto'] as const
+export const PARAMETRY = ['sablona', 'paleta', 'krize', 'foto', 'barva', 'akcent', 'pismo', 'velikost'] as const
 
 const KRIZE: readonly string[] = ['off', 'info', 'warning', 'emergency']
 
@@ -26,6 +40,10 @@ export function ocisti(v: Record<string, unknown>): StavUkazky {
   if (typeof v.krize === 'string' && KRIZE.includes(v.krize)) s.krize = v.krize as KrizeUkazky
   if (v.foto === true || v.foto === '1') s.foto = true
   if (v.foto === false || v.foto === '0') s.foto = false
+  if (typeof v.barva === 'string' && HEX.test(v.barva)) s.barva = v.barva.toLowerCase()
+  if (typeof v.akcent === 'string' && HEX.test(v.akcent)) s.akcent = v.akcent.toLowerCase()
+  if (typeof v.pismo === 'string' && (PISMA_UKAZKY as readonly string[]).includes(v.pismo)) s.pismo = v.pismo as KlicPisma
+  if (typeof v.velikost === 'string' && (VELIKOSTI as readonly string[]).includes(v.velikost)) s.velikost = v.velikost as VelikostUkazky
   return s
 }
 
@@ -42,6 +60,8 @@ export function sloucit(url: URLSearchParams, cookie: string | undefined): StavU
   const zUrl = ocisti(Object.fromEntries(PARAMETRY.map((k) => [k, url.get(k) ?? undefined])))
   const vysledek: StavUkazky = { ...zCookie, ...zUrl }
   if (url.get('krize') === 'auto') delete vysledek.krize
+  // `vychozi` v URL vrátí vlastní vzhled na hodnoty šablony.
+  for (const k of ['barva', 'akcent', 'pismo', 'velikost'] as const) if (url.get(k) === 'vychozi') delete vysledek[k]
   return vysledek
 }
 
@@ -61,6 +81,7 @@ export function adresaStavu(cesta: string, s: StavUkazky): string {
   if (s.paleta !== undefined) p.set('paleta', String(s.paleta))
   p.set('krize', s.krize ?? 'auto')
   if (s.foto !== undefined) p.set('foto', s.foto ? '1' : '0')
+  for (const k of ['barva', 'akcent', 'pismo', 'velikost'] as const) if (s[k]) p.set(k, s[k])
   return `${cesta}?${p.toString()}`
 }
 

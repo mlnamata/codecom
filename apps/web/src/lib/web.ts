@@ -31,7 +31,8 @@ export const vzhled = cache(async () => {
   const indexPalety = stav.paleta ?? (klic === obec.sablona ? obec.paleta : 0)
   const paleta = najdiPaletu(klic, indexPalety)
   const modul = await nactiSablonu(klic)
-  return { obec, stav, sablona, paleta, indexPalety, modul, foto: stav.foto !== false && modul.foto }
+  // Šablony ukazují jen fotografie (rozhodnutí zakladatele ze 4. 11. 2026), kreslené ilustrace se nepoužívají.
+  return { obec, stav, sablona, paleta, indexPalety, modul, foto: modul.foto }
 })
 
 const polozkaDesky = (d: DokumentDesky): PolozkaDesky => ({

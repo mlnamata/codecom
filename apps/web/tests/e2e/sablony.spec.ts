@@ -2,12 +2,12 @@ import { expect, test } from '@playwright/test'
 import { SABLONY } from '@codekom/tokeny'
 import { bezVodorovnehoPosunu, sleduj } from './pomocne'
 
-/** Úvod všech 20 šablon × 3 palet: bez vodorovného posunu a bez chyb v konzoli. */
+/** Úvod všech šablon × 3 palet: bez vodorovného posunu a bez chyb v konzoli. */
 for (const s of SABLONY) {
   test(`šablona ${s.cislo} ${s.nazev} ve 3 paletách`, async ({ page }) => {
     const { chyby, google } = await sleduj(page)
     for (const p of [0, 1, 2]) {
-      await page.goto(`/?sablona=${s.klic}&paleta=${p}&krize=off&foto=0`)
+      await page.goto(`/?sablona=${s.klic}&paleta=${p}&krize=off`)
       await expect(page.locator(`[data-sablona="${s.klic}"][data-paleta="${p}"]`)).toBeVisible()
       await expect(page.locator('h1')).toHaveCount(1)
       await expect(page.locator('main#obsah')).toHaveCount(1)
@@ -23,6 +23,22 @@ test('varianta Fotografie má popisek a alt', async ({ page }) => {
   const foto = page.locator('figure img').first()
   await expect(foto).toHaveAttribute('alt', /Náves vesnice/)
   await expect(page.locator('figure figcaption img[alt="AI"]')).toBeVisible()
+})
+
+test('šablony ukazují jen fotografie, ne kreslené ilustrace', async ({ page }) => {
+  await page.goto('/?sablona=naves&paleta=0&krize=off&foto=0')
+  await expect(page.locator('figure.foto-uvod img').first()).toBeVisible()
+})
+
+test('vlastní vzhled: barva, písmo a velikost z lišty ukázky', async ({ page }) => {
+  await page.goto('/?sablona=lipa&paleta=0&krize=off&barva=%23aa0000&pismo=atkinson&velikost=vetsi')
+  const web = page.locator('[data-sablona="lipa"]')
+  await expect(web).toHaveAttribute('data-vlastni-pismo', '')
+  expect(await web.evaluate((e) => getComputedStyle(e).getPropertyValue('--primary'))).toBe('#aa0000')
+  expect(await web.evaluate((e) => getComputedStyle(e).getPropertyValue('--on-primary'))).toBe('#ffffff')
+  expect(await page.locator('h1').evaluate((e) => getComputedStyle(e).fontFamily)).toContain('Atkinson Hyperlegible')
+  await page.goto('/?barva=vychozi&pismo=vychozi&velikost=vychozi')
+  await expect(page.locator('[data-sablona="lipa"]')).not.toHaveAttribute('data-vlastni-pismo')
 })
 
 test('stav ukázky v URL a v cookie', async ({ page, context }) => {

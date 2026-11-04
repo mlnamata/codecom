@@ -14,7 +14,7 @@ async function zkontroluj(page: Page, popis: string) {
 for (const s of SABLONY) {
   test(`axe: úvod ${s.cislo} ${s.nazev}, 3 palety`, async ({ page }) => {
     for (const p of [0, 1, 2]) {
-      await page.goto(`/?sablona=${s.klic}&paleta=${p}&krize=off&foto=0`)
+      await page.goto(`/?sablona=${s.klic}&paleta=${p}&krize=off`)
       await zkontroluj(page, `${s.klic} paleta ${p}`)
     }
   })
@@ -25,7 +25,7 @@ for (const klic of ['naves', 'lupa', 'urad']) {
   test(`axe: banner v šabloně ${klic}`, async ({ page }) => {
     for (const p of [0, 1, 2]) {
       for (const k of ['off', 'info', 'warning', 'emergency']) {
-        await page.goto(`/?sablona=${klic}&paleta=${p}&krize=${k}&foto=0`)
+        await page.goto(`/?sablona=${klic}&paleta=${p}&krize=${k}`)
         await zkontroluj(page, `${klic} paleta ${p} krize ${k}`)
       }
     }
