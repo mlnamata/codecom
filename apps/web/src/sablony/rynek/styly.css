@@ -33,3 +33,9 @@
 @media (prefers-reduced-motion:reduce) {
 .sablona-rynek * { transition:none!important;animation:none!important }
 }
+/* Úvod podle šablony Sirius: karty leží přes spodní okraj velké fotky, štítek AI je proto nahoře. */
+.sablona-rynek .rn-foto figcaption { top:12px!important;bottom:auto!important }
+.sablona-rynek .rn-pres { margin-top:-120px!important }
+@media (max-width:767.98px) {
+.sablona-rynek .rn-pres { margin-top:-48px!important }
+}
