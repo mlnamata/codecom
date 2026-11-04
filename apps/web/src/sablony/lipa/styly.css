@@ -33,3 +33,9 @@
 @media (prefers-reduced-motion:reduce) {
 .sablona-lipa * { transition:none!important;animation:none!important }
 }
+
+/* Údaje o poplatku se na telefonu skládají pod sebe místo úzkého sloupce. */
+@media (max-width:599.98px) {
+.sablona-lipa .udaje-poplatku { grid-template-columns:1fr!important }
+.sablona-lipa .udaje-poplatku dt { padding-bottom:0!important;border-bottom:0!important }
+}

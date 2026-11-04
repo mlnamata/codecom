@@ -2,13 +2,14 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S04-Lipa.html. */
 
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -57,7 +58,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             </div>
             {' '}
             <aside aria-labelledby="dnes" style={{ flex: "1 1 300px", minWidth: "0", display: "flex", flexDirection: "column", gap: "8px" }}>
-              {foto ? <Foto sablona="lipa" styl={{ width: "100%", height: "200px", borderRadius: "12px", marginBottom: "8px" }} /> : null}
+              <FotoDlazdice soubor="sablona-04-lipa.webp" alt={POPISY_FOTEK.lipa ?? ""} styl={{ width: "100%", height: "200px", borderRadius: "12px", marginBottom: "8px" }} />
               {' '}
               <h2 id="dnes" style={{ margin: "0 0 4px", fontSize: "18px", fontWeight: "600" }}>{"Dnes v Javoří Lhotě"}</h2>
               {' '}
@@ -94,7 +95,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
               <p style={{ margin: "16px 0 0", fontSize: "15px", color: "var(--muted)" }}>Stránku spravuje Jana Malá, účetní obce. Aktualizováno 26. 10. 2026.</p>
             </div>
             {' '}
-            <dl style={{ flex: "2 1 420px", minWidth: "0", margin: "0", display: "grid", gridTemplateColumns: "minmax(120px, 180px) 1fr", borderTop: "1px solid var(--line)" }}>
+            <dl className="udaje-poplatku" style={{ flex: "2 1 420px", minWidth: "0", margin: "0", display: "grid", gridTemplateColumns: "minmax(120px, 180px) 1fr", borderTop: "1px solid var(--line)" }}>
               <dt style={{ padding: "12px 0", borderBottom: "1px solid var(--line)", color: "var(--muted)" }}>Kdo platí</dt>
               <dd style={{ margin: "0", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>{"každý s trvalým pobytem v obci a majitelé chalup"}</dd>
               <dt style={{ padding: "12px 0", borderBottom: "1px solid var(--line)", color: "var(--muted)" }}>Kolik</dt>
