@@ -7,14 +7,14 @@ import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
       {banner}
       <Hlavicka />
       <main id="obsah" tabIndex={-1}>
-        {foto ? <Foto sablona="hranice" styl={{ width: "100%", height: "clamp(200px, 24vw, 340px)" }} /> : null}
+        <Foto sablona="hranice" styl={{ width: "100%", height: "clamp(200px, 24vw, 340px)" }} />
         {' '}
         <h1 className="sr">Obec Javoří Lhota, Gemeinde Javoří Lhota</h1>
         {' '}

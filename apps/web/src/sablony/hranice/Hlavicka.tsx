@@ -10,20 +10,6 @@ export function Hlavicka() {
   return (
     <header>
       <div className="on-primary" style={{ position: "relative", background: "var(--primary)", color: "var(--on-primary)", overflow: "hidden" }}>
-        <svg viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style={{ position: "absolute", inset: "0", width: "100%", height: "100%", display: "block" }}>
-          <path d="M0 160 C200 110 360 140 520 120 S860 70 1040 100 S1320 140 1440 110 V300 H0z" fill="#FFFFFF" opacity="0.08"></path>
-          <path d="M0 220 C260 190 520 210 760 200 S1200 170 1440 190 V300 H0z" fill="#FFFFFF" opacity="0.1"></path>
-          <g fill="#FFFFFF" opacity="0.14">
-            <path d="M1060 240 l26 -80 l26 80z"></path>
-            <path d="M1110 240 l20 -60 l20 60z"></path>
-            <path d="M1160 240 l30 -96 l30 96z"></path>
-            <path d="M1220 240 l22 -66 l22 66z"></path>
-            <path d="M160 240 l24 -70 l24 70z"></path>
-            <path d="M210 240 l30 -92 l30 92z"></path>
-          </g>
-          <path d="M720 0 V300" stroke="#FFFFFF" strokeWidth="2" strokeDasharray="6 10" opacity="0.4"></path>
-        </svg>
-        {' '}
         <div style={{ position: "relative", maxWidth: "1200px", margin: "0 auto", padding: "48px clamp(16px, 4vw, 32px) 56px", display: "flex", alignItems: "center", gap: "20px" }}>
           <ZnakObce velikost={64} />
           {' '}
