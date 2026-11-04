@@ -182,7 +182,7 @@ Rozpor: návrh 04 uvádí založení zdarma při smlouvě na 24 měsíců (jinak
 - Obrazy jsou snímky šablon, schémata v SVG a hotové fotografie z `design/obrazky/foto/` vytvořené umělou inteligencí, vždy s poznámkou podle sekce funkce. Žádná fotografie z fotobanky.
 - Tón: věcně, oslovení „vy“, krátké věty, konkrétní podstatná jména („úřední deska“, ne „digitální transformace“). Každá věta musí unést otázku starosty „kde to je napsané“.
 
-**Jak obce nakupují:** rada nebo zastupitelstvo podle výše částky a směrnice, písemná nabídka a návrh smlouvy, rozpočet na konci roku. Ceník a Ke stažení proto nabízejí podklady k přeposlání radě. Limit zakázky malého rozsahu u služeb je z paměti 2 000 000 Kč bez DPH podle § 27 zákona č. 134/2016 Sb., NEOVĚŘENO (viz overit); po ověření jen ve větě „roční cena služby bývá hluboko pod limitem“.
+**Jak obce nakupují:** rada nebo zastupitelstvo podle výše částky a směrnice, písemná nabídka a návrh smlouvy, rozpočet na konci roku. Ceník a Ke stažení proto nabízejí podklady k přeposlání radě. Limit zakázky malého rozsahu u služeb je 3 000 000 Kč bez DPH podle § 27 zákona č. 134/2016 Sb. (ověřeno 4. 11. 2026 v konsolidovaném znění na zakonyprolidi.cz, viz `obsah/prezentace/tvrzeni.md`; dřívější údaj z paměti 2 000 000 Kč neplatí); na webu jen ve větě „roční cena služby bývá hluboko pod limitem“ s datem ověření.
 </pravidla>
 
 <design_a_pristupnost>
@@ -263,7 +263,7 @@ Co rešerše neověřila (NEOVĚŘENO). Ověř, nebo nech v kódu označené `[O
 
 | Položka | Jak ověřit |
 |---|---|
-| Limit veřejné zakázky malého rozsahu u služeb (z paměti 2 000 000 Kč bez DPH podle § 27 zákona č. 134/2016 Sb.) a případná novela 2025–2026 | e-Sbírka (`e-sbirka.gov.cz`), `portal-vz.cz`, vzorová směrnice MV: `mvcr.cz/soubor/vnitrni-smernice-pro-zadavani-verejnych-zakazek-maleho-rozsahu-priklad-smernice-obce.aspx` |
+| Limit veřejné zakázky malého rozsahu u služeb: 3 000 000 Kč bez DPH podle § 27 zákona č. 134/2016 Sb. (ověřeno 4. 11. 2026 na zakonyprolidi.cz, potvrdit v e-Sbírce a doplnit odkaz) | e-Sbírka (`e-sbirka.gov.cz`), `portal-vz.cz`, vzorová směrnice MV: `mvcr.cz/soubor/vnitrni-smernice-pro-zadavani-verejnych-zakazek-maleho-rozsahu-priklad-smernice-obce.aspx` |
 | Výjimka obce z uveřejnění v registru smluv (§ 3 odst. 2 písm. k) zák. 340/2015 Sb.) | e-Sbírka, datum v registru tvrzení |
 | Dotační výzvy 2026–2027 (NPO, IROP, Plzeňský kraj) | MMR factsheet `mmr.cz/getmedia/88941948-d5d9-4561-8646-9696559f9960/Factsheet-eGov.pdf.aspx`, `plzensky-kraj.cz/Framework/Document.ashx?ID=357856` a `ID=322073`, `mv.gov.cz/npo/clanek/jak-na-obecni-web.aspx` (dříve se nenačetla); zapiš jen přečtené |
 | Ceny a funkce konkurence | na web nepatří; pro interní účely z veřejných smluv v registru smluv, do `docs/` s datem |

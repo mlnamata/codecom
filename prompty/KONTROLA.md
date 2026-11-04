@@ -88,3 +88,16 @@ Kolem 40 různých míst, seskupeno podle toho, co musí zakladatel dodat. Ve zd
 - Doklad pověření pilotní obce pro Google Play Government apps declaration (02)
 - Potvrzení fontu loga (06)
 - Cesty `[DOPLNIT: cesta]` na stránky webu obce pro Služby v aplikaci, než je dodá prompt 03 (02)
+
+## Dokončení přípravy podkladů (prompt 00, 4. 11. 2026)
+
+| Soubor | Problém | Co jsem udělal |
+| --- | --- | --- |
+| 06 | Limit zakázky malého rozsahu u služeb uveden „z paměti“ jako 2 000 000 Kč; podle § 27 zákona č. 134/2016 Sb. v konsolidovaném znění (zakonyprolidi.cz, znění od 3. 4. 2025) je 3 000 000 Kč | Opraveno v 06 (sekce pravidla a overit), zapsáno v `obsah/prezentace/tvrzeni.md` |
+| 06 | Mapa webu nemá stránku pro `faq.md` | `faq.md` má adresu `/ke-stazeni#caste-otazky`, otázky patří na Ke stažení pod „Jak obec nakupuje“ |
+| 06 | Úvod má podle 06 „tři důvody“, hotový `uvod.md` má čtyři | Ponecháno, `uvod.md` je hotový text; 06 ho převezme beze změny smyslu |
+| 06, D, E | 06 a 08 popisují účet v aplikaci „bez hesla“ (e-mail a jednorázový kód), D a E počítají s heslem | Texty prezentace píšou „bez hesla“; D a E k úpravě před kontrolou advokátem |
+| 04, A | Matice podpory v 04 (Základ jen e-mail, 2 pracovní dny) se liší od smlouvy A čl. 5 (e-mail a telefon, lhůty podle závažnosti) | Texty prezentace se řídí smlouvou A |
+| 03, obec.json | 03 uvádí Lípu jako výchozí šablonu pro 500 až 2 000 obyvatel, ukázková obec a 06 mají výchozí Náves | Ukázky píšou u Lípy „pro obce od 500 do 2 000 obyvatel“ bez slova výchozí |
+| šablony | Rozdíly v obsahu Javoří Lhoty mezi těly šablon (ulice bez vody, den zprávy o bioodpadu, místo sběru odpadu, hodiny starostky, poplatek za chalupu 900 a 600 Kč, e-mail obce, „dnes“ 2. 11. proti `DEMO_DNES` 4. 11.); adventní trh v Rynku a Hranicích je v neděli 29. 11. | Vyřešeno v datech, tabulka v `obsah/javori-lhota/README.md`; statické texty šablon nechány |
+| 07, 08 | Typ se jmenuje jednou `HlaseniZavad`, jindy `HlaseniZavady` | Nechány; soubor je `hlaseni-zavad.json`, sjednotí 07 při zakládání `packages/typy` |
