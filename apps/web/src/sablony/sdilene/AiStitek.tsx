@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 
 /**
- * Kruhový štítek AI (nahrazuje původní textový nápis).
+ * Kruhový štítek AI jako vodoznak (nahrazuje původní textový nápis). Text je jen pro čtečky obrazovky.
  * Zobrazuje se v rohu ilustrační fotografie i u odpovědí AI asistenta.
  */
 export function AiStitek({
@@ -15,7 +15,6 @@ export function AiStitek({
 }) {
   return (
     <span
-      title={popisek}
       aria-label={popisek}
       style={{
         display: 'inline-flex',

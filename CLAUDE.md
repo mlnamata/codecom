@@ -75,7 +75,7 @@ Před instalací ověř aktuální verzi přes `npm view <balíček> version`. P
 - Výjimka: skleněné šablony 21 Canopus, 22 Achernar a 23 Bellatrix smí na přání zakladatele ze 4. 11. 2026 porušit unslop (sklo, přechody, záře, řezy nad 600). Kontrast, 44 px a omezený pohyb platí i pro ně.
 - Šablony webů obcí jsou v `design/prototypy` (20 šablon, každá ve 3 barevných variantách). Vzhled ber odtud, obsah z ukázkové obce Javoří Lhota v `obsah/javori-lhota`.
 - Texty a obsah nevymýšlej. Ukázková obec bere obsah z `obsah/javori-lhota`. Co chybí, označ `[DOPLNIT]`.
-- Fotky z `design/obrazky/foto` jsou vygenerované AI. Kde se zobrazí, má být poznámka „Ilustrační fotografie vytvořená umělou inteligencí“.
+- Fotky z `design/obrazky/foto` jsou vygenerované AI. Kde se zobrazí, má v rohu vodoznak AI (`AiStitek`). Viditelný nápis „Ilustrační fotografie vytvořená umělou inteligencí“ tam nebude, text je jen pro čtečky obrazovky (přání zakladatele ze 4. 11. 2026, platí i proti starším promptům).
 - Logo CodeKom je v `brand/`, černobílé. Na webech obcí je jen v patičce, hlavní značkou je znak obce.
 
 ## Jak pracovat

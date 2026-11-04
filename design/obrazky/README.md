@@ -1,6 +1,6 @@
 # Obrázky
 
-Fotky pro úvody šablon a pro prezentační web. Všechny jsou vygenerované AI (Gemini, model `gemini-2.5-flash-image`) pro smyšlenou obec Javoří Lhota. Kde se zobrazí, patří k nim poznámka „Ilustrační fotografie vytvořená umělou inteligencí“.
+Fotky pro úvody šablon a pro prezentační web. Všechny jsou vygenerované AI (Gemini, model `gemini-2.5-flash-image`) pro smyšlenou obec Javoří Lhota. Kde se zobrazí, mají v rohu vodoznak AI. Text „Ilustrační fotografie vytvořená umělou inteligencí“ je jen pro čtečky obrazovky.
 
 | Soubor | Kam patří |
 | --- | --- |
