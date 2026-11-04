@@ -81,6 +81,12 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 4. 11. 2026 | Ukázka administrace má tři úrovně editoru, volené parametrem `?uroven=` a nezbytnou cookie `ukazka-uroven`. Obrazovky Pokročilého a Advance (skladatel, schvalování, podweby, vlastní barvy, AI asistent) drží stav jen v prohlížeči. | Ukazuje rozdíly úrovní podle 04-admin-editor.md; v ostrém provozu úroveň určí předplatné a kontroluje ji server. |
 | 4. 11. 2026 | Interní správa CodeKom (`/ukazka/codekom`): předplatné obcí, úroveň a moduly, faktury a jejich stav. Kromě Javoří Lhoty jsou obce smyšlené a tak označené. Úložiště je v paměti procesu. | Zakladatel chce správu předplatného a faktur; skutečné faktury a napojení na účetnictví [DOPLNIT: fakturační systém]. |
 | 4. 11. 2026 | Prezentační web: úvod, galerie a ceník skládám z textů v `obsah/prezentace` a navíc stránky úrovní `/urovne` a `/urovne/<uroven>` s maticí funkcí, rolemi a bloky z 04-admin-editor.md. | Zakladatel chce úrovně popsané detailně; texty úvodu jsou zkrácené věty z `uvod.md`. |
+| 4. 11. 2026 | Prezentační web bere texty přímo z `obsah/prezentace/*.md` a převádí je knihovnou `marked`, ne kopií do MDX. | Jeden zdroj textů, žádná ruční kopie; komentáře `{/* */}` se při převodu vynechají. Odchylka od promptu 06 (MDX). |
+| 4. 11. 2026 | Prezentační web nemá žádné měření návštěvnosti, ani bez cookies. | Zda měření bez zápisu do zařízení spadá mimo § 89 odst. 3 zákona č. 127/2005 Sb., je [OVĚŘIT u advokáta]. |
+| 4. 11. 2026 | Poptávkový formulář a newsletter jsou odložené. Kontakt je telefon, e-mail a `mailto:`. | Web nic nesbírá, zásady osobních údajů to tak popisují. |
+| 4. 11. 2026 | Nadpisy prezentace Montserrat 500 a 600, text Inter, obojí self-hosted přes `@fontsource`. Název v logu zůstává vektorový. Překrytí s Montserratem jsem nezkoušel, přesný font loga je [OVĚŘIT u zakladatele]. | Žádné načítání z Google Fonts. |
+| 4. 11. 2026 | PDF ke stažení tiskne Chromium (`page.pdf`, `tagged: true`): označená struktura, jazyk cs, název a osnova. veraPDF jsem nespouštěl. | Ověřeno jen přítomností StructTreeRoot a /Lang v testu; kontrolu PDF/UA veraPDF udělat před nasazením. |
+| 4. 11. 2026 | Snímky šablon jsou z produkčního buildu s fotkami, velikost do 179 kB (cíl 120 kB překračují snímky s fotkou). | Nepřegenerovávám, jen hlásím podle promptu 06. |
 
 ## Právo
 

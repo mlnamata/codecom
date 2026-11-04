@@ -1,0 +1,4 @@
+Porovnání SVG s PNG (scripts/logo-svg.mjs)
+znak: 570 × 430 px, odlišných pixelů 0.23 % (limit 1 %) OK
+nazev: 535 × 87 px, odlišných pixelů 0.72 % (limit 2 %) OK
+logo: 941 × 630 px, odlišných pixelů 0.26 % (limit 2 %) OK

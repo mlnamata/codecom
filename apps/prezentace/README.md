@@ -39,10 +39,44 @@ pnpm --filter prezentace typecheck
 pnpm --filter prezentace lint
 ```
 
+```bash
+pnpm --filter prezentace test
+```
+
+```bash
+pnpm --filter prezentace build
+```
+
+```bash
+pnpm --filter prezentace e2e
+```
+
+```bash
+pnpm --filter prezentace a11y
+```
+
+```bash
+pnpm --filter prezentace obsah
+```
+
+```bash
+pnpm --filter prezentace lighthouse
+```
+
+Kontrola odkazů potřebuje běžící `next start` na portu 3300 (`ODKAZY_URL` změní adresu):
+
+```bash
+pnpm --filter prezentace odkazy
+```
+
+## Generované soubory
+
+| Příkaz | Co vyrobí |
+| --- | --- |
+| `pnpm logo` | `brand/svg/*.svg`, porovnání s PNG, favicony |
+| `pnpm pdf` | 5 PDF v `public/ke-stazeni` a `src/data/ke-stazeni.json` |
+| `pnpm obsah` | `docs/tvrzeni-prezentace.md`, kontrola textů, výpis `[DOPLNIT]` |
+
 ## Nasazení (později)
 
-`vercel.json` má region `fra1`. Nic se zatím nenasazuje. Doména: [DOPLNIT].
-
-## Co zbývá z promptu 06
-
-SVG logo a favicon sada, OpenGraph obrázky, PDF ke stažení, registr tvrzení a kontroly obsahu, Playwright, axe a Lighthouse testy.
+`vercel.json` má region `fra1`. Nic se zatím nenasazuje. Před nasazením nastavte `NEXT_PUBLIC_SITE_URL` (doména [DOPLNIT]), `NEXT_PUBLIC_DEMO_URL` a `NEXT_PUBLIC_APP_DEMO_URL` a spusťte `node scripts/kontrola-doplnit.mjs --prisne`, který skončí chybou, dokud zbývá nějaké `[DOPLNIT]`.

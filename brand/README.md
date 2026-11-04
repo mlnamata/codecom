@@ -20,7 +20,11 @@ Logo dodal zakladatel 3. 11. 2026. Značka je monogram **CK** v rámečku se se�
 - Logo nenatahuj, neotáčej, nepřidávej stíny ani přechody.
 - Na webech obcí je logo CodeKom jen v patičce („Provozuje CodeKom“). Hlavní značkou webu je vždy znak a název obce.
 
-## Chybí
+## SVG
 
-- Vektorová verze (SVG) monogramu a názvu. Do té doby je vyrob z PNG nebo nech obkreslit. Prompt pro prezentační web s tím počítá.
+V `svg/` jsou vektorové verze `znak`, `nazev` a `logo` v černé a bílé (`-cerne.svg`, `-bile.svg`). Vznikly 4. 11. 2026 vektorizací PNG (potrace, skript `apps/prezentace/scripts/logo-svg.mjs`): jedna cesta na soubor, `viewBox`, bez rastrových vložek. Shoda s PNG po návratu do rastru je v `svg/porovnani.txt` (znak 0,23 %, název 0,72 %, logo 0,26 % odlišných pixelů). Rámeček znaku je vektorizovaný z PNG, ne kreslený ručně.
+
+Favicony prezentačního webu vyrábí `apps/prezentace/scripts/favicon.mjs`: bílý monogram na černém čtverci, ve velikosti 16 px jen písmena CK.
+
+## Chybí
 - Písmo názvu vypadá jako geometrický bezpatkový font typu Montserrat. Přesný font a řez je potřeba potvrdit.

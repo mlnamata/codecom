@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { KalkulackaCeniku } from '@/komponenty/KalkulackaCeniku'
+import { JsonLd } from '@/komponenty/JsonLd'
 import { Markdown } from '@/komponenty/Markdown'
 import { casti, naHtml, nactiStranku } from '@/lib/obsah'
+import { sluzbaJsonLd } from '@/lib/seo'
 
 const stranka = nactiStranku('cenik')
 
@@ -18,6 +20,7 @@ export default function Cenik() {
   const po = i < 0 ? [] : c.slice(i + 1)
   return (
     <div className="obal pt-12">
+      <JsonLd data={sluzbaJsonLd()} />
       <Markdown html={naHtml(uvod)} />
       {pred.map((x) => (
         <Markdown key={x.nadpis} html={md(x)} />

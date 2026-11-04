@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FotoAi } from '@/komponenty/FotoAi'
+import { JsonLd } from '@/komponenty/JsonLd'
 import { Snimek } from '@/komponenty/Snimek'
 import { CENY_WEBU, STITEK_CENY, kc } from '@/lib/cenik'
 import { odkazAplikace, odkazDema } from '@/lib/demo'
 import { nactiStranku } from '@/lib/obsah'
+import { organizaceJsonLd } from '@/lib/seo'
 import { sablonyGalerie } from '@/lib/sablony'
 import { UROVNE } from '@/lib/urovne'
 
@@ -48,6 +50,7 @@ export default function Uvod() {
 
   return (
     <>
+      <JsonLd data={organizaceJsonLd()} />
       {/* První obrazovka: pro koho to je a co obec získá */}
       <section className="obal grid items-center gap-12 pb-16 pt-12 md:pt-20 lg:grid-cols-[1.05fr_1fr]">
         <div>

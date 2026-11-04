@@ -14,5 +14,5 @@ export default tseslint.config(
       '@typescript-eslint/ban-ts-comment': 'error',
     },
   },
-  { files: ['scripts/**/*.mjs'], languageOptions: { globals: { console: 'readonly', process: 'readonly' } } },
+  { files: ['scripts/**/*.mjs'], languageOptions: { globals: { console: 'readonly', process: 'readonly', Buffer: 'readonly', document: 'readonly' } } },
 )

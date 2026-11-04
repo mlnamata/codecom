@@ -10,3 +10,4 @@ public/sablony/
 public/brand/
 .env
 .env.local
+.lighthouseci/
