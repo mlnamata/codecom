@@ -1,63 +1,21 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/Main.html. */
 import type { ReactNode } from 'react'
 import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
       <div style={{ position: "relative" }}>
-        {foto ? (
-          <Foto sablona="naves" styl={{ position: "absolute", inset: "0 0 auto 0", width: "100%", height: "600px", display: "block" }} />
-        ) : (
-          <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style={{ position: "absolute", inset: "0 0 auto 0", width: "100%", height: "600px", display: "block" }}>
-            <rect width="1440" height="600" style={{ fill: "var(--surface)" }}></rect>
-            <path d="M0 250 C180 210 360 120 560 96 S900 150 1060 172 S1300 200 1440 186 V600 H0z" style={{ fill: "var(--hill)" }}></path>
-            <rect x="552" y="58" width="10" height="40" style={{ fill: "var(--primary)" }}></rect>
-            <path d="M540 64 h34 l-6 -10 h-22z" style={{ fill: "var(--primary)" }}></path>
-            <path d="M0 330 C260 290 520 306 760 314 S1180 282 1440 300 V600 H0z" style={{ fill: "var(--meadow)" }}></path>
-            <path d="M1000 352 C1080 340 1200 344 1300 358 C1200 372 1080 372 1000 352z" style={{ fill: "var(--surface)" }}></path>
-            <rect x="0" y="420" width="1440" height="180" style={{ fill: "var(--primary)" }}></rect>
-            <path d="M120 420 V352 l44 -34 l44 34 V420z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M110 354 l54 -44 l54 44z" style={{ fill: "var(--roof)" }}></path>
-            <rect x="152" y="380" width="22" height="40" style={{ fill: "var(--primary)" }}></rect>
-            <path d="M240 420 V362 l34 -26 l34 26 V420z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M231 364 l43 -34 l43 34z" style={{ fill: "var(--accent)" }}></path>
-            <path d="M340 420 V356 l40 -30 l40 30 V420z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M330 358 l50 -38 l50 38z" style={{ fill: "var(--roof)" }}></path>
-            <rect x="368" y="384" width="20" height="36" style={{ fill: "var(--primary)" }}></rect>
-            <rect x="636" y="320" width="24" height="100" style={{ fill: "var(--ink)" }}></rect>
-            <circle cx="648" cy="268" r="76" style={{ fill: "var(--primary)" }}></circle>
-            <circle cx="582" cy="302" r="50" style={{ fill: "var(--primary)" }}></circle>
-            <circle cx="716" cy="296" r="52" style={{ fill: "var(--primary)" }}></circle>
-            <circle cx="648" cy="210" r="48" style={{ fill: "var(--primary)" }}></circle>
-            <circle cx="620" cy="244" r="16" style={{ fill: "var(--meadow)" }}></circle>
-            <circle cx="684" cy="276" r="13" style={{ fill: "var(--meadow)" }}></circle>
-            <circle cx="600" cy="300" r="10" style={{ fill: "var(--meadow)" }}></circle>
-            <path d="M840 420 V312 h80 V420z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M856 312 V232 h48 V312z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M840 314 l40 -24 l40 24z" style={{ fill: "var(--roof)" }}></path>
-            <path d="M856 234 l24 -74 l24 74z" style={{ fill: "var(--primary)" }}></path>
-            <circle cx="880" cy="260" r="9" style={{ fill: "var(--primary)" }}></circle>
-            <rect x="868" y="372" width="24" height="48" rx="12" style={{ fill: "var(--primary)" }}></rect>
-            <rect x="900" y="330" width="10" height="16" rx="5" style={{ fill: "var(--hill)" }}></rect>
-            <rect x="850" y="330" width="10" height="16" rx="5" style={{ fill: "var(--hill)" }}></rect>
-            <path d="M1010 420 V372 l34 -26 l34 26 V420z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M1001 374 l43 -34 l43 34z" style={{ fill: "var(--accent)" }}></path>
-            <path d="M1120 420 V360 l40 -30 l40 30 V420z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M1110 362 l50 -38 l50 38z" style={{ fill: "var(--roof)" }}></path>
-            <rect x="1148" y="386" width="20" height="34" style={{ fill: "var(--primary)" }}></rect>
-            <path d="M1250 420 V376 l30 -22 l30 22 V420z" style={{ fill: "var(--bg)" }}></path>
-            <path d="M1242 378 l38 -28 l38 28z" style={{ fill: "var(--accent)" }}></path>
-          </svg>
-        )}
+        <Foto sablona="naves" styl={{ position: "absolute", inset: "0 0 auto 0", width: "100%", height: "600px", display: "block" }} />
         {' '}
         <Hlavicka />
         {' '}
         <main id="obsah" tabIndex={-1} style={{ position: "relative", maxWidth: "1240px", margin: "0 auto", padding: "300px clamp(16px, 4vw, 32px) 64px", display: "flex", flexWrap: "wrap", gap: "24px", alignItems: "flex-start" }}>
-          <aside aria-label="Rychlé odkazy a počasí" style={{ flex: "1 1 240px", minWidth: "0", display: "flex", flexDirection: "column", gap: "16px" }}>
+          <aside aria-label="Rychlé odkazy a počasí" className="m-odkazy" style={{ flex: "1 1 240px", minWidth: "0", display: "flex", flexDirection: "column", gap: "16px" }}>
             <nav className="on-primary" aria-labelledby="obec-menu" style={{ borderRadius: "16px", background: "var(--primary)", color: "var(--on-primary)", padding: "8px" }}>
               <h2 id="obec-menu" className="sr">Rychlá navigace</h2>
               {' '}
@@ -145,14 +103,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
               <h2 id="zpravy" style={{ margin: "0 0 16px", fontSize: "22px" }}>{"Zprávy z obce"}</h2>
               {' '}
               <article style={{ display: "flex", flexWrap: "wrap", gap: "20px", paddingBottom: "20px", borderBottom: "1px solid var(--line)" }}>
-                <svg viewBox="0 0 280 160" aria-hidden="true" style={{ flex: "1 1 220px", maxWidth: "280px", borderRadius: "12px", display: "block", background: "var(--surface)" }}>
-                  <path d="M0 120 C60 100 120 110 160 104 S240 96 280 106 V160 H0z" style={{ fill: "var(--meadow)" }}></path>
-                  <rect x="40" y="70" width="200" height="40" rx="6" style={{ fill: "var(--bg)" }}></rect>
-                  <path d="M40 70 l100 -36 l100 36z" style={{ fill: "var(--roof)" }}></path>
-                  <rect x="120" y="84" width="40" height="26" rx="4" style={{ fill: "var(--primary)" }}></rect>
-                  <circle cx="70" cy="128" r="10" style={{ fill: "var(--accent)" }}></circle>
-                  <circle cx="96" cy="132" r="8" style={{ fill: "var(--primary)" }}></circle>
-                </svg>
+                <FotoDlazdice soubor="sablona-06-hnizdo.webp" alt="Malá venkovská škola s novým dřevěným hřištěm, na zemi podzimní listí." styl={{ flex: "1 1 220px", maxWidth: "280px", aspectRatio: "7 / 4", borderRadius: "12px" }} />
                 {' '}
                 <div style={{ flex: "2 1 260px", minWidth: "0" }}>
                   <p style={{ margin: "0 0 4px", color: "var(--muted)", fontSize: "15px" }}>26. října</p>

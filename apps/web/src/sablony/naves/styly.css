@@ -34,5 +34,9 @@
 .sablona-naves * { transition:none!important;animation:none!important }
 }
 @media (max-width:767.98px) {
-.sablona-naves .m-center { order:-1 }
+/* Telefon: uvítání, hned pod ním rychlé odkazy (co lidé hledají nejčastěji), potom zbytek. */
+.sablona-naves .m-center { display:contents!important }
+.sablona-naves .m-center > section { flex:1 1 100%;min-width:0 }
+.sablona-naves .m-center > section:first-child { order:-3 }
+.sablona-naves .m-odkazy { order:-2 }
 }
