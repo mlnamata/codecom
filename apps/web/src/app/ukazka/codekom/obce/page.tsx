@@ -33,15 +33,15 @@ export default function Obce() {
           <tbody>
             {predplatne.map((p) => (
               <tr key={p.slug}>
-                <td>
+                <td data-popisek="Obec">
                   <a href={`/ukazka/codekom/obce/${p.slug}`}>{p.obec}</a>
                 </td>
-                <td className="cislo">{p.obyvatel.toLocaleString('cs-CZ')}</td>
-                <td>{NAZEV_UROVNE[p.uroven]}</td>
-                <td>{[p.urad ? 'Digitální úřad' : null, p.budovy ? `Budovy ${p.budovy}` : null].filter(Boolean).join(', ') || 'žádné'}</td>
-                <td>{p.platba === 'rocni' ? 'roční' : 'měsíční'}</td>
-                <td className="cislo">{kc(mesicne(p))}</td>
-                <td>
+                <td data-popisek="Obyvatel" className="cislo">{p.obyvatel.toLocaleString('cs-CZ')}</td>
+                <td data-popisek="Úroveň">{NAZEV_UROVNE[p.uroven]}</td>
+                <td data-popisek="Moduly">{[p.urad ? 'Digitální úřad' : null, p.budovy ? `Budovy ${p.budovy}` : null].filter(Boolean).join(', ') || 'žádné'}</td>
+                <td data-popisek="Platba">{p.platba === 'rocni' ? 'roční' : 'měsíční'}</td>
+                <td data-popisek="Měsíčně bez DPH" className="cislo">{kc(mesicne(p))}</td>
+                <td data-popisek="Stav">
                   <span className={`stav ${tridaPredplatneho(p.stav)}`}>{NAZVY_STAVU[p.stav]}</span>
                 </td>
               </tr>

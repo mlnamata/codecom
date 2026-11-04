@@ -477,9 +477,9 @@ export function Uzivatele({ s }: { s: Schopnosti }) {
           <tbody>
             {lide.map((u) => (
               <tr key={u.email}>
-                <td>{u.jmeno}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
+                <td data-popisek="Jméno">{u.jmeno}</td>
+                <td data-popisek="E-mail">{u.email}</td>
+                <td data-popisek="Role">{u.role}</td>
               </tr>
             ))}
           </tbody>

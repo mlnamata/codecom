@@ -58,14 +58,20 @@ body {
   outline-offset: 0;
 }
 
-/* Pruh „Ukázka CodeKom“: neutrální, vizuálně oddělený od šablony. */
+/*
+ * Pruh „Ukázka CodeKom“: nástroj CodeKomu nad webem obce. Tmavý a neutrální, aby se nepletl
+ * se šablonou. Jedna akcentová barva (žlutý fokus), tenké linky, mřížka po 4 px.
+ * Telefon: řádek s názvem, stavem slovy a tlačítkem Nastavit. Od 1024 px je panel vždy vidět.
+ */
 .pruh-ukazky {
-  background: #ececE8;
-  color: #1a1a18;
-  border-bottom: 1px solid #8a8a84;
+  position: relative;
+  z-index: 40;
+  background: #1a1a18;
+  color: #ffffff;
+  border-bottom: 1px solid #000000;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 15px;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 .pruh-ukazky__obsah {
   max-width: 1240px;
@@ -74,56 +80,174 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 20px;
+  gap: 8px 24px;
+}
+.pruh-ukazky__hlava {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1 1 100%;
 }
 .pruh-ukazky__nadpis {
   margin: 0;
   font-size: 15px;
   font-weight: 600;
+  white-space: nowrap;
 }
-.pruh-ukazky__skupina {
+.pruh-ukazky__stav {
+  margin: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+  color: #d6d6d0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pruh-ukazky__panel {
+  display: none;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  padding: 8px 0 4px;
+}
+.pruh-ukazky__panel[data-otevreno="true"] {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+.pruh-ukazky__panel > :first-child,
+.pruh-ukazky__panel > [role="group"],
+.pruh-ukazky__panel > .pruh-ukazky__odkazy {
+  grid-column: 1 / -1;
+}
+.pruh-ukazky__pole[role="group"] {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px 12px;
+}
+.pruh-ukazky__pole[role="group"] > .pruh-ukazky__popisek {
+  flex-basis: 100%;
+}
+.pruh-ukazky__pole {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 8px;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
+.pruh-ukazky label,
 .pruh-ukazky__popisek {
-  font-weight: 600;
-}
-.pruh-ukazky label {
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
+  color: #d6d6d0;
 }
 .pruh-ukazky select,
 .pruh-ukazky button {
   min-height: 44px;
   padding: 0 12px;
-  border: 1px solid #1a1a18;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #1a1a18;
+  border: 1px solid #6b6b66;
+  border-radius: 4px;
+  background: #2a2a27;
+  color: #ffffff;
   font: inherit;
   cursor: pointer;
 }
-.pruh-ukazky button {
+.pruh-ukazky select {
+  max-width: 100%;
+  padding-right: 32px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ffffff' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+.pruh-ukazky select option {
+  background: #ffffff;
+  color: #1a1a18;
+}
+.pruh-ukazky__segment {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+.pruh-ukazky__segment button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 52px;
+  padding: 0;
+  border-radius: 0;
+}
+.pruh-ukazky__hodnota {
+  color: #ffffff;
+  white-space: nowrap;
+}
+.pruh-ukazky__segment button + button {
+  margin-left: -1px;
+}
+.pruh-ukazky__segment button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.pruh-ukazky__segment button:last-child {
+  border-radius: 0 4px 4px 0;
 }
 .pruh-ukazky button[aria-pressed="true"] {
-  background: #1a1a18;
-  color: #ffffff;
+  position: relative;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #1a1a18;
+  font-weight: 600;
 }
-.pruh-ukazky .pruh-ukazky__odkaz {
-  border-color: transparent;
-  background: transparent;
-  text-decoration: underline;
+.pruh-ukazky__rozbalit {
+  flex: none;
+}
+.pruh-ukazky .pruh-ukazky__zpet {
+  flex: none;
+  padding: 0 12px;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* Telefon: první řádek název a Nastavit, druhý tlačítko Zpět, třetí stav slovy. */
+@media (max-width: 1023.98px) {
+  .pruh-ukazky__hlava {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .pruh-ukazky__nadpis {
+    order: 1;
+    flex: 1 1 auto;
+  }
+  .pruh-ukazky__rozbalit {
+    order: 2;
+  }
+  .pruh-ukazky .pruh-ukazky__zpet {
+    order: 3;
+  }
+  .pruh-ukazky__stav {
+    order: 4;
+    flex-basis: 100%;
+  }
+}
+.pruh-ukazky .pruh-ukazky__zpet:hover {
+  background: #ffffff;
+  color: #1a1a18;
+}
+.pruh-ukazky__odkazy {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
 }
 .pruh-ukazky a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: #1a1a18;
+  color: #ffffff;
   font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .pruh-ukazky__kapky {
   display: inline-flex;
@@ -132,17 +256,43 @@ body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 .pruh-ukazky__kapky span + span {
   margin-left: -4px;
 }
 .pruh-ukazky :focus-visible {
-  outline: 3px solid #1a1a18;
+  outline: 3px solid #ffd24d;
   outline-offset: 2px;
+  z-index: 1;
 }
-.pruh-ukazky button[aria-pressed="true"]:focus-visible {
-  outline-color: #2362a2;
+@media (min-width: 1024px) {
+  .pruh-ukazky__hlava {
+    flex: none;
+  }
+  .pruh-ukazky__stav,
+  .pruh-ukazky__rozbalit {
+    display: none;
+  }
+  .pruh-ukazky__panel,
+  .pruh-ukazky__panel[data-otevreno="true"] {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    padding: 0;
+  }
+  .pruh-ukazky__pole {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  .pruh-ukazky__pole[role="group"] {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .pruh-ukazky__pole[role="group"] > .pruh-ukazky__popisek {
+    flex-basis: auto;
+  }
 }
 
 /* Pás s hlavičkou šablony na vnitřních stránkách. */
@@ -266,6 +416,8 @@ body {
   font-weight: 600;
 }
 .stranka .tabulka-obal {
+  /* position: skrytý popisek tabulky (absolute) nesmí rozšířit stránku na telefonu. */
+  position: relative;
   overflow-x: auto;
 }
 .stranka dl.udaje {

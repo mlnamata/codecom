@@ -70,18 +70,18 @@ export default async function Faktury({ searchParams }: { searchParams: Promise<
           <tbody>
             {vybrane.map((f) => (
               <tr key={f.cislo}>
-                <td>{f.cislo}</td>
-                <td>
+                <td data-popisek="Číslo">{f.cislo}</td>
+                <td data-popisek="Obec">
                   <a href={`/ukazka/codekom/obce/${f.slug}`}>{obec(f.slug)}</a>
                 </td>
-                <td>{f.obdobi}</td>
-                <td>{f.zpusob === 'faktura' ? 'faktura' : 'karta'}</td>
-                <td>{datum(f.splatnost)}</td>
-                <td className="cislo">{kc(soucet(f))}</td>
-                <td>
+                <td data-popisek="Období">{f.obdobi}</td>
+                <td data-popisek="Způsob">{f.zpusob === 'faktura' ? 'faktura' : 'karta'}</td>
+                <td data-popisek="Splatnost">{datum(f.splatnost)}</td>
+                <td data-popisek="Bez DPH" className="cislo">{kc(soucet(f))}</td>
+                <td data-popisek="Stav">
                   <span className={`stav ${tridaFaktury(f.stav)}`}>{NAZVY_STAVU_FAKTURY[f.stav]}</span>
                 </td>
-                <td>
+                <td data-popisek="Změnit stav">
                   <FormStavu cislo={f.cislo} stav={f.stav} zpet={zpet} />
                 </td>
               </tr>

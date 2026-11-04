@@ -64,13 +64,13 @@ export default function PrehledSpravy() {
             <tbody>
               {dluzne.map((f) => (
                 <tr key={f.cislo}>
-                  <td>{f.cislo}</td>
-                  <td>
+                  <td data-popisek="Číslo">{f.cislo}</td>
+                  <td data-popisek="Obec">
                     <a href={`/ukazka/codekom/obce/${f.slug}`}>{obec(f.slug)}</a>
                   </td>
-                  <td>{datum(f.splatnost)}</td>
-                  <td className="cislo">{kc(soucet(f))}</td>
-                  <td>
+                  <td data-popisek="Splatnost">{datum(f.splatnost)}</td>
+                  <td data-popisek="Bez DPH" className="cislo">{kc(soucet(f))}</td>
+                  <td data-popisek="Stav">
                     <span className={`stav ${tridaFaktury(f.stav)}`}>{NAZVY_STAVU_FAKTURY[f.stav]}</span>
                   </td>
                 </tr>

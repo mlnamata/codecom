@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { RozbalovaciNavigace } from '../RozbalovaciNavigace'
 
 const POLOZKY = [
   { nazev: 'Přehled', href: '/ukazka/codekom' },
@@ -10,11 +11,12 @@ const POLOZKY = [
 
 export function NavigaceSpravy() {
   const cesta = usePathname()
+  const jeAktivni = (href: string) => (href === '/ukazka/codekom' ? cesta === href : cesta.startsWith(href))
   return (
-    <nav aria-label="Správa CodeKom" className="admin__navigace">
+    <RozbalovaciNavigace popisek="Správa CodeKom" aktualni={POLOZKY.find((p) => jeAktivni(p.href))?.nazev}>
       <ul>
         {POLOZKY.map((p) => {
-          const aktivni = p.href === '/ukazka/codekom' ? cesta === p.href : cesta.startsWith(p.href)
+          const aktivni = jeAktivni(p.href)
           return (
             <li key={p.href}>
               <a href={p.href} aria-current={aktivni ? 'page' : undefined}>
@@ -24,6 +26,6 @@ export function NavigaceSpravy() {
           )
         })}
       </ul>
-    </nav>
+    </RozbalovaciNavigace>
   )
 }

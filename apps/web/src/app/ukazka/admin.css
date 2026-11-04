@@ -125,6 +125,8 @@
   white-space: nowrap;
 }
 .admin .posuvnik {
+  /* position: skrytý popisek tabulky (sr-only, absolute) nesmí rozšířit stránku. */
+  position: relative;
   overflow-x: auto;
   max-width: 100%;
   margin: 0 0 24px;
@@ -199,4 +201,37 @@
 }
 .admin__navigace a[aria-current="page"] .admin__od {
   border-color: currentColor;
+}
+
+/* Tlačítko Menu boční navigace: jen na telefonu, na širokém displeji je navigace vždy vidět. */
+.admin__menu {
+  display: none;
+}
+@media (max-width: 899.98px) {
+  .admin__menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    border: 1px solid var(--admin-linka, #8a8a84);
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1a1a18;
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+  }
+  .admin__menu-stranka {
+    font-weight: 400;
+    color: #4a4a46;
+  }
+  .admin__navigace-obsah[data-otevreno="false"] {
+    display: none;
+  }
+  .admin__navigace-obsah[data-otevreno="true"] {
+    margin-top: 8px;
+  }
 }

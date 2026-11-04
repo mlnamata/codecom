@@ -59,8 +59,8 @@ export default async function Predplatne() {
           <tbody>
             {polozky(p).map((x) => (
               <tr key={x.popis}>
-                <td>{x.popis}</td>
-                <td className="cislo">{kc(x.kcBezDph)}</td>
+                <td data-popisek="Položka">{x.popis}</td>
+                <td data-popisek="Měsíčně bez DPH" className="cislo">{kc(x.kcBezDph)}</td>
               </tr>
             ))}
           </tbody>
@@ -89,10 +89,10 @@ export default async function Predplatne() {
           <tbody>
             {UROVNE.map((u) => (
               <tr key={u}>
-                <td>{NAZEV_UROVNE[u]}</td>
-                <td>{PRINCIP_UROVNE[u]}</td>
-                <td className="cislo">{kc(CENY_WEBU[u][v])}</td>
-                <td>{u === p.uroven ? <span className="stav neutralni">Máte</span> : <a href={`?uroven=${u}`}>Vyzkoušet</a>}</td>
+                <td data-popisek="Úroveň">{NAZEV_UROVNE[u]}</td>
+                <td data-popisek="Princip">{PRINCIP_UROVNE[u]}</td>
+                <td data-popisek="Web měsíčně" className="cislo">{kc(CENY_WEBU[u][v])}</td>
+                <td data-popisek="Akce">{u === p.uroven ? <span className="stav neutralni">Máte</span> : <a href={`?uroven=${u}`}>Vyzkoušet</a>}</td>
               </tr>
             ))}
           </tbody>
@@ -119,12 +119,12 @@ export default async function Predplatne() {
           <tbody>
             {faktury.map((f) => (
               <tr key={f.cislo}>
-                <td>{f.cislo}</td>
-                <td>{f.obdobi}</td>
-                <td>{datum(f.vystaveno)}</td>
-                <td>{datum(f.splatnost)}</td>
-                <td className="cislo">{kc(soucet(f))}</td>
-                <td>
+                <td data-popisek="Číslo">{f.cislo}</td>
+                <td data-popisek="Období">{f.obdobi}</td>
+                <td data-popisek="Vystaveno">{datum(f.vystaveno)}</td>
+                <td data-popisek="Splatnost">{datum(f.splatnost)}</td>
+                <td data-popisek="Bez DPH" className="cislo">{kc(soucet(f))}</td>
+                <td data-popisek="Stav">
                   <span className={`stav ${tridaFaktury(f.stav)}`}>{NAZVY_STAVU_FAKTURY[f.stav]}</span>
                 </td>
               </tr>

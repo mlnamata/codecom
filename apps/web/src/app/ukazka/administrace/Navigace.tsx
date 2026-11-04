@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { NAZEV_UROVNE, staci, type Uroven } from '@/ukazka/uroven'
+import { RozbalovaciNavigace } from '../RozbalovaciNavigace'
 
 const Z = '/ukazka/administrace'
 
@@ -41,8 +42,9 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
 
 export function Navigace({ uroven }: { uroven: Uroven }) {
   const cesta = usePathname()
+  const aktualni = SKUPINY.flatMap((s) => s.polozky).find((p) => p.href === cesta)?.nazev
   return (
-    <nav aria-label="Administrace" className="admin__navigace">
+    <RozbalovaciNavigace popisek="Administrace" aktualni={aktualni}>
       {SKUPINY.map((s) => (
         <div key={s.id}>
           <p className="admin__skupina" id={s.id}>
@@ -63,6 +65,6 @@ export function Navigace({ uroven }: { uroven: Uroven }) {
           </ul>
         </div>
       ))}
-    </nav>
+    </RozbalovaciNavigace>
   )
 }

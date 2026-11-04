@@ -23,7 +23,9 @@ export default async function AdministraceLayout({ children }: { children: React
       </a>
       <header className="admin__hlavicka">
         <p className="admin__nazev">
-          <a href="/ukazka/administrace">Administrace obce Javoří Lhota</a>
+          <a href="/ukazka/administrace">
+            Administrace <span className="admin__obec">obce Javoří Lhota</span>
+          </a>
         </p>
         <nav aria-label="Úroveň editoru v ukázce" className="admin__urovne">
           {UROVNE.map((u) => (
@@ -32,9 +34,13 @@ export default async function AdministraceLayout({ children }: { children: React
             </a>
           ))}
         </nav>
-        <p className="admin__stitek">Ukázka, data se po restartu vrátí</p>
-        <FormObnovit />
-        <a href="/">Zobrazit web</a>
+        <div className="admin__akce">
+          <p className="admin__stitek">Ukázka, data se po restartu vrátí</p>
+          <FormObnovit />
+          <a href="/" className="admin__web">
+            Zobrazit web
+          </a>
+        </div>
       </header>
       <div className="admin__telo">
         <Navigace uroven={uroven} />

@@ -20,13 +20,19 @@ export default function SpravaLayout({ children }: { children: ReactNode }) {
       </a>
       <header className="admin__hlavicka codekom-hlavicka">
         <p className="admin__nazev">
-          <a href="/ukazka/codekom">Správa CodeKom</a>
+          <a href="/ukazka/codekom">
+            Správa <span className="admin__obec">CodeKom</span>
+          </a>
         </p>
-        <p className="admin__stitek">Ukázka, smyšlené obce a data</p>
-        <form action={obnovSpravu}>
-          <button type="submit">Obnovit data ukázky</button>
-        </form>
-        <a href="/ukazka/administrace">Administrace obce</a>
+        <div className="admin__akce">
+          <p className="admin__stitek">Ukázka, smyšlené obce a data</p>
+          <form action={obnovSpravu}>
+            <button type="submit">Obnovit data ukázky</button>
+          </form>
+          <a href="/ukazka/administrace" className="admin__web">
+            Administrace obce
+          </a>
+        </div>
       </header>
       <div className="admin__telo">
         <NavigaceSpravy />

@@ -93,13 +93,13 @@ export default async function DetailObce({ params, searchParams }: { params: Pro
               <tbody>
                 {polozky(p).map((x) => (
                   <tr key={x.popis}>
-                    <td>{x.popis}</td>
-                    <td className="cislo">{kc(x.kcBezDph)}</td>
+                    <td data-popisek="Položka">{x.popis}</td>
+                    <td data-popisek="Měsíčně" className="cislo">{kc(x.kcBezDph)}</td>
                   </tr>
                 ))}
                 <tr>
-                  <th scope="row">Celkem bez DPH</th>
-                  <td className="cislo">
+                  <th data-popisek="Položka" scope="row">Celkem bez DPH</th>
+                  <td data-popisek="Měsíčně" className="cislo">
                     <strong>{kc(mesicne(p))}</strong>
                   </td>
                 </tr>
@@ -132,15 +132,15 @@ export default async function DetailObce({ params, searchParams }: { params: Pro
             <tbody>
               {faktury.map((f) => (
                 <tr key={f.cislo}>
-                  <td>{f.cislo}</td>
-                  <td>{f.obdobi}</td>
-                  <td>{datum(f.splatnost)}</td>
-                  <td className="cislo">{kc(soucet(f))}</td>
-                  <td>
+                  <td data-popisek="Číslo">{f.cislo}</td>
+                  <td data-popisek="Období">{f.obdobi}</td>
+                  <td data-popisek="Splatnost">{datum(f.splatnost)}</td>
+                  <td data-popisek="Bez DPH" className="cislo">{kc(soucet(f))}</td>
+                  <td data-popisek="Stav">
                     <span className={`stav ${tridaFaktury(f.stav)}`}>{NAZVY_STAVU_FAKTURY[f.stav]}</span>
                     {f.zaplaceno ? <span style={{ display: 'block', fontSize: 14 }}>{datum(f.zaplaceno)}</span> : null}
                   </td>
-                  <td>
+                  <td data-popisek="Změnit stav">
                     <FormStavu cislo={f.cislo} stav={f.stav} zpet={`/ukazka/codekom/obce/${p.slug}`} />
                   </td>
                 </tr>

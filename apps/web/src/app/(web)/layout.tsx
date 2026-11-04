@@ -35,6 +35,7 @@ export default async function WebLayout({ children }: { children: ReactNode }) {
         vynuceno={stav.krize !== undefined}
         foto={foto}
         appUrl={process.env.NEXT_PUBLIC_APP_URL || null}
+        codekomUrl={process.env.NEXT_PUBLIC_CODEKOM_URL || null}
       />
     )
   }
