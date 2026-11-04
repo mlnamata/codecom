@@ -5,6 +5,7 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 | Úkol | Oblast souborů | Stav | Poznámka |
 | --- | --- | --- | --- |
 | Dotažení šablon 08 Rigel, 09 Aldebaran a 10 Spica (fotky, oblasti, cíle, 375 px) | `apps/web/src/sablony/{vinice,hreben,rynek}` | rozpracováno | agent šablon 08 až 10 |
+| Dotažení šablon 17 Alkor, 18 Mizar, 19 Fomalhaut, 20 Betelgeuse (fotky místo kreseb, cíle, 375 px) | `apps/web/src/sablony/{magistrat,zpravodaj,mikroregion,urad}` | rozpracováno | agent šablon 17 až 20 |
 | Konfigurace šablony v liště (barvy, písmo), jen fotky, štítek AI, glass šablony | `apps/web/src/ukazka`, `apps/web/src/sablony` | hotovo | hlavní session |
 | Skleněné šablony 21 Canopus, 22 Achernar a 23 Bellatrix | `apps/web/src/sablony/{sklo,noc,aurora}`, `packages/tokeny` | hotovo | fork session skleněných šablon; [DOPLNIT] snímky a generátor |
 | Nový vzhled administrace, vícedílný skladatel šablon a blog | `apps/web/src/app/ukazka/**`, `admin.css` | hotovo | hlavní session |
