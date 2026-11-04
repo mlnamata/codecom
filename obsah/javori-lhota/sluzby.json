@@ -89,6 +89,56 @@
       "odkaz": null,
       "uradCesta": "Zavolejte na úřad, nebo přijďte v úředních hodinách bez objednání.",
       "klicovaSlova": ["objednat", "overeni", "podpis", "czech point", "vypis"]
+    },
+    {
+      "id": "chytra-obec",
+      "slug": "chytra-obec",
+      "nazev": "Chytrá obec a živá data",
+      "popis": "IoT senzory ovzduší, hladina potoka, GPS technika a odjezdy spojů.",
+      "zpusob": "online",
+      "odkaz": "/chytra-obec",
+      "uradCesta": "Aktuální informace získáte i na úřadě nebo telefonicky.",
+      "klicovaSlova": ["chytra obec", "iot", "senzory", "potok", "hladina", "pocasi", "odjezdy", "parkovani"]
+    },
+    {
+      "id": "komunita",
+      "slug": "komunita",
+      "nazev": "Komunitní půjčovna a sousedský bazar",
+      "popis": "Půjčovna nářadí a stanů, darovna, spolujízda a dobrovolnické brigády.",
+      "zpusob": "online",
+      "odkaz": "/komunita",
+      "uradCesta": "Vybavení půjčovny si zarezervujete i v kanceláři úřadu.",
+      "klicovaSlova": ["komunita", "pujcovna", "naradi", "stipac", "bazar", "darovna", "spolujizda", "brigady"]
+    },
+    {
+      "id": "majetek",
+      "slug": "majetek",
+      "nazev": "Správa majetku a energetika",
+      "popis": "Obecní byty, stavební parcely, komunitní FVE a pasport hřbitova.",
+      "zpusob": "online",
+      "odkaz": "/majetek",
+      "uradCesta": "Žádosti o byty a pozemky vyřizuje místostarosta v úředních hodinách.",
+      "klicovaSlova": ["majetek", "byty", "pozemky", "parcely", "energetika", "fve", "hrbitov", "hrob"]
+    },
+    {
+      "id": "bezpecnost",
+      "slug": "bezpecnost",
+      "nazev": "Bezpečnost obce a AED defibrilátory",
+      "popis": "Mapa a dostupnost AED, registr ztrát a nálezů zvířat a přehled kamer.",
+      "zpusob": "online",
+      "odkaz": "/bezpecnost",
+      "uradCesta": "Ztráty a nálezy se shromažďují na podatelně úřadu.",
+      "klicovaSlova": ["bezpecnost", "aed", "defibrilator", "ztraty", "nalezy", "pes", "kamery"]
+    },
+    {
+      "id": "portal",
+      "slug": "portal",
+      "nazev": "Portál zastupitelů a otevřená data",
+      "popis": "Extranet zastupitelstva, systém občanských bodů a API pro vývojáře.",
+      "zpusob": "online",
+      "odkaz": "/portal",
+      "uradCesta": "Materiály k zasedání jsou veřejně přístupné i na úřední desce.",
+      "klicovaSlova": ["portal", "zastupitele", "extranet", "body", "gamifikace", "api", "opendata"]
     }
   ],
   "poplatky": [

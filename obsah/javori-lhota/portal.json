@@ -1,0 +1,101 @@
+{
+  "extranetZastupitele": {
+    "pristiZasedani": {
+      "cislo": "14. řádné zasedání Zastupitelstva obce Javoří Lhota",
+      "datum": "Pondělí 16. listopadu 2026 v 18:00",
+      "misto": "Zasedací síň obecního úřadu (otevřeno veřejnosti)",
+      "podklady": [
+        {
+          "nazev": "Návrh rozpočtu obce na rok 2027 (střednědobý výhled)",
+          "typ": "PDF",
+          "velikost": "1,4 MB",
+          "duverne": false
+        },
+        {
+          "nazev": "Smlouva o dílo – oprava chodníku Na Rovném (nabídky 3 uchazečů)",
+          "typ": "PDF",
+          "velikost": "2,8 MB",
+          "duverne": true
+        },
+        {
+          "nazev": "Žádost o dotaci na fotovoltaiku ZŠ z OPŽP",
+          "typ": "PDF",
+          "velikost": "850 kB",
+          "duverne": false
+        }
+      ],
+      "diskuze": [
+        {
+          "tema": "Vánoční osvětlení – obnova LED prvků na lípě",
+          "prispevku": 5,
+          "posledni": "Včera 19:40 (Marie Šťastná)"
+        },
+        {
+          "tema": "Závlaha fotbalového hřiště TJ Sokol",
+          "prispevku": 8,
+          "posledni": "3. 11. 11:15 (Petr Kos)"
+        }
+      ]
+    },
+    "dochazkaZastupitelu": {
+      "obdobi": "Volební období 2022–2026",
+      "prumerDochazky": "96,2 %",
+      "pocetUsneseniRocne": 84
+    }
+  },
+  "gamifikace": {
+    "nazevSystemu": "Občanské kredity Javoří Lhota",
+    "popis": "Komunitní systém odměňování občanů za péči o obec, aktivní hlášení problémů a včasné plnění poplatků.",
+    "pravidla": [
+      { "cinnost": "Ověřené nahlášení závady přes aplikaci", "body": "+50 bodů" },
+      { "cinnost": "Včasná platba poplatku za odpad a psa online", "body": "+30 bodů" },
+      { "cinnost": "Aktivní účast na obecní úklidové brigádě", "body": "+150 bodů" },
+      { "cinnost": "Sousedská výpomoc nebo spolujízda", "body": "+20 bodů" }
+    ],
+    "odmeny": [
+      {
+        "id": "koupaliste",
+        "nazev": "Volná celodenní vstupenka na letní koupaliště",
+        "cenaBodu": 100,
+        "dostupnost": "Kdykoliv v sezóně 2027"
+      },
+      {
+        "id": "sleva-pes",
+        "nazev": "Sleva 100 Kč na roční poplatek ze psa",
+        "cenaBodu": 120,
+        "dostupnost": "Uplatnitelné při platbě za rok 2027"
+      },
+      {
+        "id": "stipac-zdarma",
+        "nazev": "Víkendová výpůjčka štípače dřeva zdarma",
+        "cenaBodu": 200,
+        "dostupnost": "Kauce zůstává v platnosti"
+      }
+    ]
+  },
+  "developerPortal": {
+    "nazev": "Otevřená data a API CodeKom obce",
+    "popis": "Strojově čitelná data v reálném čase pro vývojáře, studenty i integrace do Home Assistant a chytré domácnosti.",
+    "endpointy": [
+      {
+        "cesta": "GET /api/v1/obce/javori-lhota/senzory",
+        "popis": "Živá data IoT čidel (ovzduší, hladina potoka, teplota vozovky) v JSON formátu",
+        "format": "application/json"
+      },
+      {
+        "cesta": "GET /api/v1/obce/javori-lhota/uredni-deska",
+        "popis": "Aktuální dokumenty úřední desky podle otevřeného standardu DIA / eSbírka",
+        "format": "application/json"
+      },
+      {
+        "cesta": "GET /api/v1/obce/javori-lhota/odjezdy",
+        "popis": "GTFS-RT data odjezdů spojů s reálným zpožděním ze zastávek v katastru obce",
+        "format": "application/json"
+      }
+    ],
+    "webhooks": [
+      { "udalost": "krize.vyhlasena", "popis": "Okamžité push upozornění při vyhlášení výstrahy nebo krizového stavu" },
+      { "udalost": "potok.stupen_bdelosti", "popis": "Notifikace při dosažení 1. SPA nebo překročení 100 cm hladiny" }
+    ]
+  }
+}

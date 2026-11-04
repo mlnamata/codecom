@@ -1,0 +1,136 @@
+{
+  "pujcovna": [
+    {
+      "id": "stipac-dreva",
+      "nazev": "Vertikální štípač na dřevo Scheppach HL 810",
+      "kategorie": "Zahrada a les",
+      "tlak": "8 tun, 230 V",
+      "pujcovne": "150 Kč / den",
+      "kauce": "1 000 Kč",
+      "stav": "volno",
+      "popis": "Určeno pro polena do délky 55 cm a průměru 30 cm. Včetně štípacího kříže a bezpečnostních prvků."
+    },
+    {
+      "id": "party-stan",
+      "nazev": "Zahradní párty stan 6 × 3 metry profi",
+      "kategorie": "Oslavy a spolky",
+      "tlak": "Nepromokavá plachta 500 g/m²",
+      "pujcovne": "250 Kč / víkend",
+      "kauce": "1 500 Kč",
+      "stav": "volno",
+      "popis": "Ocelová konstrukce, plné i průhledné bočnice, kotvení do země i dlažby."
+    },
+    {
+      "id": "pivni-sety",
+      "nazev": "Pivní set (stůl 220 cm + 2 lavice)",
+      "kategorie": "Oslavy a spolky",
+      "tlak": "Masivní smrk, 8 míst k sezení",
+      "pujcovne": "50 Kč / víkend za set",
+      "kauce": "500 Kč",
+      "stav": "volno",
+      "popis": "Obec má celkem 12 setů. K dispozici je aktuálně 8 setů."
+    },
+    {
+      "id": "elektrocentrala",
+      "nazev": "Benzínová elektrocentrála Honda 3 kW",
+      "kategorie": "Stavba a dílna",
+      "tlak": "Výkon 2.8 kVA, 2× 230 V",
+      "pujcovne": "200 Kč / den",
+      "kauce": "2 000 Kč",
+      "stav": "volno",
+      "popis": "Tichý chod, regulace napětí AVR, vhodná i pro citlivou elektroniku."
+    },
+    {
+      "id": "krovinorez",
+      "nazev": "Profesionální křovinořez Stihl FS 131",
+      "kategorie": "Zahrada a les",
+      "tlak": "Motor 4-MIX 1.4 kW",
+      "pujcovne": "100 Kč / den",
+      "kauce": "1 000 Kč",
+      "stav": "rezervovano",
+      "popis": "Včetně popruhu, strunové hlavy a trojzubého žacího nože na vysokou trávu."
+    }
+  ],
+  "bazar": [
+    {
+      "id": "jablka-rubin",
+      "typ": "nabidka",
+      "nazev": "Přebytky jablek ze starého sadu (Rubín a Šampion)",
+      "autor": "rodina Kučerova, č. p. 38",
+      "cena": "Zdarma / za tabulku čokolády",
+      "datum": "2026-11-03",
+      "popis": "Nestíháme zpracovat cca 4 bedýnky krásných jablek vhodných na uskladnění i na křížaly. Vlastní odnos nebo bedýnka vítána."
+    },
+    {
+      "id": "stavebni-kamen",
+      "typ": "nabidka",
+      "nazev": "Žulový kámen po rozebrání tarasu",
+      "autor": "Jan Holý, Na Rovném",
+      "cena": "Za odvoz",
+      "datum": "2026-11-01",
+      "popis": "Cca 2 vozíky kvalitního šumavského kamene, vhodného na skalku nebo suchou zídku. Pomohu naložit."
+    },
+    {
+      "id": "odrazedlo-firstbike",
+      "typ": "darovna",
+      "nazev": "Dětské odrážedlo FirstBike s brzdou",
+      "autor": "Tereza Černá, Javoří Lhota",
+      "cena": "Zdarma za odvoz",
+      "datum": "2026-10-29",
+      "popis": "Modré, funkční, drobné škrábance od běžného ježdění. Děti už z něj vyrostly."
+    },
+    {
+      "id": "shanim-bedynky",
+      "typ": "poptavka",
+      "nazev": "Poptávka: dřevěné laťkové bedýnky na brambory",
+      "autor": "Zdeněk Pešek",
+      "cena": "Dohodou / zaplatím",
+      "datum": "2026-11-02",
+      "popis": "Sháním 5 až 10 dřevěných bedýnek na brambory do sklepa. Mohu si pro ně kdykoliv přijet po obci."
+    }
+  ],
+  "spolujizda": [
+    {
+      "id": "klatovy-rano",
+      "trasa": "Javoří Lhota do Klatov (náměstí a nemocnice)",
+      "kdy": "Každý pracovní den, odjezd 6:40 z návsi",
+      "navrat": "Odjezd z Klatov 16:15",
+      "ridic": "Ing. Martin Dvořák (č. p. 12)",
+      "volno": 2,
+      "prispevek": "30 Kč za jednu cestu na benzín",
+      "kontakt": "Dohoda přes aplikaci CodeKom nebo po telefonu"
+    },
+    {
+      "id": "plzen-skola",
+      "trasa": "Javoří Lhota do Plzně (Bory, univerzitní kampus)",
+      "kdy": "Úterý a čtvrtek, odjezd 7:00 od lípy",
+      "navrat": "Zpět kolem 17:30",
+      "ridic": "Tereza K. (studentka ZČU)",
+      "volno": 3,
+      "prispevek": "60 Kč za cestu",
+      "kontakt": "Ověřený profil občana v CodeKomu"
+    }
+  ],
+  "dobrovolnictvi": [
+    {
+      "id": "uklid-potoka",
+      "nazev": "Jarní úklid břehů Javornického potoka",
+      "organizator": "Obec Javoří Lhota a spolek Rybáři",
+      "termin": "Sobota 18. dubna 2027 od 09:00",
+      "misto": "Sraz u lávky na návsi",
+      "odmena": "Občerstvení a opékání špekáčků pro všechny dobrovolníky, pytle a rukavice zajistí obec",
+      "prihlaseno": 14,
+      "kapacita": 30
+    },
+    {
+      "id": "obecni-sad",
+      "nazev": "Dosadba starých odrůd v obecním sadu",
+      "organizator": "Místní akční skupina a obec",
+      "termin": "Sobota 9. května 2027 od 13:00",
+      "misto": "Obecní sad Podjavoří",
+      "odmena": "Káva, koláče a zasazený strom s jmenovkou vaší rodiny",
+      "prihlaseno": 6,
+      "kapacita": 10
+    }
+  ]
+}

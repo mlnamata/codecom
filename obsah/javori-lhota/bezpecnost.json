@@ -1,0 +1,76 @@
+{
+  "ztratyANalezy": [
+    {
+      "id": "pes-labrador",
+      "kategorie": "zvire",
+      "nazev": "Nalezený pes – kříženec labradora",
+      "datum": "2026-11-03",
+      "misto": "okraj lesa u Hájku (GPS 49.2314, 13.5122)",
+      "popis": "Zlatohnědý pes, věk cca 3–4 roky, klidné povahy, hnědý kožený obojek bez evidenční známky. Zvíře je v pořádku a nakrmené.",
+      "pece": "Dočasně v péči pana místostarosty Kosa. Kontaktován smluvní útulek Klatovy.",
+      "stav": "hleda-majitele"
+    },
+    {
+      "id": "svazek-klicu",
+      "kategorie": "vec",
+      "nazev": "Svazek 4 klíčů FAB s modrým přívěskem",
+      "datum": "2026-11-02",
+      "misto": "Lavička v autobusové zastávce na návsi",
+      "popis": "Čtyři stříbrné klíče FAB, malý visací klíček a plastový modrý přívěsek se čtyřlístkem.",
+      "pece": "Uloženo v kanceláři účetní na obecním úřadě.",
+      "stav": "k-vyzvednuti"
+    },
+    {
+      "id": "detska-cepice",
+      "kategorie": "vec",
+      "nazev": "Dětská pletená čepice s bambulí",
+      "datum": "2026-10-30",
+      "misto": "Dětské hřiště za školou",
+      "popis": "Teplá zimní čepice, šedo-červené pruhy.",
+      "pece": "K vyzvednutí na recepci školy nebo úřadu.",
+      "stav": "k-vyzvednuti"
+    }
+  ],
+  "aedDefibrilatory": [
+    {
+      "id": "aed-hasici",
+      "lokace": "Hasičská zbrojnice, Náves 12",
+      "umisteni": "Venkovní vyhřívaný zelený box vedle garážových vrat",
+      "dostupnost": "Nepřetržitě 24/7",
+      "pinBox": "PIN sdělí operátor linky 155 při tísňovém volání",
+      "typ": "Defibtech Lifeline AED s hlasovými pokyny v češtině",
+      "stav": "Pravidelně servisováno, baterie a elektrody OK (revize 09/2026)",
+      "souradnice": "49.2341, 13.5189"
+    },
+    {
+      "id": "aed-urad",
+      "lokace": "Obecní úřad, Náves 1",
+      "umisteni": "Zádveří budovy vlevo u vstupních dveří",
+      "dostupnost": "V otevírací době úřadu (Po–Čt 7:30–17:30, Pá 7:30–14:00)",
+      "pinBox": "Volně přístupný bez kódu",
+      "typ": "Philips HeartStart FRx",
+      "stav": "Plně funkční, připraven k použití",
+      "souradnice": "49.2338, 13.5182"
+    }
+  ],
+  "kamery": [
+    {
+      "id": "kamera-naves",
+      "nazev": "Náves – silnice a střed obce",
+      "umisteni": "Budova obecního úřadu, pohled na lípu a parkoviště",
+      "ucel": "Dopravní situace a sledování sněhové pokrývky pro zimní údržbu",
+      "obnovaSec": 30,
+      "gdprPoznamka": "V souladu s GDPR jsou obličeje osob a registrační značky vozidel automaticky softwarově rozostřeny.",
+      "stav": "online"
+    },
+    {
+      "id": "kamera-potok",
+      "nazev": "Javornický potok – vodočet u mostku",
+      "umisteni": "Příjezdová lávka k mlýnu",
+      "ucel": "Vizuální kontrola průtoku a stavu hladiny při přívalových deštích a tání sněhu",
+      "obnovaSec": 60,
+      "gdprPoznamka": "Záběr směřuje výhradně na vodní tok a měřicí lať, mimo obytné budovy a soukromé pozemky.",
+      "stav": "online"
+    }
+  ]
+}

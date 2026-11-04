@@ -1,0 +1,104 @@
+{
+  "bytyAPozemky": {
+    "obecniDomy": [
+      {
+        "id": "dum-na-vyhlidce",
+        "adresa": "Bytový dům Na Vyhlídce 42",
+        "celkemBytu": 8,
+        "startovaciByty": 2,
+        "volneByty": 1,
+        "popis": "Cihlový dům zrekonstruovaný v roce 2024 s tepelným čerpadlem a fotovoltaikou. Dispozice volného bytu 2+kk (54 m²), určen jako startovací pro mladé rodiny s trvalým pobytem."
+      }
+    ],
+    "poradnik": {
+      "pocetZadosti": 3,
+      "podminky": [
+        "Věk žadatele do 35 let v době podání žádosti",
+        "Trvalý pobyt v Javoří Lhotě nebo doložený pracovní poměr v dojezdové vzdálenosti",
+        "Žadatel ani manžel/partner nevlastní na území ČR jinou nemovitost k bydlení",
+        "Bodový systém schválený zastupitelstvem usnesením č. 14/2025"
+      ],
+      "aktualizace": "Listopad 2026"
+    },
+    "parcely": [
+      {
+        "cislo": "214/5",
+        "lokalita": "Pod Javorníkem – jižní svah",
+        "vymera": 850,
+        "cenaZaMetr": 1200,
+        "celkemCena": 1020000,
+        "zasitovani": "Voda, kanalizace, elektřina, optický internet přiveden na hranici pozemku",
+        "stav": "k-prodeji"
+      },
+      {
+        "cislo": "214/6",
+        "lokalita": "Pod Javorníkem – jižní svah",
+        "vymera": 910,
+        "cenaZaMetr": 1200,
+        "celkemCena": 1092000,
+        "zasitovani": "Kompletně zasíťováno, hotová příjezdová komunikace",
+        "stav": "rezervovano"
+      }
+    ]
+  },
+  "energetika": {
+    "komunitaNazev": "Energetické společenství Javoří Lhota z.s.",
+    "edcRegistrace": "EDC-CZ-2026-0814",
+    "instalovanyVykonCelkem": "40 kWp",
+    "aktualniVyroba": 23.7,
+    "vyrobaDnes": 94.2,
+    "kapacitaUloziste": 24,
+    "stavUloziste": 78,
+    "usporenoCo2Dnes": "48 kg",
+    "zdroje": [
+      {
+        "id": "fve-skola",
+        "nazev": "FVE Základní a mateřská škola",
+        "vykonKwp": 25,
+        "aktualneKw": 14.8,
+        "stav": "v-provozu",
+        "vyuziti": "Přednostní spotřeba pro školní kuchyni a tepelné čerpadlo, přebytky sdíleny"
+      },
+      {
+        "id": "fve-hasici",
+        "nazev": "FVE Hasičská zbrojnice",
+        "vykonKwp": 15,
+        "aktualneKw": 8.9,
+        "stav": "v-provozu",
+        "vyuziti": "Dobíjení techniky a obecního elektromobilu, ohřev TUV"
+      }
+    ],
+    "sdileniObcanum": {
+      "zapojenoDomacnosti": 18,
+      "volnaKapacita": "35 % přebytků",
+      "cenaKwh": "1,80 Kč / kWh (včetně DPH a distribučního poplatku)",
+      "usetrenoObcanumRocne": "cca 4 200 Kč na domácnost"
+    }
+  },
+  "hrbitov": {
+    "nazev": "Hřbitov u kostela svatého Václava",
+    "spravce": "Obecní úřad Javoří Lhota",
+    "hrobovaMistaCelkem": 240,
+    "obsazeno": 198,
+    "volnychMist": 42,
+    "radaPachtu": "Pachtovní smlouvy na 10 let, roční nájem 120 Kč/m²",
+    "vyznamneOsobnosti": [
+      {
+        "id": "pamatnik-padlych",
+        "jmeno": "Památník obětem 1. a 2. světové války",
+        "sektor": "Centrální kříž",
+        "letopocet": "1914–1945",
+        "popis": "Pietní místo se jmény 18 padlých občanů Javoří Lhoty a osad Hájek a Podjavoří.",
+        "zapalenychSvicek": 47
+      },
+      {
+        "id": "schuster",
+        "jmeno": "Johann Schuster",
+        "sektor": "Oddělení A, hrob 14",
+        "letopocet": "1842–1912",
+        "popis": "Mistr sklář a mecenáš obce, který v roce 1898 financoval stavbu obecní školy.",
+        "zapalenychSvicek": 23
+      }
+    ]
+  }
+}

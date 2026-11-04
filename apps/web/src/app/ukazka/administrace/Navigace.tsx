@@ -31,6 +31,16 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
     ],
   },
   {
+    nadpis: 'Chytrá obec a majetek',
+    id: 'sk-chytra-obec',
+    polozky: [
+      { nazev: 'IoT čidla a živá data', href: `${Z}/chytra-obec`, od: 'zaklad' },
+      { nazev: 'Komunita a půjčovna', href: `${Z}/komunita`, od: 'zaklad' },
+      { nazev: 'Majetek a energetika', href: `${Z}/majetek`, od: 'pokrocily' },
+      { nazev: 'Zastupitelský extranet', href: `${Z}/extranet`, od: 'pokrocily' },
+    ],
+  },
+  {
     nadpis: 'Obec',
     id: 'sk-obec',
     polozky: [

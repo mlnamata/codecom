@@ -1,0 +1,143 @@
+{
+  "posledniAktualizace": "2026-11-04T14:30:00.000Z",
+  "senzory": {
+    "ovzdusi": {
+      "stanice": "Náves – meteostanice ZŠ",
+      "aqi": 22,
+      "aqiStav": "Velmi dobré",
+      "teplota": 9.2,
+      "vlhkost": 68,
+      "tlak": 1018,
+      "pm25": 8.4,
+      "pm10": 14.1
+    },
+    "potok": {
+      "tok": "Javornický potok",
+      "profil": "mostek pod návsí (ř. km 4.2)",
+      "hladina": 48,
+      "jednotka": "cm",
+      "prutok": 0.65,
+      "prutokJednotka": "m³/s",
+      "stav": "Normal",
+      "stavNazev": "Běžný stav",
+      "stupne": {
+        "bdelost": 100,
+        "pohotovost": 140,
+        "ohrozeni": 180
+      },
+      "varovaniAktivni": false
+    },
+    "vozovka": {
+      "usek": "silnice III/171 – stoupání Podjavoří",
+      "teplotaPovrchu": 4.5,
+      "stavVozovky": "suchá",
+      "rizikoNamrazy": false
+    },
+    "puda": {
+      "lokalita": "obecní lesopark a sad",
+      "vlhkostPudy": 62,
+      "rizikoPozaru": "velmi nízké"
+    }
+  },
+  "technika": [
+    {
+      "id": "tatra-sypac",
+      "nazev": "Tatra 815 – sypač a radlice",
+      "typ": "Zimní údržba",
+      "ridic": "Josef Novák",
+      "stav": "pohotovost",
+      "stavText": "V pohotovosti na dvoře úřadu",
+      "posledniTrasa": "Dnes 05:40–07:15, prohrnuty okruhy Javoří Lhota, Hájek i Podjavoří",
+      "poloha": "Dvůr obecního úřadu"
+    },
+    {
+      "id": "zetor-traktor",
+      "nazev": "Zetor Proxima s vlečkou a čelním nakladačem",
+      "typ": "Údržba zeleně a svoz",
+      "ridic": "Václav Král",
+      "stav": "v-terenu",
+      "stavText": "Právě pracuje v terénu",
+      "posledniTrasa": "Svoz ořezaných větví z obecního sadu na kompostárnu",
+      "poloha": "Lokalita Na Rovném"
+    },
+    {
+      "id": "multicar",
+      "nazev": "Multicar M31 – zametač chodníků",
+      "typ": "Čištění komunikací",
+      "ridic": "Karel Marek",
+      "stav": "hotovo",
+      "stavText": "Trasa dokončena",
+      "posledniTrasa": "Zametání chodníků podél hlavní silnice a autobusových zálivů",
+      "poloha": "Garáž technických služeb"
+    }
+  ],
+  "parkovani": [
+    {
+      "id": "naves",
+      "nazev": "Centrální parkoviště Náves",
+      "kapacita": 25,
+      "volno": 18,
+      "obsazenost": 28,
+      "poplatek": "Zdarma (max. 3 hodiny s parkovacím kotoučem)"
+    },
+    {
+      "id": "zvonice",
+      "nazev": "Parkoviště u hřbitova a zvonice",
+      "kapacita": 12,
+      "volno": 6,
+      "obsazenost": 50,
+      "poplatek": "Bez poplatku a časového omezení"
+    }
+  ],
+  "nabijecky": [
+    {
+      "id": "ev-naves",
+      "nazev": "Obecní dobíjecí stanice EV",
+      "lokace": "Náves u obecního úřadu",
+      "konektory": [
+        { "typ": "Type 2 Mennekes", "vykon": "22 kW", "stav": "volno" },
+        { "typ": "Type 2 Mennekes", "vykon": "22 kW", "stav": "obsazeno" }
+      ],
+      "operator": "CodeKom Charge / Obec Javoří Lhota",
+      "cena": "7,50 Kč/kWh (pro občany obce s kartou 5,90 Kč/kWh)"
+    }
+  ],
+  "odjezdy": [
+    {
+      "linka": "Bus 431",
+      "smer": "Sušice, žel. st.",
+      "stanice": "Javoří Lhota, náves",
+      "odjezd": "14:15",
+      "zpozdeniMin": 2,
+      "nizkopodlazni": true,
+      "dopravce": "Arriva Střední Čechy"
+    },
+    {
+      "linka": "Bus 431",
+      "smer": "Klatovy, aut. nádr.",
+      "stanice": "Javoří Lhota, náves",
+      "odjezd": "14:48",
+      "zpozdeniMin": 0,
+      "nizkopodlazni": true,
+      "dopravce": "Arriva Střední Čechy"
+    },
+    {
+      "linka": "Vlak Os 17520",
+      "smer": "Horažďovice předměstí",
+      "stanice": "Javoří Lhota, žel. zastávka",
+      "odjezd": "15:02",
+      "zpozdeniMin": 0,
+      "nizkopodlazni": false,
+      "dopravce": "České dráhy"
+    },
+    {
+      "linka": "Bus 432",
+      "smer": "Kašperské Hory, nám.",
+      "stanice": "Javoří Lhota, náves",
+      "odjezd": "15:35",
+      "zpozdeniMin": 4,
+      "nizkopodlazni": true,
+      "dopravce": "ČSAD autobusy Plzeň"
+    }
+  ]
+}
