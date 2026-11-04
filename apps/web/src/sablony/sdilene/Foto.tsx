@@ -10,7 +10,7 @@ export function Foto({ sablona: klic, styl }: { sablona: string; styl: CSSProper
   const s = sablona(klic)
   const src = `/demo/foto/sablona-${s.cislo}-${klic}.webp`
   return (
-    <figure style={{ position: 'relative', ...styl, margin: 0, overflow: 'hidden' }}>
+    <figure className="foto-uvod" style={{ position: 'relative', ...styl, margin: 0, overflow: 'hidden' }}>
       <img
         src={src}
         alt={POPISY_FOTEK[klic] ?? 'Ilustrační fotografie obce'}

@@ -591,3 +591,26 @@ body {
     max-width: none;
   }
 }
+
+/*
+ * Fotografie v úvodu šablony: záhlaví, které v návrhu leží na kreslené ilustraci, dostane
+ * plnou plochu šablony, aby byl text čitelný na jakékoli fotce (Náves, Hřeben).
+ */
+.foto-uvod ~ header {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  box-shadow: 0 0 0 100vmax var(--bg);
+  clip-path: inset(0 -100vmax);
+}
+.deep > .foto-uvod ~ header {
+  background: var(--deep);
+  box-shadow: 0 0 0 100vmax var(--deep);
+}
+/* Tmavé šablony mají bílý text přímo na fotce, proto fotku ztlumí jednolitá vrstva. */
+.deep > .foto-uvod::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
