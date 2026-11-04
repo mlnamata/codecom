@@ -44,3 +44,10 @@
 .sablona-zvonice .dfrom,
 .sablona-zvonice .dto { color:var(--muted);font-size:15px }
 }
+
+/* Odkazy dokumentů úřední desky jsou cíle aspoň 24 px, údaje úřadu na telefonu pod sebou. */
+.sablona-zvonice .dodkaz { display:inline-block;padding-block:4px }
+@media (max-width:599.98px) {
+.sablona-zvonice .udaje-uradu { grid-template-columns:1fr!important }
+.sablona-zvonice .udaje-uradu dt { padding-bottom:0!important;border-bottom:0!important }
+}

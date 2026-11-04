@@ -10,7 +10,7 @@ import { Paticka } from './Paticka'
 import { denSlovem } from '../sdilene/format'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner, data, foto }: { banner: ReactNode; data: DataUvodu; foto: boolean }) {
+export function Uvod({ banner, data }: { banner: ReactNode; data: DataUvodu; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -33,7 +33,7 @@ export function Uvod({ banner, data, foto }: { banner: ReactNode; data: DataUvod
           </div>
         </div>
         {' '}
-        {foto ? <Foto sablona="zvonice" styl={{ marginTop: "40px", width: "100%", height: "clamp(220px, 30vw, 380px)", borderRadius: "4px" }} /> : null}
+        <Foto sablona="zvonice" styl={{ marginTop: "40px", width: "100%", height: "clamp(220px, 30vw, 380px)", borderRadius: "4px" }} />
         {' '}
         <section aria-labelledby="ukony" style={{ marginTop: "56px" }}>
           <h2 id="ukony" style={{ margin: "0 0 16px", fontFamily: "var(--font-newsreader), Georgia, serif", fontSize: "32px" }}>Nejčastější úkony</h2>
@@ -101,7 +101,7 @@ export function Uvod({ banner, data, foto }: { banner: ReactNode; data: DataUvod
                   <Fragment key={i}>
                     <div role="row" className="drow">
                       <span role="cell">
-                        <a href={d.href} style={{ fontWeight: "600" }}>{d.title}</a>
+                        <a href={d.href} className="dodkaz" style={{ fontWeight: "600" }}>{d.title}</a>
                         <span style={{ display: "block", fontSize: "15px", color: "var(--muted)" }}>{d.cat}{d.state}</span>
                       </span>
                       <span role="cell" className="dfrom">{d.from}</span>
@@ -129,7 +129,7 @@ export function Uvod({ banner, data, foto }: { banner: ReactNode; data: DataUvod
         <section aria-labelledby="urad" style={{ marginTop: "56px" }}>
           <h2 id="urad" style={{ margin: "0 0 16px", fontFamily: "var(--font-newsreader), Georgia, serif", fontSize: "32px" }}>Obecní úřad</h2>
           {' '}
-          <dl style={{ margin: "0", display: "grid", gridTemplateColumns: "minmax(140px, 220px) 1fr", borderTop: "1px solid var(--line)" }}>
+          <dl className="udaje-uradu" style={{ margin: "0", display: "grid", gridTemplateColumns: "minmax(140px, 220px) 1fr", borderTop: "1px solid var(--line)" }}>
             <dt style={{ padding: "12px 0", borderBottom: "1px solid var(--line)", color: "var(--muted)" }}>Úřední hodiny</dt>
             <dd style={{ margin: "0", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>{"pondělí a středa 8 až 17, úterý a čtvrtek 8 až 12"}</dd>
             <dt style={{ padding: "12px 0", borderBottom: "1px solid var(--line)", color: "var(--muted)" }}>Adresa</dt>
