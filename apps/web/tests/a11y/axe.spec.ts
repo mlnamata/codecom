@@ -63,3 +63,21 @@ test('axe: ukázka administrace', async ({ page }) => {
     await zkontroluj(page, cesta)
   }
 })
+
+const OBRAZOVKY_UROVNI = ['stranky', 'skladatel', 'schvalovani', 'vzhled', 'podweby', 'asistent', 'uzivatele', 'predplatne']
+
+for (const uroven of ['zaklad', 'pokrocily', 'advance']) {
+  test(`axe: administrace úrovně ${uroven}`, async ({ page }) => {
+    for (const o of OBRAZOVKY_UROVNI) {
+      await page.goto(`/ukazka/administrace/${o}?uroven=${uroven}`)
+      await zkontroluj(page, `${uroven} ${o}`)
+    }
+  })
+}
+
+test('axe: správa CodeKom', async ({ page }) => {
+  for (const cesta of ['/ukazka/codekom', '/ukazka/codekom/obce', '/ukazka/codekom/obce/javori-lhota', '/ukazka/codekom/faktury']) {
+    await page.goto(cesta)
+    await zkontroluj(page, cesta)
+  }
+})

@@ -1,0 +1,202 @@
+/* Úrovně editoru a interní správa v ukázce administrace. Navazuje na .admin v globals.css. */
+.admin__urovne {
+  display: inline-flex;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.admin__urovne a {
+  padding: 0 16px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  border-left: 1px solid var(--ink);
+}
+.admin__urovne a:first-child {
+  border-left: 0;
+}
+.admin__urovne a[aria-current="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+.admin__skupina {
+  margin: 20px 0 4px;
+  padding: 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.admin__navigace > div:first-child .admin__skupina {
+  margin-top: 0;
+}
+.admin__navigace a {
+  justify-content: space-between;
+  gap: 8px;
+}
+.admin__navigace a.zamceno {
+  color: var(--muted);
+}
+.admin__od {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.admin .panel-bily {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 0 0 16px;
+}
+.admin .radek-akci {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.admin .mala {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.admin .mala:disabled {
+  border-color: var(--line);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.admin .mala.hlavni {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+.admin .seznam-bloku {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  max-width: none;
+}
+.admin .seznam-bloku > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 16px;
+  margin: 0 0 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.admin .seznam-bloku > li.skryty {
+  border-style: dashed;
+  color: var(--muted);
+}
+.admin .tabulka-admin {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg);
+  font-size: 16px;
+}
+.admin .tabulka-admin th,
+.admin .tabulka-admin td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.admin .tabulka-admin thead th {
+  font-weight: 600;
+  border-bottom-color: var(--ink);
+}
+.admin .tabulka-admin .cislo {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.admin .posuvnik {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0 0 24px;
+}
+.admin .zamcena-stranka {
+  background: var(--bg);
+  border: 2px dashed var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+.admin .stav {
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.admin .stav.dobre { color: #1d6b34; }
+.admin .stav.pozor { color: #8a4b00; }
+.admin .stav.spatne { color: #a00d10; }
+.admin .stav.neutralni { color: var(--muted); }
+.admin .cisla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  max-width: none;
+}
+.admin .cisla li {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.admin .cisla strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.admin .nahled {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.admin .vzorek {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #8a8a84;
+  vertical-align: middle;
+}
+.admin .codekom-hlavicka {
+  background: #0a0a0a;
+  color: #ffffff;
+  border-bottom: 0;
+}
+.admin .codekom-hlavicka a,
+.admin .codekom-hlavicka .admin__nazev a {
+  color: #ffffff;
+}
+.admin .codekom-hlavicka :focus-visible {
+  outline-color: #ffffff;
+}
+.admin__navigace a.zamceno[aria-current="page"] {
+  color: var(--on-primary);
+}
+.admin__navigace a[aria-current="page"] .admin__od {
+  border-color: currentColor;
+}

@@ -103,7 +103,16 @@ export function naHtml(md: string, { bezH1 = false } = {}): string {
   if (bezH1) zdroj = zdroj.replace(/^# .+$/m, '')
   let html = marked.parse(zdroj, { async: false })
   html = html.replace(/<a href="(https?:[^"]+)"/g, '<a href="$1" rel="noopener noreferrer"')
-  html = html.replace(/<table>/g, '<div class="tabulka" role="region" aria-label="Tabulka, posuňte do strany" tabindex="0"><table>').replace(/<\/table>/g, '</table></div>')
+  // Každá tabulka dostane popisek podle nadpisu nad ní (unikátní oblasti pro čtečky).
+  let nadpis = 'Tabulka'
+  html = html.replace(/<h[1-4][^>]*>([^<]+)<\/h[1-4]>|<table>/g, (m: string, t?: string) => {
+    if (t) {
+      nadpis = t
+      return m
+    }
+    return `<div class="tabulka" role="region" aria-label="${esc(nadpis)}, tabulka" tabindex="0"><table>`
+  })
+  html = html.replace(/<\/table>/g, '</table></div>')
   html = html.replace(/<h([2-4])>([^<]+)<\/h\1>/g, (_, u: string, t: string) => `<h${u} id="${kotva(t)}">${t}</h${u}>`)
   return zvyrazni(html)
 }

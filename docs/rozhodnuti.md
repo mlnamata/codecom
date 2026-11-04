@@ -77,6 +77,10 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 4. 11. 2026 | Kolekce Payloadu (`tykaSe` v krizových hlášeních) se v prototypu nemění; sdílená pravidla používají `casti`. Změnu kolekce udělá prompt 01. | Aplikované migrace se nemění. |
 | 4. 11. 2026 | `loading.tsx` jen u stránek bez dynamického detailu. | Streamování by u detailu skrytého dokumentu vrátilo stav 200 místo 404. |
 | 4. 11. 2026 | Úložiště ukázky je v paměti procesu. Na Vercelu může mít každá instance funkce vlastní kopii, změny z administrace se nemusí projevit všude a po studeném startu zmizí. | Prototyp nemá databázi; trvalá data dodá prompt 01 (Supabase). |
+| 4. 11. 2026 | Fotky mají všechny šablony a jsou výchozí volba (`foto=1`). Generátor zná značku `<foto-obce>` a `data-foto` v předloze. Ilustrace zůstávají jako volba v pruhu ukázky. | Zakladatel chce místo kreslených ilustrací fotografie; nahrazuje řádek o 9 z 20 šablon. |
+| 4. 11. 2026 | Ukázka administrace má tři úrovně editoru, volené parametrem `?uroven=` a nezbytnou cookie `ukazka-uroven`. Obrazovky Pokročilého a Advance (skladatel, schvalování, podweby, vlastní barvy, AI asistent) drží stav jen v prohlížeči. | Ukazuje rozdíly úrovní podle 04-admin-editor.md; v ostrém provozu úroveň určí předplatné a kontroluje ji server. |
+| 4. 11. 2026 | Interní správa CodeKom (`/ukazka/codekom`): předplatné obcí, úroveň a moduly, faktury a jejich stav. Kromě Javoří Lhoty jsou obce smyšlené a tak označené. Úložiště je v paměti procesu. | Zakladatel chce správu předplatného a faktur; skutečné faktury a napojení na účetnictví [DOPLNIT: fakturační systém]. |
+| 4. 11. 2026 | Prezentační web: úvod, galerie a ceník skládám z textů v `obsah/prezentace` a navíc stránky úrovní `/urovne` a `/urovne/<uroven>` s maticí funkcí, rolemi a bloky z 04-admin-editor.md. | Zakladatel chce úrovně popsané detailně; texty úvodu jsou zkrácené věty z `uvod.md`. |
 
 ## Právo
 
@@ -91,7 +95,6 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 
 - Záložka AI v návrhu platformy je zatím jen osnova.
 - Seznamy na úvodu většiny šablon jsou statický text návrhu, napojit je ručně na data (prompt 07, zbývá).
-- Snímky šablon pro galerii (`pnpm --filter codekom-web snimky`) zatím nevznikly.
 - Skutečné ceny, holding a jeho název, první skutečná obec pro pilot.
 - Údaje CodeKomu pro prezentační web: IČO, sídlo, kontakty, jména pro stránku O nás (`[DOPLNIT]` v `obsah/prezentace`).
 - Kontrola právních dokumentů advokátem před podpisem s první obcí.

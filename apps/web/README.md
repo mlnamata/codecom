@@ -35,7 +35,10 @@ Pruh „Ukázka CodeKom“ nastavuje parametry URL. Odkaz otevře přesně daný
 | Lípa, druhá paleta, výstraha, fotografie | `/?sablona=lipa&paleta=1&krize=warning&foto=1` |
 | Úřad bez banneru | `/?sablona=urad&krize=off` |
 | Banner podle dat obce | `/?krize=auto` |
-| Ukázka administrace | `/ukazka/administrace` |
+| Ukázka administrace, úroveň Základ | `/ukazka/administrace?uroven=zaklad` |
+| Ukázka administrace, úroveň Pokročilý | `/ukazka/administrace?uroven=pokrocily` |
+| Ukázka administrace, úroveň Advance | `/ukazka/administrace?uroven=advance` |
+| Interní správa CodeKom (předplatné, faktury) | `/ukazka/codekom` |
 
 Parametry: `sablona` (klíč šablony, například `naves`, `zvonice`, `urad`), `paleta` (0 až 2), `krize` (`off`, `info`, `warning`, `emergency`, `auto`), `foto` (0 nebo 1, výchozí 1: fotografie). Volba se uloží do nezbytné cookie `ukazka`.
 
