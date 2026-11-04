@@ -1,10 +1,11 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S13-Mlyn.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -59,7 +60,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
           </dl>
         </section>
         {' '}
-        {foto ? <Foto sablona="mlyn" styl={{ width: "100%", height: "clamp(240px, 30vw, 420px)" }} /> : null}
+        <FotoDlazdice soubor="sablona-13-mlyn.webp" alt={POPISY_FOTEK.mlyn ?? ""} styl={{ width: "100%", height: "clamp(240px, 30vw, 420px)" }} />
         {' '}
         <section id="prace13" aria-labelledby="prace13-t" style={{ background: "var(--surface)" }}>
           <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px)" }}>
@@ -94,7 +95,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             {' '}
             <p style={{ margin: "16px 0 0" }}>
               {"Nabízíte práci v obci? "}
-              <a href="/obecni-urad" style={{ color: "var(--link)", fontWeight: "600" }}>Pošlete nám inzerát</a>
+              <a href="/obecni-urad" className="hit" style={{ color: "var(--link)", fontWeight: "600" }}>Pošlete nám inzerát</a>
               , zveřejníme ho zdarma.
             </p>
           </div>
@@ -122,31 +123,8 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             </p>
           </div>
           {' '}
-          <svg viewBox="0 0 600 380" role="img" aria-label="Plánek parcel Za pilou: P1 a P3 volné, P2 rezervovaná, vedle pila a potok" style={{ flex: "1.4 1 420px", minWidth: "0", width: "100%", height: "auto", borderRadius: "8px", background: "var(--surface)" }}>
-            <defs>
-              <pattern id="srafa13" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                <rect width="10" height="10" style={{ fill: "var(--bg)" }}></rect>
-                <path d="M0 0 V10" style={{ stroke: "var(--accent)" }} strokeWidth="3"></path>
-              </pattern>
-            </defs>
-            <path d="M0 330 C120 300 220 360 340 320 S520 290 600 310 V380 H0z" style={{ fill: "var(--accent)" }} opacity="0.25"></path>
-            <rect x="0" y="150" width="600" height="28" style={{ fill: "var(--bg)" }}></rect>
-            <path d="M0 164 H600" style={{ stroke: "var(--line)" }} strokeWidth="2" strokeDasharray="14 10"></path>
-            <rect x="30" y="30" width="180" height="104" rx="2" style={{ fill: "var(--muted)" }} opacity="0.5"></rect>
-            <text x="120" y="88" textAnchor="middle" style={{ fill: "var(--ink)", fontFamily: "var(--font-barlow), sans-serif", fontWeight: "600", fontSize: "18px" }}>Pila</text>
-            <rect x="230" y="30" width="160" height="104" rx="2" style={{ fill: "var(--primary)" }}></rect>
-            <text x="310" y="78" textAnchor="middle" style={{ fill: "var(--on-primary)", fontFamily: "var(--font-barlow-condensed), sans-serif", fontWeight: "600", fontSize: "30px" }}>P1</text>
-            <text x="310" y="104" textAnchor="middle" style={{ fill: "var(--on-primary)", fontFamily: "var(--font-barlow), sans-serif", fontSize: "15px" }}>1,8 ha, volná</text>
-            <rect x="410" y="30" width="160" height="104" rx="2" style={{ fill: "url(#srafa13)", stroke: "var(--ink)" }} strokeWidth="1.5"></rect>
-            <text x="490" y="78" textAnchor="middle" style={{ fill: "var(--ink)", fontFamily: "var(--font-barlow-condensed), sans-serif", fontWeight: "600", fontSize: "30px" }}>P2</text>
-            <rect x="436" y="88" width="108" height="24" rx="2" style={{ fill: "var(--bg)" }}></rect>
-            <text x="490" y="105" textAnchor="middle" style={{ fill: "var(--ink)", fontFamily: "var(--font-barlow), sans-serif", fontSize: "15px" }}>rezervovaná</text>
-            <rect x="230" y="194" width="200" height="100" rx="2" style={{ fill: "var(--primary)" }}></rect>
-            <text x="330" y="238" textAnchor="middle" style={{ fill: "var(--on-primary)", fontFamily: "var(--font-barlow-condensed), sans-serif", fontWeight: "600", fontSize: "30px" }}>P3</text>
-            <text x="330" y="264" textAnchor="middle" style={{ fill: "var(--on-primary)", fontFamily: "var(--font-barlow), sans-serif", fontSize: "15px" }}>1,3 ha, volná</text>
-            <text x="40" y="360" style={{ fill: "var(--ink)", fontFamily: "var(--font-barlow), sans-serif", fontSize: "15px" }}>Javornický potok</text>
-            <text x="560" y="190" textAnchor="end" style={{ fill: "var(--muted)", fontFamily: "var(--font-barlow), sans-serif", fontSize: "14px" }}>silnice na Hájek</text>
-          </svg>
+          {/* Kreslený plánek měl na telefonu nečitelné popisky, stav parcel je v seznamu vlevo. */}
+          <FotoDlazdice soubor="sablona-16-kompas.webp" alt={POPISY_FOTEK.kompas ?? ""} styl={{ flex: "1.4 1 420px", minWidth: "0", aspectRatio: "16 / 10", alignSelf: "flex-start", borderRadius: "8px" }} />
         </section>
       </main>
       <Paticka />
