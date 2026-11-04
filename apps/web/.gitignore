@@ -4,3 +4,4 @@ node_modules
 *.tsbuildinfo
 media
 dokumenty
+next-env.d.ts
