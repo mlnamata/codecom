@@ -8,7 +8,7 @@ import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -17,41 +17,13 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
         <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "8px clamp(16px, 4vw, 32px)", display: "flex", flexWrap: "wrap", gap: "4px 24px" }}>
           <span>Úřad dnes 8 až 17 hodin</span>
           <span>[TELEFON]</span>
-          <a href="/obecni-urad" style={{ color: "var(--on-deep)" }}>[E-MAIL]</a>
+          <a href="/obecni-urad" className="odkaz-lista" style={{ color: "var(--on-deep)" }}>[E-MAIL]</a>
         </div>
       </aside>
       <Hlavicka />
       <main id="obsah" tabIndex={-1}>
         <section style={{ display: "flex", flexWrap: "wrap" }}>
-          {foto ? (
-            <Foto sablona="studanka" styl={{ flex: "1 1 480px", minWidth: "0", minHeight: "360px", display: "block" }} />
-          ) : (
-            <svg viewBox="0 0 720 460" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Studánka u kaple svaté Anny pod Javorníkem" style={{ flex: "1 1 480px", minWidth: "0", minHeight: "360px", display: "block" }}>
-              <rect width="720" height="460" style={{ fill: v.sky }}></rect>
-              <path d="M0 230 C140 170 260 110 380 96 S600 150 720 170 V460 H0z" style={{ fill: "var(--tree2)" }} opacity="0.35"></path>
-              <path d="M60 360 l60 -190 l60 190z" style={{ fill: "var(--tree)" }}></path>
-              <path d="M150 360 l46 -150 l46 150z" style={{ fill: "var(--tree2)" }}></path>
-              <path d="M520 360 l64 -210 l64 210z" style={{ fill: "var(--tree)" }}></path>
-              <path d="M460 360 l42 -136 l42 136z" style={{ fill: "var(--tree2)" }}></path>
-              <path d="M620 360 l40 -120 l40 120z" style={{ fill: "var(--tree2)" }}></path>
-              <rect y="350" width="720" height="110" style={{ fill: v.ground }}></rect>
-              <path d="M290 330 h140 v44 h-140z" style={{ fill: "var(--tree2)" }}></path>
-              <path d="M272 300 l88 -58 l88 58z" style={{ fill: "var(--ink)" }}></path>
-              <rect x="296" y="300" width="10" height="34" style={{ fill: "var(--ink)" }}></rect>
-              <rect x="414" y="300" width="10" height="34" style={{ fill: "var(--ink)" }}></rect>
-              <path d="M190 400 q50 -12 100 0 t100 0 t100 0 t100 0" strokeWidth="8" fill="none" strokeLinecap="round" style={{ stroke: "var(--water)" }}></path>
-              <path d="M250 424 q50 -10 100 0 t100 0 t100 0" strokeWidth="5" fill="none" strokeLinecap="round" style={{ stroke: "var(--water)" }}></path>
-              <g style={{ opacity: v.snowOn, fill: "#FFFFFF" }}>
-                <circle cx="90" cy="80" r="4"></circle>
-                <circle cx="220" cy="140" r="3"></circle>
-                <circle cx="330" cy="60" r="4"></circle>
-                <circle cx="460" cy="120" r="3"></circle>
-                <circle cx="610" cy="70" r="4"></circle>
-                <circle cx="680" cy="200" r="3"></circle>
-                <circle cx="40" cy="200" r="3"></circle>
-              </g>
-            </svg>
-          )}
+          <Foto sablona="studanka" styl={{ flex: "1 1 480px", minWidth: "0", minHeight: "360px", display: "block" }} />
           {' '}
           <div className="deep" style={{ flex: "1 1 400px", minWidth: "0", background: "var(--deep)", color: "var(--on-deep)", padding: "clamp(32px, 5vw, 64px) clamp(24px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: "20px" }}>
             <h1 style={{ margin: "0", fontFamily: "var(--font-alegreya), Georgia, serif", fontWeight: "500", fontSize: "clamp(40px, 4.4vw, 60px)", lineHeight: "1.1" }}>
@@ -72,7 +44,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
         </section>
         {' '}
         <section style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 clamp(16px, 4vw, 32px)", display: "flex", flexWrap: "wrap", gap: "24px", alignItems: "stretch" }}>
-          <form role="search" style={{ flex: "1 1 300px", minWidth: "0", marginTop: "-48px", padding: "28px", borderRadius: "4px", background: "var(--accent)", color: "var(--on-accent)", display: "flex", flexDirection: "column", gap: "12px", position: "relative" }} action="/hledat" method="get">
+          <form role="search" className="hledani-prekryv" style={{ flex: "1 1 300px", minWidth: "0", marginTop: "-48px", padding: "28px", borderRadius: "4px", background: "var(--accent)", color: "var(--on-accent)", display: "flex", flexDirection: "column", gap: "12px", position: "relative" }} action="/hledat" method="get">
             <h2 style={{ margin: "0", fontFamily: "var(--font-alegreya), Georgia, serif", fontSize: "26px" }}>Hledáte něco?</h2>
             {' '}
             <label htmlFor="q03" style={{ fontWeight: "500" }}>Hledat na webu obce</label>

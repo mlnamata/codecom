@@ -33,3 +33,9 @@
 @media (prefers-reduced-motion:reduce) {
 .sablona-studanka * { transition:none!important;animation:none!important }
 }
+
+/* Odkaz v horní liště je cíl aspoň 24 px. Na telefonu hledání nepřekrývá přepínač Léto a zima. */
+.sablona-studanka .odkaz-lista { display:inline-block;padding-block:4px }
+@media (max-width:767.98px) {
+.sablona-studanka .hledani-prekryv { margin-top:24px!important }
+}
