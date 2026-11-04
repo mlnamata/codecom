@@ -33,3 +33,9 @@
 @media (prefers-reduced-motion:reduce) {
 .sablona-vinice * { transition:none!important;animation:none!important }
 }
+/* Úvod podle šablony Sirius: karta s titulkem leží přes spodní okraj velké fotky, štítek AI je proto nahoře. */
+.sablona-vinice .vn-foto figcaption { top:12px!important;bottom:auto!important }
+.sablona-vinice .vn-pres { margin-top:-120px!important }
+@media (max-width:767.98px) {
+.sablona-vinice .vn-pres { margin-top:-48px!important }
+}
