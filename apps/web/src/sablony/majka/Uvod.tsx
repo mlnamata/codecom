@@ -1,10 +1,10 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S05-Majka.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       <div aria-hidden="true" style={{ display: "flex", height: "8px" }}>
@@ -116,14 +116,8 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
           </div>
         </section>
         {' '}
-        <section aria-labelledby="spolky" style={{ position: "relative", overflow: "hidden", maxWidth: "1200px", margin: "0 auto", padding: "72px clamp(16px, 4vw, 32px)" }}>
-          {foto ? (
-            <Foto sablona="majka" styl={{ position: "absolute", top: "8px", left: "0", width: "100%", height: "auto", pointerEvents: "none" }} />
-          ) : (
-            <svg aria-hidden="true" viewBox="0 0 1000 240" preserveAspectRatio="xMidYMin meet" style={{ position: "absolute", top: "8px", left: "0", width: "100%", height: "auto", pointerEvents: "none" }}>
-              <text x="500" y="210" textAnchor="middle" style={{ fontFamily: "var(--font-big-shoulders), 'Arial Narrow', sans-serif", fontWeight: "600", fontSize: "260px", fill: "var(--line)" }}>Spolky</text>
-            </svg>
-          )}
+        <section aria-labelledby="spolky" style={{ maxWidth: "1200px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 72px" }}>
+          <FotoDlazdice soubor="sablona-05-majka.webp" alt="Stavění máje na vesnické slavnosti, stuhy a věnec, lidé jsou vidět zezadu." styl={{ width: "100%", aspectRatio: "16 / 6", borderRadius: "4px", marginBottom: "32px" }} />
           {' '}
           <h2 id="spolky" style={{ position: "relative", margin: "0 0 24px", fontFamily: "var(--font-big-shoulders), 'Arial Narrow', sans-serif", fontWeight: "600", fontSize: "52px" }}>{"Spolky v obci"}</h2>
           {' '}
