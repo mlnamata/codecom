@@ -1,23 +1,34 @@
 /* Úrovně editoru a interní správa v ukázce administrace. Navazuje na .admin v globals.css. */
 .admin__urovne {
   display: inline-flex;
-  border: 1px solid var(--ink);
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  overflow: hidden;
+  padding: 3px;
+  gap: 2px;
 }
 .admin__urovne a {
-  padding: 0 16px;
-  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: 0;
+  color: var(--muted);
   text-decoration: none;
+  font-size: 13.5px;
   font-weight: 500;
-  border-left: 1px solid var(--ink);
+  transition: all 0.15s ease;
 }
-.admin__urovne a:first-child {
-  border-left: 0;
+.admin__urovne a:hover {
+  color: var(--ink);
 }
 .admin__urovne a[aria-current="true"] {
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 .admin__skupina {
   margin: 20px 0 4px;
@@ -189,9 +200,46 @@
   color: #ffffff;
   border-bottom: 0;
 }
+.admin .codekom-hlavicka {
+  background: #181816;
+  color: #f5f5f0;
+  border-bottom-color: #2e2e2a;
+}
 .admin .codekom-hlavicka a,
 .admin .codekom-hlavicka .admin__nazev a {
   color: #ffffff;
+}
+.admin .codekom-hlavicka .admin__obec {
+  color: #a3a39e;
+}
+.admin .codekom-hlavicka .admin__stitek {
+  background: #242420;
+  border-color: #383832;
+  color: #d6d6d0;
+}
+.admin .codekom-hlavicka button {
+  border-color: #383834;
+  border-radius: 6px;
+  background: #22221f;
+  color: #ffffff;
+}
+.admin .codekom-hlavicka button:hover {
+  border-color: #55554f;
+  background: #2a2a26;
+}
+.admin .codekom-hlavicka button[type="submit"] {
+  background: #f5f5f0;
+  border-color: #f5f5f0;
+  color: #181816;
+}
+.admin .codekom-hlavicka .admin__web {
+  background: #22221f;
+  border-color: #383834;
+  color: #ffffff !important;
+}
+.admin .codekom-hlavicka .admin__web:hover {
+  border-color: #55554f;
+  background: #2a2a26;
 }
 .admin .codekom-hlavicka :focus-visible {
   outline-color: #ffffff;
@@ -211,27 +259,54 @@
   .admin__menu {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     width: 100%;
     min-height: 48px;
     padding: 0 16px;
-    border: 1px solid var(--admin-linka, #8a8a84);
+    border: 1px solid var(--line);
     border-radius: 8px;
-    background: #ffffff;
-    color: #1a1a18;
+    background: var(--bg);
+    color: var(--ink);
     font: inherit;
+    font-size: 15px;
     font-weight: 600;
     text-align: left;
     cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.15s ease;
+  }
+  .admin__menu:hover {
+    border-color: var(--ink);
+  }
+  .admin__menu-titulek {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
   .admin__menu-stranka {
-    font-weight: 400;
-    color: #4a4a46;
+    margin-left: auto;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .admin__menu-sipka {
+    flex: 0 0 16px;
+    color: var(--muted);
   }
   .admin__navigace-obsah[data-otevreno="false"] {
     display: none;
   }
   .admin__navigace-obsah[data-otevreno="true"] {
-    margin-top: 8px;
+    margin-top: 10px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   }
 }

@@ -67,13 +67,19 @@ export function PrepinacUkazky({ sablony, sablona, paleta, krize, vynuceno, foto
     <section className="pruh-ukazky" aria-labelledby={`${id}-nadpis`}>
       <div className="pruh-ukazky__obsah">
         <div className="pruh-ukazky__hlava">
-          <h2 id={`${id}-nadpis`} className="pruh-ukazky__nadpis">
-            Ukázka CodeKom
-          </h2>
+          <div className="pruh-ukazky__znacka">
+            <h2 id={`${id}-nadpis`} className="pruh-ukazky__nadpis">
+              CodeKom
+            </h2>
+            <span className="pruh-ukazky__odznak">Ukázka</span>
+          </div>
           <p className="pruh-ukazky__stav">{stav}</p>
           {codekomUrl ? (
             <a href={codekomUrl} className="pruh-ukazky__zpet">
-              Zpět na web CodeKom
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              <span>Zpět na web CodeKom</span>
             </a>
           ) : null}
           <button
@@ -83,7 +89,14 @@ export function PrepinacUkazky({ sablony, sablona, paleta, krize, vynuceno, foto
             aria-controls={`${id}-panel`}
             onClick={() => setOtevreno((o) => !o)}
           >
-            {otevreno ? 'Skrýt nastavení' : 'Nastavit'}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              {otevreno ? (
+                <path d="M18 6L6 18M6 6l12 12" />
+              ) : (
+                <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" />
+              )}
+            </svg>
+            <span>{otevreno ? 'Skrýt nastavení' : 'Nastavit'}</span>
           </button>
         </div>
 
@@ -142,8 +155,23 @@ export function PrepinacUkazky({ sablony, sablona, paleta, krize, vynuceno, foto
           ) : null}
 
           <nav aria-label="Ukázka" className="pruh-ukazky__odkazy">
-            <a href="/ukazka/administrace">Administrace</a>
-            {appUrl ? <a href={appUrl}>Aplikace</a> : null}
+            <a href="/ukazka/administrace">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg>
+              <span>Administrace</span>
+            </a>
+            {appUrl ? (
+              <a href={appUrl}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                  <line x1="12" y1="18" x2="12.01" y2="18" />
+                </svg>
+                <span>Aplikace</span>
+              </a>
+            ) : null}
           </nav>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
+import { ZnakObce } from '@/sablony/sdilene/ZnakObce'
 import { NAZEV_UROVNE, PRINCIP_UROVNE, UROVNE } from '@/ukazka/uroven'
 import { urovenAdministrace } from '@/ukazka/uroven-server'
 import { FormObnovit } from './Formulare'
@@ -24,7 +25,10 @@ export default async function AdministraceLayout({ children }: { children: React
       <header className="admin__hlavicka">
         <p className="admin__nazev">
           <a href="/ukazka/administrace">
-            Administrace <span className="admin__obec">obce Javoří Lhota</span>
+            <ZnakObce velikost={28} />
+            <span>
+              <strong>Administrace</strong> <span className="admin__obec">obce Javoří Lhota</span>
+            </span>
           </a>
         </p>
         <nav aria-label="Úroveň editoru v ukázce" className="admin__urovne">
@@ -38,7 +42,11 @@ export default async function AdministraceLayout({ children }: { children: React
           <p className="admin__stitek">Ukázka, data se po restartu vrátí</p>
           <FormObnovit />
           <a href="/" className="admin__web">
-            Zobrazit web
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span>Zobrazit web</span>
           </a>
         </div>
       </header>

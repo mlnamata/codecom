@@ -21,7 +21,14 @@ export default function SpravaLayout({ children }: { children: ReactNode }) {
       <header className="admin__hlavicka codekom-hlavicka">
         <p className="admin__nazev">
           <a href="/ukazka/codekom">
-            Správa <span className="admin__obec">CodeKom</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flex: '0 0 auto' }}>
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            <span>
+              <strong>Správa</strong> <span className="admin__obec">CodeKom</span>
+            </span>
           </a>
         </p>
         <div className="admin__akce">
@@ -30,7 +37,12 @@ export default function SpravaLayout({ children }: { children: ReactNode }) {
             <button type="submit">Obnovit data ukázky</button>
           </form>
           <a href="/ukazka/administrace" className="admin__web">
-            Administrace obce
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <line x1="3" y1="9" x2="21" y2="9" />
+              <line x1="9" y1="21" x2="9" y2="9" />
+            </svg>
+            <span>Administrace obce</span>
           </a>
         </div>
       </header>

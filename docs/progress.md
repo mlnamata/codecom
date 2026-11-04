@@ -11,6 +11,8 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 
 ## Hotovo
 
+- Záhlavní menu: lišta ukázky (nové ikony, kompaktní tmavý vzhled, elegantní přepínač palet bez bílého bliknutí), administrace a správa (znak obce, nový přepínač úrovní, tlačítko Zobrazit web s ikonou, animovaná rozbalovací navigace na telefonu s indikátorem stránky), šablony obcí (interaktivní stavy odkazů na desktopu, přehledné a kontrastní rozbalovací karty mobilního menu).
+
 - Lišta ukázky: tmavá, sbalitelná na telefonu, tlačítko „Zpět na web CodeKom“ (`NEXT_PUBLIC_CODEKOM_URL`). Administrace: sbalitelná navigace na telefonu, tabulky už nepřetékají stránku.
 
 - Firemní web přesunutý do `mlnamata/codekom_web` a smazaný odsud (`apps/prezentace`, `obsah/prezentace`, `docs/tvrzeni-prezentace.md`).

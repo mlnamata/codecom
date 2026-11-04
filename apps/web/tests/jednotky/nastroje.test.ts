@@ -8,7 +8,7 @@ import { zkontrolujText } from '../../../../scripts/unslop.mjs'
 
 const WEB = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 const ROOT = path.resolve(WEB, '..', '..')
-const PYTHON = process.env.PYTHON ?? 'python'
+const PYTHON = process.env.PYTHON ?? (spawnSync('python3', ['--version']).status === 0 ? 'python3' : 'python')
 
 describe('unslop', () => {
   it('najde řez 700, přechod, verzálky, šipku a vykřičník', () => {
