@@ -18,11 +18,13 @@ for (const s of SABLONY) {
   })
 }
 
-test('varianta Fotografie má popisek a alt', async ({ page }) => {
+test('každá fotka má alt a vodoznak AI', async ({ page }) => {
   await page.goto('/?sablona=naves&paleta=0&krize=off&foto=1')
-  const foto = page.locator('figure img').first()
-  await expect(foto).toHaveAttribute('alt', /Náves vesnice/)
-  await expect(page.locator('figure figcaption img[alt="AI"]')).toBeVisible()
+  await expect(page.locator('figure img').first()).toHaveAttribute('alt', /Náves vesnice/)
+  const fotky = page.locator('figure:has(figcaption img[alt="AI"])')
+  await expect(fotky.first()).toBeVisible()
+  // Sirius má fotku úvodu i fotku u zprávy, obě s vodoznakem.
+  expect(await fotky.count()).toBe(await page.locator('figure').count())
 })
 
 test('šablony ukazují jen fotografie, ne kreslené ilustrace', async ({ page }) => {
