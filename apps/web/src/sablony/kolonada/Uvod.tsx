@@ -1,9 +1,10 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S12-Kolonada.html. */
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner }: { banner: ReactNode }) {
+export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -29,18 +30,22 @@ export function Uvod({ banner }: { banner: ReactNode }) {
             </div>
             {' '}
             <div style={{ flex: "0 1 400px", minWidth: "0", margin: "0 auto" }}>
-              <svg viewBox="0 0 400 480" role="img" aria-label="Ilustrace: starostka v oblouku kolonády u pramene" style={{ width: "100%", height: "auto", display: "block" }}>
-                <path d="M20 480 V200 a180 180 0 0 1 360 0 V480z" style={{ fill: "var(--bg)" }}></path>
-                <path d="M44 480 V204 a156 156 0 0 1 312 0 V480z" style={{ fill: "var(--primary)" }} opacity="0.14"></path>
-                <circle cx="200" cy="210" r="58" style={{ fill: "var(--primary)" }} opacity="0.85"></circle>
-                <path d="M146 214 a54 60 0 0 1 108 0 c0 -50 -22 -78 -54 -78 s-54 28 -54 78z" style={{ fill: "var(--ink)" }} opacity="0.85"></path>
-                <path d="M84 480 c0 -96 52 -150 116 -150 s116 54 116 150z" style={{ fill: "var(--primary)" }}></path>
-                <path d="M176 334 l24 40 l24 -40" style={{ fill: "none", stroke: "var(--bg)" }} strokeWidth="4" strokeLinejoin="round"></path>
-                <g style={{ stroke: "var(--accent)" }} strokeWidth="2" fill="none">
-                  <path d="M20 200 a180 180 0 0 1 360 0"></path>
-                  <path d="M20 480 V200 M380 480 V200"></path>
-                </g>
-              </svg>
+              {foto ? (
+                <Foto sablona="kolonada" styl={{ width: "100%", height: "auto", aspectRatio: "400 / 480", borderRadius: "200px 200px 0 0", display: "block" }} />
+              ) : (
+                <svg viewBox="0 0 400 480" role="img" aria-label="Ilustrace: starostka v oblouku kolonády u pramene" style={{ width: "100%", height: "auto", aspectRatio: "400 / 480", borderRadius: "200px 200px 0 0", display: "block" }}>
+                  <path d="M20 480 V200 a180 180 0 0 1 360 0 V480z" style={{ fill: "var(--bg)" }}></path>
+                  <path d="M44 480 V204 a156 156 0 0 1 312 0 V480z" style={{ fill: "var(--primary)" }} opacity="0.14"></path>
+                  <circle cx="200" cy="210" r="58" style={{ fill: "var(--primary)" }} opacity="0.85"></circle>
+                  <path d="M146 214 a54 60 0 0 1 108 0 c0 -50 -22 -78 -54 -78 s-54 28 -54 78z" style={{ fill: "var(--ink)" }} opacity="0.85"></path>
+                  <path d="M84 480 c0 -96 52 -150 116 -150 s116 54 116 150z" style={{ fill: "var(--primary)" }}></path>
+                  <path d="M176 334 l24 40 l24 -40" style={{ fill: "none", stroke: "var(--bg)" }} strokeWidth="4" strokeLinejoin="round"></path>
+                  <g style={{ stroke: "var(--accent)" }} strokeWidth="2" fill="none">
+                    <path d="M20 200 a180 180 0 0 1 360 0"></path>
+                    <path d="M20 480 V200 M380 480 V200"></path>
+                  </g>
+                </svg>
+              )}
             </div>
           </div>
         </section>

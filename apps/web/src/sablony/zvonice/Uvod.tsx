@@ -3,13 +3,14 @@
 
 import type { DataUvodu } from '../sdilene/typy'
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { denSlovem } from '../sdilene/format'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner, data }: { banner: ReactNode; data: DataUvodu }) {
+export function Uvod({ banner, data, foto }: { banner: ReactNode; data: DataUvodu; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -31,6 +32,8 @@ export function Uvod({ banner, data }: { banner: ReactNode; data: DataUvodu }) {
             </p>
           </div>
         </div>
+        {' '}
+        {foto ? <Foto sablona="zvonice" styl={{ marginTop: "40px", width: "100%", height: "clamp(220px, 30vw, 380px)", borderRadius: "4px" }} /> : null}
         {' '}
         <section aria-labelledby="ukony" style={{ marginTop: "56px" }}>
           <h2 id="ukony" style={{ margin: "0 0 16px", fontFamily: "var(--font-newsreader), Georgia, serif", fontSize: "32px" }}>Nejčastější úkony</h2>

@@ -37,7 +37,7 @@ Pruh „Ukázka CodeKom“ nastavuje parametry URL. Odkaz otevře přesně daný
 | Banner podle dat obce | `/?krize=auto` |
 | Ukázka administrace | `/ukazka/administrace` |
 
-Parametry: `sablona` (klíč šablony, například `naves`, `zvonice`, `urad`), `paleta` (0 až 2), `krize` (`off`, `info`, `warning`, `emergency`, `auto`), `foto` (0 nebo 1). Volba se uloží do nezbytné cookie `ukazka`.
+Parametry: `sablona` (klíč šablony, například `naves`, `zvonice`, `urad`), `paleta` (0 až 2), `krize` (`off`, `info`, `warning`, `emergency`, `auto`), `foto` (0 nebo 1, výchozí 1: fotografie). Volba se uloží do nezbytné cookie `ukazka`.
 
 ## Proměnné
 

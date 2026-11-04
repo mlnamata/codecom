@@ -2,12 +2,13 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S04-Lipa.html. */
 
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner }: { banner: ReactNode }) {
+export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -56,6 +57,8 @@ export function Uvod({ banner }: { banner: ReactNode }) {
             </div>
             {' '}
             <aside aria-labelledby="dnes" style={{ flex: "1 1 300px", minWidth: "0", display: "flex", flexDirection: "column", gap: "8px" }}>
+              {foto ? <Foto sablona="lipa" styl={{ width: "100%", height: "200px", borderRadius: "12px", marginBottom: "8px" }} /> : null}
+              {' '}
               <h2 id="dnes" style={{ margin: "0 0 4px", fontSize: "18px", fontWeight: "600" }}>{"Dnes v Javoří Lhotě"}</h2>
               {' '}
               <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", boxShadow: "inset 0 0 0 1px var(--line)" }}>

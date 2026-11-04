@@ -1,9 +1,10 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S18-Zpravodaj.html. */
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner }: { banner: ReactNode }) {
+export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -13,20 +14,24 @@ export function Uvod({ banner }: { banner: ReactNode }) {
         {' '}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "32px" }}>
           <article style={{ flex: "2.2 1 560px", minWidth: "0" }}>
-            <svg viewBox="0 0 720 300" role="img" aria-label="Ilustrace: zavřený most přes Javornický potok a objížďka přes Hájek" style={{ display: "block", width: "100%", height: "auto", background: "var(--paper)" }}>
-              <path d="M0 210 C160 190 260 240 400 220 S620 180 720 200 V300 H0z" style={{ fill: "var(--river)" }}></path>
-              <path d="M240 150 h240 v20 h-240z" style={{ fill: "var(--ink)" }}></path>
-              <path d="M260 170 v60 M460 170 v60" style={{ stroke: "var(--ink)" }} strokeWidth="10"></path>
-              <g style={{ fill: "var(--accent)" }}>
-                <rect x="230" y="116" width="36" height="34"></rect>
-                <rect x="454" y="116" width="36" height="34"></rect>
-              </g>
-              <g style={{ stroke: "var(--bg)" }} strokeWidth="5">
-                <path d="M232 122 l32 22 M488 122 l-32 22"></path>
-              </g>
-              <path d="M120 150 C140 60 300 40 360 60 S600 60 600 150" style={{ fill: "none", stroke: "var(--ink)" }} strokeWidth="3" strokeDasharray="10 8"></path>
-              <text x="360" y="44" textAnchor="middle" style={{ fill: "var(--ink)", fontFamily: "var(--font-libre-franklin), sans-serif", fontSize: "16px", fontWeight: "600" }}>objížďka přes Hájek</text>
-            </svg>
+            {foto ? (
+              <Foto sablona="zpravodaj" styl={{ display: "block", width: "100%", height: "auto", aspectRatio: "720 / 300", background: "var(--paper)" }} />
+            ) : (
+              <svg viewBox="0 0 720 300" role="img" aria-label="Ilustrace: zavřený most přes Javornický potok a objížďka přes Hájek" style={{ display: "block", width: "100%", height: "auto", aspectRatio: "720 / 300", background: "var(--paper)" }}>
+                <path d="M0 210 C160 190 260 240 400 220 S620 180 720 200 V300 H0z" style={{ fill: "var(--river)" }}></path>
+                <path d="M240 150 h240 v20 h-240z" style={{ fill: "var(--ink)" }}></path>
+                <path d="M260 170 v60 M460 170 v60" style={{ stroke: "var(--ink)" }} strokeWidth="10"></path>
+                <g style={{ fill: "var(--accent)" }}>
+                  <rect x="230" y="116" width="36" height="34"></rect>
+                  <rect x="454" y="116" width="36" height="34"></rect>
+                </g>
+                <g style={{ stroke: "var(--bg)" }} strokeWidth="5">
+                  <path d="M232 122 l32 22 M488 122 l-32 22"></path>
+                </g>
+                <path d="M120 150 C140 60 300 40 360 60 S600 60 600 150" style={{ fill: "none", stroke: "var(--ink)" }} strokeWidth="3" strokeDasharray="10 8"></path>
+                <text x="360" y="44" textAnchor="middle" style={{ fill: "var(--ink)", fontFamily: "var(--font-libre-franklin), sans-serif", fontSize: "16px", fontWeight: "600" }}>objížďka přes Hájek</text>
+              </svg>
+            )}
             {' '}
             <p style={{ margin: "14px 0 4px", fontSize: "14px", color: "var(--muted)" }}>Doprava, 2. listopadu</p>
             {' '}

@@ -2,12 +2,13 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S17-Magistrat.html. */
 
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner }: { banner: ReactNode }) {
+export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -76,6 +77,8 @@ export function Uvod({ banner }: { banner: ReactNode }) {
             </div>
           </div>
         </section>
+        {' '}
+        {foto ? <Foto sablona="magistrat" styl={{ width: "100%", height: "clamp(220px, 26vw, 360px)" }} /> : null}
         {' '}
         <section aria-labelledby="casti17" style={{ maxWidth: "1240px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 0" }}>
           <h2 id="casti17" style={{ margin: "0 0 20px", fontSize: "32px" }}>Části obce</h2>

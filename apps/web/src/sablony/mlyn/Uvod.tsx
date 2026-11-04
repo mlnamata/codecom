@@ -1,9 +1,10 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S13-Mlyn.html. */
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner }: { banner: ReactNode }) {
+export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -57,6 +58,8 @@ export function Uvod({ banner }: { banner: ReactNode }) {
             </div>
           </dl>
         </section>
+        {' '}
+        {foto ? <Foto sablona="mlyn" styl={{ width: "100%", height: "clamp(240px, 30vw, 420px)" }} /> : null}
         {' '}
         <section id="prace13" aria-labelledby="prace13-t" style={{ background: "var(--surface)" }}>
           <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px)" }}>

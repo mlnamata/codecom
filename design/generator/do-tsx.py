@@ -479,6 +479,12 @@ class Vystup:
             return f"{ind}<ZnakObce velikost={{{n.attr('velikost')}}} />"
         if t == 'krizovy-banner':
             return f'{ind}{{banner}}'
+        if t == 'foto-obce':
+            # Fotografie obce vložená do rozvržení šablony. Bez fotky (foto=0) se nevykreslí nic.
+            self.foto_hotovo = True
+            self.uses.add('Foto')
+            st = n.attr('style') or ''
+            return f'{ind}{{foto ? <Foto sablona="{self.klic}" styl={styl(st, r, self.pisma_map)} /> : null}}'
         if t == '#hlavicka':
             return f'{ind}<Hlavicka />'
         if t == '#paticka':
@@ -680,7 +686,11 @@ def predzpracuj(key):
 
 
 def oznac_foto(root):
-    """První dekorativní SVG mimo hlavičku, široké aspoň 600 jednotek, je úvodní ilustrace."""
+    """Místo pro fotografii: značka <foto-obce>, SVG s data-foto="1" v předloze, jinak
+    první dekorativní SVG mimo hlavičku široké aspoň 600 jednotek (úvodní ilustrace)."""
+    for n in root.iter():
+        if n.tag == 'foto-obce' or n.attr('data-foto') == '1':
+            return True
     for n in root.iter():
         if n.tag == 'header':
             continue

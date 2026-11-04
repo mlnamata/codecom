@@ -2,12 +2,13 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S19-Mikroregion.html. */
 
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner }: { banner: ReactNode }) {
+export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
@@ -20,6 +21,8 @@ export function Uvod({ banner }: { banner: ReactNode }) {
           <p style={{ margin: "14px 0 28px", maxWidth: "56ch", fontSize: "19px", color: "var(--muted)" }}>
             {"Jedna obec, čtyři části, 684 obyvatel. Vyberte svou část a uvidíte, co se v ní teď děje a kdo vám v ní poradí."}
           </p>
+          {' '}
+          {foto ? <Foto sablona="mikroregion" styl={{ width: "100%", height: "clamp(200px, 24vw, 320px)", borderRadius: "20px", marginBottom: "28px" }} /> : null}
           {' '}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "24px", alignItems: "stretch" }}>
             <div style={{ flex: "1.3 1 480px", minWidth: "0", borderRadius: "20px", background: "var(--surface)", boxShadow: "inset 0 0 0 1px var(--line)", padding: "16px" }}>

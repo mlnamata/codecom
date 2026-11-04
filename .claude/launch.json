@@ -6,6 +6,18 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "codekom-web", "start", "--port", "3100"],
       "port": 3100
+    },
+    {
+      "name": "web-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "codekom-web", "dev", "--port", "3100"],
+      "port": 3100
+    },
+    {
+      "name": "prezentace-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "prezentace", "dev", "--port", "3000"],
+      "port": 3000
     }
   ]
 }

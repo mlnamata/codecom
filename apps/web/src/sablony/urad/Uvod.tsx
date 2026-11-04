@@ -2,18 +2,21 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S20-Urad.html. */
 
 import type { ReactNode } from 'react'
+import { Foto } from '../sdilene/Foto'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner }: { banner: ReactNode }) {
+export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
       {banner}
       <Hlavicka />
       <main id="obsah" tabIndex={-1} style={{ maxWidth: "1200px", margin: "0 auto", padding: "24px clamp(16px, 4vw, 32px) 64px" }}>
+        {foto ? <Foto sablona="urad" styl={{ width: "100%", height: "clamp(180px, 22vw, 300px)", borderRadius: "4px", marginBottom: "24px" }} /> : null}
+        {' '}
         <nav aria-label="Drobečková navigace" style={{ fontSize: "15px", marginBottom: "16px" }}>
           <a href="/" style={{ color: "var(--link)" }}>Úvod</a>
           <span aria-hidden="true" style={{ margin: "0 8px", color: "var(--muted)" }}>/</span>

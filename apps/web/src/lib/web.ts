@@ -31,7 +31,7 @@ export const vzhled = cache(async () => {
   const indexPalety = stav.paleta ?? (klic === obec.sablona ? obec.paleta : 0)
   const paleta = najdiPaletu(klic, indexPalety)
   const modul = await nactiSablonu(klic)
-  return { obec, stav, sablona, paleta, indexPalety, modul, foto: stav.foto === true && modul.foto }
+  return { obec, stav, sablona, paleta, indexPalety, modul, foto: stav.foto !== false && modul.foto }
 })
 
 const polozkaDesky = (d: DokumentDesky): PolozkaDesky => ({

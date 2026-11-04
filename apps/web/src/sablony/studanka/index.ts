@@ -15,7 +15,7 @@ const modul: ModulSablony = {
   Hlavicka,
   Paticka,
   Uvod: Uvod as ModulSablony['Uvod'],
-  foto: false,
+  foto: true,
   Stav: StavSablony,
 }
 
