@@ -19,6 +19,8 @@
 .sablona-mikroregion td a,
 .sablona-mikroregion dd a,
 .sablona-mikroregion .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+/* Karta úvodu leží přes spodní okraj fotky, proto je štítek AI v horním rohu fotky. */
+.sablona-mikroregion main > .foto-uvod > figcaption { top:12px!important;bottom:auto!important }
 .sablona-mikroregion .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
 .sablona-mikroregion .nav-narrow { display:none }
 @media (max-width:767.98px) {
@@ -29,6 +31,7 @@
 .sablona-mikroregion .nav-narrow>summary::-webkit-details-marker { display:none }
 .sablona-mikroregion .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
 .sablona-mikroregion .nav-narrow nav a { margin-block:0;padding-block:10px }
+.sablona-mikroregion .m-cast > figure { min-height:220px!important }
 }
 @media (prefers-reduced-motion:reduce) {
 .sablona-mikroregion * { transition:none!important;animation:none!important }
