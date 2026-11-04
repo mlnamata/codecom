@@ -1,10 +1,11 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S15-Lupa.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
@@ -16,7 +17,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
           {"Na tomto webu najdete, co potřebujete vyřídit, kdy jezdí popelnice a co hlásil rozhlas."}
         </p>
         {' '}
-        {foto ? <Foto sablona="lupa" styl={{ width: "100%", height: "clamp(200px, 30vw, 340px)", margin: "0 0 1.6em", borderRadius: "0.4em" }} /> : null}
+        <FotoDlazdice soubor="sablona-15-lupa.webp" alt={POPISY_FOTEK.lupa ?? ""} styl={{ width: "100%", height: "clamp(200px, 30vw, 340px)", margin: "0 0 1.6em", borderRadius: "0.4em" }} />
         {' '}
         <div style={{ padding: "1em 1.2em", marginBottom: "2em", borderLeft: "0.4em solid var(--primary)", background: "var(--surface)", color: "var(--ink)" }}>
           <p style={{ margin: "0", fontWeight: "600" }}>Úřad je dnes otevřený od 8 do 17 hodin</p>

@@ -9,8 +9,6 @@ export function Hlavicka() {
   const v = useHodnoty()
   return (
     <header className="deep" style={{ background: "var(--deep)", color: "var(--on-deep)" }}>
-      <a className="skip" href="#obsah15">Přeskočit na obsah</a>
-      {' '}
       <div style={{ maxWidth: "1040px", margin: "0 auto", padding: "0.8em clamp(16px, 4vw, 32px)", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "0.6em 1.2em" }}>
         <a href="/" style={{ display: "flex", alignItems: "center", gap: "0.6em", color: "var(--on-deep)", textDecoration: "none", fontWeight: "600", fontSize: "1.2em" }}>
           <ZnakObce velikost={36} />
