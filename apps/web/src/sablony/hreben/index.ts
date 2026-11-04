@@ -10,7 +10,7 @@ const modul: ModulSablony = {
   klic: 'hreben',
   tridyPisem,
   pismo: "var(--font-archivo), system-ui, sans-serif",
-  temaHlavicky: 'bg',
+  temaHlavicky: 'deep',
   Hlavicka,
   Paticka,
   Uvod: Uvod as ModulSablony['Uvod'],

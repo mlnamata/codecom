@@ -1,7 +1,7 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S09-Hreben.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
 import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
@@ -9,39 +9,46 @@ export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
-      <div className="deep" style={{ position: "relative", background: "var(--deep)", color: "#FFFFFF", overflow: "hidden" }}>
-        <Foto sablona="hreben" styl={{ position: "absolute", inset: "0", width: "100%", height: "100%", display: "block" }} />
-        {' '}
+      <div className="deep" style={{ background: "var(--deep)", color: "#FFFFFF" }}>
         <Hlavicka />
-        {' '}
-        <section aria-labelledby="hreben-titulek" style={{ position: "relative", maxWidth: "1240px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 40px" }}>
-          <h1 id="hreben-titulek" style={{ margin: "0", fontWeight: "500", fontStretch: "62%", fontSize: "clamp(72px, 17vw, 240px)", lineHeight: "0.95", letterSpacing: "-0.02em" }}>Javorník</h1>
-          {' '}
-          <p style={{ margin: "8px 0 0", maxWidth: "40ch", fontSize: "20px", lineHeight: "1.45" }}>
-            {"Javoří Lhota pod hřebenem, 1 012 metrů nad mořem. Na hřebeni dnes 2. listopadu v 10:40."}
-          </p>
-          {' '}
-          <dl style={{ margin: "160px 0 0", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", gap: "8px" }}>
-            <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
-              <dt style={{ fontSize: "15px", color: "var(--muted)" }}>Teplota na hřebeni</dt>
-              <dd style={{ margin: "4px 0 0", fontSize: "36px", fontWeight: "500", fontStretch: "75%", fontVariantNumeric: "tabular-nums" }}>−1 °C</dd>
-            </div>
-            <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
-              <dt style={{ fontSize: "15px", color: "var(--muted)" }}>{"Sníh u rozhledny"}</dt>
-              <dd style={{ margin: "4px 0 0", fontSize: "36px", fontWeight: "500", fontStretch: "75%", fontVariantNumeric: "tabular-nums" }}>8 cm</dd>
-            </div>
-            <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
-              <dt style={{ fontSize: "15px", color: "var(--muted)" }}>Vleky</dt>
-              <dd style={{ margin: "4px 0 0", fontSize: "20px", fontWeight: "500", lineHeight: "1.3" }}>mimo provoz, sezona od 19. prosince</dd>
-            </div>
-            <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
-              <dt style={{ fontSize: "15px", color: "var(--muted)" }}>Silnice na Javorník</dt>
-              <dd style={{ margin: "4px 0 0", fontSize: "20px", fontWeight: "500", lineHeight: "1.3", color: "var(--link)" }}>sjízdná, ráno náledí</dd>
-            </div>
-          </dl>
-        </section>
       </div>
       <main id="obsah" tabIndex={-1}>
+        <section className="deep" aria-labelledby="hreben-titulek" style={{ background: "var(--deep)", color: "#FFFFFF" }}>
+          <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "40px clamp(16px, 4vw, 32px) 32px" }}>
+            <h1 id="hreben-titulek" style={{ margin: "0", fontWeight: "500", fontStretch: "62%", fontSize: "clamp(72px, 17vw, 240px)", lineHeight: "0.95", letterSpacing: "-0.02em", overflowWrap: "anywhere" }}>Javorník</h1>
+            {' '}
+            <p style={{ margin: "8px 0 0", maxWidth: "40ch", fontSize: "20px", lineHeight: "1.45" }}>
+              {"Javoří Lhota pod hřebenem, 1 012 metrů nad mořem. Na hřebeni dnes 2. listopadu v 10:40."}
+            </p>
+          </div>
+          {' '}
+          {/* Fotka je pás pod titulkem uvnitř hlavní oblasti, bílý text na ní neleží. */}
+          <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 clamp(16px, 4vw, 32px)" }}>
+            <FotoDlazdice soubor="sablona-09-hreben.webp" alt={POPISY_FOTEK.hreben ?? ""} styl={{ width: "100%", height: "clamp(220px, 34vw, 440px)", borderRadius: "12px" }} />
+          </div>
+          {' '}
+          <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "8px clamp(16px, 4vw, 32px) 0" }}>
+            <dl style={{ margin: "0", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", gap: "8px" }}>
+              <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
+                <dt style={{ fontSize: "15px", color: "var(--muted)" }}>Teplota na hřebeni</dt>
+                <dd style={{ margin: "4px 0 0", fontSize: "36px", fontWeight: "500", fontStretch: "75%", fontVariantNumeric: "tabular-nums" }}>−1 °C</dd>
+              </div>
+              <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
+                <dt style={{ fontSize: "15px", color: "var(--muted)" }}>{"Sníh u rozhledny"}</dt>
+                <dd style={{ margin: "4px 0 0", fontSize: "36px", fontWeight: "500", fontStretch: "75%", fontVariantNumeric: "tabular-nums" }}>8 cm</dd>
+              </div>
+              <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
+                <dt style={{ fontSize: "15px", color: "var(--muted)" }}>Vleky</dt>
+                <dd style={{ margin: "4px 0 0", fontSize: "20px", fontWeight: "500", lineHeight: "1.3" }}>mimo provoz, sezona od 19. prosince</dd>
+              </div>
+              <div style={{ padding: "16px 20px", borderRadius: "12px", background: "var(--bg)", color: "var(--ink)" }}>
+                <dt style={{ fontSize: "15px", color: "var(--muted)" }}>Silnice na Javorník</dt>
+                <dd style={{ margin: "4px 0 0", fontSize: "20px", fontWeight: "500", lineHeight: "1.3", color: "var(--link)" }}>sjízdná, ráno náledí</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+        {' '}
         <section className="deep" style={{ background: "var(--deep)", color: "#FFFFFF" }}>
           <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px)", display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "16px 48px", padding: "28px 0", borderTop: "1px solid rgba(255, 255, 255, 0.2)" }}>
@@ -86,7 +93,7 @@ export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
                 <p style={{ margin: "0" }}>Pokud napadne aspoň 40 centimetrů sněhu. Permanentky prodává obecní úřad.</p>
               </article>
               {' '}
-              <FotoDlazdice soubor="sablona-09-hreben.webp" alt="Zasněžený zalesněný hřeben v podhůří Šumavy s dřevěnou rozhlednou na vrcholu." styl={{ height: "100%", minHeight: "220px", borderRadius: "12px" }} />
+              <FotoDlazdice soubor="sablona-19-mikroregion.webp" alt={POPISY_FOTEK.mikroregion ?? ""} styl={{ height: "100%", minHeight: "220px", borderRadius: "12px" }} />
               {' '}
               <article style={{ padding: "24px", borderRadius: "12px", background: "var(--bg)", display: "flex", flexDirection: "column", gap: "8px", boxShadow: "inset 0 0 0 1px var(--line)" }}>
                 <p style={{ margin: "0", color: "var(--muted)", fontSize: "15px" }}>20. října</p>
