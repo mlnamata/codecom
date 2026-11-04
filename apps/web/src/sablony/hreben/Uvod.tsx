@@ -1,32 +1,16 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S09-Hreben.html. */
 import type { ReactNode } from 'react'
 import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
       <div className="deep" style={{ position: "relative", background: "var(--deep)", color: "#FFFFFF", overflow: "hidden" }}>
-        {foto ? (
-          <Foto sablona="hreben" styl={{ position: "absolute", inset: "0", width: "100%", height: "100%", display: "block" }} />
-        ) : (
-          <svg viewBox="0 0 1440 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style={{ position: "absolute", inset: "0", width: "100%", height: "100%", display: "block" }}>
-            <path d="M0 520 L180 460 L300 490 L470 440 L620 470 L760 420 L900 440 L1060 300 L1220 390 L1440 330 V640 H0z" style={{ fill: "var(--far)" }}></path>
-            <path d="M1060 300 L1024 332 L1046 328 L1062 342 L1080 324 L1100 336z" style={{ fill: "var(--snow)" }}></path>
-            <rect x="1056" y="260" width="8" height="42" style={{ fill: "var(--snow)" }}></rect>
-            <path d="M1046 266 h28 l-4 -10 h-20z" style={{ fill: "var(--snow)" }}></path>
-            <path d="M0 580 L220 510 L360 540 L560 490 L760 530 L960 470 L1180 505 L1440 440 V640 H0z" style={{ fill: "var(--near)" }}></path>
-            <g style={{ fill: "var(--deep)" }} opacity="0.6">
-              <path d="M120 560 l18 -54 l18 54z"></path>
-              <path d="M160 560 l14 -40 l14 40z"></path>
-              <path d="M1260 560 l18 -54 l18 54z"></path>
-              <path d="M1300 560 l14 -42 l14 42z"></path>
-              <path d="M1340 560 l18 -58 l18 58z"></path>
-            </g>
-          </svg>
-        )}
+        <Foto sablona="hreben" styl={{ position: "absolute", inset: "0", width: "100%", height: "100%", display: "block" }} />
         {' '}
         <Hlavicka />
         {' '}
@@ -87,13 +71,10 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             </div>
           </div>
           {' '}
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style={{ display: "block", width: "100%", height: "80px" }}>
-            <path d="M0 80 L0 60 L120 30 L200 50 L320 10 L440 46 L560 24 L700 54 L820 20 L960 48 L1080 16 L1200 44 L1320 26 L1440 50 V80z" style={{ fill: "var(--surface)" }}></path>
-          </svg>
         </section>
         {' '}
         <section aria-labelledby="aktuality" style={{ background: "var(--surface)" }}>
-          <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "24px clamp(16px, 4vw, 32px) 72px" }}>
+          <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 72px" }}>
             <h2 id="aktuality" style={{ margin: "0 0 24px", fontSize: "40px", fontStretch: "75%" }}>{"Z obce a z hor"}</h2>
             {' '}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "16px" }}>
@@ -105,11 +86,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
                 <p style={{ margin: "0" }}>Pokud napadne aspoň 40 centimetrů sněhu. Permanentky prodává obecní úřad.</p>
               </article>
               {' '}
-              <svg viewBox="0 0 280 220" role="img" aria-label="Rozhledna na Javorníku" style={{ width: "100%", height: "100%", minHeight: "220px", borderRadius: "12px", background: "var(--near)" }}>
-                <path d="M0 170 L80 120 L140 150 L210 100 L280 140 V220 H0z" style={{ fill: "var(--far)" }}></path>
-                <rect x="196" y="40" width="12" height="62" style={{ fill: "var(--snow)" }}></rect>
-                <path d="M184 46 h36 l-6 -14 h-24z" style={{ fill: "var(--snow)" }}></path>
-              </svg>
+              <FotoDlazdice soubor="sablona-09-hreben.webp" alt="Zasněžený zalesněný hřeben v podhůří Šumavy s dřevěnou rozhlednou na vrcholu." styl={{ height: "100%", minHeight: "220px", borderRadius: "12px" }} />
               {' '}
               <article style={{ padding: "24px", borderRadius: "12px", background: "var(--bg)", display: "flex", flexDirection: "column", gap: "8px", boxShadow: "inset 0 0 0 1px var(--line)" }}>
                 <p style={{ margin: "0", color: "var(--muted)", fontSize: "15px" }}>20. října</p>
