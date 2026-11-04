@@ -22,6 +22,13 @@ const IKONY: Record<string, ReactNode> = {
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L1 7" />
     </svg>
   ),
+  'Rozhlas, SMS a zpravodaj': (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </svg>
+  ),
   'Nová aktualita': (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
@@ -54,6 +61,24 @@ const IKONY: Record<string, ReactNode> = {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M9 11l3 3L22 4" />
       <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+    </svg>
+  ),
+  'Poplatky a pokladna': (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="5" width="20" height="14" rx="2" />
+      <line x1="2" y1="10" x2="22" y2="10" />
+    </svg>
+  ),
+  'Smlouvy a faktury': (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="m9 15 2 2 4-4" />
+    </svg>
+  ),
+  'Přepážka, matrika a revize': (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
     </svg>
   ),
   'Stránky a menu': (
@@ -139,16 +164,26 @@ const IKONY: Record<string, ReactNode> = {
 
 const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: string; od: Uroven }[] }[] = [
   {
-    nadpis: 'Obsah a úřad',
+    nadpis: 'Obsah a komunikace',
     id: 'sk-obsah',
     polozky: [
       { nazev: 'Přehled', href: Z, od: 'zaklad' },
       { nazev: 'Obecní e-mail a pošta', href: `${Z}/posta`, od: 'zaklad' },
+      { nazev: 'Rozhlas, SMS a zpravodaj', href: `${Z}/rozhlas`, od: 'zaklad' },
       { nazev: 'Nová aktualita', href: `${Z}/aktuality`, od: 'zaklad' },
       { nazev: 'Úřední deska', href: `${Z}/deska`, od: 'zaklad' },
       { nazev: 'Krizová hlášení', href: `${Z}/krize`, od: 'zaklad' },
       { nazev: 'Hlášení závad', href: `${Z}/zavady`, od: 'zaklad' },
       { nazev: 'Ke schválení', href: `${Z}/schvalovani`, od: 'pokrocily' },
+    ],
+  },
+  {
+    nadpis: 'Agenda úřadu a finance',
+    id: 'sk-urad-finance',
+    polozky: [
+      { nazev: 'Poplatky a pokladna', href: `${Z}/poplatky`, od: 'zaklad' },
+      { nazev: 'Smlouvy a faktury', href: `${Z}/smlouvy`, od: 'zaklad' },
+      { nazev: 'Přepážka, matrika a revize', href: `${Z}/prepazka`, od: 'zaklad' },
     ],
   },
   {
