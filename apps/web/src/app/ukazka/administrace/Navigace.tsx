@@ -120,6 +120,12 @@ const IKONY: Record<string, ReactNode> = {
       <path d="M17 19h4" />
     </svg>
   ),
+  'Řídicí panel a mapa': (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z" />
+      <path d="M9 3v15M15 6v15" />
+    </svg>
+  ),
   'IoT čidla a živá data': (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -201,6 +207,7 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
     nadpis: 'Chytrá obec a majetek',
     id: 'sk-chytra-obec',
     polozky: [
+      { nazev: 'Řídicí panel a mapa', href: '/ukazka/panel', od: 'zaklad' },
       { nazev: 'IoT čidla a živá data', href: `${Z}/chytra-obec`, od: 'zaklad' },
       { nazev: 'Komunita a půjčovna', href: `${Z}/komunita`, od: 'zaklad' },
       { nazev: 'Majetek a energetika', href: `${Z}/majetek`, od: 'pokrocily' },
