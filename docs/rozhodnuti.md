@@ -98,9 +98,11 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 2. 11. 2026 | Obce platí buď fakturou za roční licenci, nebo kartou měsíčně. | Obce si vyberou podle svého rozpočtu. |
 | 2. 11. 2026 | Data: Supabase v EU (Frankfurt), web na Vercelu, AI server v ČR. | Data zůstávají v EU, AI dotazy v ČR. |
 | 2. 11. 2026 | Obec může vypovědět kdykoli, prvních 30 dní dostane zpět vše, u roční licence se vrací nevyčerpané měsíce. Úřední deska běží i při neplacení, export dat je zdarma. | Férové podmínky jsou pro obec argument a snižují riziko sporu. |
+| 4. 11. 2026 | Weby obcí mají i skleněné šablony 21 Sklo, 22 Noc a 23 Aurora (rozostřené průsvitné plochy, přechody, záře, řezy písma nad 600). Platí pro ně výjimka z unslop, kontrola `scripts/unslop.mjs` jejich složky přeskakuje. Tokeny jsou ručně v `packages/tokeny/src/sablony-sklo.ts`, generátor `design/generator` je zatím nezná a snímky v `design/snimky` pro ně chybí ([DOPLNIT] snímky a generátor). | Přání zakladatele, aby si každá obec našla vzhled, který se jí líbí. Kontrast textu aspoň 4,5 : 1 i nad sklem, cíle 44 px, `prefers-reduced-motion` a náhrada bez `backdrop-filter` zůstávají povinné. |
 
 ## Otevřené
 
+- Skleněné šablony 21 až 23: [DOPLNIT] snímky v `design/snimky`, prototypy v `design/prototypy` a podpora v generátoru `design/generator`.
 - Záložka AI v návrhu platformy je zatím jen osnova.
 - Seznamy na úvodu většiny šablon jsou statický text návrhu, napojit je ručně na data (prompt 07, zbývá).
 - Skutečné ceny, holding a jeho název, první skutečná obec pro pilot.

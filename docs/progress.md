@@ -5,6 +5,7 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 | Úkol | Oblast souborů | Stav | Poznámka |
 | --- | --- | --- | --- |
 | Konfigurace šablony v liště (barvy, písmo), jen fotky, štítek AI, glass šablony | `apps/web/src/ukazka`, `apps/web/src/sablony` | hotovo | hlavní session |
+| Skleněné šablony (21 Sklo hotovo, 22 Noc a 23 Aurora rozpracované) | `apps/web/src/sablony/{sklo,noc,aurora}`, `packages/tokeny` | rozpracováno | fork session skleněných šablon |
 | Nový vzhled administrace, vícedílný skladatel šablon a blog | `apps/web/src/app/ukazka/**`, `admin.css` | hotovo | hlavní session |
 | Integrovaná pošta, ISDS a propojení s Microsoft Office | `apps/web/src/app/ukazka/administrace/posta/**` | hotovo | hlavní session |
 | Aplikace a IoT | repozitář `mlnamata/codecom_app` | předáno jiné session | zadání v `codecom_app/docs/zadani` |

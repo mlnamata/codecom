@@ -13,7 +13,15 @@ import { fileURLToPath } from 'node:url'
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const CILE = process.argv.slice(2).length ? process.argv.slice(2) : ['apps/web/src', 'obsah/javori-lhota']
 const PRIPONY = new Set(['.ts', '.tsx', '.css', '.json'])
-const VYNECHAT = [/payload-types\.ts$/, /migrations[\\/]/, /generovano[\\/]/, /[\\/]sablony\.ts$/]
+const VYNECHAT = [
+  /payload-types\.ts$/,
+  /migrations[\\/]/,
+  /generovano[\\/]/,
+  /[\\/]sablony\.ts$/,
+  // Skleněné šablony 21 až 23 jsou výjimka z unslop na přání zakladatele ze 4. 11. 2026
+  // (docs/rozhodnuti.md): smí mít řezy nad 600, přechody a záři. Ostatní kód kontrola hlídá dál.
+  /sablony[\\/](sklo|noc|aurora)[\\/]/,
+]
 
 export const PRAVIDLA = [
   { nazev: 'řez písma nad 600', re: /font-?weight\s*:\s*["']?(700|800|900|bold|bolder)\b/gi },

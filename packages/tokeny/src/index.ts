@@ -1,11 +1,15 @@
 import { kontrast } from './kontrast'
-import { KONTROLY_KONTRASTU, SABLONY } from './sablony'
+import { KONTROLY_KONTRASTU, SABLONY as GENEROVANE_SABLONY } from './sablony'
+import { SKLENENE_SABLONY } from './sablony-sklo'
 import { KLICE_TOKENU, type Paleta, type Sablona } from './typy'
 
 export * from './krize'
 export * from './kontrast'
 export * from './typy'
-export { KONTROLY_KONTRASTU, SABLONY }
+export { KONTROLY_KONTRASTU }
+
+/** Šablony 01 až 20 z generátoru a ručně psané skleněné šablony od 21. */
+export const SABLONY: readonly Sablona[] = [...GENEROVANE_SABLONY, ...SKLENENE_SABLONY]
 
 const kebab = (s: string): string => s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)
 

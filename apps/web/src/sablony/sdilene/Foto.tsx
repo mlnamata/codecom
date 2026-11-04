@@ -7,14 +7,26 @@ import { AiStitek } from './AiStitek'
  * Fotografický úvod místo kreslené ilustrace. Fotka má kruhový štítek AI.
  * Text šablony leží na plochách šablony, ne přímo na fotce.
  */
-export function Foto({ sablona: klic, styl }: { sablona: string; styl: CSSProperties }) {
+export function Foto({
+  sablona: klic,
+  styl,
+  soubor,
+  alt,
+}: {
+  sablona: string
+  styl: CSSProperties
+  /** Jiná fotka z /demo/foto (název souboru), když šablona nemá vlastní. */
+  soubor?: string
+  /** Popis fotky, výchozí je z POPISY_FOTEK. */
+  alt?: string
+}) {
   const s = sablona(klic)
-  const src = `/demo/foto/sablona-${s.cislo}-${klic}.webp`
+  const src = soubor ? `/demo/foto/${soubor}` : `/demo/foto/sablona-${s.cislo}-${klic}.webp`
   return (
     <figure className="foto-uvod" style={{ position: 'relative', ...styl, margin: 0, overflow: 'hidden' }}>
       <img
         src={src}
-        alt={POPISY_FOTEK[klic] ?? 'Ilustrační fotografie obce'}
+        alt={alt ?? POPISY_FOTEK[klic] ?? 'Ilustrační fotografie obce'}
         width={1600}
         height={900}
         fetchPriority="high"

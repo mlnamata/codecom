@@ -23,6 +23,8 @@ export const NACITANI: Record<string, () => Promise<{ default: ModulSablony }>> 
   zpravodaj: () => import('./zpravodaj'),
   mikroregion: () => import('./mikroregion'),
   urad: () => import('./urad'),
+  // Skleněné šablony, psané ručně (generátor je zatím nezná).
+  sklo: () => import('./sklo'),
 }
 
 export async function nactiSablonu(klic: string): Promise<ModulSablony> {
