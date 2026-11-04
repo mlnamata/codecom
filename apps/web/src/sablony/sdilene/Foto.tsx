@@ -1,10 +1,11 @@
 import type { CSSProperties } from 'react'
 import { sablona } from '@codekom/tokeny'
 import { POPISY_FOTEK } from './popisy-fotek'
+import { AiStitek } from './AiStitek'
 
 /**
- * Fotografický úvod místo kreslené ilustrace. Fotka je vygenerovaná AI, proto má vždy
- * viditelný popisek. Text šablony leží na plochách šablony, ne přímo na fotce.
+ * Fotografický úvod místo kreslené ilustrace. Fotka má kruhový štítek AI.
+ * Text šablony leží na plochách šablony, ne přímo na fotce.
  */
 export function Foto({ sablona: klic, styl }: { sablona: string; styl: CSSProperties }) {
   const s = sablona(klic)
@@ -22,18 +23,14 @@ export function Foto({ sablona: klic, styl }: { sablona: string; styl: CSSProper
       <figcaption
         style={{
           position: 'absolute',
-          right: 8,
-          bottom: 8,
-          padding: '4px 8px',
-          borderRadius: 4,
-          background: '#1A1A18',
-          color: '#FFFFFF',
-          fontSize: 14,
-          lineHeight: 1.4,
+          right: 12,
+          bottom: 12,
+          margin: 0,
+          padding: 0,
           zIndex: 1,
         }}
       >
-        Ilustrační fotografie vytvořená umělou inteligencí
+        <AiStitek velikost={34} />
       </figcaption>
     </figure>
   )

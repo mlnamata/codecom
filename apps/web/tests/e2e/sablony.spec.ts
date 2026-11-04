@@ -20,9 +20,9 @@ for (const s of SABLONY) {
 
 test('varianta Fotografie má popisek a alt', async ({ page }) => {
   await page.goto('/?sablona=naves&paleta=0&krize=off&foto=1')
-  const foto = page.locator('figure img')
+  const foto = page.locator('figure img').first()
   await expect(foto).toHaveAttribute('alt', /Náves vesnice/)
-  await expect(page.getByText('Ilustrační fotografie vytvořená umělou inteligencí')).toBeVisible()
+  await expect(page.locator('figure figcaption img[alt="AI"]')).toBeVisible()
 })
 
 test('stav ukázky v URL a v cookie', async ({ page, context }) => {

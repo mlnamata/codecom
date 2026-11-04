@@ -1,25 +1,39 @@
 import type { Metadata } from 'next'
 import { uloziste } from '@/lib/data/demo-pamet'
-import { FormAktualita } from '../Formulare'
+import { SpravaBlogu } from './SpravaBlogu'
 
-export const metadata: Metadata = { title: 'Nová aktualita' }
+export const metadata: Metadata = { title: 'Blog a aktuality | Administrace' }
 export const dynamic = 'force-dynamic'
 
 export default function NovaAktualita() {
   const { obec, aktuality } = uloziste()
   return (
     <>
-      <h1>Nová aktualita</h1>
-      <p>Před zveřejněním kontrolujeme popis obrázku, nadpisy a osobní údaje v textu.</p>
-      <FormAktualita telefon={obec.telefon} email={obec.email} />
-      <h2>Poslední zveřejněné</h2>
-      <ul>
-        {aktuality.slice(0, 5).map((a) => (
-          <li key={a.id}>
-            <a href={`/aktuality/${a.slug}`}>{a.titulek}</a>
-          </li>
-        ))}
-      </ul>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
+        <h1>Správa blogu a zpráv obce</h1>
+        <a href="/aktuality" className="mala" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+          Zobrazit veřejný blog
+        </a>
+      </div>
+      <p style={{ marginTop: 0, marginBottom: 20 }}>
+        Kompletní redakční systém pro obecní zprávy, magazín a aktuality. Skládejte články z obsahových widgetů, filtrujte podle rubrik a chraňte osobní údaje.
+      </p>
+
+      <SpravaBlogu
+        seznam={aktuality.map((a) => ({
+          id: a.id,
+          slug: a.slug,
+          titulek: a.titulek,
+          perex: a.perex,
+          obsah: a.obsah,
+          rubrika: a.rubrika,
+          autor: a.autor,
+          publikovano: a.publikovano,
+          stitky: ['#obec', `#${a.rubrika}`],
+        }))}
+        telefonUradu={obec.telefon}
+        emailUradu={obec.email}
+      />
     </>
   )
 }

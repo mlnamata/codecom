@@ -310,3 +310,407 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   }
 }
+
+/* ==========================================================================
+   Profesionální dashboard administrace, widgetový skladatel a správa blogu
+   ========================================================================== */
+
+/* Moderní stavové pruhy a karty metrik */
+.admin-uvod-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.admin-uvod-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: #e6f4ea;
+  color: #0f5b28;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.admin-uvod-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #137333;
+}
+
+.admin-kpi-mrizka {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.admin-kpi-karta {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-kpi-karta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.admin-kpi-hlavicka {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.admin-kpi-popis {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 0;
+}
+
+.admin-kpi-hodnota {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  margin: 4px 0 0;
+}
+
+.admin-kpi-paticka {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* Rychlé akce */
+.admin-rychle-akce {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.admin-akce-tlacitko {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.admin-akce-tlacitko:hover {
+  border-color: var(--primary);
+  background: var(--surface);
+  color: var(--primary);
+}
+
+.admin-akce-ikona {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Přepínač záložek (Tabs) */
+.admin-zalozky {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.admin-zalozka-tlacitko {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 16px;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-zalozka-tlacitko:hover {
+  color: var(--ink);
+}
+
+.admin-zalozka-tlacitko[aria-selected="true"] {
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Widgetový skladatel (Composer) */
+.admin-skladatel-kontejner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-skladatel-rozvrzeni {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.4fr) minmax(300px, 1fr);
+  gap: 24px;
+  align-items: flex-start;
+}
+
+@media (max-width: 991.98px) {
+  .admin-skladatel-rozvrzeni {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-widget-karta {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-widget-karta:hover {
+  border-color: #8a8a84;
+}
+
+.admin-widget-karta.skryty {
+  border-style: dashed;
+  background: var(--surface);
+  opacity: 0.75;
+}
+
+.admin-widget-vrch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.admin-widget-znacka {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15.5px;
+  font-weight: 600;
+}
+
+.admin-widget-kategorie-stitek {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.admin-widget-nastaveni-radek {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+}
+
+/* Zařízení pro náhled skladatele */
+.admin-zarizeni-lista {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.admin-zarizeni-tlacitko {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-zarizeni-tlacitko:hover {
+  color: var(--ink);
+}
+
+.admin-zarizeni-tlacitko[aria-pressed="true"] {
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.admin-nahled-okno {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  max-width: 100%;
+  margin: 0 auto;
+  transition: max-width 0.2s ease;
+}
+
+/* Blokový editor příspěvku a blog */
+.admin-blog-filtr-pruh {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-blog-kategorie-filtr {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-kategorie-pilulka {
+  min-height: 38px;
+  padding: 0 14px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-kategorie-pilulka:hover {
+  border-color: var(--ink);
+}
+
+.admin-kategorie-pilulka[aria-pressed="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  font-weight: 600;
+}
+
+.admin-stitek-tag {
+  display: inline-block;
+  font-size: 12.5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
+.admin-blok-karta {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.admin-blok-hlavicka {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-blok-knihovna {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.admin-blok-pridat-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 64px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.admin-blok-pridat-btn:hover {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.admin-blok-pridat-nazev {
+  font-weight: 600;
+  font-size: 14px;
+}

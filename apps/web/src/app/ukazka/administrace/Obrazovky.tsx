@@ -123,93 +123,164 @@ export function EditorMenu({ s, uroven }: { s: Schopnosti; uroven: Uroven }) {
 interface Blok {
   id: string
   nazev: string
+  kategorie?: string
   skryty: boolean
   sloupce: number
   od: Uroven
+  styl?: 'karty' | 'seznam' | 'mrizka'
+  pocetPolozek?: number
 }
 
 const KNIHOVNA: Blok[] = [
-  { id: 'ukony', nazev: 'Rychlé úkony', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'deska', nazev: 'Úřední deska', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'aktuality', nazev: 'Aktuality', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'akce', nazev: 'Kalendář akcí', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'rozhlas', nazev: 'Hlášení rozhlasu', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'urad', nazev: 'Kontakt na úřad', skryty: false, sloupce: 1, od: 'pokrocily' },
+  { id: 'ukony', nazev: 'Rychlé úkony', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 4 },
+  { id: 'deska', nazev: 'Úřední deska', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 5 },
+  { id: 'aktuality', nazev: 'Aktuality a blog', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 3 },
+  { id: 'akce', nazev: 'Kalendář akcí', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 4 },
+  { id: 'rozhlas', nazev: 'Hlášení rozhlasu', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 3 },
+  { id: 'iot', nazev: 'Živá IoT data a potok', kategorie: 'Chytrá obec', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 4 },
+  { id: 'komunita', nazev: 'Obecní půjčovna a bazar', kategorie: 'Komunita', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 3 },
+  { id: 'urad', nazev: 'Kontakt na úřad', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 1 },
 ]
 
 const PRIDAT: Blok[] = [
-  { id: 'faq', nazev: 'Otázky a odpovědi', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'mapa', nazev: 'Mapa s body', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'odpocet', nazev: 'Odpočet do akce', skryty: false, sloupce: 1, od: 'pokrocily' },
-  { id: 'sekce', nazev: 'Sekce se sloupci a pozadím', skryty: false, sloupce: 2, od: 'advance' },
-  { id: 'kod', nazev: 'Vložený kód', skryty: false, sloupce: 1, od: 'advance' },
+  { id: 'faq', nazev: 'Otázky a odpovědi', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam' },
+  { id: 'mapa', nazev: 'Mapa s body', kategorie: 'Mapy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty' },
+  { id: 'odpocet', nazev: 'Odpočet do akce', kategorie: 'Události', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty' },
+  { id: 'spolujizda', nazev: 'Sousedská spolujízda', kategorie: 'Komunita', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam' },
+  { id: 'aed', nazev: 'AED a první pomoc', kategorie: 'Bezpečnost', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty' },
+  { id: 'sekce', nazev: 'Sekce se sloupci a pozadím', kategorie: 'Rozvržení', skryty: false, sloupce: 2, od: 'advance', styl: 'mrizka' },
+  { id: 'kod', nazev: 'Vložený kód', kategorie: 'Kód', skryty: false, sloupce: 1, od: 'advance', styl: 'karty' },
 ]
 
 export function Skladatel({ s }: { s: Schopnosti }) {
   const [bloky, setBloky] = useState(KNIHOVNA)
+  const [zarizeni, setZarizeni] = useState<'desktop' | 'tablet' | 'mobil'>('desktop')
   const [hlaska, setHlaska] = useState('')
+
   const zmen = (id: string, z: Partial<Blok>) => setBloky(bloky.map((b) => (b.id === id ? { ...b, ...z } : b)))
   const posun = (i: number, o: number) => {
     const j = i + o
     if (j < 0 || j >= bloky.length) return
     const m = [...bloky]
-    ;[m[i], m[j]] = [m[j]!, m[i]!]
+    const docasny = m[i]
+    const druhy = m[j]
+    if (!docasny || !druhy) return
+    m[i] = druhy
+    m[j] = docasny
     setBloky(m)
-    setHlaska(`Blok ${m[j]!.nazev} je na ${j + 1}. místě.`)
+    setHlaska(`Blok ${m[j]?.nazev ?? ''} je na ${j + 1}. místě.`)
   }
+
+  const sirkaOkna = zarizeni === 'desktop' ? '100%' : zarizeni === 'tablet' ? '760px' : '375px'
+
   return (
     <>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'flex-start' }}>
-        <div style={{ flex: '2 1 420px', minWidth: 0 }}>
-          <h2>Bloky úvodní stránky</h2>
-          <ol className="seznam-bloku">
+        <div style={{ flex: '1.4 1 420px', minWidth: 0 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
+            <h2>Bloky úvodní stránky</h2>
+            <span className="vedlejsi" style={{ fontSize: 13.5 }}>
+              Aktivních: {bloky.filter((b) => !b.skryty).length} z {bloky.length} widgetů
+            </span>
+          </div>
+
+          <ol className="seznam-bloku" style={{ listStyle: 'none', padding: 0 }}>
             {bloky.map((b, i) => (
-              <li key={b.id} className={b.skryty ? 'skryty' : undefined}>
-                <span style={{ fontWeight: 500 }}>
-                  {b.nazev}
-                  {b.skryty ? ' (skrytý)' : ''}
-                  {s.sloupce ? `, ${b.sloupce} ${b.sloupce === 1 ? 'sloupec' : b.sloupce < 5 ? 'sloupce' : 'sloupců'}` : ''}
-                </span>
-                <span className="radek-akci">
-                  <button type="button" className="mala" onClick={() => posun(i, -1)} disabled={i === 0} aria-label={`Posunout ${b.nazev} nahoru`}>
-                    Nahoru
-                  </button>
-                  <button type="button" className="mala" onClick={() => posun(i, 1)} disabled={i === bloky.length - 1} aria-label={`Posunout ${b.nazev} dolů`}>
-                    Dolů
-                  </button>
-                  <button type="button" className="mala" aria-pressed={b.skryty} onClick={() => (zmen(b.id, { skryty: !b.skryty }), setHlaska(`Blok ${b.nazev} je ${b.skryty ? 'zobrazený' : 'skrytý'}.`))}>
-                    {b.skryty ? 'Zobrazit' : 'Skrýt'}
-                  </button>
+              <li key={b.id} className={b.skryty ? 'skryty' : undefined} style={{ display: 'block', padding: '14px 16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                    <span className="admin-widget-kategorie-stitek">{b.kategorie || 'Widget'}</span>
+                    <strong style={{ fontSize: 15.5 }}>{b.nazev}</strong>
+                    {b.skryty ? <span className="vedlejsi" style={{ fontSize: 13 }}>(skrytý)</span> : null}
+                  </div>
+
+                  <span className="radek-akci">
+                    <button type="button" className="mala" onClick={() => posun(i, -1)} disabled={i === 0} aria-label={`Posunout ${b.nazev} nahoru`}>
+                      Nahoru
+                    </button>
+                    <button type="button" className="mala" onClick={() => posun(i, 1)} disabled={i === bloky.length - 1} aria-label={`Posunout ${b.nazev} dolů`}>
+                      Dolů
+                    </button>
+                    <button
+                      type="button"
+                      className="mala"
+                      aria-pressed={b.skryty}
+                      onClick={() => {
+                        zmen(b.id, { skryty: !b.skryty })
+                        setHlaska(`Blok ${b.nazev} je ${b.skryty ? 'zobrazený' : 'skrytý'}.`)
+                      }}
+                    >
+                      {b.skryty ? 'Zobrazit' : 'Skrýt'}
+                    </button>
+                  </span>
+                </div>
+
+                <div className="admin-widget-nastaveni-radek">
                   {s.sloupce ? (
                     <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
-                      Sloupce
-                      <select value={b.sloupce} onChange={(e) => zmen(b.id, { sloupce: Number(e.target.value) })} style={{ width: 72, margin: 0 }}>
-                        {[1, 2, 3, 4].map((n) => (
-                          <option key={n}>{n}</option>
-                        ))}
+                      Šířka:
+                      <select value={b.sloupce} onChange={(e) => zmen(b.id, { sloupce: Number(e.target.value) })} style={{ width: 110, margin: 0, minHeight: 36, padding: '4px 8px', fontSize: 13 }}>
+                        <option value={1}>1 sloupec</option>
+                        <option value={2}>2 sloupce</option>
+                        <option value={3}>3 sloupce</option>
+                        <option value={4}>Plná šířka</option>
                       </select>
                     </label>
                   ) : null}
-                </span>
+
+                  <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
+                    Styl zobrazení:
+                    <select
+                      value={b.styl || 'karty'}
+                      onChange={(e) => zmen(b.id, { styl: e.target.value as 'karty' | 'seznam' | 'mrizka' })}
+                      style={{ width: 130, margin: 0, minHeight: 36, padding: '4px 8px', fontSize: 13 }}
+                    >
+                      <option value="karty">Vizuální karty</option>
+                      <option value="seznam">Kompaktní seznam</option>
+                      <option value="mrizka">Mřížka s ikonami</option>
+                    </select>
+                  </label>
+
+                  <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
+                    Položek:
+                    <select
+                      value={b.pocetPolozek || 4}
+                      onChange={(e) => zmen(b.id, { pocetPolozek: Number(e.target.value) })}
+                      style={{ width: 70, margin: 0, minHeight: 36, padding: '4px 8px', fontSize: 13 }}
+                    >
+                      <option value={3}>3</option>
+                      <option value={4}>4</option>
+                      <option value={6}>6</option>
+                      <option value={8}>8</option>
+                    </select>
+                  </label>
+                </div>
               </li>
             ))}
           </ol>
-          <h2>Přidat z knihovny</h2>
+
+          <h2 style={{ marginTop: 28 }}>Přidat z knihovny</h2>
           <ul className="seznam-bloku">
             {PRIDAT.map((b) => {
               const zamceny = b.od === 'advance' && !s.sloupce
               const pridany = bloky.some((x) => x.id === b.id)
               return (
                 <li key={b.id}>
-                  <span>
-                    {b.nazev}
+                  <div>
+                    <span style={{ fontWeight: 600 }}>{b.nazev}</span>
+                    <span className="admin-widget-kategorie-stitek" style={{ marginLeft: 8 }}>
+                      {b.kategorie}
+                    </span>
                     {zamceny ? <span className="admin__od" style={{ marginLeft: 8 }}>od Advance</span> : null}
-                  </span>
+                  </div>
                   <button
                     type="button"
                     className="mala"
                     disabled={zamceny || pridany}
-                    onClick={() => (setBloky([...bloky, b]), setHlaska(`Blok ${b.nazev} je přidaný na konec stránky.`))}
+                    onClick={() => {
+                      setBloky([...bloky, b])
+                      setHlaska(`Blok ${b.nazev} je přidaný na konec stránky.`)
+                    }}
                   >
                     {pridany ? 'Přidáno' : zamceny ? 'Zamčeno' : 'Přidat'}
                   </button>
@@ -218,22 +289,104 @@ export function Skladatel({ s }: { s: Schopnosti }) {
             })}
           </ul>
         </div>
-        <aside aria-label="Náhled pořadí" style={{ flex: '1 1 260px', minWidth: 0 }}>
-          <h2>Náhled</h2>
-          <div className="nahled" style={{ background: 'var(--bg)', padding: 12 }}>
+
+        <aside aria-label="Náhled pořadí" style={{ flex: '1 1 340px', minWidth: 0 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
+            <h2 style={{ margin: 0 }}>Náhled</h2>
+            <div className="admin-zarizeni-lista" role="group" aria-label="Přepnout zařízení náhledu">
+              <button
+                type="button"
+                className="admin-zarizeni-tlacitko"
+                aria-pressed={zarizeni === 'desktop'}
+                onClick={() => setZarizeni('desktop')}
+              >
+                Počítač
+              </button>
+              <button
+                type="button"
+                className="admin-zarizeni-tlacitko"
+                aria-pressed={zarizeni === 'tablet'}
+                onClick={() => setZarizeni('tablet')}
+              >
+                Tablet
+              </button>
+              <button
+                type="button"
+                className="admin-zarizeni-tlacitko"
+                aria-pressed={zarizeni === 'mobil'}
+                onClick={() => setZarizeni('mobil')}
+              >
+                Mobil
+              </button>
+            </div>
+          </div>
+
+          <div
+            className="admin-nahled-okno"
+            style={{
+              width: '100%',
+              maxWidth: sirkaOkna,
+              margin: '0 auto',
+              background: 'var(--surface)',
+              padding: 12,
+            }}
+          >
             {bloky
               .filter((b) => !b.skryty)
               .map((b) => (
-                <div key={b.id} style={{ display: 'grid', gridTemplateColumns: `repeat(${b.sloupce}, 1fr)`, gap: 6, marginBottom: 6 }} aria-hidden="true">
-                  {Array.from({ length: b.sloupce }, (_, k) => (
-                    <div key={k} style={{ border: '1px solid var(--line)', borderRadius: 4, padding: '8px 10px', fontSize: 14, background: 'var(--surface)' }}>
-                      {k === 0 ? b.nazev : ''}
-                    </div>
-                  ))}
+                <div
+                  key={b.id}
+                  style={{
+                    background: 'var(--bg)',
+                    border: '1px solid var(--line)',
+                    borderRadius: 8,
+                    padding: '10px 12px',
+                    marginBottom: 8,
+                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.03)',
+                  }}
+                  aria-hidden="true"
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                    <strong style={{ fontSize: 13.5 }}>{b.nazev}</strong>
+                    <span className="vedlejsi" style={{ fontSize: 11 }}>
+                      {b.styl === 'mrizka' ? 'Mřížka' : b.styl === 'seznam' ? 'Seznam' : 'Karty'}
+                    </span>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: `repeat(${b.sloupce}, 1fr)`, gap: 6 }}>
+                    {Array.from({ length: b.sloupce }, (_, k) => (
+                      <div
+                        key={k}
+                        style={{
+                          border: '1px dashed var(--line)',
+                          borderRadius: 4,
+                          padding: '6px 8px',
+                          fontSize: 12,
+                          background: 'var(--surface)',
+                          color: 'var(--muted)',
+                        }}
+                      >
+                        {b.id === 'deska'
+                          ? 'Dokument: Usnesení zastupitelstva'
+                          : b.id === 'aktuality'
+                            ? 'Článek: Oprava mostu přes potok'
+                            : b.id === 'iot'
+                              ? 'Hladina potoka: 42 cm · Normál'
+                              : b.id === 'komunita'
+                                ? 'Půjčovna: Štípač Lumag (Volno)'
+                                : b.id === 'urad'
+                                  ? 'OÚ Javoří Lhota · Úřední hodiny'
+                                  : `${b.nazev} (obsahový widget)`}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
           </div>
-          <p style={{ fontSize: 15, color: 'var(--muted)' }}>Povinné části (úřední deska, kontakt na úřad a patička) nejde z webu odebrat, jen přesunout.</p>
+
+          <p style={{ fontSize: 14, color: 'var(--muted)', marginTop: 12 }}>
+            Povinné části (úřední deska, kontakt na úřad a patička) nejde z webu odebrat, jen přesunout.
+          </p>
         </aside>
       </div>
       <Hlaska text={hlaska} />
