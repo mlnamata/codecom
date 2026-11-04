@@ -5,13 +5,13 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 | Úkol | Oblast souborů | Stav | Poznámka |
 | --- | --- | --- | --- |
 | Konfigurace šablony v liště (barvy, písmo), jen fotky, štítek AI, glass šablony | `apps/web/src/ukazka`, `apps/web/src/sablony` | hotovo | hlavní session |
-| Nový vzhled administrace, widgetový skladatel a blog | `apps/web/src/app/ukazka/**`, `admin.css` | hotovo | hlavní session |
+| Nový vzhled administrace, vícedílný skladatel šablon a blog | `apps/web/src/app/ukazka/**`, `admin.css` | hotovo | hlavní session |
 | Aplikace a IoT | repozitář `mlnamata/codecom_app` | předáno jiné session | zadání v `codecom_app/docs/zadani` |
 | Firemní landing na codekom.vercel.app | repozitář `mlnamata/codekom_web` | čeká na zakladatele | Vercel projekt napojit na `codekom_web` |
 
 ## Hotovo
 
-- Profesionální administrace, widgetový skladatel webu, blog a kruhový štítek AI: kompletní redesign přehledu administrace s KPI metrikami a rychlými akcemi úřadu; modulární skladatel úvodní stránky s konfigurací sloupců, stylů zobrazení a živým náhledem na počítači, tabletu i mobilu; plnohodnotná správa blogu a zpráv s blokovým/widgetovým editorem článků (odstavce, infoboxy, citace, přílohy ke stažení, štítky, odhad doby čtení) a živým náhledem; kruhový štítek AI nahrazující původní textový nápis u ilustračních fotografií.
+- Profesionální administrace, vícedílný skladatel šablon a blog: kompletní redesign administrace v moderním SaaS stylu (břidlicová paleta, čistá typografie, ikony u všech sekcí, 4 KPI karty v jedné řadě bez zalamování, moderní akční dlaždice); podpora vícedílných šablon webu v widgetovém skladateli s rozdělením do layoutových zón (horní Hero pás, hlavní sloupec obsahu, boční panel / sidebar, spodní servisní pás chytré obce a zápatí) s dvousloupcovým živým náhledem pro desktop, tablet i mobil a přepínačem dalších částí webu (úřední deska, blog, kontakty a úřad, chytrá obec); plnohodnotná správa blogu a zpráv s rubrikami a blokovým editorem.
 
 - Moduly chytré obce a komunity: 5 velkých modulů na veřejném webu i v administraci Javoří Lhoty (1. Senzorika, IoT a živá data: LoRaWAN, stav Javornického potoka s automatickým varováním, GPS trasy komunální techniky, parkování, EV dobíjení a digitální odjezdová tabule; 2. Komunita a lokální ekonomika: obecní půjčovna nářadí, sousedský bazar a darovna, spolujízda do Klatov a burza dobrovolnictví; 3. Pokročilá správa majetku a energetiky: startovací byty s pořadníkem, parcely k prodeji, komunitní FVE s bateriovým úložištěm a digitální hřbitov s virtuální svíčkou; 4. Bezpečnost a krizové situace: registr nalezených zvířat a věcí s mapou a útulkem, interaktivní mapa AED defibrilátorů a veřejné webkamery dle GDPR; 5. Zákulisní portály a gamifikace: zastupitelský extranet s neveřejnými podklady a diskuzí, systém občanských kreditů a odměn, vývojářský API portál s webhooky).
 

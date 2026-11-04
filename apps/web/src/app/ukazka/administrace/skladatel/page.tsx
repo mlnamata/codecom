@@ -18,8 +18,10 @@ export default async function Stranka() {
   )
   return (
     <>
-      <h1>Skladatel úvodní stránky</h1>
-      <p>Bloky úvodní stránky přesunete, skryjete nebo přidáte z knihovny. Výsledek je vždy přístupný a funguje na mobilu.</p>
+      <h1>Skladatel úvodní stránky a částí webu</h1>
+      <p>
+        Šablony CodeKom se skládají z více částí (horní Hero zóna, hlavní sloupec, boční panel a spodní servisní pás) i různých podstránek. Jednotlivé widgety můžete libovolně přesouvat mezi částmi šablony.
+      </p>
       <Skladatel s={s} />
     </>
   )

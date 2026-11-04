@@ -1,8 +1,10 @@
 /* Úrovně editoru a interní správa v ukázce administrace. Navazuje na .admin v globals.css. */
+
+/* Přepínač úrovní editoru v záhlaví */
 .admin__urovne {
   display: inline-flex;
   align-items: center;
-  background: var(--surface);
+  background: #f1f5f9;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 3px;
@@ -11,13 +13,13 @@
 .admin__urovne a {
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0 14px;
+  min-height: 32px;
+  padding: 0 12px;
   border-radius: 6px;
   border: 0;
   color: var(--muted);
   text-decoration: none;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   transition: all 0.15s ease;
 }
@@ -25,72 +27,135 @@
   color: var(--ink);
 }
 .admin__urovne a[aria-current="true"] {
-  background: var(--bg);
+  background: #ffffff;
   color: var(--ink);
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
+
+/* Boční navigace */
 .admin__skupina {
-  margin: 20px 0 4px;
-  padding: 0 12px;
-  font-size: 15px;
+  margin: 16px 0 6px;
+  padding: 0 10px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--muted);
+  color: #64748b;
+  letter-spacing: 0.04em;
 }
 .admin__navigace > div:first-child .admin__skupina {
-  margin-top: 0;
+  margin-top: 2px;
+}
+.admin__nav-polozka {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.admin__nav-ikona {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: #64748b;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+.admin__navigace a:hover .admin__nav-ikona {
+  color: var(--ink);
+}
+.admin__navigace a[aria-current="page"] .admin__nav-ikona {
+  color: var(--primary);
+}
+.admin__nav-nazev {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .admin__navigace a {
   justify-content: space-between;
   gap: 8px;
 }
 .admin__navigace a.zamceno {
-  color: var(--muted);
+  color: #64748b;
+}
+.admin__navigace a.zamceno:hover {
+  color: var(--ink);
+  background: #f8fafc;
 }
 .admin__od {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
-  padding: 0 6px;
+  padding: 2px 6px;
+  background: #f1f5f9;
   border: 1px solid var(--line);
   border-radius: 4px;
+  color: #64748b;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
+.admin__navigace a[aria-current="page"] .admin__od {
+  border-color: #bfdbfe;
+  background: #ffffff;
+  color: var(--primary);
+}
+
+/* Karty a panely */
 .admin .panel-bily {
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px 24px;
   margin: 0 0 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
+
 .admin .radek-akci {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
 }
+
+/* Malá ovládací tlačítka */
 .admin .mala {
   min-height: 44px;
   min-width: 44px;
   padding: 0 14px;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
-  background: var(--bg);
+  background: #ffffff;
   color: var(--ink);
   font: inherit;
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+.admin .mala:hover {
+  background: var(--surface);
+  border-color: #94a3b8;
 }
 .admin .mala:disabled {
   border-color: var(--line);
+  background: #f8fafc;
   color: var(--muted);
   cursor: not-allowed;
+  box-shadow: none;
 }
 .admin .mala.hlavni {
   background: var(--primary);
   border-color: var(--primary);
   color: var(--on-primary);
 }
+.admin .mala.hlavni:hover {
+  background: #1e40af;
+  border-color: #1e40af;
+}
+
+/* Seznamy bloků a položek */
 .admin .seznam-bloku {
   list-style: none;
   margin: 0 0 16px;
@@ -105,30 +170,47 @@
   gap: 8px 16px;
   padding: 12px 16px;
   margin: 0 0 8px;
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 .admin .seznam-bloku > li.skryty {
   border-style: dashed;
+  background: #f8fafc;
   color: var(--muted);
 }
+
+/* Tabulky */
 .admin .tabulka-admin {
   width: 100%;
-  border-collapse: collapse;
-  background: var(--bg);
-  font-size: 16px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  font-size: 13.5px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
 }
 .admin .tabulka-admin th,
 .admin .tabulka-admin td {
   text-align: left;
-  padding: 10px 12px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--line);
-  vertical-align: top;
+  vertical-align: middle;
 }
 .admin .tabulka-admin thead th {
   font-weight: 600;
-  border-bottom-color: var(--ink);
+  color: #475569;
+  background: #f8fafc;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line);
+}
+.admin .tabulka-admin tbody tr:last-child td {
+  border-bottom: 0;
+}
+.admin .tabulka-admin tbody tr:hover td {
+  background: #f8fafc;
 }
 .admin .tabulka-admin .cislo {
   text-align: right;
@@ -136,34 +218,56 @@
   white-space: nowrap;
 }
 .admin .posuvnik {
-  /* position: skrytý popisek tabulky (sr-only, absolute) nesmí rozšířit stránku. */
   position: relative;
   overflow-x: auto;
   max-width: 100%;
   margin: 0 0 24px;
 }
+
+/* Zamčená stránka */
 .admin .zamcena-stranka {
-  background: var(--bg);
-  border: 2px dashed var(--line);
-  border-radius: 8px;
-  padding: 24px;
+  background: #ffffff;
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
+
+/* Stavové štítky */
 .admin .stav {
   display: inline-block;
-  padding: 0 8px;
+  padding: 2px 8px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 600;
   border: 1px solid currentColor;
   white-space: nowrap;
 }
-.admin .stav.dobre { color: #1d6b34; }
-.admin .stav.pozor { color: #8a4b00; }
-.admin .stav.spatne { color: #a00d10; }
-.admin .stav.neutralni { color: var(--muted); }
+.admin .stav.dobre {
+  color: #0f5b28;
+  background: #e6f4ea;
+  border-color: #a7f3d0;
+}
+.admin .stav.pozor {
+  color: #703800;
+  background: #fef7e0;
+  border-color: #fae19c;
+}
+.admin .stav.spatne {
+  color: #991b1b;
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+.admin .stav.neutralni {
+  color: var(--muted);
+  background: #f1f5f9;
+  border-color: var(--line);
+}
+
+/* Metriky a čísla */
 .admin .cisla {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
   gap: 16px;
   list-style: none;
   padding: 0;
@@ -171,17 +275,21 @@
   max-width: none;
 }
 .admin .cisla li {
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 16px 20px;
+  border-radius: 10px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 .admin .cisla strong {
   display: block;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 600;
+  color: var(--ink);
   font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
 }
+
 .admin .nahled {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -195,11 +303,8 @@
   border: 1px solid #8a8a84;
   vertical-align: middle;
 }
-.admin .codekom-hlavicka {
-  background: #0a0a0a;
-  color: #ffffff;
-  border-bottom: 0;
-}
+
+/* CodeKom interní záhlaví */
 .admin .codekom-hlavicka {
   background: #181816;
   color: #f5f5f0;
@@ -244,14 +349,8 @@
 .admin .codekom-hlavicka :focus-visible {
   outline-color: #ffffff;
 }
-.admin__navigace a.zamceno[aria-current="page"] {
-  color: var(--on-primary);
-}
-.admin__navigace a[aria-current="page"] .admin__od {
-  border-color: currentColor;
-}
 
-/* Tlačítko Menu boční navigace: jen na telefonu, na širokém displeji je navigace vždy vidět. */
+/* Mobilní menu navigace */
 .admin__menu {
   display: none;
 }
@@ -266,10 +365,10 @@
     padding: 0 16px;
     border: 1px solid var(--line);
     border-radius: 8px;
-    background: var(--bg);
+    background: #ffffff;
     color: var(--ink);
     font: inherit;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     text-align: left;
     cursor: pointer;
@@ -286,11 +385,11 @@
   }
   .admin__menu-stranka {
     margin-left: auto;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 500;
     padding: 2px 10px;
     border-radius: 9999px;
-    background: var(--surface);
+    background: #f1f5f9;
     color: var(--muted);
     border: 1px solid var(--line);
   }
@@ -304,7 +403,7 @@
   .admin__navigace-obsah[data-otevreno="true"] {
     margin-top: 10px;
     padding: 12px;
-    background: var(--bg);
+    background: #ffffff;
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
@@ -312,22 +411,22 @@
 }
 
 /* ==========================================================================
-   Profesionální dashboard administrace, widgetový skladatel a správa blogu
+   Profesionální dashboard administrace
    ========================================================================== */
 
-/* Moderní stavové pruhy a karty metrik */
+/* Moderní uvítací pruh */
 .admin-uvod-banner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 20px 24px;
+  padding: 18px 24px;
   margin-bottom: 24px;
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .admin-uvod-status {
@@ -337,38 +436,54 @@
   padding: 4px 12px;
   background: #e6f4ea;
   color: #0f5b28;
+  border: 1px solid #a7f3d0;
   border-radius: 9999px;
-  font-size: 13.5px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .admin-uvod-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #137333;
+  background: #0f5b28;
 }
 
+/* Mřížka 4 KPI karet v jedné řadě */
 .admin-kpi-mrizka {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1099.98px) {
+  .admin-kpi-mrizka {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599.98px) {
+  .admin-kpi-mrizka {
+    grid-template-columns: 1fr;
+  }
 }
 
 .admin-kpi-karta {
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .admin-kpi-karta:hover {
   transform: translateY(-1px);
+  border-color: #cbd5e1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -380,16 +495,17 @@
 }
 
 .admin-kpi-popis {
-  font-size: 14px;
-  color: var(--muted);
+  font-size: 13px;
+  color: #64748b;
   font-weight: 500;
   margin: 0;
 }
 
 .admin-kpi-hodnota {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 600;
   line-height: 1.1;
+  color: var(--ink);
   font-variant-numeric: tabular-nums;
   margin: 4px 0 0;
 }
@@ -401,14 +517,43 @@
   font-size: 13px;
   color: var(--muted);
   margin-top: auto;
+  padding-top: 6px;
 }
 
-/* Rychlé akce */
+.admin-kpi-paticka a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--link);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+
+.admin-kpi-paticka a:hover {
+  text-decoration: underline;
+  color: #1e40af;
+}
+
+/* Rychlé akce úřadu */
 .admin-rychle-akce {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 1099.98px) {
+  .admin-rychle-akce {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599.98px) {
+  .admin-rychle-akce {
+    grid-template-columns: 1fr;
+  }
 }
 
 .admin-akce-tlacitko {
@@ -416,33 +561,64 @@
   align-items: center;
   gap: 12px;
   min-height: 52px;
-  padding: 10px 16px;
-  background: var(--bg);
+  padding: 12px 14px;
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--ink);
-  text-decoration: none;
-  font-size: 14.5px;
-  font-weight: 500;
+  text-decoration: none !important;
   transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .admin-akce-tlacitko:hover {
-  border-color: var(--primary);
-  background: var(--surface);
-  color: var(--primary);
+  border-color: #93c5fd;
+  background: #f8fafc;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
 }
 
 .admin-akce-ikona {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  background: var(--surface);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #eff6ff;
   color: var(--primary);
   flex-shrink: 0;
+}
+
+.admin-akce-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.admin-akce-nazev {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.admin-akce-podtitul {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Sloupce přehledu (aktivita + termíny) */
+.admin-prehled-sloupce {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+@media (max-width: 899.98px) {
+  .admin-prehled-sloupce {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Přepínač záložek (Tabs) */
@@ -451,7 +627,7 @@
   flex-wrap: wrap;
   gap: 4px;
   padding: 4px;
-  background: var(--surface);
+  background: #f1f5f9;
   border: 1px solid var(--line);
   border-radius: 8px;
   margin-bottom: 24px;
@@ -468,7 +644,7 @@
   border-radius: 6px;
   color: var(--muted);
   font: inherit;
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -479,7 +655,7 @@
 }
 
 .admin-zalozka-tlacitko[aria-selected="true"] {
-  background: var(--bg);
+  background: #ffffff;
   color: var(--ink);
   font-weight: 600;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -489,7 +665,7 @@
 .admin-skladatel-kontejner {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .admin-skladatel-rozvrzeni {
@@ -506,21 +682,23 @@
 }
 
 .admin-widget-karta {
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 16px 18px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .admin-widget-karta:hover {
-  border-color: #8a8a84;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .admin-widget-karta.skryty {
   border-style: dashed;
-  background: var(--surface);
+  background: #f8fafc;
   opacity: 0.75;
 }
 
@@ -535,36 +713,36 @@
 .admin-widget-znacka {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 15.5px;
+  gap: 8px;
+  font-size: 14.5px;
   font-weight: 600;
 }
 
 .admin-widget-kategorie-stitek {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
   padding: 2px 8px;
   border-radius: 9999px;
-  background: var(--surface);
+  background: #f1f5f9;
   border: 1px solid var(--line);
-  color: var(--muted);
+  color: #64748b;
 }
 
 .admin-widget-nastaveni-radek {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px 16px;
+  gap: 12px 18px;
   padding-top: 10px;
   border-top: 1px solid var(--line);
-  font-size: 13.5px;
+  font-size: 13px;
 }
 
 /* Zařízení pro náhled skladatele */
 .admin-zarizeni-lista {
   display: inline-flex;
   align-items: center;
-  background: var(--surface);
+  background: #f1f5f9;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 3px;
@@ -576,12 +754,12 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 36px;
+  min-height: 32px;
   padding: 0 12px;
   background: transparent;
   border: 0;
   border-radius: 6px;
-  color: var(--muted);
+  color: #64748b;
   font: inherit;
   font-size: 13px;
   font-weight: 500;
@@ -594,14 +772,14 @@
 }
 
 .admin-zarizeni-tlacitko[aria-pressed="true"] {
-  background: var(--bg);
+  background: #ffffff;
   color: var(--ink);
   font-weight: 600;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .admin-nahled-okno {
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 16px;
@@ -628,46 +806,48 @@
 }
 
 .admin-kategorie-pilulka {
-  min-height: 38px;
+  min-height: 36px;
   padding: 0 14px;
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 9999px;
-  color: var(--ink);
+  color: #475569;
   font: inherit;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .admin-kategorie-pilulka:hover {
-  border-color: var(--ink);
+  border-color: #94a3b8;
+  color: var(--ink);
 }
 
 .admin-kategorie-pilulka[aria-pressed="true"] {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--on-primary);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #ffffff;
   font-weight: 600;
 }
 
 .admin-stitek-tag {
   display: inline-block;
-  font-size: 12.5px;
+  font-size: 12px;
   padding: 2px 8px;
   border-radius: 4px;
-  background: var(--surface);
-  color: var(--muted);
+  background: #f1f5f9;
+  color: #475569;
   border: 1px solid var(--line);
 }
 
 .admin-blok-karta {
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 14px 16px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .admin-blok-hlavicka {
@@ -676,7 +856,7 @@
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
 }
 
@@ -694,7 +874,7 @@
   gap: 4px;
   min-height: 64px;
   padding: 10px 12px;
-  background: var(--bg);
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--ink);
@@ -703,6 +883,7 @@
   cursor: pointer;
   text-align: left;
   transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .admin-blok-pridat-btn:hover {
@@ -712,5 +893,5 @@
 
 .admin-blok-pridat-nazev {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13.5px;
 }

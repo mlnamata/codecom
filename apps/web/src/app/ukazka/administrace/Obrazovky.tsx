@@ -120,6 +120,9 @@ export function EditorMenu({ s, uroven }: { s: Schopnosti; uroven: Uroven }) {
 
 /* ------------------------------------------------------------ skladatel úvodní stránky */
 
+export type Zona = 'hlavni' | 'bocni' | 'hero' | 'spodni'
+export type CastWebu = 'uvod' | 'deska' | 'blog' | 'urad' | 'sluzby'
+
 interface Blok {
   id: string
   nazev: string
@@ -129,30 +132,42 @@ interface Blok {
   od: Uroven
   styl?: 'karty' | 'seznam' | 'mrizka'
   pocetPolozek?: number
+  zona: Zona
+}
+
+const NAZVY_ZON: Record<Zona, string> = {
+  hlavni: 'Hlavní sloupec',
+  bocni: 'Boční panel (Sidebar)',
+  hero: 'Horní Hero pás',
+  spodni: 'Spodní servisní pás',
 }
 
 const KNIHOVNA: Blok[] = [
-  { id: 'ukony', nazev: 'Rychlé úkony', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 4 },
-  { id: 'deska', nazev: 'Úřední deska', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 5 },
-  { id: 'aktuality', nazev: 'Aktuality a blog', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 3 },
-  { id: 'akce', nazev: 'Kalendář akcí', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 4 },
-  { id: 'rozhlas', nazev: 'Hlášení rozhlasu', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 3 },
-  { id: 'iot', nazev: 'Živá IoT data a potok', kategorie: 'Chytrá obec', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 4 },
-  { id: 'komunita', nazev: 'Obecní půjčovna a bazar', kategorie: 'Komunita', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 3 },
-  { id: 'urad', nazev: 'Kontakt na úřad', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 1 },
+  { id: 'hero-uvod', nazev: 'Uvítací pás a panorama', kategorie: 'Úvod', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', zona: 'hero' },
+  { id: 'deska', nazev: 'Úřední deska', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 5, zona: 'hlavni' },
+  { id: 'aktuality', nazev: 'Aktuality a blog', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 3, zona: 'hlavni' },
+  { id: 'rozhlas', nazev: 'Hlášení rozhlasu', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 3, zona: 'hlavni' },
+  { id: 'ukony', nazev: 'Rychlé úkony a formuláře', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 4, zona: 'bocni' },
+  { id: 'pocasi', nazev: 'Počasí na návsi a radar', kategorie: 'Informace', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 1, zona: 'bocni' },
+  { id: 'akce', nazev: 'Kalendář akcí', kategorie: 'Zprávy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', pocetPolozek: 4, zona: 'bocni' },
+  { id: 'urad', nazev: 'Úřední hodiny a kontakty', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 1, zona: 'bocni' },
+  { id: 'iot', nazev: 'Živá IoT data a vodočet potoka', kategorie: 'Chytrá obec', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 4, zona: 'spodni' },
+  { id: 'komunita', nazev: 'Obecní půjčovna a sousedský bazar', kategorie: 'Komunita', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', pocetPolozek: 3, zona: 'spodni' },
 ]
 
 const PRIDAT: Blok[] = [
-  { id: 'faq', nazev: 'Otázky a odpovědi', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam' },
-  { id: 'mapa', nazev: 'Mapa s body', kategorie: 'Mapy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty' },
-  { id: 'odpocet', nazev: 'Odpočet do akce', kategorie: 'Události', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty' },
-  { id: 'spolujizda', nazev: 'Sousedská spolujízda', kategorie: 'Komunita', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam' },
-  { id: 'aed', nazev: 'AED a první pomoc', kategorie: 'Bezpečnost', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty' },
-  { id: 'sekce', nazev: 'Sekce se sloupci a pozadím', kategorie: 'Rozvržení', skryty: false, sloupce: 2, od: 'advance', styl: 'mrizka' },
-  { id: 'kod', nazev: 'Vložený kód', kategorie: 'Kód', skryty: false, sloupce: 1, od: 'advance', styl: 'karty' },
+  { id: 'aed', nazev: 'AED defibrilátory a první pomoc', kategorie: 'Bezpečnost', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', zona: 'bocni' },
+  { id: 'spolujizda', nazev: 'Sousedská spolujízda a dojíždění', kategorie: 'Komunita', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', zona: 'spodni' },
+  { id: 'mapa', nazev: 'Interaktivní mapa katastru', kategorie: 'Mapy', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', zona: 'spodni' },
+  { id: 'faq', nazev: 'Časté dotazy občanů (FAQ)', kategorie: 'Úřad', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'seznam', zona: 'hlavni' },
+  { id: 'odpocet', nazev: 'Odpočet do obecní slavnosti', kategorie: 'Události', skryty: false, sloupce: 1, od: 'pokrocily', styl: 'karty', zona: 'hero' },
+  { id: 'sekce', nazev: 'Sekce se sloupci a pozadím', kategorie: 'Rozvržení', skryty: false, sloupce: 2, od: 'advance', styl: 'mrizka', zona: 'hlavni' },
+  { id: 'kod', nazev: 'Vložený kód a externí widget', kategorie: 'Kód', skryty: false, sloupce: 1, od: 'advance', styl: 'karty', zona: 'hlavni' },
 ]
 
 export function Skladatel({ s }: { s: Schopnosti }) {
+  const [castWebu, setCastWebu] = useState<CastWebu>('uvod')
+  const [filtrZony, setFiltrZony] = useState<'vse' | Zona>('vse')
   const [bloky, setBloky] = useState(KNIHOVNA)
   const [zarizeni, setZarizeni] = useState<'desktop' | 'tablet' | 'mobil'>('desktop')
   const [hlaska, setHlaska] = useState('')
@@ -173,224 +188,519 @@ export function Skladatel({ s }: { s: Schopnosti }) {
 
   const sirkaOkna = zarizeni === 'desktop' ? '100%' : zarizeni === 'tablet' ? '760px' : '375px'
 
+  const filtrovaneBloky = filtrZony === 'vse' ? bloky : bloky.filter((b) => b.zona === filtrZony)
+  const heroBloky = bloky.filter((b) => !b.skryty && b.zona === 'hero')
+  const hlavniBloky = bloky.filter((b) => !b.skryty && b.zona === 'hlavni')
+  const bocniBloky = bloky.filter((b) => !b.skryty && b.zona === 'bocni')
+  const spodniBloky = bloky.filter((b) => !b.skryty && b.zona === 'spodni')
+
   return (
-    <>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'flex-start' }}>
-        <div style={{ flex: '1.4 1 420px', minWidth: 0 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
-            <h2>Bloky úvodní stránky</h2>
-            <span className="vedlejsi" style={{ fontSize: 13.5 }}>
-              Aktivních: {bloky.filter((b) => !b.skryty).length} z {bloky.length} widgetů
-            </span>
-          </div>
+    <div className="admin-skladatel-kontejner">
+      {/* Přepínač částí a podstránek šablony webu */}
+      <div className="admin-zalozky" role="tablist" aria-label="Výběr části webu">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={castWebu === 'uvod'}
+          className="admin-zalozka-tlacitko"
+          onClick={() => setCastWebu('uvod')}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Úvodní stránka (Vícesloupcový layout)</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={castWebu === 'deska'}
+          className="admin-zalozka-tlacitko"
+          onClick={() => setCastWebu('deska')}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
+          <span>Úřední deska</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={castWebu === 'blog'}
+          className="admin-zalozka-tlacitko"
+          onClick={() => setCastWebu('blog')}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+          </svg>
+          <span>Článek a blog</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={castWebu === 'urad'}
+          className="admin-zalozka-tlacitko"
+          onClick={() => setCastWebu('urad')}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+          </svg>
+          <span>Kontakty a úřad</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={castWebu === 'sluzby'}
+          className="admin-zalozka-tlacitko"
+          onClick={() => setCastWebu('sluzby')}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+          </svg>
+          <span>Chytrá obec a IoT</span>
+        </button>
+      </div>
 
-          <ol className="seznam-bloku" style={{ listStyle: 'none', padding: 0 }}>
-            {bloky.map((b, i) => (
-              <li key={b.id} className={b.skryty ? 'skryty' : undefined} style={{ display: 'block', padding: '14px 16px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                    <span className="admin-widget-kategorie-stitek">{b.kategorie || 'Widget'}</span>
-                    <strong style={{ fontSize: 15.5 }}>{b.nazev}</strong>
-                    {b.skryty ? <span className="vedlejsi" style={{ fontSize: 13 }}>(skrytý)</span> : null}
-                  </div>
+      {castWebu === 'uvod' ? (
+        <div className="admin-skladatel-rozvrzeni">
+          <div style={{ minWidth: 0 }}>
+            {/* Přepínač zón úvodní šablony */}
+            <div style={{ marginBottom: 16 }}>
+              <span className="vedlejsi" style={{ display: 'block', fontSize: 13, marginBottom: 8 }}>
+                Filtrovat zónu rozvržení šablony:
+              </span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <button
+                  type="button"
+                  className="admin-kategorie-pilulka"
+                  aria-pressed={filtrZony === 'vse'}
+                  onClick={() => setFiltrZony('vse')}
+                >
+                  Všechny části ({bloky.length})
+                </button>
+                <button
+                  type="button"
+                  className="admin-kategorie-pilulka"
+                  aria-pressed={filtrZony === 'hlavni'}
+                  onClick={() => setFiltrZony('hlavni')}
+                >
+                  Hlavní sloupec ({bloky.filter((b) => b.zona === 'hlavni').length})
+                </button>
+                <button
+                  type="button"
+                  className="admin-kategorie-pilulka"
+                  aria-pressed={filtrZony === 'bocni'}
+                  onClick={() => setFiltrZony('bocni')}
+                >
+                  Boční panel ({bloky.filter((b) => b.zona === 'bocni').length})
+                </button>
+                <button
+                  type="button"
+                  className="admin-kategorie-pilulka"
+                  aria-pressed={filtrZony === 'hero'}
+                  onClick={() => setFiltrZony('hero')}
+                >
+                  Horní Hero pás ({bloky.filter((b) => b.zona === 'hero').length})
+                </button>
+                <button
+                  type="button"
+                  className="admin-kategorie-pilulka"
+                  aria-pressed={filtrZony === 'spodni'}
+                  onClick={() => setFiltrZony('spodni')}
+                >
+                  Spodní servisní pás ({bloky.filter((b) => b.zona === 'spodni').length})
+                </button>
+              </div>
+            </div>
 
-                  <span className="radek-akci">
-                    <button type="button" className="mala" onClick={() => posun(i, -1)} disabled={i === 0} aria-label={`Posunout ${b.nazev} nahoru`}>
-                      Nahoru
-                    </button>
-                    <button type="button" className="mala" onClick={() => posun(i, 1)} disabled={i === bloky.length - 1} aria-label={`Posunout ${b.nazev} dolů`}>
-                      Dolů
-                    </button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
+              <h2>Bloky úvodní stránky</h2>
+              <span className="vedlejsi" style={{ fontSize: 13.5 }}>
+                Aktivních: {bloky.filter((b) => !b.skryty).length} z {bloky.length} widgetů ve více částech šablony
+              </span>
+            </div>
+
+            <ol className="seznam-bloku" style={{ listStyle: 'none', padding: 0 }}>
+              {filtrovaneBloky.map((b) => {
+                const skutecnyIndex = bloky.findIndex((x) => x.id === b.id)
+                return (
+                  <li key={b.id} className={b.skryty ? 'skryty' : undefined} style={{ display: 'block', padding: '14px 16px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
+                      <div style={{ display: 'inline-flex', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+                        <span className="admin-widget-kategorie-stitek">{b.kategorie || 'Widget'}</span>
+                        <span className="admin-stitek-tag">{NAZVY_ZON[b.zona]}</span>
+                        <strong style={{ fontSize: 15 }}>{b.nazev}</strong>
+                        {b.skryty ? <span className="vedlejsi" style={{ fontSize: 13 }}>(skrytý)</span> : null}
+                      </div>
+
+                      <span className="radek-akci">
+                        <button
+                          type="button"
+                          className="mala"
+                          onClick={() => posun(skutecnyIndex, -1)}
+                          disabled={skutecnyIndex === 0}
+                          aria-label={`Posunout ${b.nazev} nahoru`}
+                        >
+                          Nahoru
+                        </button>
+                        <button
+                          type="button"
+                          className="mala"
+                          onClick={() => posun(skutecnyIndex, 1)}
+                          disabled={skutecnyIndex === bloky.length - 1}
+                          aria-label={`Posunout ${b.nazev} dolů`}
+                        >
+                          Dolů
+                        </button>
+                        <button
+                          type="button"
+                          className="mala"
+                          aria-pressed={b.skryty}
+                          onClick={() => {
+                            zmen(b.id, { skryty: !b.skryty })
+                            setHlaska(`Blok ${b.nazev} je ${b.skryty ? 'zobrazený' : 'skrytý'}.`)
+                          }}
+                        >
+                          {b.skryty ? 'Zobrazit' : 'Skrýt'}
+                        </button>
+                      </span>
+                    </div>
+
+                    <div className="admin-widget-nastaveni-radek">
+                      <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 500 }}>
+                        Část šablony:
+                        <select
+                          value={b.zona}
+                          onChange={(e) => zmen(b.id, { zona: e.target.value as Zona })}
+                          style={{ minHeight: 34, padding: '4px 8px', fontSize: 13 }}
+                        >
+                          <option value="hlavni">Hlavní sloupec</option>
+                          <option value="bocni">Boční panel (Sidebar)</option>
+                          <option value="hero">Horní Hero pás</option>
+                          <option value="spodni">Spodní pás služeb</option>
+                        </select>
+                      </label>
+
+                      {s.sloupce ? (
+                        <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
+                          Šířka:
+                          <select
+                            value={b.sloupce}
+                            onChange={(e) => zmen(b.id, { sloupce: Number(e.target.value) })}
+                            style={{ width: 110, margin: 0, minHeight: 34, padding: '4px 8px', fontSize: 13 }}
+                          >
+                            <option value={1}>1 sloupec</option>
+                            <option value={2}>2 sloupce</option>
+                            <option value={3}>3 sloupce</option>
+                            <option value={4}>Plná šířka</option>
+                          </select>
+                        </label>
+                      ) : null}
+
+                      <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
+                        Styl:
+                        <select
+                          value={b.styl || 'karty'}
+                          onChange={(e) => zmen(b.id, { styl: e.target.value as 'karty' | 'seznam' | 'mrizka' })}
+                          style={{ width: 130, margin: 0, minHeight: 34, padding: '4px 8px', fontSize: 13 }}
+                        >
+                          <option value="karty">Vizuální karty</option>
+                          <option value="seznam">Kompaktní seznam</option>
+                          <option value="mrizka">Mřížka s ikonami</option>
+                        </select>
+                      </label>
+
+                      <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
+                        Položek:
+                        <select
+                          value={b.pocetPolozek || 4}
+                          onChange={(e) => zmen(b.id, { pocetPolozek: Number(e.target.value) })}
+                          style={{ width: 70, margin: 0, minHeight: 34, padding: '4px 8px', fontSize: 13 }}
+                        >
+                          <option value={1}>1</option>
+                          <option value={3}>3</option>
+                          <option value={4}>4</option>
+                          <option value={5}>5</option>
+                          <option value={8}>8</option>
+                        </select>
+                      </label>
+                    </div>
+                  </li>
+                )
+              })}
+            </ol>
+
+            <h2 style={{ marginTop: 28 }}>Přidat z knihovny</h2>
+            <ul className="seznam-bloku">
+              {PRIDAT.map((b) => {
+                const zamceny = b.od === 'advance' && !s.sloupce
+                const pridany = bloky.some((x) => x.id === b.id)
+                return (
+                  <li key={b.id}>
+                    <div>
+                      <span style={{ fontWeight: 600 }}>{b.nazev}</span>
+                      <span className="admin-widget-kategorie-stitek" style={{ marginLeft: 8 }}>
+                        {b.kategorie}
+                      </span>
+                      <span className="admin-stitek-tag" style={{ marginLeft: 6 }}>
+                        {NAZVY_ZON[b.zona]}
+                      </span>
+                      {zamceny ? <span className="admin__od" style={{ marginLeft: 8 }}>od Advance</span> : null}
+                    </div>
                     <button
                       type="button"
                       className="mala"
-                      aria-pressed={b.skryty}
+                      disabled={zamceny || pridany}
                       onClick={() => {
-                        zmen(b.id, { skryty: !b.skryty })
-                        setHlaska(`Blok ${b.nazev} je ${b.skryty ? 'zobrazený' : 'skrytý'}.`)
+                        setBloky([...bloky, b])
+                        setHlaska(`Blok ${b.nazev} je přidaný do šablony.`)
                       }}
                     >
-                      {b.skryty ? 'Zobrazit' : 'Skrýt'}
+                      {pridany ? 'Přidáno' : zamceny ? 'Zamčeno' : 'Přidat'}
                     </button>
-                  </span>
-                </div>
-
-                <div className="admin-widget-nastaveni-radek">
-                  {s.sloupce ? (
-                    <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
-                      Šířka:
-                      <select value={b.sloupce} onChange={(e) => zmen(b.id, { sloupce: Number(e.target.value) })} style={{ width: 110, margin: 0, minHeight: 36, padding: '4px 8px', fontSize: 13 }}>
-                        <option value={1}>1 sloupec</option>
-                        <option value={2}>2 sloupce</option>
-                        <option value={3}>3 sloupce</option>
-                        <option value={4}>Plná šířka</option>
-                      </select>
-                    </label>
-                  ) : null}
-
-                  <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
-                    Styl zobrazení:
-                    <select
-                      value={b.styl || 'karty'}
-                      onChange={(e) => zmen(b.id, { styl: e.target.value as 'karty' | 'seznam' | 'mrizka' })}
-                      style={{ width: 130, margin: 0, minHeight: 36, padding: '4px 8px', fontSize: 13 }}
-                    >
-                      <option value="karty">Vizuální karty</option>
-                      <option value="seznam">Kompaktní seznam</option>
-                      <option value="mrizka">Mřížka s ikonami</option>
-                    </select>
-                  </label>
-
-                  <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, margin: 0, fontWeight: 400 }}>
-                    Položek:
-                    <select
-                      value={b.pocetPolozek || 4}
-                      onChange={(e) => zmen(b.id, { pocetPolozek: Number(e.target.value) })}
-                      style={{ width: 70, margin: 0, minHeight: 36, padding: '4px 8px', fontSize: 13 }}
-                    >
-                      <option value={3}>3</option>
-                      <option value={4}>4</option>
-                      <option value={6}>6</option>
-                      <option value={8}>8</option>
-                    </select>
-                  </label>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-          <h2 style={{ marginTop: 28 }}>Přidat z knihovny</h2>
-          <ul className="seznam-bloku">
-            {PRIDAT.map((b) => {
-              const zamceny = b.od === 'advance' && !s.sloupce
-              const pridany = bloky.some((x) => x.id === b.id)
-              return (
-                <li key={b.id}>
-                  <div>
-                    <span style={{ fontWeight: 600 }}>{b.nazev}</span>
-                    <span className="admin-widget-kategorie-stitek" style={{ marginLeft: 8 }}>
-                      {b.kategorie}
-                    </span>
-                    {zamceny ? <span className="admin__od" style={{ marginLeft: 8 }}>od Advance</span> : null}
-                  </div>
-                  <button
-                    type="button"
-                    className="mala"
-                    disabled={zamceny || pridany}
-                    onClick={() => {
-                      setBloky([...bloky, b])
-                      setHlaska(`Blok ${b.nazev} je přidaný na konec stránky.`)
-                    }}
-                  >
-                    {pridany ? 'Přidáno' : zamceny ? 'Zamčeno' : 'Přidat'}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-
-        <aside aria-label="Náhled pořadí" style={{ flex: '1 1 340px', minWidth: 0 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
-            <h2 style={{ margin: 0 }}>Náhled</h2>
-            <div className="admin-zarizeni-lista" role="group" aria-label="Přepnout zařízení náhledu">
-              <button
-                type="button"
-                className="admin-zarizeni-tlacitko"
-                aria-pressed={zarizeni === 'desktop'}
-                onClick={() => setZarizeni('desktop')}
-              >
-                Počítač
-              </button>
-              <button
-                type="button"
-                className="admin-zarizeni-tlacitko"
-                aria-pressed={zarizeni === 'tablet'}
-                onClick={() => setZarizeni('tablet')}
-              >
-                Tablet
-              </button>
-              <button
-                type="button"
-                className="admin-zarizeni-tlacitko"
-                aria-pressed={zarizeni === 'mobil'}
-                onClick={() => setZarizeni('mobil')}
-              >
-                Mobil
-              </button>
-            </div>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
 
-          <div
-            className="admin-nahled-okno"
-            style={{
-              width: '100%',
-              maxWidth: sirkaOkna,
-              margin: '0 auto',
-              background: 'var(--surface)',
-              padding: 12,
-            }}
-          >
-            {bloky
-              .filter((b) => !b.skryty)
-              .map((b) => (
-                <div
-                  key={b.id}
-                  style={{
-                    background: 'var(--bg)',
-                    border: '1px solid var(--line)',
-                    borderRadius: 8,
-                    padding: '10px 12px',
-                    marginBottom: 8,
-                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.03)',
-                  }}
-                  aria-hidden="true"
+          {/* Živý náhled vícedílné šablony */}
+          <aside aria-label="Náhled pořadí" style={{ minWidth: 0 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
+              <h2 style={{ margin: 0 }}>Náhled rozvržení</h2>
+              <div className="admin-zarizeni-lista" role="group" aria-label="Přepnout zařízení náhledu">
+                <button
+                  type="button"
+                  className="admin-zarizeni-tlacitko"
+                  aria-pressed={zarizeni === 'desktop'}
+                  onClick={() => setZarizeni('desktop')}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                    <strong style={{ fontSize: 13.5 }}>{b.nazev}</strong>
-                    <span className="vedlejsi" style={{ fontSize: 11 }}>
-                      {b.styl === 'mrizka' ? 'Mřížka' : b.styl === 'seznam' ? 'Seznam' : 'Karty'}
-                    </span>
-                  </div>
+                  Počítač
+                </button>
+                <button
+                  type="button"
+                  className="admin-zarizeni-tlacitko"
+                  aria-pressed={zarizeni === 'tablet'}
+                  onClick={() => setZarizeni('tablet')}
+                >
+                  Tablet
+                </button>
+                <button
+                  type="button"
+                  className="admin-zarizeni-tlacitko"
+                  aria-pressed={zarizeni === 'mobil'}
+                  onClick={() => setZarizeni('mobil')}
+                >
+                  Mobil
+                </button>
+              </div>
+            </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: `repeat(${b.sloupce}, 1fr)`, gap: 6 }}>
-                    {Array.from({ length: b.sloupce }, (_, k) => (
-                      <div
-                        key={k}
-                        style={{
-                          border: '1px dashed var(--line)',
-                          borderRadius: 4,
-                          padding: '6px 8px',
-                          fontSize: 12,
-                          background: 'var(--surface)',
-                          color: 'var(--muted)',
-                        }}
-                      >
-                        {b.id === 'deska'
-                          ? 'Dokument: Usnesení zastupitelstva'
-                          : b.id === 'aktuality'
-                            ? 'Článek: Oprava mostu přes potok'
-                            : b.id === 'iot'
-                              ? 'Hladina potoka: 42 cm · Normál'
-                              : b.id === 'komunita'
-                                ? 'Půjčovna: Štípač Lumag (Volno)'
-                                : b.id === 'urad'
-                                  ? 'OÚ Javoří Lhota · Úřední hodiny'
-                                  : `${b.nazev} (obsahový widget)`}
-                      </div>
-                    ))}
+            <div
+              className="admin-nahled-okno"
+              style={{
+                width: '100%',
+                maxWidth: sirkaOkna,
+                margin: '0 auto',
+                background: 'var(--surface)',
+                padding: 12,
+              }}
+            >
+              {/* Náhled záhlaví */}
+              <div style={{ background: '#ffffff', border: '1px solid var(--line)', borderRadius: 6, padding: '8px 12px', marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12 }}>
+                <strong>Záhlaví obce Javoří Lhota</strong>
+                <span className="vedlejsi">Menu a vyhledávání</span>
+              </div>
+
+              {/* Náhled Hero zóny */}
+              {heroBloky.length > 0 ? (
+                <div style={{ marginBottom: 10 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', marginBottom: 4 }}>
+                    HORNÍ HERO PÁS
                   </div>
+                  {heroBloky.map((b) => (
+                    <div
+                      key={b.id}
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid var(--line)',
+                        borderRadius: 6,
+                        padding: '8px 10px',
+                        marginBottom: 6,
+                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)',
+                      }}
+                    >
+                      <strong style={{ fontSize: 13 }}>{b.nazev}</strong>
+                    </div>
+                  ))}
                 </div>
-              ))}
-          </div>
+              ) : null}
 
-          <p style={{ fontSize: 14, color: 'var(--muted)', marginTop: 12 }}>
-            Povinné části (úřední deska, kontakt na úřad a patička) nejde z webu odebrat, jen přesunout.
+              {/* Dvou/třísloupcové tělo: Hlavní sloupec + Boční panel */}
+              <div
+                style={{
+                  display: zarizeni === 'desktop' ? 'grid' : 'flex',
+                  gridTemplateColumns: zarizeni === 'desktop' ? '1.3fr 1fr' : undefined,
+                  flexDirection: zarizeni === 'desktop' ? undefined : 'column',
+                  gap: 10,
+                  marginBottom: 10,
+                }}
+              >
+                {/* Hlavní sloupec */}
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', marginBottom: 4 }}>
+                    HLAVNÍ SLOUPEC OBSAHU
+                  </div>
+                  {hlavniBloky.map((b) => (
+                    <div
+                      key={b.id}
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid var(--line)',
+                        borderRadius: 6,
+                        padding: '8px 10px',
+                        marginBottom: 6,
+                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                        <strong style={{ fontSize: 13 }}>{b.nazev}</strong>
+                        <span className="vedlejsi" style={{ fontSize: 11 }}>{b.styl}</span>
+                      </div>
+                      <div style={{ fontSize: 11.5, color: 'var(--muted)', background: 'var(--surface)', padding: '4px 6px', borderRadius: 4 }}>
+                        {b.id === 'deska' ? 'Úřední dokumenty a vyhlášky' : b.id === 'aktuality' ? 'Články a novinky z radnice' : 'Hlášení rozhlasu'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Boční panel (Sidebar) */}
+                <div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', marginBottom: 4 }}>
+                    BOČNÍ PANEL (SIDEBAR)
+                  </div>
+                  {bocniBloky.map((b) => (
+                    <div
+                      key={b.id}
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid var(--line)',
+                        borderRadius: 6,
+                        padding: '8px 10px',
+                        marginBottom: 6,
+                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                        <strong style={{ fontSize: 13 }}>{b.nazev}</strong>
+                        <span className="vedlejsi" style={{ fontSize: 11 }}>boční</span>
+                      </div>
+                      <div style={{ fontSize: 11.5, color: 'var(--muted)', background: 'var(--surface)', padding: '4px 6px', borderRadius: 4 }}>
+                        {b.id === 'pocasi' ? 'Meteo: 9 °C · Polojasno' : b.id === 'akce' ? 'Kulturní a sportovní akce' : b.id === 'urad' ? 'Úřední hodiny: Po a St' : 'Rychlá navigace'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Spodní servisní pás */}
+              {spodniBloky.length > 0 ? (
+                <div style={{ marginBottom: 10 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--muted)', marginBottom: 4 }}>
+                    SPODNÍ SERVISNÍ PÁS (CHYTRÁ OBEC A SLUŽBY)
+                  </div>
+                  {spodniBloky.map((b) => (
+                    <div
+                      key={b.id}
+                      style={{
+                        background: '#ffffff',
+                        border: '1px solid var(--line)',
+                        borderRadius: 6,
+                        padding: '8px 10px',
+                        marginBottom: 6,
+                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)',
+                      }}
+                    >
+                      <strong style={{ fontSize: 13 }}>{b.nazev}</strong>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
+              {/* Náhled patičky */}
+              <div style={{ background: '#ffffff', border: '1px solid var(--line)', borderRadius: 6, padding: '8px 12px', fontSize: 11.5, color: 'var(--muted)', textAlign: 'center' }}>
+                Zápatí webu · Kontakty, mapa stránek a povinné informace
+              </div>
+            </div>
+
+            <p style={{ fontSize: 13.5, color: 'var(--muted)', marginTop: 12 }}>
+              Šablony CodeKom skládají web z více částí (horní hero, hlavní sloupec, boční panel, spodní servisní pás a zápatí). Na mobilu se boční panel automaticky přizpůsobí.
+            </p>
+          </aside>
+        </div>
+      ) : (
+        /* Správa ostatních částí a podstránek webu */
+        <div className="panel-bily" style={{ maxWidth: 780 }}>
+          <h2 style={{ marginTop: 0 }}>
+            {castWebu === 'deska'
+              ? 'Šablona úřední desky'
+              : castWebu === 'blog'
+                ? 'Šablona detailu článku a blogu'
+                : castWebu === 'urad'
+                  ? 'Šablona kontaktů a úředních hodin'
+                  : 'Šablona portálu Chytrá obec'}
+          </h2>
+          <p style={{ color: 'var(--muted)', fontSize: 14 }}>
+            {castWebu === 'deska'
+              ? 'Úřední deska obce má v každé šabloně vyhledávací panel, členění podle odborů a DIA standard.'
+              : castWebu === 'blog'
+                ? 'Články přebírají jednotnou typografii šablony, postranní infoboxy a související zprávy.'
+                : castWebu === 'urad'
+                  ? 'Stránka úřadu zobrazuje úřední hodiny s indikací otevřeno/zavřeno a kontaktní medailonky.'
+                  : 'Modul chytré obce integruje živá IoT čidla, vodočet, obecní půjčovnu a mapu AED.'}
           </p>
-        </aside>
-      </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 20 }}>
+            <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '10px 14px', background: 'var(--surface)', borderRadius: 8 }}>
+              <div>
+                <strong>Režim zobrazení části webu</strong>
+                <div className="vedlejsi" style={{ fontSize: 13 }}>Standardní zobrazení šablony přizpůsobené občanům</div>
+              </div>
+              <select style={{ width: 180, minHeight: 38 }}>
+                <option>Vícesloupcový přehled</option>
+                <option>Kompaktní tabulka</option>
+                <option>Karty s filtrem</option>
+              </select>
+            </label>
+
+            <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '10px 14px', background: 'var(--surface)', borderRadius: 8 }}>
+              <div>
+                <strong>Umístění doplňkového bočního panelu</strong>
+                <div className="vedlejsi" style={{ fontSize: 13 }}>Rychlé odkazy, úřední hodiny a související obsah</div>
+              </div>
+              <select style={{ width: 180, minHeight: 38 }}>
+                <option>Vpravo od obsahu</option>
+                <option>Vlevo od obsahu</option>
+                <option>Vespod pod obsahem</option>
+              </select>
+            </label>
+
+            <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '10px 14px', background: 'var(--surface)', borderRadius: 8 }}>
+              <div>
+                <strong>Automatická integrace do vyhledávání</strong>
+                <div className="vedlejsi" style={{ fontSize: 13 }}>Indexovat obsah této části pro fulltextové vyhledávání</div>
+              </div>
+              <input type="checkbox" defaultChecked style={{ width: 22, height: 22 }} />
+            </label>
+          </div>
+        </div>
+      )}
+
       <Hlaska text={hlaska} />
-    </>
+    </div>
   )
 }
 
