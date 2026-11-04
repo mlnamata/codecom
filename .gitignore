@@ -8,3 +8,8 @@ research/snimky/
 research/varianty/
 .DS_Store
 vystupy/
+
+# monorepo
+.turbo/
+test-results/
+playwright-report/

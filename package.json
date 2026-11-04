@@ -1,0 +1,20 @@
+{
+  "name": "codekom",
+  "private": true,
+  "packageManager": "pnpm@10.34.9",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "e2e": "turbo run e2e",
+    "a11y": "turbo run a11y",
+    "unslop": "node scripts/unslop.mjs",
+    "demo": "node scripts/demo.mjs"
+  },
+  "devDependencies": {
+    "turbo": "2.11.10"
+  }
+}
