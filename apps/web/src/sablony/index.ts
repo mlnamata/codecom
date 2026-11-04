@@ -26,6 +26,7 @@ export const NACITANI: Record<string, () => Promise<{ default: ModulSablony }>> 
   // Skleněné šablony, psané ručně (generátor je zatím nezná).
   sklo: () => import('./sklo'),
   noc: () => import('./noc'),
+  aurora: () => import('./aurora'),
 }
 
 export async function nactiSablonu(klic: string): Promise<ModulSablony> {

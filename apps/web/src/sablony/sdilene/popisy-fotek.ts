@@ -22,5 +22,6 @@ export const POPISY_FOTEK: Record<string, string> = {
   "mikroregion": "Široké údolí v podhůří Šumavy se čtyřmi vesničkami spojenými silničkami, podzim.",
   "urad": "Upravená přepážka malého obecního úřadu se stojanem na formuláře a květinami, ranní světlo.",
   "sklo": "Zasněžený zalesněný hřeben v podhůří Šumavy s dřevěnou rozhlednou na vrcholu.",
-  "noc": "Malé náměstí s radnicí za soumraku, teplé pouliční lampy a mírný déšť na dlažbě."
+  "noc": "Malé náměstí s radnicí za soumraku, teplé pouliční lampy a mírný déšť na dlažbě.",
+  "aurora": "Široké údolí v podhůří Šumavy se čtyřmi vesničkami spojenými silničkami, podzim."
 }

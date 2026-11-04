@@ -16,13 +16,13 @@ function varsJakoPrototyp(c: Record<string, unknown>): string {
 }
 
 describe('tokeny', () => {
-  it('má 22 šablon po 3 paletách v pořadí 01 až 22 (20 z generátoru a skleněné)', () => {
-    expect(SABLONY).toHaveLength(22)
-    expect(SABLONY.map((s) => s.cislo)).toEqual(Array.from({ length: 22 }, (_, i) => String(i + 1).padStart(2, '0')))
+  it('má 23 šablon po 3 paletách v pořadí 01 až 23 (20 z generátoru a skleněné)', () => {
+    expect(SABLONY).toHaveLength(23)
+    expect(SABLONY.map((s) => s.cislo)).toEqual(Array.from({ length: 23 }, (_, i) => String(i + 1).padStart(2, '0')))
     for (const s of SABLONY) expect(s.palety).toHaveLength(3)
   })
 
-  it('cssPromenne odpovídá řetězci vars z prototypu pro všech 66 kombinací', () => {
+  it('cssPromenne odpovídá řetězci vars z prototypu pro všech 69 kombinací', () => {
     let n = 0
     for (const s of SABLONY) {
       for (const p of s.palety) {
@@ -32,10 +32,10 @@ describe('tokeny', () => {
         n++
       }
     }
-    expect(n).toBe(66)
+    expect(n).toBe(69)
   })
 
-  it('všech 66 palet projde kontrolami kontrastu z palettes.py', () => {
+  it('všech 69 palet projde kontrolami kontrastu z palettes.py', () => {
     const nalezy = SABLONY.flatMap((s) => s.palety.flatMap((p) => zkontrolujTokeny(s, p)))
     expect(nalezy).toEqual([])
   })
