@@ -1,5 +1,5 @@
 /**
- * Snímky úvodů šablon pro galerii prezentačního webu (stav krize=off, foto=0).
+ * Snímky úvodů šablon pro galerii prezentačního webu (stav krize=off, foto=1).
  * 60 × 1280 × 900 a 20 × 375 × 800 (paleta 0), WebP do design/snimky.
  * Potřebuje běžící sestavený web: SNIMKY_URL (výchozí http://localhost:3000).
  */
@@ -25,7 +25,7 @@ try {
     const stranka = await prohlizec.newPage({ viewport: { width: sirka, height: vyska } })
     for (const s of SABLONY) {
       for (const p of palety) {
-        await stranka.goto(`${URL_WEBU}/?sablona=${s.klic}&paleta=${p}&krize=off&foto=0`, { waitUntil: 'networkidle' })
+        await stranka.goto(`${URL_WEBU}/?sablona=${s.klic}&paleta=${p}&krize=off&foto=1`, { waitUntil: 'networkidle' })
         // pruh ukázky do snímku nepatří
         await stranka.addStyleTag({ content: '.pruh-ukazky{display:none!important}' })
         const png = await stranka.screenshot({ clip: { x: 0, y: 0, width: sirka, height: vyska } })
