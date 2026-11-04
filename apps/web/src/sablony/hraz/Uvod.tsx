@@ -4,51 +4,30 @@ import { Foto } from '../sdilene/Foto'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
       <Hlavicka />
       <main id="obsah" tabIndex={-1}>
-        <section className="deep" aria-labelledby="hraz-titulek" style={{ position: "relative", background: "var(--deep)", color: "var(--on-deep)", overflow: "hidden" }}>
-          {foto ? (
-            <Foto sablona="hraz" styl={{ position: "absolute", inset: "0", width: "100%", height: "100%" }} />
-          ) : (
-            <svg viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style={{ position: "absolute", inset: "0", width: "100%", height: "100%" }}>
-              <path d="M0 300 L1440 260 V520 H0z" style={{ fill: "var(--primary)" }}></path>
-              <g className="hraz-deko" style={{ fill: "none", stroke: "var(--wave)" }} strokeWidth="3" strokeLinecap="round">
-                <path d="M80 360 q30 -14 60 0 t60 0 t60 0"></path>
-                <path d="M560 420 q30 -14 60 0 t60 0 t60 0 t60 0"></path>
-                <path d="M1080 340 q30 -14 60 0 t60 0 t60 0"></path>
-                <path d="M300 470 q30 -14 60 0 t60 0"></path>
-              </g>
-              <g className="hraz-deko">
-                <path d="M760 268 L1440 230 V280 L760 300z" style={{ fill: "var(--surface)" }} opacity="0.9"></path>
-                <g style={{ fill: "var(--wave)" }}>
-                  <circle cx="880" cy="236" r="26"></circle>
-                  <circle cx="930" cy="226" r="34"></circle>
-                  <circle cx="1000" cy="234" r="24"></circle>
-                  <circle cx="1220" cy="216" r="30"></circle>
-                  <circle cx="1270" cy="222" r="22"></circle>
-                </g>
-                <path d="M1110 260 v-34 h40 v34z M1104 228 l26 -20 l26 20z" style={{ fill: "var(--accent)" }}></path>
-              </g>
-            </svg>
-          )}
-          {' '}
-          <div style={{ position: "relative", maxWidth: "1280px", margin: "0 auto", padding: "72px clamp(16px, 4vw, 32px) 200px" }}>
-            <h1 id="hraz-titulek" style={{ margin: "0", maxWidth: "14ch", fontSize: "clamp(44px, 5.6vw, 76px)", lineHeight: "1.02", letterSpacing: "-0.02em" }}>{"Javoří Lhota u Mlýnského rybníka"}</h1>
+        <section className="deep" aria-labelledby="hraz-titulek" style={{ background: "var(--deep)", color: "var(--on-deep)" }}>
+          <div className="hraz-uvod" style={{ maxWidth: "1280px", margin: "0 auto", padding: "56px clamp(16px, 4vw, 32px) 176px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "32px 48px" }}>
+            <div style={{ flex: "1 1 380px", minWidth: "0" }}>
+              <h1 id="hraz-titulek" style={{ margin: "0", maxWidth: "14ch", fontSize: "clamp(40px, 5.2vw, 72px)", lineHeight: "1.04", letterSpacing: "-0.02em" }}>{"Javoří Lhota u Mlýnského rybníka"}</h1>
+              {' '}
+              <p style={{ margin: "18px 0 0", maxWidth: "44ch", fontSize: "19px" }}>
+                {"Obec se třemi rybníky a hrází z roku 1584. Výlov Mlýnského rybníka je v sobotu 14. listopadu."}
+              </p>
+            </div>
             {' '}
-            <p style={{ margin: "18px 0 0", maxWidth: "44ch", fontSize: "19px" }}>
-              {"Obec se třemi rybníky a hrází z roku 1584. Výlov Mlýnského rybníka je v sobotu 14. listopadu."}
-            </p>
+            <Foto sablona="hraz" styl={{ flex: "1.3 1 460px", minWidth: "0", height: "clamp(240px, 30vw, 400px)", borderRadius: "16px" }} />
           </div>
         </section>
         {' '}
         <section aria-labelledby="sluzby14" style={{ maxWidth: "1280px", margin: "-136px auto 0", padding: "0 clamp(16px, 4vw, 32px)", position: "relative" }}>
           <h2 id="sluzby14" className="sr">Služby obce</h2>
           {' '}
-          <ul style={{ margin: "0", padding: "0", listStyle: "none", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(190px, 100%), 1fr))", borderRadius: "16px", background: "var(--bg)", boxShadow: "0 8px 24px rgba(8, 40, 44, 0.12), inset 0 0 0 1px var(--line)", overflow: "hidden" }}>
+          <ul className="hraz-sluzby" style={{ margin: "0", padding: "0", listStyle: "none", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(150px, 100%), 1fr))", borderRadius: "16px", background: "var(--bg)", boxShadow: "0 8px 24px rgba(8, 40, 44, 0.12), inset 0 0 0 1px var(--line)", overflow: "hidden" }}>
             <li style={{ borderRight: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }}>
               <a href="/sluzby#svoz-odpadu" style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "24px", minHeight: "160px", color: "var(--ink)", textDecoration: "none" }}>
                 <span style={{ display: "inline-flex", width: "44px", height: "44px", alignItems: "center", justifyContent: "center", borderRadius: "12px", background: "var(--surface)", color: "var(--primary)" }}>
@@ -216,10 +195,6 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             <p style={{ margin: "0" }}>
               {"Prodej kaprů a amurů přímo z kádí, rybí polévka od hasičů. Parkujte u pily, hráz bude pro auta zavřená."}
             </p>
-            {' '}
-            <svg viewBox="0 0 240 24" aria-hidden="true" style={{ display: "block", width: "100%", height: "24px", marginTop: "16px" }}>
-              <path d="M0 12 q15 -10 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" style={{ fill: "none", stroke: "var(--wave)" }} strokeWidth="3"></path>
-            </svg>
           </aside>
         </div>
       </main>

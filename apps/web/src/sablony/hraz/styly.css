@@ -34,5 +34,6 @@
 .sablona-hraz * { transition:none!important;animation:none!important }
 }
 @media (max-width: 767.98px) {
-.sablona-hraz .hraz-deko { display:none }
+.sablona-hraz .hraz-uvod { padding-top:32px!important }
+.sablona-hraz .hraz-sluzby a { min-height:128px!important;padding:16px!important }
 }
