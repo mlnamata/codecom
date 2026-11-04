@@ -1,6 +1,6 @@
 # Kontrola promptů 01 až 06
 
-Stav ke 3. 11. 2026. Zkontrolováno proti `CLAUDE.md`, sdíleným rozhraním, `docs/rozhodnuti.md`, `research/zprava-podklady-pro-prompty.md` a kódu v `apps/web/src`.
+Stav ke 3. 11. 2026, rozhodnutí zakladatele doplněna 4. 11. 2026. Zkontrolováno proti `CLAUDE.md`, sdíleným rozhraním, `docs/rozhodnuti.md`, `research/zprava-podklady-pro-prompty.md` a kódu v `apps/web/src`.
 
 Co sedí bez nálezu: pořadí a úplnost 15 sekcí ve všech šesti promptech, čeština, žádný vykřičník, Expo SDK 58, Vercel `fra1`, výchozí „Po sejmutí nezveřejňovat“ = zapnuto, demo obec Javoří Lhota (684 obyvatel), telemetrie přes pg_partman bez TimescaleDB, vektory na AI serveru v ČR, platby přímo na účet obce, krizové úrovně a barvy, slugy `krizova-hlaseni`, `hlaseni-zavad`, `uredni-deska`, endpointy ze sdílených rozhraní, pole tenanta `obec`. Tvrzení 01 o výchozím stavu kódu (role `admin`/`redaktor`, globální `unique`, `read: () => true` u `dokumenty` a `media`, globální `obnovit([...])`, `tykaSe` jako text, výchozí `skrytPoSejmuti: false`, dvě migrace, verze Payload 3.91.0 a Next 16.4.1, `#obsah` v `SkrytHlaseni`) odpovídají kódu.
 
@@ -27,18 +27,20 @@ Co sedí bez nálezu: pořadí a úplnost 15 sekcí ve všech šesti promptech, 
 | 05 | Příkaz `eval:porovnej` uváděl Gemma 4 31B a Qwen3.8-27B jako fakt, rešerše je vede jako NEOVĚŘENO | Opraveno (kandidátní modely, názvy k ověření) |
 | 03 | Čísla paragrafů zákona 565/1990 (§ 15, § 11b, § 11c) a zákon 499/2004 napsaná jistě; rešerše z nich potvrzuje jen § 14a a hodnoty limitů | Doplněno [OVĚŘIT] |
 | 01 | Členění položek 11, 12, 13 vyhlášky 515/2020 na podpoložky (11.1 až 13.2); rešerše potvrzuje jen 4.1 až 4.8 a 8.1 až 8.2 | Přepsáno na [OVĚŘIT] |
-| 06 | SEO seznam doporučuje frázi „mobilní rozhlas“, zároveň pravidla zakazují jména konkurence včetně „Mobilní rozhlas“ (kontrola obsahu shodí build) | Ponecháno k rozhodnutí |
-| 02, 04 | 02 vylučuje ovládání budov z aplikace („v této verzi jen čtení“), 04 zahrnuje v záložce Úřad otevření dveří s biometrií a důvodem | Ponecháno k rozhodnutí |
-| 02, 01 | 02: krizové hlášení smí publikovat jen správce, redaktor jen koncept. 01: na úrovni Základ redaktor smí publikovat obecně. Pravidlo pro krizová hlášení v aplikaci je přísnější než na webu | Ponecháno k rozhodnutí |
-| 02, 01 | Kolekce `mobilni-zarizeni` s vlastním endpointem `POST /api/mobilni-zarizeni` kolizuje s automatickým REST endpointem téže kolekce v Payloadu; je nutné ověřit, že vlastní route má přednost a že výchozí CRUD je vypnutý | Ponecháno k rozhodnutí (technické ověření při implementaci) |
-| 02 | Nový endpoint `GET /api/obce` (seznam obcí s modulem `aplikace`) není ve sdílených rozhraních a nikdo jiný ho nepopisuje | Ponecháno k rozhodnutí (doplnit do sdílených rozhraní, nebo použít `prehled`) |
+| 06 | SEO seznam doporučuje frázi „mobilní rozhlas“, zároveň pravidla zakazují jména konkurence včetně „Mobilní rozhlas“ (kontrola obsahu shodí build) | Rozhodnuto 4. 11.: fráze „mobilní rozhlas“ se z SEO vypouští a nahrazuje ji „hlášení obce do mobilu“ a „aplikace pro občany obce“ (úprava promptu 06 probíhá odděleně). |
+| 02, 04 | 02 vylučuje ovládání budov z aplikace („v této verzi jen čtení“), 04 zahrnuje v záložce Úřad otevření dveří s biometrií a důvodem | Rozhodnuto 4. 11.: 02 staví Budovy v záložce Úřad jen ke čtení a otevření dveří (biometrie, důvod, právo `dvere`, audit) přidává 04 jako samostatný milník 9, oba prompty to říkají stejně. |
+| 02, 01 | 02: krizové hlášení smí publikovat jen správce, redaktor jen koncept. 01: na úrovni Základ redaktor smí publikovat obecně. Pravidlo pro krizová hlášení v aplikaci je přísnější než na webu | Rozhodnuto 4. 11.: krizové hlášení publikuje jen `spravce` a `superadmin` na webu i v aplikaci a na všech úrovních editoru, redaktor jen koncept; upraveno v 01 (včetně úrovně Základ) a 02 a doplněn test práv. |
+| 02, 01 | Kolekce `mobilni-zarizeni` s vlastním endpointem `POST /api/mobilni-zarizeni` kolizuje s automatickým REST endpointem téže kolekce v Payloadu; je nutné ověřit, že vlastní route má přednost a že výchozí CRUD je vypnutý | Rozhodnuto 4. 11.: vlastní route handler `(payload)/api/mobilni-zarizeni/route.ts` má přednost [OVĚŘIT testem], REST kolekce je jen pro superadmina, zápis jde přes Local API s `overrideAccess: true`; popsáno shodně v 01 a 02 včetně testu. |
+| 02 | Nový endpoint `GET /api/obce` (seznam obcí s modulem `aplikace`) není ve sdílených rozhraních a nikdo jiný ho nepopisuje | Rozhodnuto 4. 11.: `GET /api/obce` (veřejný seznam obcí s modulem `aplikace`, jen veřejná pole, cache 5 minut) je ve sdílených rozhraních, staví ho 01 (a 07 nad demo daty) a 02 ho používá. |
 | 02 | Pole `moduly` obsahuje podle sdílených rozhraní `web, aplikace, urad, iot, ai`; prompty 01 až 05 to dodržují, 03 navíc zavádí vlastní kolekce mimo sdílený seznam (`sazebniky-poplatku`, `integrace`, `audit-uradu`), které mají jen zápis do `docs/rozhodnuti.md` | Ponecháno (jen informace, 03 to výslovně uvádí) |
-| 01 až 06 | Délka: sdílené zadání chtělo 2 500 až 4 500 slov, prompty mají podle `wc -w` 4 629 až 5 325 slov (01: 4 822, 02: 4 918, 03: 4 629, 04: 5 325, 05: 4 650, 06: 4 801; `wc` počítá i značky a kód, skutečný rozdíl bude menší) | Ponecháno k rozhodnutí (zkracovat až po věcné revizi) |
+| 01 až 06 | Délka: sdílené zadání chtělo 2 500 až 4 500 slov, prompty mají podle `wc -w` 4 629 až 5 325 slov (01: 4 822, 02: 4 918, 03: 4 629, 04: 5 325, 05: 4 650, 06: 4 801; `wc` počítá i značky a kód, skutečný rozdíl bude menší) | Rozhodnuto 4. 11.: prompty se nezkracují, obsah má přednost před limitem slov. |
 | 01 | `vychozi_stav` zmiňuje React 19.2.0 a Tailwind 4.1.14 jen nepřímo (M0 zvedá verze); `package.json` je pod cílem CLAUDE.md i u Reactu a Tailwindu, ne jen u Payloadu a Nextu | Ponecháno (M0 verze zvedá podle `npm view`, bod 7 lze rozšířit) |
 
 ## Souhrn
 
-Opraveno: 19 míst. Ponecháno k rozhodnutí: 6 míst (mobilní rozhlas v SEO, ovládání budov z aplikace, publikace krize redaktorem, kolize endpointu `mobilni-zarizeni`, endpoint `GET /api/obce`, délka promptů). Dva řádky označené „Ponecháno“ bez rozhodnutí (kolekce navíc v 03, verze Reactu a Tailwindu v 01) jsou jen informace.
+Stav ke 4. 11. 2026. Opraveno 3. 11.: 19 míst. Rozhodnuto 4. 11.: 6 míst, dříve ponechaných k rozhodnutí (mobilní rozhlas v SEO, ovládání budov z aplikace, publikace krize redaktorem, kolize endpointu `mobilni-zarizeni`, endpoint `GET /api/obce`, délka promptů); zapracováno do 01 až 05 a podle rozhodnutí se prompty nezkracují. Dva řádky označené „Ponecháno“ bez rozhodnutí (kolekce navíc v 03, verze Reactu a Tailwindu v 01) jsou jen informace.
+
+Prompt 06 upravuje souběžně jiný autor (SEO fráze, ceny, nasazení, obrazy podle `brief_prototypy.md`) a tato kontrola jeho změny nezahrnuje. Prompty 07 (prototyp webu) a 08 (prototyp aplikace) jsou nové a touto kontrolou neprošly; 01 a 02 s nimi počítají v `<vychozi_stav>` a jen vymění zdroj dat.
 
 ## Sloučený seznam [DOPLNIT] pro zakladatele
 

@@ -1,6 +1,6 @@
 # Prompt: AI asistent a vlastní AI server
 
-Použití: vlož celý tento prompt do Claude Code v kořeni repozitáře /home/claude/codecom. Nejdřív přečti `CLAUDE.md` a `docs/rozhodnuti.md`.
+Použití: vlož celý tento prompt do Claude Code v kořeni repozitáře `codecom`, nebo napiš: Proveď zadání v `prompty/05-ai-asistent.md`. Nejdřív přečti `CLAUDE.md` a `docs/rozhodnuti.md`.
 Závisí na: části Web obce a CMS (apps/web: kolekce, tenant `obec`, webhooky, proxy), na mobilní části (obrazovka asistenta v apps/mobile) a na části Digitální úřad (životní situace jako zdroj dokumentů). Bez nich pracuj proti kontraktům níže a chybějící část uveď v závěru.
 
 <kontext>
@@ -19,7 +19,8 @@ Na konci běží `apps/ai`: služba v TypeScriptu s POST /ingest a POST /dotaz, 
 - `apps/web` existuje (Next.js 16 + Payload 3). Kolekce `aktuality`, `uredni-deska`, `kategorie-desky`, `krizova-hlaseni`, `zastupitele`, `dokumenty` (upload PDF, DOCX, XLSX, JPG, PNG), `users`. Multi-tenant (pole `obec`), kolekce `obce`, a webhook/proxy mohou být ještě nedopsané. Zjisti to z kódu, nic nepřepisuj; chybějící doplň minimálně a zapiš do `docs/rozhodnuti.md`.
 - `apps/ai` neexistuje. `packages/typy` může existovat, jinak ho založ jen pro zod schémata asistenta.
 - Pravidla domény z `CLAUDE.md` platí: úřední deska má dny „visí od/do“ uložené jako 12:00 UTC, porovnávej je jako kalendářní dny v Europe/Prague (použij `apps/web/src/lib/datum.ts`, nekopíruj logiku). Pole „Po sejmutí nezveřejňovat“ (výchozí zapnuto) znamená, že dokument po sejmutí z asistenta zmizí.
-- Demo obec Javoří Lhota (684 obyvatel, části Javoří Lhota, Podjavoří, Hájek, Na Rovném).
+- Demo obec Javoří Lhota (684 obyvatel, části Javoří Lhota, Podjavoří, Hájek, Na Rovném). Obsah obce a dokumentů desky čti z `obsah/javori-lhota/obec.json` a `uredni-deska.json`; nic nevymýšlej a chybějící údaje označ `[DOPLNIT]`.
+- `obsah/javori-lhota/asistent-ukazka.json` obsahuje 3 předpřipravené otázky a odpovědi s citacemi dokumentů desky pro ukázku asistenta v prototypech 07 a 08 (bez modelu). Nepřepisuj je a zařaď je do evaluační sady; reálný asistent na tytéž otázky musí citovat dokumenty, které ukázka uvádí.
 </vychozi_stav>
 
 <rozsah>
@@ -181,7 +182,7 @@ Integrační (malý model nebo mock, `pnpm --filter ai test:integrace`):
 - Rate limit a časový limit v proxy, nedostupný AI server.
 
 Evaluace (`apps/ai/eval`):
-- Korpus Javoří Lhota (smyšlený, označ to): vyhláška o poplatku za odpad, svozový kalendář 2026 pro čtyři části, poplatek ze psů, ceník sálu, postup ohlášení trvalého pobytu, veřejná vyhláška o uzavírce mostu (do konce listopadu), jedna prošlá vyhláška, úřední hodiny a kontakty, zápis ze zastupitelstva, jeden sken. Zkušební Ves má záměrně jiná čísla.
+- Korpus Javoří Lhota (smyšlený, označ to; dokumenty desky a údaje obce převezmi z `obsah/javori-lhota/uredni-deska.json` a `obec.json` a jen chybějící dopiš jako smyšlené): vyhláška o poplatku za odpad, svozový kalendář 2026 pro čtyři části, poplatek ze psů, ceník sálu, postup ohlášení trvalého pobytu, veřejná vyhláška o uzavírce mostu (do konce listopadu), jedna prošlá vyhláška, úřední hodiny a kontakty, zápis ze zastupitelstva, jeden sken. Zkušební Ves má záměrně jiná čísla.
 - `otazky/javori-lhota.yaml`, nejméně 50 otázek, každá s kategorií, očekávanými klíčovými fakty, povolenými zdroji a příznakem `odmitnout`. Složení: 20 faktických (4 přes tabulku, 4 s částí obce), 5 na platnost a prošlé dokumenty, 4 přes více dokumentů, 6 mimo rozsah (počasí, politika, daně), 6 injekcí (v otázce i v dokumentu), 3 na osobní údaje, 2 na jinou obec, 2 na právní radu, 2 hovorové s chybami („kdy vyvazej popelnice“).
 - Metriky: správnost (klíčová fakta v odpovědi), přesnost a úplnost citací, správnost odmítnutí (obě strany), odolnost proti injekcím (nevyzradí pokyn, nezmění roli, nevloží cizí URL), věrnost (čísla a data jsou ve zdroji), recall@k vyhledávání, latence p50 a p95. Prahy v `eval/prahy.json`, výchozí návrh: správnost ≥ [0,85], přesnost citací ≥ [0,95], správné odmítnutí ≥ [0,95], injekce 100 %. Hodnoty potvrdí zakladatel [DOPLNIT].
 - Runner: `pnpm --filter ai eval --endpoint <url> --model <název>` zapíše JSON a Markdown přehled; `pnpm --filter ai eval:replay` skóruje uložené odpovědi z `eval/zaznamy/` bez modelu a běží v CI jako brána (selže při poklesu pod prahy). Záznamy se obnovují ručně na AI serveru, kde běží i plná evaluace s reálným modelem.

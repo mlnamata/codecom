@@ -14,7 +14,8 @@ apps/ai           služba AI asistenta (RAG nad dokumenty obcí, volá model na 
 apps/brana        agent na mini PC v budově (vedle Home Assistant)
 packages/typy     sdílené typy a zod schémata (z payload-types.ts)
 packages/tokeny   barvy, krizové úrovně a další tokeny pro web i aplikaci
-design/           klikací návrhy (.dc.html), generátor šablon, nástroje kontroly
+design/           klikací návrhy (.dc.html), generátor šablon, nástroje kontroly, fotky (obrazky/foto) a snímky šablon (snimky)
+obsah/            hotový obsah: ukázková obec Javoří Lhota (JSON) a texty prezentačního webu (Markdown)
 docs/             návrh platformy, právní dokumenty, záznam rozhodnutí
 research/         rešerše, ze které prompty vychází
 brand/            logo CodeKom
@@ -71,7 +72,9 @@ Před instalací ověř aktuální verzi přes `npm view <balíček> version`. P
   - mřížka po 4 px, tenké linky.
 - Nepoužívej nadpisy nad nadpisy velkými písmeny, odkazy se šipkou „→“, řetězce „A · B“ ani kartičky jako ze SaaS šablony.
 - Text má velikost 17 px, cíle pro dotyk aspoň 44 × 44 px, kontrast textu aspoň 4,5 : 1.
-- Šablony webů obcí jsou v `design/prototypy` (20 šablon, každá ve 3 barevných variantách). Vzhled ber odtud, obsah z ukázkové obce Javoří Lhota.
+- Šablony webů obcí jsou v `design/prototypy` (20 šablon, každá ve 3 barevných variantách). Vzhled ber odtud, obsah z ukázkové obce Javoří Lhota v `obsah/javori-lhota`.
+- Texty a obsah nevymýšlej. Prezentační web bere texty z `obsah/prezentace`, ukázková obec z `obsah/javori-lhota`. Co chybí, označ `[DOPLNIT]`.
+- Fotky z `design/obrazky/foto` jsou vygenerované AI. Kde se zobrazí, má být poznámka „Ilustrační fotografie vytvořená umělou inteligencí“.
 - Logo CodeKom je v `brand/`, černobílé. Na webech obcí je jen v patičce, hlavní značkou je znak obce.
 
 ## Jak pracovat

@@ -1,6 +1,6 @@
 # Prompt: Digitální úřad
 
-Použití: vlož celý tento soubor do Claude Code v kořeni repozitáře /home/claude/codecom.
+Použití: vlož celý tento soubor do Claude Code v kořeni repozitáře `codecom`, nebo napiš: Proveď zadání v `prompty/03-digitalni-urad.md`.
 Závisí na: 01 Web obce a CMS (multi-tenant, kolekce `obce`, role, úřední deska), 02 Mobilní aplikace (kolekce `obcane`, klient API z tohoto promptu), 04 IoT budovy (kolekce `budovy`, `planyVytapeni`, `pristupy`). Co v repu ještě chybí, nahraď úzkým rozhraním z <architektura> a označ `[DOPLNIT: napojit na prompt 0X]`.
 
 <kontext>
@@ -21,6 +21,8 @@ V `apps/web` je Payload 3.91 s kolekcemi `aktuality`, `uredni-deska`, `kategorie
 Prompt 01 zavádí multi-tenant a role superadmin, spravce, redaktor. Dokud to v repu není, piš přístup přes `hasRole` a tenanta přes pole `obec`, aby šlo přepnout na jednom místě.
 
 Z prototypu S20 převezmi stránku Životní situace (výběr situace, kroky se štítky Online, Na úřadě, Proběhne samo, údaj „Poradí“) a čtyři ukázkové situace (stěhování, narození dítěte, stavba, úmrtí) jako seed. Komponenty piš přes tokeny z `packages/tokeny`, aby fungovaly ve všech 20 šablonách.
+
+Seed Javoří Lhoty (životní situace, služby a poplatky, prostory a rezervace, hlášení závad) bere obsah z `obsah/javori-lhota/zivotni-situace.json`, `sluzby.json`, `prostory.json` a `hlaseni-zavad.json` (popis polí v `obsah/javori-lhota/README.md`); nic nevymýšlej a chybějící údaje označ `[DOPLNIT: pole]`. Pokud už proběhl prompt 07 a jeho stránky `/sluzby/platby`, `/sluzby/nahlasit-zavadu`, `/sluzby/rezervace` a `/zivotni-situace` nad demo daty, převezmi je a jen vyměň zdroj dat na Payload, UI nepřepisuj.
 </vychozi_stav>
 
 <rozsah>
@@ -139,7 +141,7 @@ type DefiniceFormulare = { sekce: { nazev: string; pole: PoleDef[] }[] }
 
 NIA: SeP registruje obec jako OVM přes svou datovou schránku, CodeKom ji technicky připojí přes SAML2/OIDC (test `tnia.identita.gov.cz`, produkce `nia.identita.gov.cz`). Produkce je jen pro subjekt s povinností ověřovat identitu, proto žadatelem je vždy obec; v kódu žádná výjimka „CodeKom jako SeP“. Postav obecného OIDC klienta a otestuj ho proti mock poskytovateli. V `integrace` ukaž obci kontrolní seznam registrace a stav (nenastaveno, test, produkce). Bez produkční konfigurace formulář s úrovní `nia` ukáže offline cestu a případnou alternativu s potvrzením.
 
-**Vzorové formuláře** (seed, sazby ze sazebníku Javoří Lhoty, ne z kódu):
+**Vzorové formuláře** (seed, sazby ze sazebníku Javoří Lhoty z `obsah/javori-lhota/sluzby.json`, ne z kódu):
 1. Přihlášení k poplatku za odpad: osoby (jméno, adresa, počet osob, datum vzniku povinnosti, podmíněné pole „vlastník bez přihlášených osob“), `email_verified`, `spravni_podani`; výsledek předpis + QR platba.
 2. Poplatek ze psa: držitel, plemeno, datum narození psa, číslo čipu (nepovinné), 65+ (podmíněné), další pes.
 3. Zábor veřejného prostranství: žadatel, účel, místo, plocha m², od a do, příloha plánek; výpočet m² × dny × sazba × násobitel účelu; schválení úředníkem před platbou.
@@ -229,9 +231,9 @@ Na začátku sepiš plán a úkoly, stav drž v `docs/progress.json`. Každý mi
 5. Hlášení závad: web, API, fotky a moderace, administrace, veřejná mapa.
 6. Poplatky a platby: sazebníky, výpočty, SPD a QR, VS, párování, připomínky, vzory pes a prostranství.
 7. Rezervace: kalendář, cena, schválení, platba, `IotRezervace`.
-8. Životní situace: kolekce, seed ze S20, stránky, odkazy.
+8. Životní situace: kolekce, seed z `obsah/javori-lhota/zivotni-situace.json` (původ je prototyp S20), stránky, odkazy.
 9. Identita a integrace: OIDC klient s mockem, kontrolní seznam NIA, ComGate v testovacím režimu, rozhraní ISDS a exportu.
-10. Seed Javoří Lhota, Playwright, axe, položky z `<overit>`, `docs/specs/urad.md` (jak obec modul zapne a co musí zařídit sama).
+10. Seed Javoří Lhota z `obsah/javori-lhota/*.json`, Playwright, axe, položky z `<overit>`, `docs/specs/urad.md` (jak obec modul zapne a co musí zařídit sama).
 </postup>
 
 <hotovo_kdyz>

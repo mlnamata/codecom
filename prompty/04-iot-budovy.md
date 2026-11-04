@@ -1,7 +1,7 @@
 # Prompt: IoT obecních budov – brána, cloud a dashboard
 
-Použití: vlož celý tento text do Claude Code v kořeni repozitáře /home/claude/codecom.
-Závisí na: webu a CMS (kolekce `obce`, `users`, multi-tenant, administrace Payload), digitálním úřadu (`rezervace`, `prostory`; do jeho dokončení pracuj s rozhraním a fixturami popsanými níže), mobilní aplikaci (záložka Úřad; tento prompt dodá API a typy).
+Použití: vlož celý tento text do Claude Code v kořeni repozitáře `codecom`, nebo napiš: Proveď zadání v `prompty/04-iot-budovy.md`.
+Závisí na: webu a CMS (kolekce `obce`, `users`, multi-tenant, administrace Payload), digitálním úřadu (`rezervace`, `prostory`; do jeho dokončení pracuj s rozhraním a fixturami popsanými níže), mobilní aplikaci (záložka Úřad: Budovy jen ke čtení staví prompt 02; otevření dveří v aplikaci přidává tento prompt jako samostatný milník 9 a dodá API a typy).
 
 <kontext>
 Obec s několika budovami (úřad se sálem, sokolovna, škola, zbrojnice) dnes topí prázdné prostory a předává klíče z ruky do ruky. CodeKom nabízí modul `iot`: malou bránu v každé budově, cloud, který plánuje a hlídá, a dashboard pro starostu, správce budov a účetní. Hlavní scénář: nájemce si rezervuje sál v digitálním úřadu, sál se předtopí, nájemce dostane časově omezený kód a po akci se vytápění utlumí. Do 5 sekund od otevření dashboardu musí být jasné, zda je vše v pořádku.
@@ -26,7 +26,7 @@ Na konci funguje celý řetěz bez skutečného hardwaru, v simulátoru: agent v
 Postav:
 1. **apps/brana**: agent v TypeScriptu (Node 22) jako doplněk (add-on) Home Assistant OS, adaptéry zařízení, místní plánovač a pravidla, vyrovnávací fronta, MQTT klient s mTLS, simulátor brány pro testy, balení doplňku a dokumentaci instalace.
 2. **Cloud v apps/web**: kolekce `budovy`, `prvky`, `planyVytapeni`, `pristupy`, `prikazy`, `alarmy`; schéma `iot` s tabulkami `mereni`, agregacemi a `audit_vstupu`; příjem telemetrie; příkazy s potvrzením; plánovač; odesílání upozornění a kódů; registrace brán.
-3. **Dashboard**: osm obrazovek v administraci Payload (jedno přihlášení) a JSON API pro záložku Úřad v aplikaci. Kód záložky v `apps/mobile` piš jen tehdy, když tam už aplikace existuje, jinak dodej API, typy v `packages/typy` a kontraktní testy.
+3. **Dashboard**: osm obrazovek v administraci Payload (jedno přihlášení) a JSON API pro záložku Úřad v aplikaci. Kód záložky v `apps/mobile` piš jen tehdy, když tam už aplikace existuje, jinak dodej API, typy v `packages/typy` a kontraktní testy. Otevření dveří z aplikace (biometrie, důvod, právo `dvere`, audit) je samostatný milník 9 a nepatří do milníku Dashboard.
 4. **Dokumenty**: `docs/iot/` (instalace brány, bezpečnostní příloha, hlášení zranitelností, soukromí a retence, seznam zařízení) a zápisy do `docs/rozhodnuti.md`.
 
 Mimo rozsah: vlastní DPS brány (až fáze B3), LoRaWAN, venkovní čidla, vodoměry, KNX, Modbus, M-Bus, OpenTherm (jen rozhraní adaptérů a poznámka), obecný vizuální editor pravidel (jsou jen šablony s nastavitelnými parametry), učení doby předtopení (v první verzi pevná hodnota na místnost), skutečné zkoušky na hardwaru, výběr dodavatele SMS, produkční nasazení brokeru. Dálkové zavírání ventilu při úniku vody je fáze B2, nedělej ho.
@@ -127,7 +127,7 @@ Všechny kolekce Payloadu mají pole `obec` (multi-tenant plugin) a přístup om
 
 **Příkaz: životní cyklus.** Dashboard nebo aplikace pošle `POST /api/iot/prikazy` s `idempotencyKey`. Server ověří roli a oprávnění, zapíše příkaz do stavu `vytvoren`, publikuje ho (`odeslan`) a klient sleduje stav (dotazováním nebo SSE). Brána příkaz po `platnoDo` neprovede a ani po obnovení spojení nesmí provést prošlý příkaz (platí hlavně pro odemčení). Po provedení brána ověří výsledek ze stavu zařízení a pošle `ack` (`provedeno` nebo `selhalo`). Bez `ack` do `platnoDo` přejde příkaz do `vyprselo`, uživatel to uvidí a u dveří vznikne alarm `prikazSelhal`. Opakování téhož `idempotencyKey` vrací původní příkaz.
 
-**Dálkové otevření dveří.** Povolí jen uživatel s `users.iotPrava = dvere` (pole přidej, výchozí hodnoty: žádné, čtení, ovládání, dveře; správce obce začíná na ovládání, dveře se přidělují výslovně), s dvoufázovým ověřením provedeným v posledních 5 minutách (step-up), s povinným důvodem z nabídky (servis nebo oprava, nájemce zapomněl kód, zásah hasičů, jiný s textem). V aplikaci před odesláním navíc biometrie na zařízení. Zámek se po 5 minutách sám zamkne. Každé otevření, úspěšné i neúspěšné, jde do `audit_vstupu`. Rozhraní vždy uvádí text „Dveře lze vždy otevřít klíčem. Klíč má: <kdoMaKlic>“.
+**Dálkové otevření dveří.** Povolí jen uživatel s `users.iotPrava = dvere` (pole přidej, výchozí hodnoty: žádné, čtení, ovládání, dveře; správce obce začíná na ovládání, dveře se přidělují výslovně), s dvoufázovým ověřením provedeným v posledních 5 minutách (step-up), s povinným důvodem z nabídky (servis nebo oprava, nájemce zapomněl kód, zásah hasičů, jiný s textem). V aplikaci (milník 9) před odesláním navíc biometrie na zařízení. Zámek se po 5 minutách sám zamkne. Každé otevření, úspěšné i neúspěšné, jde do `audit_vstupu`. Rozhraní vždy uvádí text „Dveře lze vždy otevřít klíčem. Klíč má: <kdoMaKlic>“.
 
 **Plány a rezervace.** Základní plán: v úřední hodiny komfort, jinak útlum; sál a sokolovna bez rezervace drží útlum. Potvrzená rezervace prostoru vytvoří interval komfortu od `od - predtopeniMin` do `do - utlumPredKoncemMin` pro místnosti prostoru a přístupový kód s platností od 30 minut před začátkem do 30 minut po konci (obojí v konfiguraci). Rezervace přes půlnoc je jeden interval. Dvě navazující rezervace se spojí. Zrušení nebo posun rezervace plán a kód přepočítá a starý kód zruší. Kód se pošle nájemci SMS nebo e-mailem [DOPLNIT: dodavatel SMS]; zpráva obsahuje poučení o záznamu vstupů a odkaz na podmínky rezervace. Ruční plán obce má přednost před šablonou, nikoli před mrazovou ochranou.
 
@@ -173,7 +173,7 @@ Adaptér zámku má rozhraní `ZamekAdapter` (`otevri(trvaniS)`, `zamkni()`, `na
 - Klávesnice: každý prvek dosažitelný a ovladatelný, viditelný fokus, žádná past. Dialog odemčení je modální s návratem fokusu, `Esc` zavírá, počáteční fokus je na nabídce důvodů.
 - Změny stavu (nový alarm, výsledek příkazu) oznamuje `aria-live="polite"`, kritické `role="alert"`. Příkaz zobrazuje postup slovy: Odesílám, Čekám na potvrzení, Provedeno, Neprovedeno, Vypršelo.
 - Žádný údaj se nespoléhá na hover. Časy a teploty česky (22,5 °C, 27. 10. 2026, 10:50). Respektuj `prefers-reduced-motion`.
-- Mobil: v záložce Úřad jen důležité, to jsou Přehled (alarmy, dnešní rezervace, schválení), Budovy (teploty, režim, otevření dveří s biometrií a důvodem). Plány, energie, zařízení a export jsou jen na webu a aplikace na ně odkáže. Offline zobrazí poslední stav s časem a zakáže ovládání.
+- Mobil: v záložce Úřad jen důležité, to jsou Přehled (alarmy, dnešní rezervace, schválení), Budovy (teploty, režim; ke čtení je staví prompt 02 nad adaptérem `GET /api/mobilni/urad/budovy`, otevření dveří s biometrií, důvodem a právem `dvere` přidává milník 9). Plány, energie, zařízení a export jsou jen na webu a aplikace na ně odkáže. Offline zobrazí poslední stav s časem a zakáže ovládání.
 - Rozvržení na 375 a 1280 px bez vodorovného posunu; tabulky na úzkém displeji přejdou na seznam položek.
 </design_a_pristupnost>
 
@@ -213,9 +213,10 @@ Na začátku zjisti stav repa, sepiš plán a seznam úkolů do `docs/progress.j
 3. **Simulátor a agent.** Fake HA, klient HA, fronta, MQTT, místní plánovač a pravidla, heartbeat. Testy offline a fail-safe.
 4. **Cloud: tok.** Příjem telemetrie, publikace plánu a příkazů, `ack` a časový limit, alarmy a oznámení, registrace brány a certifikáty (vývojová CA). Integrační testy brána – broker – cloud.
 5. **Plány, rezervace, kódy.** Zdroj rezervací (rozhraní a fixtura, zapojení na hák, pokud kolekce už existují), přepočet plánu, kódy a jejich doručení, audit.
-6. **Dashboard.** Osm obrazovek a API, nejdřív Přehled a Detail budovy, potom Alarmy, Přístupy, Energie, Plány, Zařízení, Rezervace. Playwright a axe. Pokud existuje `apps/mobile`, záložka Úřad (Přehled a Budovy).
+6. **Dashboard.** Osm obrazovek a API, nejdřív Přehled a Detail budovy, potom Alarmy, Přístupy, Energie, Plány, Zařízení, Rezervace. Playwright a axe. Pokud existuje `apps/mobile`, doplň do záložky Úřad Přehled ke čtení; Budovy ke čtení staví prompt 02 a otevření dveří je milník 9.
 7. **Doplněk HA a dokumenty.** Balení doplňku, `docs/iot/*`, SBOM v CI, `SECURITY.md`, zápisy do `docs/rozhodnuti.md` (příjem telemetrie, `iotPrava`, mapa bez dlaždic, ověřené a neověřené položky).
 8. **Demo a úklid.** Skript `pnpm iot:demo` spustí simulátor a naplní Javoří Lhotu. Projdi checklist níže a ověř položky z `overit`.
+9. **Otevření dveří v aplikaci** (samostatný milník, jen když existuje `apps/mobile` s Budovami ke čtení z promptu 02; jinak dodej adaptér, typy a kontraktní testy a do závěru napiš, že UI čeká na aplikaci). Tenký adaptér `POST /api/mobilni/urad/budovy/<id>/dvere` (tokeny aplikace) volá tutéž funkci jako `POST /api/iot/prikazy`: právo `dvere` v `users.iotPrava`, čerstvé 2FA (step-up do 5 minut), povinný důvod z nabídky, `idempotencyKey`, zápis pokusu i výsledku do `audit_vstupu`. Server vrátí v `GET /api/mobilni/urad/budovy` oprávnění `dvere`; jen s ním aplikace ukáže tlačítko Otevřít dveře. Dialog s důvodem (modální, fokus se vrací), biometrie na zařízení těsně před odesláním, postup příkazu slovy (Odesílám, Čekám na potvrzení, Provedeno, Neprovedeno, Vypršelo), text „Dveře lze vždy otevřít klíčem. Klíč má: <kdoMaKlic>“, offline ovládání zakázané. Testy: bez práva 403, bez step-up 403, bez důvodu 400, bez úspěšné biometrie se příkaz neodešle (RNTL), opakovaný `idempotencyKey` vrací původní příkaz, audit zapíše pokus i výsledek, a11y (role, popisky, cíle aspoň 44 × 44, čtečka). Zapiš do `docs/rozhodnuti.md`.
 </postup>
 
 <hotovo_kdyz>
@@ -230,6 +231,7 @@ Projdou `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm e2e` (375 a 1280 px), 
 - [ ] Příkaz vydaný při výpadku (otevření dveří) vyprší a po obnově spojení se neprovede; uživatel vidí stav Vypršelo a vznikne alarm.
 - [ ] Mráz v Sokolovně (scénář 4 °C) vyvolá místní protimrazové topení, alarm, e-mail a push; alarm lze převzít s poznámkou; po návratu teploty se ukončí.
 - [ ] Dálkové otevření dveří vyžaduje právo `dvere` (`users.iotPrava`), čerstvé 2FA a důvod; jinak endpoint vrátí 403; audit zapíše pokus i výsledek.
+- [ ] Otevření dveří v aplikaci (milník 9, je-li aplikace): tlačítko vidí jen uživatel s právem `dvere`, před odesláním biometrie a důvod, výsledek příkazu slovy a zápis v auditu; bez práva server vrací 403.
 - [ ] Dashboard: Přehled řekne do 5 sekund, zda je vše v pořádku; všechny stavy jsou čitelné i bez barvy; axe bez chyb; mobilní Úřad ukazuje jen Přehled a Budovy.
 - [ ] Energie: srovnání s předchozím obdobím a odhad úspory v Kč s uvedenou metodou a cenou zadanou obcí.
 - [ ] `docs/iot/` obsahuje instalaci brány, bezpečnostní přílohu, postup hlášení zranitelností, podklad k soukromí a seznam zařízení; CI vytváří SBOM.

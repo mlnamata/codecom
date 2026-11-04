@@ -1,6 +1,6 @@
 # Prompt: Web obce a redakční systém
 
-Použití: vlož celý text do Claude Code v kořeni repozitáře /home/claude/codecom. Ostatní části (mobil, digitální úřad, IoT, AI) staví na kolekcích a endpointech z této části.
+Použití: vlož celý text do Claude Code v kořeni repozitáře `codecom`, nebo napiš: Proveď zadání v `prompty/01-web-obce.md`. Ostatní části (mobil, digitální úřad, IoT, AI) staví na kolekcích a endpointech z této části.
 Závisí na: žádné jiné části. Je to základ, který musí být hotový jako první.
 
 <kontext>
@@ -10,7 +10,7 @@ Jeden nasazený `apps/web` obsluhuje všechny obce (tenant = obec) na jejich dom
 </kontext>
 
 <cil>
-Na konci běží demo obec Javoří Lhota s obsahem z prototypů na dvou doménách (vlastní a záložní subdoména) a obsah jedné obce není vidět v jiné. Všech 20 šablon se třemi paletami funguje jako React layouty a obec je vybere v české administraci. Úřední deska a krizový banner splňují pravidla z `CLAUDE.md` a tohoto zadání, včetně záznamu o vyvěšení a sejmutí. Povinné informace a prohlášení o přístupnosti se generují z dat obce, editor má tři úrovně a nepustí do publikace nepřístupný vzhled. Testy, axe a migrace na čisté databázi projdou.
+Na konci běží lokálně demo obec Javoří Lhota s obsahem z `obsah/javori-lhota/*.json` na dvou hostnames (vlastní doména a záložní subdoména se nastaví až při nasazení) a obsah jedné obce není vidět v jiné. Nic se nenasazuje, zakladatel zatím chce vše jen v repozitáři. Všech 20 šablon se třemi paletami funguje jako React layouty a obec je vybere v české administraci. Úřední deska a krizový banner splňují pravidla z `CLAUDE.md` a tohoto zadání, včetně záznamu o vyvěšení a sejmutí. Povinné informace a prohlášení o přístupnosti se generují z dat obce, editor má tři úrovně a nepustí do publikace nepřístupný vzhled. Testy, axe a migrace na čisté databázi projdou.
 </cil>
 
 <vychozi_stav>
@@ -28,12 +28,21 @@ Nedokončené: banner, výpis desky, stránky, testy. Pasti, které oprav novou 
 5. `KrizoveHlaseni.tykaSe` (text) nahraď polem `casti` (viz datový model).
 6. `SkrytHlaseni` zaostřuje `#obsah`. Každý layout musí mít `<main id="obsah" tabIndex={-1}>` a odkaz „Přeskočit na obsah“.
 7. Verze v `package.json` jsou pod aktuálním stavem (Payload 3.91.0, Next 16.4.1), viz M0.
+
+Prototypy 07 a 08. Pokud už proběhl prompt 07 (prototyp webu Javoří Lhoty bez databáze) nebo 08 (prototyp aplikace v prohlížeči), převezmi jejich datovou vrstvu, šablony, endpointy a obrazovky a jen vyměň zdroj dat; UI nepřepisuj. Konkrétně:
+- Datová vrstva `apps/web/src/lib/data/` s rozhraním `ZdrojDat` a implementací `demo` zůstává. Přidej implementaci `payload` (Local API, pravidla o `src/data` a `use cache` z <architektura> platí pro ni) a volbu `CODEKOM_ZDROJ=payload`. Výchozí je `payload`, když je nastavené `DATABASE_URI`, jinak dál `demo`. Veřejné stránky volají jen rozhraní `ZdrojDat`, nikdy Payload přímo.
+- Šablony v `apps/web/src/sablony/<klic>/` (`Hlavicka.tsx`, `Uvod.tsx`, `Paticka.tsx`, `styly.css`) jsou zdrojem pravdy; nepřevádějte je znovu z `design/generator` a drž názvy souborů z 07 (`Paticka.tsx`, ne `Patka.tsx`). Stránky ze 07 přesuň pod `app/(web)/sites/[obec]/` a obec předávej zdroji parametrem. Přepínač ukázky (`NEXT_PUBLIC_UKAZKA=1`) a `/ukazka/administrace` nech jako ukázku; skutečná administrace je Payload.
+- Endpointy `GET /api/krize/aktivni`, `GET /api/obce`, `GET /api/obce/<slug>/prehled` a `POST /api/hlaseni-zavad` z 07 už existují nad demo daty. Ponech jejich tvar a zod schémata z `packages/typy`, přepni je na zdroj `payload` a doplň testy proti Payloadu. Pokud 07 neproběhl, `GET /api/obce` a `GET /api/krize/aktivni` postav podle <architektura>; `/prehled` a `POST /api/hlaseni-zavad` zůstávají mimo rozsah.
+- Datové typy a domény z 07 (`@codekom/demo-data`, `@codekom/tokeny`, `@codekom/typy`) nepřepisuj; `packages/typy` sladi s `payload-types.ts`. Ukázkové úložiště v paměti (`demo-pamet.ts`) nepoužívej pro Payload.
+- Pokud 07 ani 08 neproběhly, postupuj podle zbytku zadání a šablony převeď z `design/generator/bodies`.
+
+Seed ukázkové obce. `seed:demo` (`pnpm --filter web seed:demo`) načte obsah z `obsah/javori-lhota/*.json` (soubory `obec.json`, `aktuality.json`, `akce.json`, `uredni-deska.json`, `krizova-hlaseni.json`, `rozhlas.json`, `zastupitele.json`), validuje ho zod schématy z `@codekom/demo-data` nebo `packages/typy` a zapíše do Payloadu. Obsah nic nevymýšlí ani nepřepisuje; chybí-li pole, je `[DOPLNIT: pole]`. Údaje jako IČO, datová schránka nebo účet jsou v JSON zjevná ukázka (například `[IČO]`) a seed je přenese beze změny. Ostatní soubory (`zivotni-situace.json`, `sluzby.json`, `prostory.json`, `hlaseni-zavad.json`, `budovy.json`, `asistent-ukazka.json`) patří promptům 03, 04 a 05. Datumy `vyvesenoOd` a `vyvesenoDo` ulož jako 12:00 UTC podle `src/lib/datum.ts`.
 </vychozi_stav>
 
 <rozsah>
 Postav: monorepo; multi-tenant; 20 šablon se sdílenými vnitřními stránkami; mapu webu a obsahové kolekce; úřední desku s evidencí, exportem a kanály; krizový banner, stránku a endpoint; povinné informace, prohlášení o přístupnosti, cookies; hledání, SEO a výkon; editor ve třech úrovních se schvalováním, plánováním, náhledem, auditem, 2FA a importem; testy a CI.
 
-Mimo rozsah: mobilní aplikace, push a SMS, digitální úřad (formuláře, platby, rezervace, `zivotniSituace`, `hlaseniZavad`), IoT, AI a audionovinky, odpadový kalendář, ankety, podweby, mega menu, vlastní HTML v Advance, překlady obsahu (Hranice má německé popisky rozhraní, obsah česky), prezentační web, kolekce `obcane` a endpointy `/api/obce/<slug>/prehled`, `/api/mobilni-zarizeni`, `/api/hlaseni-zavad`, `/api/asistent/dotaz`, `/api/poptavky`. Pro `/prehled` nech jen čisté funkce v `src/data/` (aktuality, deska, rozhlas, krize podle obce).
+Mimo rozsah: mobilní aplikace, push a SMS, digitální úřad (formuláře, platby, rezervace, `zivotniSituace`, `hlaseniZavad`), IoT, AI a audionovinky, odpadový kalendář, ankety, podweby, mega menu, vlastní HTML v Advance, překlady obsahu (Hranice má německé popisky rozhraní, obsah česky), prezentační web, kolekce `obcane` a `mobilni-zarizeni` a endpointy `/api/obce/<slug>/prehled`, `/api/mobilni-zarizeni`, `/api/hlaseni-zavad`, `/api/asistent/dotaz`, `/api/poptavky`. Pro `/prehled` nech jen čisté funkce v `src/data/` (aktuality, deska, rozhlas, krize podle obce). Do rozsahu patří `GET /api/obce` (seznam obcí s modulem `aplikace`, viz <architektura>) a pravidlo pro kolizi vlastních route handlerů s REST Payloadu, protože je aplikace potřebuje.
 </rozsah>
 
 <architektura>
@@ -49,9 +58,13 @@ Struktura `apps/web/src`:
 - `src/bloky/`: knihovna bloků úvodní stránky a obsahu stránek.
 - `src/pravni/`: `povinne-informace.ts` (14 položek s názvy), `lhuty.ts` (zákonné lhůty jako konfigurace se `zdroj` a `overeno`), `prohlaseni-pristupnosti.ts`.
 
-Hosting: `vercel.json` s `regions: ["fra1"]` a crony. Cron běží v UTC, proto dvě spuštění (22:05 a 23:05 UTC), handler `/api/cron/denni` je idempotentní a chráněný `CRON_SECRET`: obnoví tag desky po půlnoci v Praze, zapíše „sejmuto“, spustí naplánované publikace. Skript `scripts/domena-pridat.ts` přidá doménu obce přes Vercel API a vypíše DNS záznamy. Soubory: `@payloadcms/storage-s3` na Supabase Storage, privátní bucket. Databáze: `DATABASE_URI` přes pooler 6543 s malým `pool.max`, migrace přes `DATABASE_URI_MIGRACE` (přímé spojení nebo pooler 5432).
+Hosting (příprava, nic se nenasazuje; nasazení je volitelný poslední krok M10 „až zakladatel řekne“): `vercel.json` s `regions: ["fra1"]` a crony. Cron běží v UTC, proto dvě spuštění (22:05 a 23:05 UTC), handler `/api/cron/denni` je idempotentní a chráněný `CRON_SECRET`: obnoví tag desky po půlnoci v Praze, zapíše „sejmuto“, spustí naplánované publikace. Skript `scripts/domena-pridat.ts` přidá doménu obce přes Vercel API a vypíše DNS záznamy; napiš ho a otestuj proti mocku, ale nespouštěj ho proti skutečnému účtu. Soubory: `@payloadcms/storage-s3` na Supabase Storage, privátní bucket. Databáze: `DATABASE_URI` přes pooler 6543 s malým `pool.max`, migrace přes `DATABASE_URI_MIGRACE` (přímé spojení nebo pooler 5432).
 
 Rozhraní ven: `GET /api/krize/aktivni?obec=<slug>` vrací `{ hlavni, dalsich }`, kde `hlavni` je jedno nejzávažnější aktivní hlášení nebo `null`. Pole: `id`, `uroven`, `titulek`, `text`, `odkazText`, `odkazUrl`, `casti` (`{nazev, slug}[]`), `platiOd`, `platiDo`, `updatedAt`.
+
+`GET /api/obce`: veřejný seznam obcí se zapnutým modulem `aplikace`, jen veřejná pole `{ slug, nazev, okres, znakUrl, castiObce: [{nazev, slug}] }`, bez kontaktů a bez IČO, `Cache-Control: public, s-maxage=300` (cache 5 minut). Vlastní route handler `src/app/(payload)/api/obce/route.ts` má přednost před catch-all Payloadu [OVĚŘIT testem]; REST kolekce `obce` (read) je jen pro přihlášené uživatele obce, handler čte přes Local API s `overrideAccess: true` a vrací jen uvedená pole. Zod schéma `ObceSeznamOdpoved` je v `packages/typy` a používá ho aplikace (prompt 02, onboarding); v prototypu 07 stejný endpoint běží nad demo daty.
+
+Vlastní route handlery a REST Payloadu. Cesty `/api/<slug-kolekce>` zabírá automatický REST Payloadu a catch-all `(payload)/api/[...slug]`. Vlastní handler v `src/app/(payload)/api/<cesta>/route.ts` má přednost, protože statická cesta vyhrává nad catch-all [OVĚŘIT testem na Next 16.4]. U každé kolekce s vlastním koncovým bodem zruš veřejný REST přístup. Kolekce `mobilni-zarizeni` (zakládá prompt 02) by v Payloadu dostala automatický REST `/api/mobilni-zarizeni`, který koliduje s vlastním koncovým bodem aplikace. Řešení: vlastní Next route handler `src/app/(payload)/api/mobilni-zarizeni/route.ts` (POST) má přednost před catch-all Payloadu [OVĚŘIT testem]; kolekce má REST přístup jen pro superadmina (create, read, update, delete) a handler zapisuje přes Local API s `overrideAccess: true` až po vlastní validaci (zod) a rate limitu. Test: POST jde do vlastního handleru, GET /api/mobilni-zarizeni bez přihlášení vrací 403. Pro `/api/obce` platí totéž, viz výše.
 </architektura>
 
 <datovy_model>
@@ -59,7 +72,7 @@ Plugin `@payloadcms/plugin-multi-tenant`: `tenantsSlug: 'obce'`, pole tenanta `o
 
 | Kolekce | Pole a pravidla |
 | --- | --- |
-| `obce` | sdílená pole ze zadání (`nazev`, `slug`, `domeny[]`, `sablona`, `paleta` 0–2, `urovenEditoru`, `moduly[]`, `znak`, `adresa`, `ico`, `datovaSchranka`, `cisloUctu`, `uredniHodiny`, `kontakty`, `poverenec`, `castiObce[{nazev,slug}]`) plus `dic`, `adresaUradovny`, `podatelnaEmail`, `telefon`, `analytika` (`zadna`, `logy`, `souhlas`). Domény: unikátní hostnamy bez schématu. `urovenEditoru`, `moduly`, `domeny` smí měnit jen superadmin. `sablona` a `paleta` smí měnit správce |
+| `obce` | sdílená pole ze zadání (`nazev`, `slug`, `domeny[]`, `sablona`, `paleta` 0–2, `urovenEditoru`, `moduly[]`, `znak`, `adresa`, `ico`, `datovaSchranka`, `cisloUctu`, `uredniHodiny`, `kontakty`, `poverenec`, `castiObce[{nazev,slug}]`) plus `okres`, `kraj`, `dic`, `adresaUradovny`, `podatelnaEmail`, `telefon`, `analytika` (`zadna`, `logy`, `souhlas`). Domény: unikátní hostnamy bez schématu. `urovenEditoru`, `moduly`, `domeny` smí měnit jen superadmin. `sablona` a `paleta` smí měnit správce |
 | `users` | role `superadmin`, `spravce`, `redaktor`; `obce[]`; TOTP pole (šifrované tajemství, záložní kódy hashované). Počet uživatelů obce podle úrovně (3, 10, bez limitu) |
 | `nastaveni-webu` | jeden dokument na obec, `versions.drafts`; `vzhled` (12 barevných tokenů, písmo, zaoblení, hustota), `uvodniBloky[{typ, viditelny, nastaveni}]`, `menu` (přejmenování a pořadí), `seo` (popis, obrázek pro sdílení) |
 | `stranky` | `nazev`, `slug`, `rodic` (nejvýš 2 úrovně, validace), `typ` (`text`, `rozcestnik`, `kontakt`), `skupina` (`situace`, `sluzba`, `obecna`), `obsah` (Lexical), `poradi`, `vMenu`, `systemovyKlic`, `schvaleni`. Stránky se `systemovyKlic` nejdou smazat, přesunout ani vrátit do konceptu (access + DB trigger novou migrací) |
@@ -72,7 +85,7 @@ Plugin `@payloadcms/plugin-multi-tenant`: `tenantsSlug: 'obce'`, pole tenanta `o
 | `kategorie-desky` | stávající plus `obec`, unikátnost v rámci obce |
 | `evidence-vyveseni` | jen přidávání: `dokumentId`, `verze`, `udalost` (`vyveseno`, `zmeneno`, `sejmuto`, `ukonceno`), `nazev`, `puvodce`, `vyvesenoOd`, `vyvesenoDo`, `uzivatel`, `sha256`, `cas`. Trigger v databázi zakáže UPDATE a DELETE |
 | `audit` | jen přidávání: `uzivatel`, `akce` (vytvoření, změna, publikace, smazání, přihlášení, neúspěšné přihlášení), `kolekce`, `dokumentId`, `zmeny` (rozdíl bez hesel a tajemství), `cas`, `ip` zkrácená. Trigger jako výše. Čte správce své obce a superadmin |
-| `krizova-hlaseni` | stávající, `tykaSe` nahraď polem `casti` (pole slugů z `obce.castiObce`, prázdné = celá obec, validace vůči obci); datová migrace zkusí `tykaSe` spárovat podle názvu, nespárované zapíše do `text` s větou „Týká se: …“ |
+| `krizova-hlaseni` | stávající, `tykaSe` nahraď polem `casti` (pole slugů z `obce.castiObce`, prázdné = celá obec, validace vůči obci); datová migrace zkusí `tykaSe` spárovat podle názvu, nespárované zapíše do `text` s větou „Týká se: …“. Přístup: publikovat smí jen `spravce` a `superadmin` obce, `redaktor` jen koncept (viz Krizová hlášení a úroveň editoru) |
 | `dokumenty` | stávající plus `obec`, `urceni` (`deska`, `verejny`), `typ` (`obecny`, `vyhlaska`, `rozpocet`, `zaverecny-ucet`, `vyhled`, `zapis`, `zpravodaj`), `rok`, `sha256` (počítá hook při nahrání). Soubor navázaný na vyvěšenou desku nejde nahradit, jen přidat nový dokument |
 | `media` | stávající plus `obec`, `altSchvaleno`, `altSchvalil` |
 | `galerie` | `nazev`, `slug`, `datum`, `obrazky[]` (`media`). Publikovat jde, jen když mají všechny obrázky `altSchvaleno` |
@@ -133,8 +146,10 @@ Patička: Povinně zveřejňované informace, Prohlášení o přístupnosti, Os
 | Úvodní stránka | obsah do pevných bloků | přeskládat, skrýt, přidat bloky z knihovny | volné bloky a sloupce 1–4 |
 | Menu | přejmenovat, přeskládat | přidat a vnořit na 2 úrovně | stejně |
 | Vzhled | šablona a 1 ze 3 palet | + vlastní hlavní barva | všech 12 tokenů |
-| Schvalování | redaktor smí publikovat | fronta, publikuje správce | stejně |
+| Schvalování | redaktor smí publikovat (mimo `krizova-hlaseni`) | fronta, publikuje správce | stejně |
 | Verze | 30 dní | 1 rok | neomezeně |
+
+**Krizová hlášení a úroveň editoru.** Krizová hlášení publikuje jen `spravce` a `superadmin`, na webu i v aplikaci a na všech třech úrovních editoru (rozhodnutí zakladatele 4. 11. 2026). `redaktor` smí hlášení jen vytvořit a uložit jako koncept. Pravidlo vynucuje server: `access` kolekce `krizova-hlaseni` a hook `beforeChange` odmítnou přechod `_status` na `published` (také přes autosave, `schedulePublish` a Local API s `overrideAccess: false`) pro každého, kdo není `spravce` nebo `superadmin` obce; úroveň editoru toto pravidlo nemění (řádek `Schvalování` v tabulce níže se `krizova-hlaseni` netýká). Redaktor může koncept předat do fronty `ke-schvaleni`, kde fronta existuje (Pokročilý, Advance), ale schválit a publikovat ho smí jen správce. Aplikace (prompt 02) dodržuje totéž pravidlo.
 
 Skladatel úvodní stránky (pohled v administraci) pracuje nad konceptem `nastaveni-webu.uvodniBloky` s živým náhledem. Povinné bloky a povinné stránky nejdou skrýt ani smazat. V Advance správce upravuje tokeny s živou kontrolou kontrastu: text na pozadí a mutovaný text aspoň 4,5 : 1, `onPrimary` na `primary`, `onAccent` na `accent`, `onDeep` na `deep` aspoň 4,5 : 1, odkaz na pozadí 4,5 : 1, `accent` a `link` jako prvek rozhraní a focus aspoň 3 : 1. Chyba zablokuje publikaci na serveru (`ValidationError` v hooku `beforeChange` při přechodu na publikováno) i v rozhraní, editor navrhne nejbližší vyhovující odstín. Změna šablony nesmí zrušit povinné bloky. Při přechodu na nižší úroveň se rozvržení zamrazí: zobrazuje se dál, ale nejde upravovat.
 
@@ -150,7 +165,7 @@ Administrace česky, přehled (dashboard) ukáže: čeká na schválení, brzy s
 - NSS 2 As 47/2016: vyvěšení musí být evidováno a prokazatelné. Proto `evidence-vyveseni` jen přidávací, hash souboru, verze místo přepsání, nemožnost smazat vyvěšený dokument (trigger už existuje) a export.
 - „Po sejmutí nezveřejňovat“ je výchozí zapnuté. Takový dokument po posledním dni zmizí z webu, sitemapy, RSS, hledání i přímého odkazu na soubor, v administraci a evidenci zůstává.
 - Osobní údaje: před publikací na desce správce potvrdí `osobniUdajeKontrola`. Checklist: rodná čísla, data narození, adresy a čísla účtů fyzických osob.
-- Krizová hlášení: viz `CLAUDE.md`; na stránce hlášení je věta, že nenahrazují varovný systém IZS.
+- Krizová hlášení: viz `CLAUDE.md`; na stránce hlášení je věta, že nenahrazují varovný systém IZS. Publikuje jen `spravce` a `superadmin`, redaktor jen koncept, na všech úrovních editoru.
 - Lhůty z 250/2000 Sb. (rozpočet, výhled, závěrečný účet) a § 95 odst. 2 zákona 128/2000 Sb. (zápis ze zastupitelstva) patří do `src/pravni/lhuty.ts` jako konfigurace s polem `zdroj` a `overeno`. Čísla z paměti (15 dnů před projednáním, zápis do 15 dnů, 6 let) jsou NEOVĚŘENÁ: použij je jen po ověření, jinak ponech hodnotu `null` a v administraci žádné upozornění.
 - Vyhláška 515/2020 Sb.: 14 položek Přílohy č. 1 v pevném pořadí, osnova Přílohy č. 2. Rozpor v datu účinnosti (1. 8. 2021, nebo 15. den po vyhlášení) ověř.
 - Přístupnost: zákon 99/2019 Sb. (§ 8 prohlášení, § 9 podnět), EN 301 549 V3.2.1, stavíme na WCAG 2.2 AA. O pokutách netvrď nic.
@@ -176,8 +191,8 @@ Administrace česky, přehled (dashboard) ukáže: čeká na schválení, brzy s
 
 <testy>
 Test nepřeskakuj ani neupravuj, aby prošel.
-- Vitest (jednotky): `datum`, `deska` (parsování URL, `deskaWhere` na hranách dne, `nejdrivSejmuti`, stavy), `krize` (výběr, pořadí, okna platnosti, `klicSkryti`, `bezpecnyOdkaz`), `urovne` (každá schopnost × úroveň × role), `kontrast`, generátor povinných informací a prohlášení, CSV (ošetření vzorců), RSS, mapování hostname, `unslop`.
-- Integrace: Payload proti Postgresu 17 v CI (service container s `unaccent` a `pg_trgm`), migrace od nuly a `down`; PGlite jako rychlá kontrola migrací, pokud podporuje použitá rozšíření. Testy: trigger odmítne smazání vyvěšeného dokumentu, CHECK omezení, append-only tabulky, nesmazatelná systémová stránka, zámek nahrazení souboru, schvalování, blokace publikace s nízkým kontrastem, vynucené 2FA, cross-tenant (uživatel obce A nečte ani nezapisuje do B, veřejné funkce A nikdy nevrátí řádek B).
+- Vitest (jednotky): `datum`, `deska` (parsování URL, `deskaWhere` na hranách dne, `nejdrivSejmuti`, stavy), `krize` (výběr, pořadí, okna platnosti, `klicSkryti`, `bezpecnyOdkaz`), `urovne` (každá schopnost × úroveň × role), `kontrast`, generátor povinných informací a prohlášení, práva krizových hlášení (matice role `superadmin`, `spravce`, `redaktor` × úroveň Základ, Pokročilý, Advance × akce koncept, publikace, plánovaná publikace, autosave: publikovat smí jen `spravce` a `superadmin`, redaktor dostane 403 nebo `ValidationError` na každé úrovni, přes REST i Local API s `overrideAccess: false`), CSV (ošetření vzorců), RSS, mapování hostname, `unslop`.
+- Integrace: Payload proti Postgresu 17 v CI (service container s `unaccent` a `pg_trgm`), migrace od nuly a `down`; PGlite jako rychlá kontrola migrací, pokud podporuje použitá rozšíření. Testy: trigger odmítne smazání vyvěšeného dokumentu, CHECK omezení, append-only tabulky, nesmazatelná systémová stránka, zámek nahrazení souboru, schvalování, blokace publikace s nízkým kontrastem, vynucené 2FA, cross-tenant (uživatel obce A nečte ani nezapisuje do B, veřejné funkce A nikdy nevrátí řádek B). Vlastní route handlery: `GET /api/obce` jde do vlastního handleru (ne do REST Payloadu), vrací jen obce s modulem `aplikace` a jen pole `slug`, `nazev`, `okres`, `znakUrl`, `castiObce`, má hlavičku `Cache-Control` s `s-maxage=300`, a `GET /api/obce` s parametry kolekce (`?depth=2`) žádné další pole neprozradí. Pro `mobilni-zarizeni`: pokud kolekce existuje, POST jde do vlastního handleru a GET /api/mobilni-zarizeni bez přihlášení vrací 403; pokud ještě neexistuje (zakládá ji 02), ověř mechanismus přednosti na `GET /api/obce`.
 - Playwright na 375 a 1280 px: filtr desky (URL, stránkování, prázdné stavy, klávesnice), detail a soubory (sejmutý skrytý vrací 404), banner (info a výstraha jdou skrýt, zůstanou skryté po obnovení a po změně `updatedAt` se vrátí; krize nemá tlačítko; bez JavaScriptu tlačítko není; polling s `page.clock` oznámí nové hlášení do 60 s a na skryté záložce neběží), dvě domény jedné obce, výběr šablony, hledání, cookies lišta.
 - axe (`@axe-core/playwright`, WCAG 2.1 AA a best-practice): úvodní stránka všech 20 šablon × 3 palet × 4 krizové stavy (žádný, info, warning, emergency) = 240 běhů, rozdělit do shardů. Navíc vnitřní stránky (deska, detail, povinné informace, prohlášení, hledání, aktualita, kontakty, krizová hlášení) na 3 šablonách × 3 paletách. Nula chyb.
 - Lighthouse CI: rozpočty z `lighthouserc.json` na úvodní stránce, desce a aktualitě, mobil se zpomaleným 4G.
@@ -187,28 +202,30 @@ Test nepřeskakuj ani neupravuj, aby prošel.
 <postup>
 Na začátku vypiš plán a úkoly (`docs/progress.json` se stavy) a průběžně je odškrtávej. Každý milník končí `pnpm typecheck && pnpm lint && pnpm test` a commitem česky v rozkazovacím způsobu. Po dvou neúspěšných opravách téhož problému se zastav a popiš ho.
 - M0 Základ: ověř položky z `<overit>`. Zvedni `payload` a všechny `@payloadcms/*` na přesně stejnou verzi (cíl 3.92.1), Next 16.4.x, React 19.3.x, Tailwind 4.3.x podle `npm view`, major neměň. Založ monorepo, ověř `pnpm build`.
-- M1 Multi-tenant: `obce`, `users`, plugin, role, migrace (nové, na čisté DB), `proxy.ts`, `src/data`, `vercel.json`, seed obce Javoří Lhota, cross-tenant testy.
+- M1 Multi-tenant: `obce`, `users`, plugin, role, migrace (nové, na čisté DB), `proxy.ts`, `src/data`, `vercel.json`, seed obce Javoří Lhota z `obsah/javori-lhota/obec.json`, `GET /api/obce`, cross-tenant testy.
 - M2 Šablony, kostra: `packages/tokeny`, registr, sdílené vnitřní stránky, mapa webu, tři šablony (`naves`, `lipa`, `urad`), fonty, unslop.
 - M3 Úřední deska: výpis, detail, soubory, evidence, export, RSS a Atom, cron, testy.
 - M4 Krizový banner: komponenty, endpoint, stránka, `casti`, cache a testy včetně polling.
 - M5 Obsah: aktuality, akce, rozhlas, zasedání, zastupitelé, stránky, dokumenty, galerie, rozpočet, hledání.
 - M6 Právo: povinné informace, popisy úkonů, prohlášení o přístupnosti, osobní údaje, cookies a návštěvnost, SEO, sitemap, JSON-LD.
 - M7 Editor: schopnosti úrovní, vzhled a kontrast, skladatel, schvalování, plánované publikování, náhled, audit, 2FA, přehled, import.
-- M8 Zbývajících 17 šablon, seed obsahu z prototypů, matice axe 240 běhů, Lighthouse rozpočty, optimalizace.
-- M9 CI, `.env.example`, dokumentace nasazení, zápis rozhodnutí do `docs/rozhodnuti.md`, ruční průchod demo obce na dvou doménách.
+- M8 Zbývajících 17 šablon (jsou-li hotové z 07, jen je napoj na zdroj `payload`), seed obsahu z `obsah/javori-lhota/*.json`, matice axe 240 běhů, Lighthouse rozpočty, optimalizace.
+- M9 CI, `.env.example`, dokumentace nasazení (jen jako návod), zápis rozhodnutí do `docs/rozhodnuti.md`, ruční průchod demo obce lokálně na dvou hostnames.
+- M10 (volitelný, jen když zakladatel řekne): nasazení na Vercel `fra1`, připojení domén, ověření na produkci. Bez výslovného pokynu zakladatele nic nenasazuj, nekupuj domény a nespouštěj `scripts/domena-pridat.ts`.
 </postup>
 
 <hotovo_kdyz>
 Vše projde a je to vidět:
 1. `pnpm install && pnpm typecheck && pnpm lint && pnpm test && pnpm e2e && pnpm a11y` v kořeni bez chyby. Žádný přeskočený test.
 2. `payload migrate` na prázdné databázi projde, `migrate:down` a znovu `up` také. Migrace z 2. 11. jsou beze změny.
-3. Demo obec Javoří Lhota běží na vlastní doméně i na záložní subdoméně ([DOPLNIT: domény]; lokálně `javori-lhota.localhost` a druhý hostname), druhá obec nevidí její data a naopak (test).
+3. Demo obec Javoří Lhota běží lokálně na dvou hostnames (`javori-lhota.localhost` a druhý hostname jako záložní subdoména; skutečné domény [DOPLNIT: domény] se řeší až při nasazení), druhá obec nevidí její data a naopak (test).
 4. Všech 20 šablon × 3 palety se vykreslí z dat a přepnutí v administraci se projeví po uložení. `pnpm a11y`: 240 běhů bez chyb.
 5. Deska: filtr kategorie, stavu a hledání v URL, stránkování, prázdné stavy, detail, validní RSS a Atom, export CSV a PDF, vyvěšený dokument nejde smazat (aplikace ani databáze), „Po sejmutí nezveřejňovat“ je výchozí a sejmutý skrytý dokument je nedostupný včetně souboru.
-6. Banner: jedno hlášení, úroveň slovem, krize nejde zavřít, ostatní jdou skrýt (klíč `id+updatedAt`, tlačítko až po hydrataci), obnova po 60 s s oznámením, `/krizova-hlaseni` a `/api/krize/aktivni` fungují, tag `krize` expiruje okamžitě.
+6. Banner: jedno hlášení, úroveň slovem, krize nejde zavřít, ostatní jdou skrýt (klíč `id+updatedAt`, tlačítko až po hydrataci), obnova po 60 s s oznámením, `/krizova-hlaseni` a `/api/krize/aktivni` fungují, tag `krize` expiruje okamžitě. Krizové hlášení publikuje jen správce a superadmin (test práv na všech třech úrovních), redaktor jen koncept.
 7. Povinné informace mají 14 položek v pořadí vyhlášky, prohlášení o přístupnosti je vygenerované, editovatelné a odkazované v patičce každé stránky.
 8. Editor: tři úrovně se chovají podle tabulky, povinné stránky a bloky nejdou smazat, nízký kontrast zablokuje publikaci, schvalovací fronta funguje, 2FA je povinné pro správce a superadmina, audit zaznamenává změny a nejde upravit.
 9. Hledání najde „zastupitelstvo“ i bez diakritiky a nevrátí skryté dokumenty. Import RSS a CSV vytvoří koncepty.
+    `GET /api/obce` vrací jen obce s modulem `aplikace` a jen veřejná pole, s cache 5 minut; vlastní handler má přednost před REST Payloadu (test).
 10. Lighthouse rozpočty (LCP pod 2,5 s na pomalém 4G) splněny na úvodní stránce, desce a aktualitě.
 11. `docs/verification-log.md` obsahuje výsledek každé položky z `<overit>`, neověřené je v kódu označené `[OVĚŘIT]`.
 </hotovo_kdyz>
@@ -237,5 +254,5 @@ Zapiš zdroj, datum a výsledek každé položky do `docs/verification-log.md`. 
 Na konci napiš shrnutí ve třech částech.
 - Hotovo: co funguje a čím je to ověřené (příkazy a počty, například „240 axe běhů bez chyb“, výsledky Lighthouse, ruční průchod demo obce).
 - Zbývá: co nevzniklo nebo je omezené a které položky z `<overit>` zůstaly neověřené.
-- Místa `[DOPLNIT]` a `[OVĚŘIT]` s cestou k souboru: domény, údaje Javoří Lhoty (IČO, datová schránka, účet, DIČ), texty osobních údajů, kontakty, hodnoty v `lhuty.ts`.
+- Místa `[DOPLNIT]` a `[OVĚŘIT]` s cestou k souboru: domény (jen pro pozdější nasazení), údaje Javoří Lhoty (IČO, datová schránka, účet, DIČ), texty osobních údajů, kontakty, hodnoty v `lhuty.ts`.
 </zaver>

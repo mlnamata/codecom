@@ -26,6 +26,12 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 2. 11. 2026 | Návrhy podle pravidel unslop (Damir Sokolovsky, CC BY 4.0): řezy písma nejvýš 600, věty bez vykřičníků, jedna akcentová barva, žádné přechody. Každá šablona má 3 barevné varianty. | Weby nemají vypadat jako vygenerované. |
 | 2. 11. 2026 | Ilustrace kreslené v kódu (SVG), ne generované obrázky. | Fungují ve všech barevných variantách a nemají licenční otazníky. |
 | 2. 11. 2026 | Volitelné moduly v první verzi: web obce s úřední deskou, aplikace pro občany s účty, AI asistent, IoT budov. | Odpověď na otázku k právním dokumentům. |
+| 4. 11. 2026 | Pořadí stavby: marketingový web (prompt 06), funkční prototyp webu Javoří Lhoty (07) a aplikace v prohlížeči (08), potom kompletní systém (01, 03, 02, 05, 04). | Starosta má nejdřív vidět, jak to vypadá a funguje. Systém se staví, až je o něj zájem. |
+| 4. 11. 2026 | Teď se nepíše kód. V repozitáři jsou připravené prompty, texty prezentace (`obsah/prezentace`), obsah ukázkové obce (`obsah/javori-lhota`), fotky a snímky šablon. Claude Code pak jen píše kód a skládá stránky. | Zakladatel spustí stavbu sám a nechce během ní nic rozhodovat ani psát texty. |
+| 4. 11. 2026 | Prezentační web ukazuje orientační ceny „od“ z hypotéz (Web Základ od 590 Kč měsíčně bez DPH) se štítkem „orientační cena, přesnou pošleme v nabídce“. Založení za 9 900 Kč, 24 měsíců zdarma a pilot zdarma na web nejdou. | Starosta chce znát řád ceny hned. Nabídky, které odporují smlouvě A, se nezveřejňují. |
+| 4. 11. 2026 | Poptávkový formulář a newsletter zatím nejsou. Kontakt je e-mailem a telefonem. | Web nesbírá osobní údaje a nepotřebuje databázi. |
+| 4. 11. 2026 | Vše zatím jen v repozitáři, bez nasazení a bez domén. | Rozhodnutí zakladatele. |
+| 4. 11. 2026 | Vedle kreslených ilustrací jsou generované fotky (Gemini, model `gemini-2.5-flash-image`): fotografický úvod šablon jako volba a fotky pro prezentační web. Vždy s poznámkou „Ilustrační fotografie vytvořená umělou inteligencí“. Výchozí zůstávají ilustrace. | Část obcí chce fotografický úvod. Označení je opatrnost vůči čl. 50 AI Actu (zda se na tyto fotky vztahuje, je k ověření). Upravuje rozhodnutí z 2. 11. |
 
 ## Technika
 
@@ -42,6 +48,12 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 3. 11. 2026 | Telemetrie budov v Postgresu s pg_partman, ne v TimescaleDB. | TimescaleDB na Supabase s PG17 skončila. |
 | 3. 11. 2026 | Vektory a dotazy AI asistenta zůstávají na AI serveru v ČR (Postgres + pgvector tam), dokumenty obcí se tam synchronizují z webu. | Dotazy občanů neopustí ČR. |
 | 3. 11. 2026 | Prompty pro vývoj jsou pro **Claude Code**, česky, doménové názvy v kódu česky (`uredniDeska`, `vyvesenoOd`), technické anglicky. Jeden velký prompt na každou část. | Navazuje na rozpracovaný kód a čte se snadno. |
+| 4. 11. 2026 | Prototyp webu vzniká přímo v `apps/web` s datovou vrstvou (`CODEKOM_ZDROJ` je `demo` nebo `payload`) a se sdílenými endpointy. Prompt 01 jen vymění zdroj za Payload, UI se nepřepisuje. Prototyp aplikace je v `apps/mobile` s exportem pro prohlížeč a zdrojem dat `api` nebo `vestavene`. | Práce na prototypu se neztratí, ostrá verze na ni navazuje. |
+| 4. 11. 2026 | Šablony se jednou převedou z `design/generator/bodies` do TSX skriptem. Potom je zdrojem pravdy TSX a `design/` zůstává jako návrh. | Převod 20 šablon ručně by byl pomalý a nepřesný. |
+| 4. 11. 2026 | Krizové hlášení publikuje jen správce obce (a superadmin), redaktor jen koncept, na webu i v aplikaci a na všech úrovních editoru. | Hlášení může vyvolat paniku nebo uklidnit, kde by nemělo. Odpovídá za něj obec. |
+| 4. 11. 2026 | Aplikace v první verzi budovy jen zobrazuje. Otevření dveří (biometrie, důvod, právo `dvere`, záznam) přidává prompt 04. | Vzdálené otevírání je bezpečnostně citlivé a patří k IoT. |
+| 4. 11. 2026 | `POST /api/mobilni-zarizeni` je vlastní route handler před catch-all Payloadu, REST kolekce je jen pro superadmina. Nový veřejný `GET /api/obce` vrací seznam obcí s aplikací (jen veřejná pole). | Vyřešení kolize endpointu a chybějícího rozhraní z kontroly promptů. |
+| 4. 11. 2026 | Prezentační web nepoužívá frázi „mobilní rozhlas“ (jméno konkurence). Prompty se nezkracují. | Výsledek kontroly promptů (`prompty/KONTROLA.md`). |
 
 ## Právo
 
@@ -55,6 +67,7 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 ## Otevřené
 
 - Záložka AI v návrhu platformy je zatím jen osnova.
-- Krizový banner a výpis úřední desky v `apps/web` nejsou dopsané, chybí stránky a testy.
-- Ceník, holding a jeho název, první skutečná obec pro pilot.
+- Krizový banner a výpis úřední desky v `apps/web` nejsou dopsané, chybí stránky a testy. Dopíše je prompt 07.
+- Skutečné ceny, holding a jeho název, první skutečná obec pro pilot.
+- Údaje CodeKomu pro prezentační web: IČO, sídlo, kontakty, jména pro stránku O nás (`[DOPLNIT]` v `obsah/prezentace`).
 - Kontrola právních dokumentů advokátem před podpisem s první obcí.

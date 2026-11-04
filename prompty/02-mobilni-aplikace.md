@@ -1,7 +1,7 @@
 # Prompt: Mobilní aplikace pro občany a úřad
 
-Použití: vlož celý text do Claude Code v kořeni repozitáře /home/claude/codecom.
-Závisí na: 01 (web obce a CMS: multi-tenant, `obce`, `castiObce`, krizová hlášení, `GET /api/krize/aktivni`, `GET /api/obce/<slug>/prehled`), 03 (digitální úřad: `hlaseni-zavad`, služby), 04 (IoT: `budovy`, stav budov), 05 (AI: `POST /api/asistent/dotaz`). Nic z toho nemusí být hotové; kde to chybí, viz <vychozi_stav>.
+Použití: vlož celý text do Claude Code v kořeni repozitáře `codecom`, nebo napiš: Proveď zadání v `prompty/02-mobilni-aplikace.md`.
+Závisí na: 01 (web obce a CMS: multi-tenant, `obce`, `castiObce`, krizová hlášení, `GET /api/krize/aktivni`, `GET /api/obce`, `GET /api/obce/<slug>/prehled`), 03 (digitální úřad: `hlaseni-zavad`, služby), 04 (IoT: `budovy`, stav budov), 05 (AI: `POST /api/asistent/dotaz`). Nic z toho nemusí být hotové; kde to chybí, viz <vychozi_stav>.
 
 <kontext>
 CodeKom je platforma pro české obce (pilot do 2 000 obyvatel, Plzeňský kraj). Mobilní aplikace je jedna pro iOS a Android a má dvě role: občan (bez účtu čte, s účtem hlásí závady a odebírá oznámení) a pracovník obce (navíc záložka Úřad). Společný kontext je v `CLAUDE.md`, důvody rozhodnutí v `docs/rozhodnuti.md`, návrh v `docs/navrh-platformy/06-iot-dashboard-a-aplikace.md` (část Mobilní aplikace), právní podklady v `docs/pravni-dokumenty.md` (dokument D Zásady ochrany osobních údajů, dokument E Podmínky používání aplikace). Klikací návrhy `design/prototypy/App-Obcan.dc.html` a `App-Urad.dc.html` jsou vodítko vzhledu a toků, ne závazná struktura; obsahují obec Horní Vzorov, ty používej Javoří Lhotu.
@@ -21,8 +21,11 @@ Na konci stojí v `apps/mobile` aplikace v Expo SDK 58, kterou jde pomocí EAS p
 - `apps/web` existuje (Next.js 16 + Payload 3, npm, kolekce aktuality, uredni-deska, kategorie-desky, krizova-hlaseni, zastupitele, dokumenty, media, users; migrace v `src/migrations`; logika banneru v `src/lib/krize.ts`: `vyberBanner`, `lzeSkryt`, `klicSkryti`, `bezpecnyOdkaz`, `UROVNE`). Čisté funkce přesuň do `packages/typy` (bez změny chování, testy webu projdou) a importuj v obou aplikacích.
 - `apps/mobile`, `packages/typy`, `packages/tokeny` a pnpm workspace zatím nemusí existovat. Pokud chybí, založ minimální kostru (pnpm workspace, Turborepo `turbo.json`, `packages/typy`, `packages/tokeny` s barvami krizových úrovní podle CLAUDE.md). Nepřepisuj to, co už tam z jiných promptů je.
 - Role v `users` jsou dnes `admin` a `redaktor`; sdílené zadání říká `superadmin`, `spravce`, `redaktor` a pole `obec`; prompt 01 hodnotu `admin` datovou migrací přejmenuje na `spravce`. Role čti na serveru jedinou funkcí `rolePracovnika(user, obecId)`, aby šla změnit na jednom místě; zapiš do `docs/rozhodnuti.md`.
-- Chybí-li `GET /api/krize/aktivni`, `GET /api/obce/<slug>/prehled`, `POST /api/hlaseni-zavad` nebo kolekce `hlaseni-zavad`, postav minimální verzi přesně podle kontraktu v <architektura>, označ ji komentářem `// MINIMUM z promptu 02, rozšíří prompt 03` a neimplementuj nic navíc.
+- Chybí-li `GET /api/krize/aktivni`, `GET /api/obce`, `GET /api/obce/<slug>/prehled`, `POST /api/hlaseni-zavad` nebo kolekce `hlaseni-zavad`, postav minimální verzi přesně podle kontraktu v <architektura>, označ ji komentářem `// MINIMUM z promptu 02, rozšíří prompt 03` a neimplementuj nic navíc.
 - Krizové hlášení dostane vztah `casti` (na `castiObce`) místo textu `tykaSe`. Prompt 01 `tykaSe` nahrazuje polem `casti` (pole slugů z `obce.castiObce`, datová migrace spáruje staré texty). Pokud to web ještě nemá, udělej totéž novou migrací (starou neměň) a `tykaSe` ponech jako zastaralé nepovinné pole.
+- Prototypy 07 a 08. Pokud už proběhl prompt 08 (prototyp aplikace v prohlížeči v `apps/mobile`: Expo SDK 58, Expo Router, TanStack Query, react-native-web, zdroje dat `api` a `vestavene`, obrazovky občana i záložka Úřad podle `design/prototypy/App-Obcan.dc.html` a `App-Urad.dc.html`), převezmi kostru, obrazovky, komponenty a testy a UI nepřepisuj. Jen vyměň zdroj dat a doplň ostré věci: zdroj `api` napoj na skutečné endpointy z 01 a 03 (`EXPO_PUBLIC_API_URL`), zdroj `vestavene` nech jako „Offline ukázku“, ukázkové přihlášení nahraď skutečným (kód z e-mailu, heslo a 2FA pracovníka), přepínač role správce a redaktor v Úřadu nahraď rolí z `GET /api/mobilni/me`, přidej push, šifrovanou perzistentní cache, návrhy hlášení offline a EAS profily.
+- Pokud už proběhl prompt 07 (prototyp webu bez databáze), endpointy `GET /api/krize/aktivni`, `GET /api/obce`, `GET /api/obce/<slug>/prehled` a `POST /api/hlaseni-zavad` už existují nad demo daty a prompt 01 je přepne na Payload (`CODEKOM_ZDROJ=payload`). Nepřepisuj je a nestav jejich minimální verzi podruhé.
+- Pokud 07 ani 08 neproběhly, postupuj podle zbytku zadání.
 </vychozi_stav>
 
 <rozsah>
@@ -32,13 +35,13 @@ Postav:
 3. Backend v `apps/web`: `obcane`, `mobilni-zarizeni`, endpointy `/api/mobilni/*`, úloha odeslání push, kontrola receiptů, mazání neplatných tokenů, stránka pro smazání účtu a odkaz na zásady.
 4. Podklady pro obchody v `apps/mobile/store/`: popisy v češtině, odpovědi pro App Privacy a Google Play Data safety, poznámky pro recenzenty, šablona prohlášení o přístupnosti aplikace.
 5. Testy podle <testy>.
-6. Seed ukázkové obce Javoří Lhota (obec, 4 části obce (Javoří Lhota, Podjavoří, Hájek, Na Rovném), 5 aktualit, 5 dokumentů desky, jedno informační hlášení, demo občan, demo pracovník), spustitelný jedním příkazem (`pnpm --filter web seed:demo`).
+6. Seed ukázkové obce Javoří Lhota spustitelný jedním příkazem (`pnpm --filter web seed:demo`). Obsah (obec se 4 částmi Javoří Lhota, Podjavoří, Hájek, Na Rovném, aktuality, dokumenty desky, informační hlášení) bere z `obsah/javori-lhota/*.json` a nic nevymýšlí; příkaz už může existovat z promptu 01, pak jen doplň demo občana a demo pracovníka. Chybí-li pole, je `[DOPLNIT: pole]`.
 
 Mimo rozsah (nedělej, jen zapiš do `docs/rozhodnuti.md`, že se neřešilo):
 - přihlášení přes NIA a mobilní klíč eGovernmentu (pro čtení a hlášení není důvod ověřovat totožnost; do produkce NIA jen subjekty s právní povinností),
 - přihlášení přes Google, Facebook nebo Apple,
 - certifikační pinning (zdůvodnění v <bezpecnost_a_soukromi>),
-- ovládání budov z aplikace (topení, dveře); v této verzi jen čtení,
+- ovládání budov z aplikace (topení, otevření dveří); tento prompt staví Budovy v záložce Úřad jen ke čtení. Otevření dveří (biometrie na zařízení, povinný důvod, právo `dvere` v `users.iotPrava`, čerstvé 2FA, audit) přidává prompt 04 jako samostatný milník 9; zapiš do `docs/rozhodnuti.md`,
 - veřejná mapa cizích hlášení závad, komentáře a hlasování,
 - platby a rezervace přímo v aplikaci (Služby je otevírají přes web obce; mimo IAP viz Apple 3.1.3(e)),
 - SMS a rozhlas jako odesílací kanály (pole `kanaly` je může obsahovat, odesílá je jiná služba),
@@ -53,7 +56,8 @@ Mimo rozsah (nedělej, jen zapiš do `docs/rozhodnuti.md`, že se neřešilo):
 Rozhraní, která nesmíš změnit (platí pro všechny části):
 - `GET /api/krize/aktivni?obec=<slug>` vrací `{ hlavni, dalsich }` (jedno nejzávažnější aktivní hlášení).
 - `GET /api/obce/<slug>/prehled` vrací souhrn: obec (nazev, slug, znak, castiObce, kontakty, uredniHodiny, moduly), krize `{hlavni, dalsich}`, 5 aktualit, 5 dokumentů desky, poslední hlášení rozhlasu. Pokud tvar nesedí s tím, co web vrací, uprav klienta přes zod schéma v `packages/typy` a rozdíl zapiš.
-- `POST /api/mobilni-zarizeni` s tělem `{ token, platforma, obce[], casti[], kategorie[] }`.
+- `GET /api/obce` vrací veřejný seznam obcí se zapnutým modulem `aplikace`, jen pole `{ slug, nazev, okres, znakUrl, castiObce: [{nazev, slug}] }`, cache 5 minut. Staví ho prompt 01 (a prompt 07 nad demo daty); aplikace ho jen volá přes zod schéma `ObceSeznamOdpoved` z `packages/typy`. Neimplementuj ho podruhé.
+- `POST /api/mobilni-zarizeni` s tělem `{ token, platforma, obce[], casti[], kategorie[] }`. Kolekce `mobilni-zarizeni` by v Payloadu dostala automatický REST `/api/mobilni-zarizeni`, který koliduje s vlastním koncovým bodem aplikace. Řešení: vlastní Next route handler `src/app/(payload)/api/mobilni-zarizeni/route.ts` (POST) má přednost před catch-all Payloadu [OVĚŘIT testem]; kolekce má REST přístup jen pro superadmina (create, read, update, delete) a handler zapisuje přes Local API s `overrideAccess: true` až po vlastní validaci (zod) a rate limitu. Test: POST jde do vlastního handleru, GET /api/mobilni-zarizeni bez přihlášení vrací 403.
 - `POST /api/hlaseni-zavad`, `POST /api/asistent/dotaz` (body `{obec, otazka, kanal: "aplikace"}`, odpověď `{odpoved, zdroje[], jistota}`).
 - Obec je tenant (pole `obec`), `castiObce` je pole `{nazev, slug}`.
 
@@ -71,7 +75,7 @@ Rozhraní, která vlastní tento prompt (vše v `apps/web/src/app/(payload)/api/
 | `POST /api/mobilni/urad/prihlaseni` `{email, heslo}` | první krok přihlášení pracovníka; vrátí výzvu 2FA |
 | `POST /api/mobilni/urad/overit-2fa` | druhý krok; vrátí tokeny s rolí a obcemi |
 | `GET /api/mobilni/urad/hlaseni-zavad?stav=&kurzor=` | fronta, `PATCH .../:id` změna stavu, odpověď občanovi, přiřazení |
-| `POST /api/mobilni/urad/krize/nahled`, `POST .../krize` | náhled a odeslání krizového hlášení |
+| `POST /api/mobilni/urad/krize/nahled`, `POST .../krize` | náhled a odeslání krizového hlášení; publikuje jen `spravce` a `superadmin`, `redaktor` volá `POST .../krize` s `koncept: true` a vznikne koncept, publikaci server odmítne 403 |
 | `GET /api/mobilni/urad/budovy` | stav budov, jen čtení; když modul IoT chybí, `{dostupne:false}` |
 | `GET /api/mobilni/me` | role a obce uživatele; jediný zdroj pravdy pro zobrazení záložky Úřad |
 
@@ -99,7 +103,7 @@ Přístup: občan čte a mění jen sebe; personál obce nevidí `obcane` vůbec
 
 `mobilni-kody`: emailHash, kodHash (HMAC s tajemstvím ze serveru), platnostDo (10 minut), pokusy (max 5), pouzito; maže se po expiraci. `mobilni-relace`: ucet (obcan nebo user), obnovaHash, zarizeniId, platnostDo, posledniPouziti.
 
-`mobilni-zarizeni`: token (unikátní, index), platforma (ios | android), obce (vztah, hasMany), casti (pole textů `<obec-slug>:<cast-slug>`), kategorie (select, hasMany: krize, informace_obce, aktuality, uredni_deska, moje_hlaseni), obcan (vztah, nepovinný), tichyRezim, jazyk, verzeAplikace, posledniAktivita, neplatne (boolean). Tvorba a změna jen přes endpoint (`overrideAccess` s vlastním ověřením); personál vidí jen agregované počty. Token se upsertuje podle hodnoty. Zařízení bez účtu je platné: oznámení jsou vázaná na zařízení. Po přihlášení se k zařízení připojí `obcan`, po odhlášení nebo smazání účtu se odpojí a odběry `moje_hlaseni` zaniknou.
+`mobilni-zarizeni`: token (unikátní, index), platforma (ios | android), obce (vztah, hasMany), casti (pole textů `<obec-slug>:<cast-slug>`), kategorie (select, hasMany: krize, informace_obce, aktuality, uredni_deska, moje_hlaseni), obcan (vztah, nepovinný), tichyRezim, jazyk, verzeAplikace, posledniAktivita, neplatne (boolean). Tvorba a změna jen přes vlastní endpoint: Kolekce `mobilni-zarizeni` by v Payloadu dostala automatický REST `/api/mobilni-zarizeni`, který koliduje s vlastním koncovým bodem aplikace. Řešení: vlastní Next route handler `src/app/(payload)/api/mobilni-zarizeni/route.ts` (POST) má přednost před catch-all Payloadu [OVĚŘIT testem]; kolekce má REST přístup jen pro superadmina (create, read, update, delete) a handler zapisuje přes Local API s `overrideAccess: true` až po vlastní validaci (zod) a rate limitu. Test: POST jde do vlastního handleru, GET /api/mobilni-zarizeni bez přihlášení vrací 403. Personál vidí jen agregované počty. Token se upsertuje podle hodnoty. Zařízení bez účtu je platné: oznámení jsou vázaná na zařízení. Po přihlášení se k zařízení připojí `obcan`, po odhlášení nebo smazání účtu se odpojí a odběry `moje_hlaseni` zaniknou.
 
 `push-tikety`: zarizeni, hlaseni, ticketId, stav, vytvoreno; smazat po vyřízení receiptu nebo po 24 hodinách.
 
@@ -113,7 +117,7 @@ Přístup: občan čte a mění jen sebe; personál obce nevidí `obcane` vůbec
 <funkce>
 Obecně: každá obrazovka má stavy načítání (kostra s popiskem pro čtečku), prázdný, chybový s tlačítkem „Zkusit znovu“ a offline (poslední data a řádek „Naposledy aktualizováno 3. 11. 2026 v 9:41“, čas v Europe/Prague). Kontakt úřadu, úřední hodiny a adresa jsou v cache vždy (pravidlo 6 z CLAUDE.md).
 
-**Onboarding.** (1) Úvod s odkazem „Pokračovat bez účtu“. (2) Výběr obce ze seznamu obcí s modulem `aplikace` (veřejný `/api/obce`), víc obcí povolí. (3) Výběr částí obce, výchozí je celá obec. (4) Vysvětlení oznámení před systémovým dotazem: co dostanu, že jde vypnout po kategoriích, že oznámení nenahrazuje sirény, rozhlas ani IZS; tlačítka „Povolit oznámení“ (až poté systémový dotaz) a „Teď ne“. Aplikace funguje i po odmítnutí (Apple 4.5.4, 5.1.2(i)). (5) Domů.
+**Onboarding.** (1) Úvod s odkazem „Pokračovat bez účtu“. (2) Výběr obce ze seznamu obcí s modulem `aplikace` (veřejný `GET /api/obce` z promptu 01), víc obcí povolí. (3) Výběr částí obce, výchozí je celá obec. (4) Vysvětlení oznámení před systémovým dotazem: co dostanu, že jde vypnout po kategoriích, že oznámení nenahrazuje sirény, rozhlas ani IZS; tlačítka „Povolit oznámení“ (až poté systémový dotaz) a „Teď ne“. Aplikace funguje i po odmítnutí (Apple 4.5.4, 5.1.2(i)). (5) Domů.
 
 **Domů.** Krizový banner: jen jedno, nejzávažnější hlášení z `vyberBanner`; úroveň slovem (Krizová situace, Výstraha, Informace obce), barva doplněk; „další hlášení: N“ vede na seznam; Krizovou situaci nejde skrýt, ostatní ano (`lzeSkryt`, `klicSkryti`, takže úprava hlášení ho ukáže znovu). Hlášení s částmi obce vidí jen ten, kdo sleduje danou část nebo celou obec. Pod bannerem hlášení rozhlasu, 5 aktualit, 5 dokumentů desky, kontakt a hodiny. Offline banner zůstane s časem a větou „Údaj může být zastaralý, řiďte se rozhlasem a pokyny IZS“.
 
@@ -131,8 +135,8 @@ Smazání účtu: vysvětlení, potvrzení čerstvým kódem. Server smaže `obc
 
 **Záložka Úřad** (jen když `/api/mobilni/me` vrátí roli pracovníka). Přihlášení v Profilu: e-mail a heslo účtu z `users`, pak kód 2FA; token se uloží s biometrií; akce měnící data po 15 minutách nečinnosti znovu biometrie.
 - Fronta hlášení závad: filtr stavu, od nejstaršího, detail s fotkami a polohou, změna stavu, veřejná odpověď občanovi (E, 3.5), přiřazení pracovníkovi téže obce. Změna stavu pošle občanovi push (`moje_hlaseni`).
-- Krizové hlášení: pole jako ve správě (úroveň, titulek do 90 znaků, text do 300, odkaz https nebo cesta webu obce, části obce, platnost, kanály). Náhled ukáže banner v aplikaci i na webu a počet zařízení, která push dostanou (`krize/nahled`, jen číslo). Potvrzení: shrnutí a držení tlačítka 1,5 s s alternativou pro čtečku (dvojité klepnutí a dialog), u Krizové situace navíc biometrie. Publikovat smí správce obce; redaktor jen koncept. Ukončení nastaví `platiDo` s potvrzením. Hlášení nejde smazat.
-- Stav budov: barva i slovní stav, teplota, baterie, čas měření; jen čtení. Ovládání zůstane skryté, dokud server nevrátí oprávnění `iot.ovladani`, a ani pak ho tento prompt nestaví.
+- Krizové hlášení: pole jako ve správě (úroveň, titulek do 90 znaků, text do 300, odkaz https nebo cesta webu obce, části obce, platnost, kanály). Náhled ukáže banner v aplikaci i na webu a počet zařízení, která push dostanou (`krize/nahled`, jen číslo). Potvrzení: shrnutí a držení tlačítka 1,5 s s alternativou pro čtečku (dvojité klepnutí a dialog), u Krizové situace navíc biometrie. Publikovat smí jen `spravce` a `superadmin` obce, na všech úrovních editoru (rozhodnutí zakladatele 4. 11. 2026, shodně s promptem 01); `redaktor` smí hlášení jen uložit jako koncept (bez náhledu počtu zařízení a bez push) a server publikaci od něj odmítne s 403, i kdyby aplikace tlačítko ukázala. Ukončení nastaví `platiDo` s potvrzením. Hlášení nejde smazat.
+- Stav budov: barva i slovní stav, teplota, baterie, čas měření; jen čtení. Žádné ovládání, ani otevření dveří, v tomto promptu nevzniká. Otevření dveří (biometrie, důvod, právo `dvere`, audit) do aplikace přidá prompt 04 jako samostatný milník nad adaptérem `GET /api/mobilni/urad/budovy`; do té doby UI žádné tlačítko ovládání nezobrazuje.
 
 **Push, klient.** Po souhlasu `getExpoPushTokenAsync` (opakuje se při selhání offline), registrace `POST /api/mobilni-zarizeni` při startu a každé změně nastavení či tokenu. Android kanály vytvoř při startu s verzovaným ID (po vytvoření jde měnit jen název a popis): `krize_v1` (nejvyšší důležitost), `dulezite_v1` (vysoká), `informace_v1` (výchozí); Krizová situace jde do prvního, Výstraha do druhého, Informace do třetího (chybějící kanál by oznámení skryl). iOS: Krizová situace a Výstraha `timeSensitive`, Informace `active`; ověř entitlement a config plugin. Critical Alerts do buildu nepřidávej; napiš `store/critical-alerts-zadost.md` se zdůvodněním pro Apple (povodně, požár, výpadek vody, zdrojem je obec) a poznámkou, že design na něm nezávisí. Ťuknutí otevře `krize/[id]` (schéma `codekom://`, univerzální odkazy `[DOPLNIT: doména]`); v popředí se zobrazí banner v aplikaci a Domů se obnoví. Duplicity (Expo je „at least once“) se slučují podle `data.hlaseniId` a `data.verze`.
 
@@ -188,7 +192,7 @@ Ověřují se pravidla, ne pokrytí řádků. Žádný test se nepřeskakuje ani
 | Offline: poslední data s „Naposledy aktualizováno“, banner s upozorněním; sejmuté dokumenty zmizí po synchronizaci; dokument po `vyvesenoDo` zmizí i offline | RNTL, mock NetInfo a API (MSW) |
 | Hlášení závady: idempotence, offline návrh, parametry komprese; asistent: sdělení o AI při prvním použití, trvalý štítek, varování před rodným číslem | RNTL |
 | Server: výběr zařízení pro push (obec, části, kategorie, tichý režim, neplatná, prolomení Krizovou situací), dávky po 100, retry při 429, `DeviceNotRegistered` smaže zařízení | Vitest + PGlite, mock Expo API |
-| Server: přihlášení kódem (stejná odpověď pro neexistující e-mail, vypršení, 5 pokusů, rate limity, rotace obnovy, souhlas), smazání účtu, role (občan nemá `/urad/*`, redaktor nepublikuje, pracovník jen svou obec), EXIF/GPS pryč po zpracování | Vitest |
+| Server: přihlášení kódem (stejná odpověď pro neexistující e-mail, vypršení, 5 pokusů, rate limity, rotace obnovy, souhlas), smazání účtu, role (občan nemá `/urad/*`, redaktor nepublikuje krizové hlášení na žádné úrovni editoru a dostane 403, správce a superadmin ano, pracovník jen svou obec), `mobilni-zarizeni` (POST jde do vlastního handleru, GET /api/mobilni-zarizeni bez přihlášení vrací 403, REST kolekce jen pro superadmina), EXIF/GPS pryč po zpracování | Vitest |
 | E2E: onboarding, hlášení závady, příjem notifikace | Maestro v `.maestro/` na simulátorech iOS a Android |
 | Přístupnost | `eslint-plugin-react-native-a11y` jako chyba; test vykresleného stromu vyžaduje role, popisky a minimální rozměry z tokenů; ruční VoiceOver a TalkBack |
 | Typy, styl | `tsc --noEmit`, ESLint |
@@ -215,6 +219,7 @@ Na začátku sepiš plán a seznam úkolů (`docs/progress.json`) a průběžně
 Příkazy (všechny bez chyb, bez přeskočených testů):
 - `pnpm --filter mobile typecheck`, `pnpm --filter mobile lint`, `pnpm --filter mobile test`
 - `pnpm --filter web typecheck`, `pnpm --filter web test` (testy backendu a testy úřední desky a banneru z promptu 01, pokud už existují; v repu dnes žádné nejsou)
+- Pokud proběhl prompt 08, jeho testy a e2e nad `api` i `vestavene` zdrojem dál procházejí beze změny očekávání.
 - `pnpm --filter mobile e2e` (Maestro: onboarding, hlášení závady, příjem notifikace)
 - `pnpm --filter mobile a11y` (a11y lint a test stromu)
 - `npx expo-doctor` v `apps/mobile` bez chyb
@@ -226,7 +231,7 @@ Chování, které jde ukázat na demo obci Javoří Lhota:
 - V režimu letadlo Domů a Úřední deska ukážou „Naposledy aktualizováno …“.
 - Hlášení závady s fotkou a polohou se odešle, dostane číslo a stav, v odeslané fotce nejsou EXIF ani GPS (ověřeno testem), pracovník obce změní stav a občan dostane push.
 - Smazání účtu v aplikaci funguje, stránka `/smazani-uctu` také, po něm je e-mail volný pro nové založení.
-- Pracovník obce se přihlásí heslem a 2FA, vidí Úřad, odešle krizové hlášení přes náhled a potvrzení; občan a redaktor nemohou.
+- Pracovník obce se přihlásí heslem a 2FA, vidí Úřad, odešle krizové hlášení přes náhled a potvrzení; občan nemůže a redaktor uloží jen koncept (publikace vrací 403).
 - Asistent při prvním otevření ukáže sdělení, že jde o AI, a odpoví se zdrojem.
 - VoiceOver a TalkBack na Domů, Hlásit a Profil bez blokujících chyb; při 200 % písma na 320 pt se nic neořízne.
 - `store/` obsahuje popisy v češtině, tabulky pro App Privacy a Data safety, poznámky pro recenzenty, šablonu prohlášení o přístupnosti a žádost o Critical Alerts.
