@@ -23,6 +23,13 @@ test('karusel šablon se posouvá tlačítky', async ({ page }) => {
   await expect.poll(() => pas.evaluate((el) => el.scrollLeft)).toBe(0)
 })
 
+test('hlavička na telefonu ukáže jen logo a menu', async ({ page }) => {
+  await page.goto('/')
+  const napiste = page.locator('header').getByRole('link', { name: 'Napište nám' })
+  if ((page.viewportSize()?.width ?? 0) < 1024) await expect(napiste).toBeHidden()
+  else await expect(napiste).toBeVisible()
+})
+
 test('přepínač palet změní snímek a odkaz do ukázky', async ({ page }) => {
   await page.goto('/ukazky/lipa')
   await page.getByRole('button', { name: 'Obloha' }).click()

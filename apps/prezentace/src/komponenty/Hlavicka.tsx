@@ -32,7 +32,7 @@ export function Hlavicka() {
             ))}
           </ul>
         </nav>
-        <Link href="/kontakt" className="tlacitko hidden !min-h-11 lg:inline-flex">
+        <Link href="/kontakt" className="tlacitko !min-h-11 max-lg:!hidden">
           Napište nám
         </Link>
         <details className="relative lg:hidden">

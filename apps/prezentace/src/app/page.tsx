@@ -95,16 +95,16 @@ export default function Uvod() {
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/ukazky" className="tlacitko">
+            <Link href="/ukazky" className="tlacitko w-full sm:w-auto">
               Prohlédnout 20 šablon
             </Link>
             {demo ? (
-              <a href={demo} className="tlacitko-obrys" rel="noopener noreferrer">
+              <a href={demo} className="tlacitko-obrys w-full sm:w-auto" rel="noopener noreferrer">
                 Prohlédnout živou ukázku Javoří Lhoty
               </a>
             ) : null}
             {aplikace ? (
-              <a href={aplikace} className="tlacitko-obrys" rel="noopener noreferrer">
+              <a href={aplikace} className="tlacitko-obrys w-full sm:w-auto" rel="noopener noreferrer">
                 Vyzkoušet aplikaci
               </a>
             ) : null}
@@ -143,9 +143,9 @@ export default function Uvod() {
               Všech 20 šablon
             </Link>
           </Odhaleni>
-          <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="-mx-5 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
             {vybrane.map((s, i) => (
-              <Odhaleni as="li" key={s.klic} zpozdeni={i * 90}>
+              <Odhaleni as="li" key={s.klic} zpozdeni={i * 90} className="w-[80%] shrink-0 snap-start sm:w-auto">
                 <Link href={`/ukazky/${s.klic}`} className="sklo group block rounded-3xl p-2 no-underline transition-transform duration-300 hover:-translate-y-1">
                   <Snimek src={s.palety[0]!.snimek} alt={`Úvodní stránka šablony ${s.nazev} pro obec Javoří Lhota, paleta ${s.palety[0]!.nazev}.`} sizes="(min-width: 1240px) 290px, 50vw" />
                   <span className="block px-3 pb-3 pt-4">
