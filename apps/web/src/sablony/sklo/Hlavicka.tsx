@@ -1,4 +1,4 @@
-/** Hlavička šablony 21 Sklo: skleněný pruh se znakem obce a menu, na telefonu sbalené. */
+/** Hlavička šablony 21 Canopus: skleněný pruh se znakem obce a menu, na telefonu sbalené. */
 import { ZnakObce } from '../sdilene/ZnakObce'
 
 const MENU = [

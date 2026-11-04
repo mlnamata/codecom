@@ -1,0 +1,114 @@
+/* Šablona 22 Achernar. Výjimka z unslop (přání zakladatele 4. 11. 2026): tmavé sklo, jemná záře, řezy nad 600.
+   Text leží jen na skleněných plochách, které jsou dost neprůhledné pro kontrast aspoň 4,5 : 1. */
+.sablona-noc * { box-sizing:border-box }
+.sablona-noc { color-scheme:dark }
+.sablona-noc a { color:var(--link) }
+.sablona-noc a:hover { color:var(--ink) }
+.sablona-noc :focus-visible { outline:3px solid var(--primary);outline-offset:2px }
+.sablona-noc h1,
+.sablona-noc h2,
+.sablona-noc h3 { font-family:var(--font-space-grotesk), system-ui, sans-serif;line-height:1.1;font-weight:700;letter-spacing:-0.02em }
+.sablona-noc strong,
+.sablona-noc b,
+.sablona-noc th { font-weight:600 }
+.sablona-noc footer a,
+.sablona-noc nav a,
+.sablona-noc dd a,
+.sablona-noc .nc-seznam a,
+.sablona-noc .nc-hlava a { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-noc .nc-tlumene { color:var(--muted);font-size:15px }
+
+/* Pozadí: tmavá plocha s jemnou září v barvě akcentu */
+.sablona-noc .nc-pozadi {
+  background:
+    radial-gradient(60% 50% at 85% 0%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%),
+    radial-gradient(50% 40% at 0% 60%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+    var(--bg);
+}
+
+/* Tmavé sklo: bez backdrop-filter plná plocha, s ním průsvitná a rozostřená */
+.sablona-noc .nc-sklo {
+  background:var(--surface);
+  border:1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  box-shadow:0 1px 0 color-mix(in srgb, var(--ink) 10%, transparent) inset, 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  .sablona-noc .nc-sklo {
+    background:color-mix(in srgb, var(--surface) 80%, transparent);
+    -webkit-backdrop-filter:blur(24px) saturate(1.3);
+    backdrop-filter:blur(24px) saturate(1.3);
+  }
+}
+
+/* Hlavička */
+.sablona-noc .nc-hlavicka { padding:12px clamp(12px, 3vw, 24px) }
+.sablona-noc .nc-pozadi > .nc-hlavicka { position:sticky;top:0;z-index:5 }
+.sablona-noc .nc-hlavicka-pruh { max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px;padding:8px 12px 8px 16px;border-radius:18px;color:var(--ink) }
+.sablona-noc .nc-znacka { display:flex;align-items:center;gap:12px;min-height:44px;color:var(--ink);text-decoration:none;font-family:var(--font-space-grotesk), system-ui, sans-serif;font-weight:700;font-size:20px }
+.sablona-noc .nav-wide { display:flex;flex-wrap:wrap;gap:0 4px }
+.sablona-noc .nav-wide a { padding-inline:12px;border-radius:12px;color:var(--ink);text-decoration:none;font-weight:500 }
+.sablona-noc .nav-wide a:hover { background:color-mix(in srgb, var(--primary) 18%, transparent) }
+.sablona-noc .nav-narrow { display:none }
+@media (max-width:899.98px) {
+.sablona-noc .nav-wide { display:none!important }
+.sablona-noc .nav-narrow { display:block;margin-left:auto }
+.sablona-noc .nav-narrow[open] { flex-basis:100% }
+.sablona-noc .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:12px;font-weight:600;cursor:pointer }
+.sablona-noc .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-noc .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-noc .nav-narrow nav a { margin-block:0;padding-block:10px;color:var(--ink) }
+}
+.sablona-noc .pas-hlavicky .nc-hlavicka-pruh,
+.sablona-noc .nc-hlavicka-pruh { color:var(--ink) }
+
+/* Úvod */
+.sablona-noc .nc-obal { max-width:1200px;margin:0 auto;padding:24px clamp(16px, 4vw, 32px) 80px }
+.sablona-noc .nc-hero { display:grid;grid-template-columns:minmax(0, 1fr);gap:20px;align-items:stretch }
+@media (min-width:900px) { .sablona-noc .nc-hero { grid-template-columns:minmax(0, 1.1fr) minmax(0, 1fr) } }
+.sablona-noc .nc-hero .foto-uvod { box-shadow:0 0 0 1px color-mix(in srgb, var(--primary) 45%, transparent), 0 0 48px color-mix(in srgb, var(--primary) 28%, transparent) }
+.sablona-noc .nc-panel { border-radius:28px;padding:clamp(20px, 3vw, 36px) }
+.sablona-noc .nc-uvitani h1 { margin:0;font-size:clamp(42px, 6vw, 76px);line-height:1;letter-spacing:-0.04em }
+.sablona-noc .nc-uvitani h1::after { content:"";display:block;width:96px;height:4px;margin-top:20px;border-radius:4px;background:var(--primary);box-shadow:0 0 18px var(--primary) }
+.sablona-noc .nc-perex { margin:20px 0 0;font-size:20px;line-height:1.5;max-width:44ch }
+.sablona-noc .nc-dnes { margin:20px 0 0;padding:12px 16px;border-radius:16px;background:color-mix(in srgb, var(--primary) 10%, var(--surface));border:1px solid color-mix(in srgb, var(--primary) 35%, transparent) }
+
+.sablona-noc .nc-sekce { margin-top:48px }
+.sablona-noc .nc-sekce > h2 { margin:0 0 16px;font-size:30px }
+.sablona-noc .nc-ukony { list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit, minmax(min(240px, 100%), 1fr));gap:16px }
+.sablona-noc .nc-ukony li { position:relative;border-radius:20px;padding:20px;transition:box-shadow .2s ease, transform .2s ease }
+.sablona-noc .nc-ukony li:hover { transform:translateY(-2px);box-shadow:0 0 0 1px var(--primary), 0 0 32px color-mix(in srgb, var(--primary) 35%, transparent) }
+.sablona-noc .nc-ukony a { display:block;min-height:44px;font-family:var(--font-space-grotesk), system-ui, sans-serif;font-size:20px;font-weight:600;line-height:1.25;color:var(--ink);text-decoration:none }
+.sablona-noc .nc-ukony a::after { content:"";position:absolute;inset:0;border-radius:20px }
+.sablona-noc .nc-ukony a:hover { text-decoration:underline }
+.sablona-noc .nc-ukony span { display:block;margin-top:4px;color:var(--muted);font-size:15px }
+
+.sablona-noc .nc-mrizka { margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit, minmax(min(460px, 100%), 1fr));gap:20px;align-items:start }
+.sablona-noc .nc-panel h2 { margin:0 0 12px;font-size:26px }
+.sablona-noc .nc-hlava { display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;margin-bottom:4px }
+.sablona-noc .nc-hlava h2 { margin:0 }
+.sablona-noc .nc-seznam { list-style:none;margin:0;padding:0 }
+.sablona-noc .nc-seznam li { display:flex;flex-direction:column;padding:12px 0;border-top:1px solid var(--line) }
+.sablona-noc .nc-seznam li:first-child { border-top:0 }
+.sablona-noc .nc-seznam a { font-weight:500 }
+.sablona-noc .nc-titulek { font-size:19px;color:var(--ink);text-decoration:none }
+.sablona-noc .nc-titulek:hover { text-decoration:underline }
+.sablona-noc .nc-cas { align-self:flex-start;padding:2px 10px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums }
+.sablona-noc .nc-kontakt { margin:0;display:grid;grid-template-columns:minmax(120px, auto) 1fr;gap:0 16px }
+.sablona-noc .nc-kontakt dt { padding:10px 0;color:var(--muted);border-top:1px solid var(--line) }
+.sablona-noc .nc-kontakt dd { margin:0;padding:10px 0;border-top:1px solid var(--line) }
+.sablona-noc .nc-kontakt dt:first-of-type,
+.sablona-noc .nc-kontakt dd:first-of-type { border-top:0 }
+@media (max-width:479.98px) {
+.sablona-noc .nc-kontakt { grid-template-columns:1fr }
+.sablona-noc .nc-kontakt dd { border-top:0;padding-top:0 }
+}
+
+/* Patička */
+.sablona-noc .nc-paticka { background:var(--deep);color:var(--on-deep);border-top:1px solid var(--line) }
+.sablona-noc .nc-paticka-obsah { max-width:1200px;margin:0 auto;padding:32px clamp(16px, 4vw, 32px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;font-size:15px }
+.sablona-noc .nc-paticka nav { display:flex;flex-wrap:wrap;gap:0 24px }
+
+@media (prefers-reduced-motion:reduce) {
+.sablona-noc * { transition:none!important;animation:none!important }
+.sablona-noc .nc-ukony li:hover { transform:none }
+}

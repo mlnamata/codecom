@@ -1,4 +1,4 @@
-/** Úvod šablony 21 Sklo: fotka přes celou šířku, nad ní matné skleněné panely. Obsah z dat Javoří Lhoty. */
+/** Úvod šablony 21 Canopus: fotka přes celou šířku, nad ní matné skleněné panely. Obsah z dat Javoří Lhoty. */
 import type { ReactNode } from 'react'
 import type { DataUvodu } from '../sdilene/typy'
 import { Foto } from '../sdilene/Foto'

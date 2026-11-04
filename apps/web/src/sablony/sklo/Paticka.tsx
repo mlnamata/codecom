@@ -1,4 +1,4 @@
-/** Povinná patička šablony 21 Sklo. */
+/** Povinná patička šablony 21 Canopus. */
 
 export function Paticka() {
   return (

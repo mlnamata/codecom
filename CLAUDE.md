@@ -72,7 +72,7 @@ Před instalací ověř aktuální verzi přes `npm view <balíček> version`. P
 - Firemní prezentační web CodeKom se 4. 11. 2026 přesunul do samostatného repozitáře `mlnamata/codekom_web` (má vlastní pravidla vzhledu). Weby obcí a aplikace zůstávají podle unslop.
 - Nepoužívej nadpisy nad nadpisy velkými písmeny, odkazy se šipkou „→“, řetězce „A · B“ ani kartičky jako ze SaaS šablony.
 - Text má velikost 17 px, cíle pro dotyk aspoň 44 × 44 px, kontrast textu aspoň 4,5 : 1.
-- Výjimka: skleněné šablony 21 Sklo, 22 Noc a 23 Aurora smí na přání zakladatele ze 4. 11. 2026 porušit unslop (sklo, přechody, záře, řezy nad 600). Kontrast, 44 px a omezený pohyb platí i pro ně.
+- Výjimka: skleněné šablony 21 Canopus, 22 Achernar a 23 Bellatrix smí na přání zakladatele ze 4. 11. 2026 porušit unslop (sklo, přechody, záře, řezy nad 600). Kontrast, 44 px a omezený pohyb platí i pro ně.
 - Šablony webů obcí jsou v `design/prototypy` (20 šablon, každá ve 3 barevných variantách). Vzhled ber odtud, obsah z ukázkové obce Javoří Lhota v `obsah/javori-lhota`.
 - Texty a obsah nevymýšlej. Ukázková obec bere obsah z `obsah/javori-lhota`. Co chybí, označ `[DOPLNIT]`.
 - Fotky z `design/obrazky/foto` jsou vygenerované AI. Kde se zobrazí, má být poznámka „Ilustrační fotografie vytvořená umělou inteligencí“.

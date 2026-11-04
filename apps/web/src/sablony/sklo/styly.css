@@ -1,4 +1,4 @@
-/* Šablona 21 Sklo. Výjimka z unslop (přání zakladatele 4. 11. 2026): sklo, rozostření, řezy nad 600.
+/* Šablona 21 Canopus. Výjimka z unslop (přání zakladatele 4. 11. 2026): sklo, rozostření, řezy nad 600.
    Sklo je vždy dost neprůhledné, aby text měl kontrast aspoň 4,5 : 1 i nad tmavou fotkou. */
 .sablona-sklo * { box-sizing:border-box }
 .sablona-sklo a { color:var(--link) }

@@ -1,4 +1,4 @@
-// Skleněná šablona 21 Sklo. Psaná ručně, generátor design/generator/do-tsx.py ji zatím nezná ([DOPLNIT]).
+// Skleněná šablona 21 Canopus. Psaná ručně, generátor design/generator/do-tsx.py ji zatím nezná ([DOPLNIT]).
 import './styly.css'
 import type { ModulSablony } from '../sdilene/typy'
 import { tridyPisem } from './fonty'
