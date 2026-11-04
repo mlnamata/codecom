@@ -87,6 +87,16 @@ Před instalací ověř aktuální verzi přes `npm view <balíček> version`. P
 5. Nemaž cizí kód ani soubory mimo zadání. Neměň migrace, které už byly nasazené. Na každou změnu schématu napiš novou migraci.
 6. Údaje, které neznáš (IČO, ceny, kontakty), nevymýšlej. Napiš `[DOPLNIT: …]`. Kde rešerše píše NEOVĚŘENO, ověř údaj z dokumentace, nebo ho tak nech označený.
 
+## Práce více agentů najednou
+
+Na repozitáři pracuje víc instancí Claude současně. Aby měly přehled jedna o druhé:
+
+1. Po každém ověřeném kroku (kontroly prošly) hned commitni a pushni na `main`. Nečekej na konec celé práce.
+2. Do commitu přidávej jen soubory, které jsi změnil ty (`git add <cesty>`, nikdy `git add -A`). Cizí rozdělané změny v pracovním stromu nech být.
+3. Před pushem `git pull --rebase origin main`. Při konfliktu se zastav a napiš, s čím je konflikt. Nikdy nepoužívej force push.
+4. Na začátku práce si stáhni `main` a podívej se do `docs/progress.md`, kdo na čem pracuje. Svůj úkol tam zapiš (stav, oblast souborů) a při každém commitu ho aktualizuj.
+5. Drž se své oblasti souborů. Když potřebuješ měnit sdílený soubor (`globals.css`, `package.json`, lockfile), udělej to malým samostatným commitem a hned ho pushni.
+
 ## Kontrola hotovo
 
 Práce je hotová, až když v dotčené aplikaci projde:
