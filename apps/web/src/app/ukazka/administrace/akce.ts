@@ -6,6 +6,7 @@ import { NovaKrizeVstup, STAVY_ZAVADY, type StavZavady } from '@codekom/typy'
 import { z } from 'zod'
 import { ChybaPravidla, obnovUkazku, pridejAktualitu, publikujKoncept, smazDokument, ukonciKrizi, upravDokument, vydejKrizi, vyridZavadu, vyvesDokument } from '@/lib/data/zapis'
 import { obnovVerejneStranky } from '@/lib/obnovit'
+import { vynulujLimity } from '@/lib/omezeni'
 import { COOKIE_UKAZKY, ocisti } from '@/ukazka/stav'
 import { slugObce } from '@/lib/web'
 import { najdiOsobniUdaje } from './osobni-udaje'
@@ -243,6 +244,7 @@ export async function obnov(_: Vysledek, f: FormData): Promise<Vysledek> {
   hlidej()
   if (f.get('potvrzeni') !== 'ano') return { ...PRAZDNY, zprava: 'Obnovení jste nepotvrdili.' }
   obnovUkazku()
+  vynulujLimity()
   obnovVerejneStranky()
   return { ok: true, zprava: 'Ukázka je obnovená do výchozího stavu.', chyby: {}, hodnoty: {} }
 }
