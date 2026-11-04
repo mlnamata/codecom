@@ -13,3 +13,6 @@ vystupy/
 .turbo/
 test-results/
 playwright-report/
+
+# generuje Next.js při next dev
+apps/prezentace/AGENTS.md
