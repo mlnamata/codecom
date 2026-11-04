@@ -1,0 +1,35 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-hnizdo * { box-sizing:border-box }
+.sablona-hnizdo a { color:var(--link) }
+.sablona-hnizdo a:hover { color:var(--ink) }
+.sablona-hnizdo :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-hnizdo .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-hnizdo .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-hnizdo .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-hnizdo .alert :focus-visible { outline-color:currentColor }
+.sablona-hnizdo h1,
+.sablona-hnizdo h2,
+.sablona-hnizdo h3,
+.sablona-hnizdo h4 { line-height:1.2;font-weight:500 }
+.sablona-hnizdo strong,
+.sablona-hnizdo b,
+.sablona-hnizdo th { font-weight:600 }
+.sablona-hnizdo footer a:not([style*="padding"]),
+.sablona-hnizdo nav a:not([style*="padding"]),
+.sablona-hnizdo td a,
+.sablona-hnizdo dd a,
+.sablona-hnizdo .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-hnizdo .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-hnizdo .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-hnizdo .nav-wide { display:none!important }
+.sablona-hnizdo .nav-narrow { display:block;margin-left:auto }
+.sablona-hnizdo .nav-narrow[open] { flex-basis:100% }
+.sablona-hnizdo .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-hnizdo .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-hnizdo .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-hnizdo .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-hnizdo * { transition:none!important;animation:none!important }
+}

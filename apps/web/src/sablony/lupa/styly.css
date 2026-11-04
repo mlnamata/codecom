@@ -1,0 +1,37 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-lupa * { box-sizing:border-box }
+.sablona-lupa a { color:var(--link) }
+.sablona-lupa a:hover { color:var(--ink) }
+.sablona-lupa :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-lupa .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-lupa .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-lupa .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-lupa .alert :focus-visible { outline-color:currentColor }
+.sablona-lupa h1,
+.sablona-lupa h2,
+.sablona-lupa h3,
+.sablona-lupa h4 { line-height:1.2;font-weight:500 }
+.sablona-lupa strong,
+.sablona-lupa b,
+.sablona-lupa th { font-weight:600 }
+.sablona-lupa footer a:not([style*="padding"]),
+.sablona-lupa nav a:not([style*="padding"]),
+.sablona-lupa td a,
+.sablona-lupa dd a,
+.sablona-lupa .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-lupa .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-lupa .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-lupa .nav-wide { display:none!important }
+.sablona-lupa .nav-narrow { display:block;margin-left:auto }
+.sablona-lupa .nav-narrow[open] { flex-basis:100% }
+.sablona-lupa .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-lupa .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-lupa .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-lupa .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-lupa * { transition:none!important;animation:none!important }
+}
+.sablona-lupa .skip { position:absolute;left:-10000px;top:auto }
+.sablona-lupa .skip:focus { position:static;display:block;padding:12px 16px;background:#FFE14D;color:#000000;font-weight:600;outline:3px solid #000000;outline-offset:-3px }

@@ -42,17 +42,17 @@ export function jeAktivni(h: Pick<KrizoveHlaseni, 'platiOd' | 'platiDo'>, now: D
 }
 
 /** Active alerts, most serious first, newest first within a level. */
-export function aktivniHlaseni(list: readonly KrizoveHlaseni[], now: Date): KrizoveHlaseni[] {
+export function aktivniHlaseni<T extends Pick<KrizoveHlaseni, 'uroven' | 'platiOd' | 'platiDo'>>(list: readonly T[], now: Date): T[] {
   return list
     .filter((h) => h.uroven in UROVNE && jeAktivni(h, now))
     .sort((a, b) => UROVNE[a.uroven].poradi - UROVNE[b.uroven].poradi || time(b.platiOd) - time(a.platiOd))
 }
 
 /** The one alert for the banner, plus how many other active alerts exist. */
-export function vyberBanner(
-  list: readonly KrizoveHlaseni[],
+export function vyberBanner<T extends Pick<KrizoveHlaseni, 'uroven' | 'platiOd' | 'platiDo'>>(
+  list: readonly T[],
   now: Date,
-): { hlavni: KrizoveHlaseni | null; dalsich: number } {
+): { hlavni: T | null; dalsich: number } {
   const aktivni = aktivniHlaseni(list, now)
   return { hlavni: aktivni[0] ?? null, dalsich: Math.max(0, aktivni.length - 1) }
 }

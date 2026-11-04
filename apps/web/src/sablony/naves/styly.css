@@ -1,0 +1,38 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-naves * { box-sizing:border-box }
+.sablona-naves a { color:var(--link) }
+.sablona-naves a:hover { color:var(--ink) }
+.sablona-naves :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-naves .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-naves .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-naves .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-naves .alert :focus-visible { outline-color:currentColor }
+.sablona-naves h1,
+.sablona-naves h2,
+.sablona-naves h3,
+.sablona-naves h4 { line-height:1.2;font-weight:500 }
+.sablona-naves strong,
+.sablona-naves b,
+.sablona-naves th { font-weight:600 }
+.sablona-naves footer a:not([style*="padding"]),
+.sablona-naves nav a:not([style*="padding"]),
+.sablona-naves td a,
+.sablona-naves dd a,
+.sablona-naves .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-naves .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-naves .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-naves .nav-wide { display:none!important }
+.sablona-naves .nav-narrow { display:block;margin-left:auto }
+.sablona-naves .nav-narrow[open] { flex-basis:100% }
+.sablona-naves .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-naves .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-naves .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-naves .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-naves * { transition:none!important;animation:none!important }
+}
+@media (max-width:767.98px) {
+.sablona-naves .m-center { order:-1 }
+}

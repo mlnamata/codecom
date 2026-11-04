@@ -1,0 +1,35 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-hreben * { box-sizing:border-box }
+.sablona-hreben a { color:var(--link) }
+.sablona-hreben a:hover { color:var(--ink) }
+.sablona-hreben :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-hreben .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-hreben .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-hreben .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-hreben .alert :focus-visible { outline-color:currentColor }
+.sablona-hreben h1,
+.sablona-hreben h2,
+.sablona-hreben h3,
+.sablona-hreben h4 { line-height:1.2;font-weight:500 }
+.sablona-hreben strong,
+.sablona-hreben b,
+.sablona-hreben th { font-weight:600 }
+.sablona-hreben footer a:not([style*="padding"]),
+.sablona-hreben nav a:not([style*="padding"]),
+.sablona-hreben td a,
+.sablona-hreben dd a,
+.sablona-hreben .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-hreben .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-hreben .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-hreben .nav-wide { display:none!important }
+.sablona-hreben .nav-narrow { display:block;margin-left:auto }
+.sablona-hreben .nav-narrow[open] { flex-basis:100% }
+.sablona-hreben .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-hreben .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-hreben .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-hreben .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-hreben * { transition:none!important;animation:none!important }
+}

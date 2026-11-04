@@ -1,0 +1,46 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-zvonice * { box-sizing:border-box }
+.sablona-zvonice a { color:var(--link) }
+.sablona-zvonice a:hover { color:var(--ink) }
+.sablona-zvonice :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-zvonice .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-zvonice .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-zvonice .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-zvonice .alert :focus-visible { outline-color:currentColor }
+.sablona-zvonice h1,
+.sablona-zvonice h2,
+.sablona-zvonice h3,
+.sablona-zvonice h4 { line-height:1.2;font-weight:500 }
+.sablona-zvonice strong,
+.sablona-zvonice b,
+.sablona-zvonice th { font-weight:600 }
+.sablona-zvonice footer a:not([style*="padding"]),
+.sablona-zvonice nav a:not([style*="padding"]),
+.sablona-zvonice td a,
+.sablona-zvonice dd a,
+.sablona-zvonice .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-zvonice .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-zvonice .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-zvonice .nav-wide { display:none!important }
+.sablona-zvonice .nav-narrow { display:block;margin-left:auto }
+.sablona-zvonice .nav-narrow[open] { flex-basis:100% }
+.sablona-zvonice .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-zvonice .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-zvonice .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-zvonice .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-zvonice * { transition:none!important;animation:none!important }
+}
+.sablona-zvonice .drow { display:grid;grid-template-columns:minmax(0,1fr) 120px 120px;gap:4px 16px;padding:12px 0;border-top:1px solid var(--line) }
+.sablona-zvonice .dhead { border-top:0 }
+@media (max-width:767.98px) {
+.sablona-zvonice .dhead { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0) }
+.sablona-zvonice .drow { grid-template-columns:1fr 1fr }
+.sablona-zvonice .drow>span:first-child { grid-column:1/-1 }
+.sablona-zvonice .dfrom::before { content:"Vyvěšeno " }
+.sablona-zvonice .dto::before { content:"Sejmutí " }
+.sablona-zvonice .dfrom,
+.sablona-zvonice .dto { color:var(--muted);font-size:15px }
+}

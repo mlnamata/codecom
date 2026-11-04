@@ -1,0 +1,35 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-majka * { box-sizing:border-box }
+.sablona-majka a { color:var(--link) }
+.sablona-majka a:hover { color:var(--ink) }
+.sablona-majka :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-majka .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-majka .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-majka .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-majka .alert :focus-visible { outline-color:currentColor }
+.sablona-majka h1,
+.sablona-majka h2,
+.sablona-majka h3,
+.sablona-majka h4 { line-height:1.2;font-weight:500 }
+.sablona-majka strong,
+.sablona-majka b,
+.sablona-majka th { font-weight:600 }
+.sablona-majka footer a:not([style*="padding"]),
+.sablona-majka nav a:not([style*="padding"]),
+.sablona-majka td a,
+.sablona-majka dd a,
+.sablona-majka .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-majka .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-majka .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-majka .nav-wide { display:none!important }
+.sablona-majka .nav-narrow { display:block;margin-left:auto }
+.sablona-majka .nav-narrow[open] { flex-basis:100% }
+.sablona-majka .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-majka .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-majka .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-majka .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-majka * { transition:none!important;animation:none!important }
+}

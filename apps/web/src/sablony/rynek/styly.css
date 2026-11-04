@@ -1,0 +1,35 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-rynek * { box-sizing:border-box }
+.sablona-rynek a { color:var(--link) }
+.sablona-rynek a:hover { color:var(--ink) }
+.sablona-rynek :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-rynek .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-rynek .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-rynek .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-rynek .alert :focus-visible { outline-color:currentColor }
+.sablona-rynek h1,
+.sablona-rynek h2,
+.sablona-rynek h3,
+.sablona-rynek h4 { line-height:1.2;font-weight:500 }
+.sablona-rynek strong,
+.sablona-rynek b,
+.sablona-rynek th { font-weight:600 }
+.sablona-rynek footer a:not([style*="padding"]),
+.sablona-rynek nav a:not([style*="padding"]),
+.sablona-rynek td a,
+.sablona-rynek dd a,
+.sablona-rynek .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-rynek .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-rynek .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-rynek .nav-wide { display:none!important }
+.sablona-rynek .nav-narrow { display:block;margin-left:auto }
+.sablona-rynek .nav-narrow[open] { flex-basis:100% }
+.sablona-rynek .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-rynek .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-rynek .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-rynek .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-rynek * { transition:none!important;animation:none!important }
+}

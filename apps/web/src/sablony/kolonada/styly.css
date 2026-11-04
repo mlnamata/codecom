@@ -1,0 +1,35 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-kolonada * { box-sizing:border-box }
+.sablona-kolonada a { color:var(--link) }
+.sablona-kolonada a:hover { color:var(--ink) }
+.sablona-kolonada :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-kolonada .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-kolonada .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-kolonada .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-kolonada .alert :focus-visible { outline-color:currentColor }
+.sablona-kolonada h1,
+.sablona-kolonada h2,
+.sablona-kolonada h3,
+.sablona-kolonada h4 { line-height:1.2;font-weight:500 }
+.sablona-kolonada strong,
+.sablona-kolonada b,
+.sablona-kolonada th { font-weight:600 }
+.sablona-kolonada footer a:not([style*="padding"]),
+.sablona-kolonada nav a:not([style*="padding"]),
+.sablona-kolonada td a,
+.sablona-kolonada dd a,
+.sablona-kolonada .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-kolonada .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-kolonada .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-kolonada .nav-wide { display:none!important }
+.sablona-kolonada .nav-narrow { display:block;margin-left:auto }
+.sablona-kolonada .nav-narrow[open] { flex-basis:100% }
+.sablona-kolonada .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-kolonada .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-kolonada .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-kolonada .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-kolonada * { transition:none!important;animation:none!important }
+}

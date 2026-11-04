@@ -1,0 +1,38 @@
+/** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S17-Magistrat.html. */
+import { ZnakObce } from '../sdilene/ZnakObce'
+
+export function Hlavicka() {
+  return (
+    <header style={{ maxWidth: "1240px", margin: "0 auto", padding: "18px clamp(16px, 4vw, 32px)", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "16px", borderBottom: "1px solid rgba(255, 255, 255, 0.2)" }}>
+      <a href="/" style={{ display: "flex", alignItems: "center", gap: "12px", color: "var(--on-deep)", textDecoration: "none" }}>
+        <ZnakObce velikost={32} />
+        <span style={{ fontWeight: "600", fontSize: "20px" }}>Javoří Lhota</span>
+      </a>
+      {' '}
+      <nav className="nav-wide" aria-label="Hlavní menu" style={{ display: "flex", flexWrap: "wrap", gap: "0 24px", fontWeight: "500" }}>
+        <a href="/zivotni-situace" style={{ color: "var(--on-deep)", textDecoration: "none" }}>Životní situace</a>
+        {' '}
+        <a href="/obecni-urad" style={{ color: "var(--on-deep)", textDecoration: "none" }}>Části obce</a>
+        {' '}
+        <a href="/uredni-deska" style={{ color: "var(--on-deep)", textDecoration: "none" }}>Úřední deska</a>
+        {' '}
+        <a href="/obecni-urad" style={{ color: "var(--on-deep)", textDecoration: "none" }}>Kontakty</a>
+      </nav>
+      {' '}
+      <details className="nav-narrow">
+        <summary>
+          <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true">
+            <path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" strokeWidth="2"></path>
+          </svg>
+          Menu
+        </summary>
+        <nav aria-label="Hlavní menu">
+          <a href="/zivotni-situace">Životní situace</a>
+          <a href="/obecni-urad">Části obce</a>
+          <a href="/uredni-deska">Úřední deska</a>
+          <a href="/obecni-urad">Kontakty</a>
+        </nav>
+      </details>
+    </header>
+  )
+}

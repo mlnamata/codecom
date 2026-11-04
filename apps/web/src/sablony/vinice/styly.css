@@ -1,0 +1,35 @@
+/* Vygenerováno skriptem design/generator/do-tsx.py z build.py a tpls.py. */
+.sablona-vinice * { box-sizing:border-box }
+.sablona-vinice a { color:var(--link) }
+.sablona-vinice a:hover { color:var(--ink) }
+.sablona-vinice :focus-visible { outline:3px solid var(--link);outline-offset:2px }
+.sablona-vinice .deep :focus-visible { outline-color:var(--on-deep) }
+.sablona-vinice .on-primary :focus-visible { outline-color:var(--on-primary) }
+.sablona-vinice .deep .on-light :focus-visible { outline-color:var(--link) }
+.sablona-vinice .alert :focus-visible { outline-color:currentColor }
+.sablona-vinice h1,
+.sablona-vinice h2,
+.sablona-vinice h3,
+.sablona-vinice h4 { line-height:1.2;font-weight:500 }
+.sablona-vinice strong,
+.sablona-vinice b,
+.sablona-vinice th { font-weight:600 }
+.sablona-vinice footer a:not([style*="padding"]),
+.sablona-vinice nav a:not([style*="padding"]),
+.sablona-vinice td a,
+.sablona-vinice dd a,
+.sablona-vinice .hit { display:inline-block;padding-block:max(0px,calc((44px - 1lh) / 2));margin-block:min(0px,calc((1lh - 44px) / 2)) }
+.sablona-vinice .sr { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap }
+.sablona-vinice .nav-narrow { display:none }
+@media (max-width:767.98px) {
+.sablona-vinice .nav-wide { display:none!important }
+.sablona-vinice .nav-narrow { display:block;margin-left:auto }
+.sablona-vinice .nav-narrow[open] { flex-basis:100% }
+.sablona-vinice .nav-narrow>summary { list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid currentColor;border-radius:8px;font-weight:500;cursor:pointer }
+.sablona-vinice .nav-narrow>summary::-webkit-details-marker { display:none }
+.sablona-vinice .nav-narrow nav { display:flex;flex-direction:column;padding:8px 0 4px }
+.sablona-vinice .nav-narrow nav a { margin-block:0;padding-block:10px }
+}
+@media (prefers-reduced-motion:reduce) {
+.sablona-vinice * { transition:none!important;animation:none!important }
+}
