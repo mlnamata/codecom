@@ -4,6 +4,7 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 
 | Úkol | Oblast souborů | Stav | Poznámka |
 | --- | --- | --- | --- |
+| Koordinace dotažení šablon 08 až 20, potom srovnat seznam šablon v `codekom_web` (hvězdné názvy, skleněné 21 až 23, snímky) | `docs/progress.md`; potom repozitář `mlnamata/codekom_web` | rozpracováno | hlavní session; 4 agenti v samostatných worktree pushují po každé šabloně; 01 až 07 hotovo dřív |
 | Dotažení šablon 08 Rigel, 09 Aldebaran a 10 Spica (fotky, oblasti, cíle, 375 px) | `apps/web/src/sablony/{vinice,hreben,rynek}` | rozpracováno | agent šablon 08 až 10 |
 | Dotažení šablon 17 Alkor, 18 Mizar, 19 Fomalhaut, 20 Betelgeuse (fotky místo kreseb, cíle, 375 px) | `apps/web/src/sablony/{magistrat,zpravodaj,mikroregion,urad}` | rozpracováno | agent šablon 17 až 20 |
 | Konfigurace šablony v liště (barvy, písmo), jen fotky, štítek AI, glass šablony | `apps/web/src/ukazka`, `apps/web/src/sablony` | hotovo | hlavní session |
