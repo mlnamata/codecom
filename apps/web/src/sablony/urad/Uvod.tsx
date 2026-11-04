@@ -2,20 +2,21 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S20-Urad.html. */
 
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   const v = useHodnoty()
   return (
     <>
       {banner}
       <Hlavicka />
       <main id="obsah" tabIndex={-1} style={{ maxWidth: "1200px", margin: "0 auto", padding: "24px clamp(16px, 4vw, 32px) 64px" }}>
-        {foto ? <Foto sablona="urad" styl={{ width: "100%", height: "clamp(180px, 22vw, 300px)", borderRadius: "4px", marginBottom: "24px" }} /> : null}
+        <FotoDlazdice soubor="sablona-20-urad.webp" alt={POPISY_FOTEK.urad ?? ""} styl={{ width: "100%", height: "clamp(180px, 22vw, 300px)", borderRadius: "4px", marginBottom: "24px" }} />
         {' '}
         <nav aria-label="Drobečková navigace" style={{ fontSize: "15px", marginBottom: "16px" }}>
           <a href="/" style={{ color: "var(--link)" }}>Úvod</a>
@@ -69,21 +70,21 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             <h2 id="deska20" style={{ margin: "0 0 12px", fontSize: "26px", fontWeight: "500" }}>Úřední deska</h2>
             {' '}
             <ul style={{ margin: "0", padding: "0", listStyle: "none", borderTop: "2px solid var(--primary)" }}>
-              <li style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 16px", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>
-                <a href="/uredni-deska/navrh-rozpoctu-2027" style={{ color: "var(--link)" }}>Návrh rozpočtu obce na rok 2027</a>
+              <li style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "baseline", gap: "0 16px", padding: "4px 0", borderBottom: "1px solid var(--line)" }}>
+                <a href="/uredni-deska/navrh-rozpoctu-2027" className="hit" style={{ color: "var(--link)" }}>Návrh rozpočtu obce na rok 2027</a>
                 <span style={{ color: "var(--muted)", fontSize: "15px" }}>Rozpočet, visí do 11. 11. 2026</span>
               </li>
-              <li style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 16px", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>
-                <a href="/uredni-deska/pozvanka-zasedani-9-11" style={{ color: "var(--link)" }}>Pozvánka na zasedání zastupitelstva 9. 11.</a>
+              <li style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "baseline", gap: "0 16px", padding: "4px 0", borderBottom: "1px solid var(--line)" }}>
+                <a href="/uredni-deska/pozvanka-zasedani-9-11" className="hit" style={{ color: "var(--link)" }}>Pozvánka na zasedání zastupitelstva 9. 11.</a>
                 <span style={{ color: "var(--muted)", fontSize: "15px" }}>Zastupitelstvo, visí do 9. 11. 2026</span>
               </li>
-              <li style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 16px", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>
-                <a href="/uredni-deska/uzavirka-mostu" style={{ color: "var(--link)" }}>Veřejná vyhláška: uzavírka mostu</a>
+              <li style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "baseline", gap: "0 16px", padding: "4px 0", borderBottom: "1px solid var(--line)" }}>
+                <a href="/uredni-deska/uzavirka-mostu" className="hit" style={{ color: "var(--link)" }}>Veřejná vyhláška: uzavírka mostu</a>
                 <span style={{ color: "var(--muted)", fontSize: "15px" }}>Doprava, visí do 30. 11. 2026</span>
               </li>
             </ul>
             {' '}
-            <a href="/uredni-deska" style={{ display: "inline-block", marginTop: "12px", color: "var(--link)", fontWeight: "500" }}>Všechny dokumenty na úřední desce</a>
+            <a href="/uredni-deska" className="hit" style={{ marginTop: "12px", color: "var(--link)", fontWeight: "500" }}>Všechny dokumenty na úřední desce</a>
           </section>
           {' '}
           <section aria-labelledby="kontakt20" style={{ flex: "1 1 300px", minWidth: "0", padding: "24px", background: "var(--surface)", borderRadius: "4px" }}>
