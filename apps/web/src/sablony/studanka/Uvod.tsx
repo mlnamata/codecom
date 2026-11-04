@@ -2,7 +2,8 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S03-Studanka.html. */
 
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Fragment } from 'react'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
@@ -23,7 +24,7 @@ export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
       <Hlavicka />
       <main id="obsah" tabIndex={-1}>
         <section style={{ display: "flex", flexWrap: "wrap" }}>
-          <Foto sablona="studanka" styl={{ flex: "1 1 480px", minWidth: "0", minHeight: "360px", display: "block" }} />
+          <FotoDlazdice soubor="sablona-03-studanka.webp" alt={POPISY_FOTEK.studanka ?? ""} styl={{ flex: "1 1 480px", minWidth: "0", minHeight: "360px", display: "block" }} />
           {' '}
           <div className="deep" style={{ flex: "1 1 400px", minWidth: "0", background: "var(--deep)", color: "var(--on-deep)", padding: "clamp(32px, 5vw, 64px) clamp(24px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: "20px" }}>
             <h1 style={{ margin: "0", fontFamily: "var(--font-alegreya), Georgia, serif", fontWeight: "500", fontSize: "clamp(40px, 4.4vw, 60px)", lineHeight: "1.1" }}>

@@ -2,7 +2,8 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S07-Hranice.html. */
 
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 import { useHodnoty } from './Interaktivni'
@@ -14,7 +15,7 @@ export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
       {banner}
       <Hlavicka />
       <main id="obsah" tabIndex={-1}>
-        <Foto sablona="hranice" styl={{ width: "100%", height: "clamp(200px, 24vw, 340px)" }} />
+        <FotoDlazdice soubor="sablona-07-hranice.webp" alt={POPISY_FOTEK.hranice ?? ""} styl={{ width: "100%", height: "clamp(200px, 24vw, 340px)" }} />
         {' '}
         <h1 className="sr">Obec Javoří Lhota, Gemeinde Javoří Lhota</h1>
         {' '}
