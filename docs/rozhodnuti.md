@@ -87,6 +87,7 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 | 4. 11. 2026 | Nadpisy prezentace Montserrat 500 a 600, text Inter, obojí self-hosted přes `@fontsource`. Název v logu zůstává vektorový. Překrytí s Montserratem jsem nezkoušel, přesný font loga je [OVĚŘIT u zakladatele]. | Žádné načítání z Google Fonts. |
 | 4. 11. 2026 | PDF ke stažení tiskne Chromium (`page.pdf`, `tagged: true`): označená struktura, jazyk cs, název a osnova. veraPDF jsem nespouštěl. | Ověřeno jen přítomností StructTreeRoot a /Lang v testu; kontrolu PDF/UA veraPDF udělat před nasazením. |
 | 4. 11. 2026 | Snímky šablon jsou z produkčního buildu s fotkami, velikost do 179 kB (cíl 120 kB překračují snímky s fotkou). | Nepřegenerovávám, jen hlásím podle promptu 06. |
+| 4. 11. 2026 | Prezentační web má moderní vzhled podle vzoru dom-ino.cz: tmavý úvod přes celou obrazovku s fotkou, písmo Inter až 800, skleněné plochy (backdrop-filter), jemná záře, animace při posouvání. Kontrola unslop se na `apps/prezentace` nespouští. | Zakladatel označil černobílou i časopiseckou verzi za zastaralou. Kontrast, přístupnost a omezený pohyb zůstávají povinné. |
 
 ## Právo
 

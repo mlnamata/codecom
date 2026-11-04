@@ -70,6 +70,7 @@ Před instalací ověř aktuální verzi přes `npm view <balíček> version`. P
   - věty začínají velkým písmenem, bez vykřičníků, krátké popisky bez tečky,
   - jedna akcentová barva, žádné přechody, záře ani emoji,
   - mřížka po 4 px, tenké linky.
+- Výjimka: prezentační web CodeKom (`apps/prezentace`) má od 4. 11. 2026 na přání zakladatele moderní vzhled se skleněnými efekty, přechody, tučnějším písmem a animacemi. Kontrast 4,5 : 1, `prefers-reduced-motion` a poznámka u AI fotek platí i tam. Weby obcí a aplikace zůstávají podle unslop.
 - Nepoužívej nadpisy nad nadpisy velkými písmeny, odkazy se šipkou „→“, řetězce „A · B“ ani kartičky jako ze SaaS šablony.
 - Text má velikost 17 px, cíle pro dotyk aspoň 44 × 44 px, kontrast textu aspoň 4,5 : 1.
 - Šablony webů obcí jsou v `design/prototypy` (20 šablon, každá ve 3 barevných variantách). Vzhled ber odtud, obsah z ukázkové obce Javoří Lhota v `obsah/javori-lhota`.
