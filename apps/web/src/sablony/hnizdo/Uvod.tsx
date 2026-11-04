@@ -1,55 +1,27 @@
 /** Vygenerováno skriptem design/generator/do-tsx.py z bodies/S06-Hnizdo.html. */
 import type { ReactNode } from 'react'
-import { Foto } from '../sdilene/Foto'
+import { FotoDlazdice } from '../sdilene/FotoDlazdice'
+import { POPISY_FOTEK } from '../sdilene/popisy-fotek'
 import { Hlavicka } from './Hlavicka'
 import { Paticka } from './Paticka'
 
-export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
+export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
       <Hlavicka />
       <main id="obsah" tabIndex={-1}>
         <section className="deep" style={{ position: "relative", background: "var(--deep)", color: "#FFFFFF", overflow: "hidden" }}>
-          {foto ? (
-            <Foto sablona="hnizdo" styl={{ position: "absolute", inset: "auto 0 0 0", width: "100%", height: "420px", display: "block" }} />
-          ) : (
-            <svg viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style={{ position: "absolute", inset: "auto 0 0 0", width: "100%", height: "420px", display: "block" }}>
-              <path d="M0 300 C240 260 480 280 720 270 S1200 240 1440 260 V420 H0z" fill="#FFFFFF" opacity="0.06"></path>
-              <path d="M0 340 C300 320 600 330 900 326 S1300 314 1440 320 V420 H0z" fill="#FFFFFF" opacity="0.08"></path>
-              <g opacity="0.9">
-                <path d="M820 340 V270 h150 V340z" style={{ fill: "var(--surface)" }}></path>
-                <path d="M810 272 l85 -50 l85 50z" style={{ fill: "var(--primary)" }}></path>
-                <rect x="870" y="296" width="50" height="44" style={{ fill: "var(--deep)" }}></rect>
-                <rect x="836" y="286" width="20" height="18" style={{ fill: "var(--accent)" }}></rect>
-                <rect x="934" y="286" width="20" height="18" style={{ fill: "var(--accent)" }}></rect>
-                <rect x="886" y="236" width="18" height="10" rx="2" style={{ fill: "var(--surface)" }}></rect>
-              </g>
-              <g>
-                <path d="M1040 340 V292 l40 -30 l40 30 V340z" style={{ fill: "var(--surface)" }}></path>
-                <path d="M1032 294 l48 -36 l48 36z" style={{ fill: "var(--primary)" }}></path>
-                <path d="M1160 340 V300 l34 -26 l34 26 V340z" style={{ fill: "var(--surface)" }}></path>
-                <path d="M1152 302 l42 -32 l42 32z" style={{ fill: "var(--primary)" }}></path>
-              </g>
-              <g>
-                <rect x="560" y="300" width="170" height="44" rx="10" style={{ fill: "var(--accent)" }}></rect>
-                <rect x="574" y="308" width="30" height="16" rx="3" style={{ fill: "var(--deep)" }}></rect>
-                <rect x="612" y="308" width="30" height="16" rx="3" style={{ fill: "var(--deep)" }}></rect>
-                <rect x="650" y="308" width="30" height="16" rx="3" style={{ fill: "var(--deep)" }}></rect>
-                <circle cx="596" cy="346" r="10" style={{ fill: "var(--deep)" }}></circle>
-                <circle cx="696" cy="346" r="10" style={{ fill: "var(--deep)" }}></circle>
-              </g>
-              <rect y="356" width="1440" height="64" fill="#FFFFFF" opacity="0.1"></rect>
-            </svg>
-          )}
-          {' '}
-          <div style={{ position: "relative", maxWidth: "1200px", margin: "0 auto", padding: "72px clamp(16px, 4vw, 32px) 200px" }}>
+          <div style={{ position: "relative", maxWidth: "1200px", margin: "0 auto", padding: "64px clamp(16px, 4vw, 32px) 40px" }}>
             <h1 style={{ margin: "0", maxWidth: "16ch", fontSize: "clamp(40px, 5.4vw, 68px)", lineHeight: "1.08", letterSpacing: "-0.02em" }}>{"Škola, školka a autobus na jednom místě"}</h1>
             {' '}
             <p style={{ margin: "16px 0 0", maxWidth: "46ch", fontSize: "19px", lineHeight: "1.5", color: "#FFFFFF" }}>
               {"Pro rodiny v Javoří Lhotě. Jídelníček, zápisy, odjezdy do Klatov a co se v obci staví."}
             </p>
           </div>
+          {' '}
+          {/* Fotka leží pod textem, ne pod ním: bílý text nikdy nestojí přímo na fotografii. */}
+          <FotoDlazdice soubor="sablona-06-hnizdo.webp" alt={POPISY_FOTEK.hnizdo ?? ""} styl={{ width: "100%", height: "clamp(240px, 32vw, 400px)" }} />
         </section>
         {' '}
         <div style={{ position: "relative", maxWidth: "1200px", margin: "-120px auto 0", padding: "0 clamp(16px, 4vw, 32px)", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "0" }}>
@@ -149,7 +121,7 @@ export function Uvod({ banner, foto }: { banner: ReactNode; foto: boolean }) {
             {' '}
             <article style={{ padding: "16px 0", borderTop: "1px solid var(--line)" }}>
               <h3 style={{ margin: "0 0 4px", fontSize: "19px", fontWeight: "600" }}>
-                <a href="/aktuality/zapis-do-skolky-5-kvetna" style={{ color: "var(--ink)", textDecoration: "none" }}>Zápis do školky bude 5. května, přihlášky půjdou podat online</a>
+                <a href="/aktuality/zapis-do-skolky-5-kvetna" style={{ display: "inline-block", paddingBlock: "2px", color: "var(--ink)", textDecoration: "none" }}>Zápis do školky bude 5. května, přihlášky půjdou podat online</a>
               </h3>
               <p style={{ margin: "0", color: "var(--muted)" }}>Mateřská škola, 24. října</p>
             </article>
