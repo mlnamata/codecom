@@ -16,6 +16,12 @@ const IKONY: Record<string, ReactNode> = {
       <rect x="3" y="14" width="7" height="7" rx="1" />
     </svg>
   ),
+  'Obecní e-mail a pošta': (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L1 7" />
+    </svg>
+  ),
   'Nová aktualita': (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
@@ -137,6 +143,7 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
     id: 'sk-obsah',
     polozky: [
       { nazev: 'Přehled', href: Z, od: 'zaklad' },
+      { nazev: 'Obecní e-mail a pošta', href: `${Z}/posta`, od: 'zaklad' },
       { nazev: 'Nová aktualita', href: `${Z}/aktuality`, od: 'zaklad' },
       { nazev: 'Úřední deska', href: `${Z}/deska`, od: 'zaklad' },
       { nazev: 'Krizová hlášení', href: `${Z}/krize`, od: 'zaklad' },

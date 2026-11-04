@@ -6,10 +6,13 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 | --- | --- | --- | --- |
 | Konfigurace šablony v liště (barvy, písmo), jen fotky, štítek AI, glass šablony | `apps/web/src/ukazka`, `apps/web/src/sablony` | hotovo | hlavní session |
 | Nový vzhled administrace, vícedílný skladatel šablon a blog | `apps/web/src/app/ukazka/**`, `admin.css` | hotovo | hlavní session |
+| Integrovaná pošta, ISDS a propojení s Microsoft Office | `apps/web/src/app/ukazka/administrace/posta/**` | hotovo | hlavní session |
 | Aplikace a IoT | repozitář `mlnamata/codecom_app` | předáno jiné session | zadání v `codecom_app/docs/zadani` |
 | Firemní landing na codekom.vercel.app | repozitář `mlnamata/codekom_web` | čeká na zakladatele | Vercel projekt napojit na `codekom_web` |
 
 ## Hotovo
+
+- Integrovaný obecní e-mail, datová schránka ISDS a pracoviště úřadu s podporou Microsoft Office: do menu administrace přibyl samostatný modul „Obecní e-mail a pošta“ (`/ukazka/administrace/posta`). Úředníci tak nemusí opouštět aplikaci ani chodit do externích webmailů či na portál datových schránek. Zahrnuje přepínač schránek úřadu (`podatelna@`, `starosta@`, `ucetni@` i státní `ISDS`), složky (doručené, e-podatelna, ISDS zprávy, odeslané, archiv), předpřipravené úřední šablony odpovědí, bleskové akce 1 kliknutím (vyvěšení přílohy na elektronickou úřední desku, založení závady pro technické služby), generátor úředního rozhodnutí s hlavičkou obce, číslem jednacím a spisovou značkou připraveného pro aplikaci Microsoft Word a přímý export podacího deníku do formátu pro Microsoft Excel. Splňuje 100% WCAG AA kontrast i unslop pravidla.
 
 - Profesionální administrace, vícedílný skladatel šablon a blog: kompletní redesign administrace v moderním SaaS stylu (břidlicová paleta, čistá typografie, ikony u všech sekcí, 4 KPI karty v jedné řadě bez zalamování, moderní akční dlaždice); podpora vícedílných šablon webu v widgetovém skladateli s rozdělením do layoutových zón (horní Hero pás, hlavní sloupec obsahu, boční panel / sidebar, spodní servisní pás chytré obce a zápatí) s dvousloupcovým živým náhledem pro desktop, tablet i mobil a přepínačem dalších částí webu (úřední deska, blog, kontakty a úřad, chytrá obec); plnohodnotná správa blogu a zpráv s rubrikami a blokovým editorem.
 
