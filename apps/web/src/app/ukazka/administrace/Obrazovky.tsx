@@ -8,6 +8,7 @@
 import { useState } from 'react'
 import { kontrast } from '@codekom/tokeny'
 import { NAZEV_UROVNE, pocet, type Schopnosti, type Uroven } from '@/ukazka/uroven'
+import { FRONTA, type Prispevek } from './schvalovani/fronta'
 
 const Hlaska = ({ text }: { text: string }) =>
   text ? (
@@ -705,21 +706,6 @@ export function Skladatel({ s }: { s: Schopnosti }) {
 }
 
 /* ------------------------------------------------------------ schvalování */
-
-interface Prispevek {
-  id: number
-  nazev: string
-  autor: string
-  kde: string
-  stav: 'ceka' | 'schvaleno' | 'vraceno'
-  komentar?: string
-}
-
-const FRONTA: Prispevek[] = [
-  { id: 1, nazev: 'Pozvánka na lampionový průvod', autor: 'Redaktorka, spolek Javořáček', kde: 'Akce', stav: 'ceka' },
-  { id: 2, nazev: 'Zápis do mateřské školy 2027', autor: 'Ředitelka MŠ', kde: 'Podweb Mateřská škola', stav: 'ceka' },
-  { id: 3, nazev: 'Výsledky sběru nebezpečného odpadu', autor: 'Účetní obce', kde: 'Aktuality', stav: 'ceka' },
-]
 
 export function Schvalovani({ vicestupnove }: { vicestupnove: boolean }) {
   const [fronta, setFronta] = useState(FRONTA)
