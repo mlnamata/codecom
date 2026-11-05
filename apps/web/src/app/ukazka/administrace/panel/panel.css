@@ -226,8 +226,8 @@
 }
 .rp .rp-upravy .rp-upravy__odebrat {
   margin-left: auto;
+  /* Text v barvě textu, červená jen na okraji: čitelné ve světlém i tmavém vzhledu. */
   border-color: var(--rp-porucha);
-  color: var(--rp-porucha);
 }
 
 /* Nabídka Přidat widget */

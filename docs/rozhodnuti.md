@@ -95,6 +95,8 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 
 - Administrace obce dostane vzhled moderního SaaS dashboardu (tmavý režim, fialový akcent, karty s čísly a grafy) podle obrázku od zakladatele z 5. 11. 2026. Je to výjimka z unslop jen pro administraci, weby obcí zůstávají podle unslop.
 
+- Řídicí panel obce je od 5. 11. 2026 obrazovka administrace `/ukazka/administrace/panel` (položka Řídicí panel pod Přehledem), stará adresa `/ukazka/panel` trvale přesměruje. Obsah je rozdělený na widgety, které si uživatel v režimu Upravit plochu přidá, odebere, přesune (tažením i tlačítky Posunout výš a níž kvůli WCAG 2.5.7) a nastaví šířku. Rozložení se v ukázce ukládá do `localStorage` prohlížeče (bez něj platí výchozí), v ostrém provozu má patřit k účtu uživatele [DOPLNIT: uložení rozložení na serveru]. Nastavení čidel a limitů zůstává na obrazovce IoT čidla a živá data, panel na ni odkazuje.
+
 ## Právo
 
 | Datum | Rozhodnutí | Proč |

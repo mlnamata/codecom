@@ -403,7 +403,7 @@ export function WidgetKamera({ data }: { data: DataPanelu }) {
     <>
       {kamery.length > 1 ? (
         <div className="rp-pole">
-          <label htmlFor={`${id}-kamera`}>Kamera</label>
+          <label htmlFor={`${id}-kamera`}>Vybraná kamera</label>
           <select id={`${id}-kamera`} value={vybrana} onChange={(e) => setVybrana(e.target.value)}>
             {kamery.map((o) => (
               <option key={o.id} value={o.id}>
