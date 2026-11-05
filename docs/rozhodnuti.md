@@ -93,6 +93,8 @@ Rozhodnutí v pořadí, jak padla. U každého je důvod, aby šlo později pozn
 
 - Šablony v `apps/web/src/sablony` se po převodu dotahují ručně, generátor `do-tsx.py` je už nepřepisuje. Test generátoru proto zapisuje do dočasné složky (`CODEKOM_SABLONY_VYSTUP`) a ověřuje, že dva běhy dají stejný výstup a že výstup odpovídá snímku. Dřív při `pnpm test` přepsal ručně dotaženou šablonu Sirius kreslenou verzí (4. 11. 2026).
 
+- Administrace obce dostane vzhled moderního SaaS dashboardu (tmavý režim, fialový akcent, karty s čísly a grafy) podle obrázku od zakladatele z 5. 11. 2026. Je to výjimka z unslop jen pro administraci, weby obcí zůstávají podle unslop.
+
 ## Právo
 
 | Datum | Rozhodnutí | Proč |
