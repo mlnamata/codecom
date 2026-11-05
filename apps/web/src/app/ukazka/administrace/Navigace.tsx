@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useState, type ReactNode } from 'react'
 import { ZnakObce } from '@/sablony/sdilene/ZnakObce'
-import { NAZEV_UROVNE, PRINCIP_UROVNE, UROVNE, staci, type Uroven } from '@/ukazka/uroven'
+import { NAZEV_UROVNE, UROVNE, staci, type Uroven } from '@/ukazka/uroven'
 import { RozbalovaciNavigace } from '../RozbalovaciNavigace'
 import { HledaniVMenu, normalizuj, useHledani } from './Ram'
 
@@ -281,37 +281,24 @@ export function HledaniAdministrace() {
   return <HledaniVMenu nazvy={SKUPINY.flatMap((s) => s.polozky)} />
 }
 
-/** Údaje pro kartu pod menu: předplatné obce a úroveň zvolená v ukázce. */
+/** Údaje pro patu menu: předplatné obce a úroveň zvolená v ukázce. */
 export interface KartaPredplatneho {
   urovenPredplatneho: Uroven | null
   stavPredplatneho: string | null
 }
 
-function Karta({ uroven, karta }: { uroven: Uroven; karta: KartaPredplatneho }) {
+/** Pata menu: úroveň editoru a předplatné malým textem, odkaz na další úroveň nebo předplatné. */
+function Pata({ uroven, karta }: { uroven: Uroven; karta: KartaPredplatneho }) {
   const dalsi = UROVNE[UROVNE.indexOf(uroven) + 1]
   return (
-    <section className="admin__karta" aria-labelledby="admin-karta-nadpis">
-      <span className="admin__karta-ikona" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z" />
-        </svg>
-      </span>
-      <h2 id="admin-karta-nadpis">Úroveň {NAZEV_UROVNE[uroven]}</h2>
+    <div className="admin__pata">
       <p>
-        {PRINCIP_UROVNE[uroven]}.
-        {karta.urovenPredplatneho ? ` Předplatné obce: ${NAZEV_UROVNE[karta.urovenPredplatneho]}${karta.stavPredplatneho ? `, ${karta.stavPredplatneho}` : ''}.` : ''}
+        Úroveň editoru <strong>{NAZEV_UROVNE[uroven]}</strong>
+        {karta.urovenPredplatneho ? `, předplatné obce ${NAZEV_UROVNE[karta.urovenPredplatneho]}${karta.stavPredplatneho ? ` (${karta.stavPredplatneho})` : ''}` : ''}.
       </p>
-      {dalsi ? (
-        <a className="admin__karta-akce" href={`?uroven=${dalsi}`}>
-          Vyzkoušet úroveň {NAZEV_UROVNE[dalsi]}
-        </a>
-      ) : (
-        <a className="admin__karta-akce" href="/ukazka/administrace/predplatne">
-          Předplatné a faktury
-        </a>
-      )}
-      <p className="admin__karta-pozn">Ukázka, data se po restartu vrátí</p>
-    </section>
+      {dalsi ? <a href={`?uroven=${dalsi}`}>Vyzkoušet úroveň {NAZEV_UROVNE[dalsi]}</a> : <a href="/ukazka/administrace/predplatne">Předplatné a faktury</a>}
+      <p>Ukázka, data se po restartu vrátí.</p>
+    </div>
   )
 }
 
@@ -336,7 +323,7 @@ export function Navigace({ uroven, karta }: { uroven: Uroven; karta: KartaPredpl
           </a>
         </p>
       }
-      paticka={<Karta uroven={uroven} karta={karta} />}
+      paticka={<Pata uroven={uroven} karta={karta} />}
     >
       {SKUPINY.map((s) => (
         <Skupina key={s.id} skupina={s} uroven={uroven} cesta={cesta} dotaz={n} />

@@ -10,6 +10,8 @@ import { urovenAdministrace } from '@/ukazka/uroven-server'
 import { FormObnovit } from './Formulare'
 import { HledaniAdministrace, Navigace } from './Navigace'
 import { PrepinacVzhledu, RamAdministrace, SKRIPT_VZHLEDU } from './Ram'
+import '@fontsource/noto-sans/400.css'
+import '@fontsource/noto-sans/600.css'
 import '../admin.css'
 import '../admin-obec.css'
 
@@ -32,7 +34,7 @@ function prihlaseny() {
 /**
  * Ukázka redakčního rozhraní tří úrovní editoru. Bez přihlášení, jen s NEXT_PUBLIC_UKAZKA=1.
  * Není to produkční zabezpečení, skutečná administrace je Payload (prompt 01).
- * Vzhled SaaS dashboardu s tmavým a světlým režimem (výjimka z unslop ze 5. 11. 2026, viz CLAUDE.md).
+ * Střídmý vzhled pracovního nástroje s tmavým a světlým režimem (výjimka z unslop, viz CLAUDE.md).
  */
 export default async function AdministraceLayout({ children }: { children: ReactNode }) {
   if (process.env.NEXT_PUBLIC_UKAZKA !== '1') notFound()
