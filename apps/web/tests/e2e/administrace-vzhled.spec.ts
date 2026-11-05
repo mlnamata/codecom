@@ -16,13 +16,39 @@ test('administrace má výchozí tmavý vzhled i při světlém systému a přep
   await expect(ram).toHaveAttribute('data-vzhled', 'tmavy')
 })
 
-test('přehled administrace ukazuje čísla, grafy a poslední aktivitu', async ({ page }) => {
-  await page.goto('/ukazka/administrace')
+test('přehled administrace ukazuje, co čeká na vyřízení, čísla, graf a poslední aktivitu', async ({ page }) => {
+  await page.goto('/ukazka/administrace?uroven=advance')
   await expect(page.getByRole('heading', { name: 'Přehled', level: 1 })).toBeVisible()
-  await expect(page.getByRole('link', { name: 'Visí na úřední desce' })).toBeVisible()
-  await expect(page.getByRole('img', { name: /Počet dokumentů visících na úřední desce/ })).toBeVisible()
+
+  // K vyřízení: počty z dat ukázky a odkazy na obrazovky, kde se věc vyřídí
+  const vyrizeni = page.getByRole('region', { name: 'K vyřízení' })
+  await expect(vyrizeni.locator('strong', { hasText: /závad k převzetí/ })).toBeVisible()
+  await expect(vyrizeni.locator('strong', { hasText: /ke schválení$/ })).toBeVisible()
+  await expect(vyrizeni.locator('strong', { hasText: /končí vyvěšení/ })).toBeVisible()
+  await vyrizeni.getByRole('link', { name: /^Ke schválení/ }).click()
+  await expect(page).toHaveURL(/\/ukazka\/administrace\/schvalovani$/)
+  await page.goBack()
+
+  // Čísla bez procent, změna absolutně slovy
+  const cisla = page.locator('.souhrn')
+  await expect(cisla.getByText('Visí na úřední desce')).toBeVisible()
+  await expect(cisla).not.toContainText('%')
+  await expect(cisla.getByText(/(víc|méně) než před týdnem|stejně jako před týdnem/)).toBeVisible()
+
+  // Jeden čárový graf s textovou alternativou a rozdělení závad jako pruh s tabulkou, ne prstenec
+  await expect(page.getByRole('img', { name: /Čárový graf: počet dokumentů visících na úřední desce/ })).toBeVisible()
   await expect(page.getByRole('img', { name: /Hlášení závad celkem/ })).toBeVisible()
+  await expect(page.getByRole('table', { name: 'Hlášení závad podle stavu' })).toBeVisible()
+  await expect(page.locator('linearGradient')).toHaveCount(0)
+
   await expect(page.getByRole('heading', { name: 'Poslední aktivita' })).toBeVisible()
+})
+
+test('příspěvky ke schválení jsou v bloku K vyřízení až od úrovně Pokročilý', async ({ page }) => {
+  await page.goto('/ukazka/administrace?uroven=zaklad')
+  const vyrizeni = page.getByRole('region', { name: 'K vyřízení' })
+  await expect(vyrizeni.locator('strong', { hasText: /závad k převzetí/ })).toBeVisible()
+  await expect(vyrizeni.locator('strong', { hasText: /ke schválení$/ })).toHaveCount(0)
 })
 
 test('hledání v liště filtruje menu a Enter otevře první položku', async ({ page }) => {
