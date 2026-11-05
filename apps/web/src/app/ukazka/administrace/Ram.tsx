@@ -70,10 +70,10 @@ const KLIC = 'codekom-admin-vzhled'
 const UDALOST = 'codekom-admin-vzhled'
 
 /**
- * Skript před prvním vykreslením: uložená volba, jinak systémové nastavení, bez JS tmavý vzhled.
+ * Skript před prvním vykreslením: uložená volba, jinak vždy tmavý vzhled (přání zakladatele z 5. 11. 2026).
  * Atribut se zapisuje na rám administrace (suppressHydrationWarning), React ho nespravuje.
  */
-export const SKRIPT_VZHLEDU = `(function(){var r=document.currentScript&&document.currentScript.parentElement;if(!r)return;var v=null;try{v=localStorage.getItem('${KLIC}')}catch(e){}if(v!=='svetly'&&v!=='tmavy'){v=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'svetly':'tmavy'}r.setAttribute('data-vzhled',v)})()`
+export const SKRIPT_VZHLEDU = `(function(){var r=document.currentScript&&document.currentScript.parentElement;if(!r)return;var v=null;try{v=localStorage.getItem('${KLIC}')}catch(e){}if(v!=='svetly'&&v!=='tmavy'){v='tmavy'}r.setAttribute('data-vzhled',v)})()`
 
 const ram = () => document.querySelector<HTMLElement>('.admin-obec')
 const ctiVzhled = (): Vzhled => (ram()?.getAttribute('data-vzhled') === 'svetly' ? 'svetly' : 'tmavy')

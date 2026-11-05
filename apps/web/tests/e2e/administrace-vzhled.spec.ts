@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
-test('administrace má tmavý vzhled podle systému a přepínač si volbu pamatuje', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'dark' })
+test('administrace má výchozí tmavý vzhled i při světlém systému a přepínač si volbu pamatuje', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' })
   await page.goto('/ukazka/administrace')
   const ram = page.locator('.admin-obec')
   await expect(ram).toHaveAttribute('data-vzhled', 'tmavy')

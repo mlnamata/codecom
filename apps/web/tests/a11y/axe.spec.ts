@@ -64,13 +64,14 @@ test('axe: ukázka administrace', async ({ page }) => {
   }
 })
 
-/** Všechny obrazovky administrace obce v tmavém i světlém vzhledu (výchozí podle prefers-color-scheme). */
+/** Všechny obrazovky administrace obce v tmavém (výchozí) i světlém vzhledu (volba uložená přepínačem). */
 const OBRAZOVKY_ADMINISTRACE = ['', 'panel', 'posta', 'rozhlas', 'aktuality', 'deska', 'krize', 'zavady', 'schvalovani', 'poplatky', 'smlouvy', 'prepazka', 'stranky', 'skladatel', 'vzhled', 'podweby', 'asistent', 'chytra-obec', 'komunita', 'majetek', 'extranet', 'uzivatele', 'predplatne']
 
-for (const [rezim, schema] of [['tmavy', 'dark'], ['svetly', 'light']] as const) {
+for (const rezim of ['tmavy', 'svetly'] as const) {
   test(`axe: administrace ve vzhledu ${rezim}`, async ({ page }) => {
     test.setTimeout(180_000)
-    await page.emulateMedia({ colorScheme: schema })
+    // Stejný klíč jako ukládá přepínač vzhledu v administrace/Ram.tsx.
+    await page.addInitScript((v) => window.localStorage.setItem('codekom-admin-vzhled', v), rezim)
     for (const o of OBRAZOVKY_ADMINISTRACE) {
       await page.goto(`/ukazka/administrace/${o}?uroven=advance`)
       await expect(page.locator('.admin-obec')).toHaveAttribute('data-vzhled', rezim)
