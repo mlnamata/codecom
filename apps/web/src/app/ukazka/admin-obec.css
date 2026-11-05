@@ -919,6 +919,16 @@
   border-color: var(--a-linka-silna);
   border-radius: var(--a-r);
 }
+/* Štítky s vloženými barvami (pošta a další obrazovky) jsou jen popisky, ne stav: neutrálně. */
+.admin-obec .admin-stitek-tag[style] {
+  background: transparent !important;
+  border-color: var(--a-linka-silna) !important;
+  color: var(--a-text-2) !important;
+}
+.admin-obec .admin-posta-pocet-odznak[style] {
+  background: transparent !important;
+  color: var(--a-text) !important;
+}
 .admin-obec .admin-uvod-status {
   color: var(--a-zelena-text);
   background: transparent;
