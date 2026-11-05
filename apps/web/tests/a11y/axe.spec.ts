@@ -81,3 +81,15 @@ test('axe: správa CodeKom', async ({ page }) => {
     await zkontroluj(page, cesta)
   }
 })
+
+test('axe: řídicí panel v administraci, i v režimu úprav', async ({ page }) => {
+  await page.goto('/ukazka/administrace/panel')
+  await page.evaluate(() => window.localStorage.clear())
+  await page.reload()
+  await zkontroluj(page, 'řídicí panel')
+  await page.getByRole('button', { name: 'Zobrazit jako seznam' }).click()
+  await zkontroluj(page, 'řídicí panel, mapa jako seznam')
+  await page.getByRole('button', { name: 'Upravit plochu' }).click()
+  await page.getByRole('button', { name: 'Odebrat widget Kamera' }).click()
+  await zkontroluj(page, 'řídicí panel v režimu úprav')
+})

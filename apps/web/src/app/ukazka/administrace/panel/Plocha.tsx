@@ -302,11 +302,11 @@ export function Plocha({ data }: { data: DataPanelu }) {
               </div>
               {upravuje ? (
                 <div className="rp-upravy" role="group" aria-label={`Úpravy widgetu ${w.nazev}`}>
-                  <button type="button" data-akce="vys" disabled={i === 0} onClick={() => posunWidget(p.id, -1)}>
-                    Posunout výš<span className="sr-only">, {w.nazev}</span>
+                  <button type="button" data-akce="vys" aria-label={`Posunout výš, ${w.nazev}`} disabled={i === 0} onClick={() => posunWidget(p.id, -1)}>
+                    Posunout výš
                   </button>
-                  <button type="button" data-akce="niz" disabled={i === plocha.length - 1} onClick={() => posunWidget(p.id, 1)}>
-                    Posunout níž<span className="sr-only">, {w.nazev}</span>
+                  <button type="button" data-akce="niz" aria-label={`Posunout níž, ${w.nazev}`} disabled={i === plocha.length - 1} onClick={() => posunWidget(p.id, 1)}>
+                    Posunout níž
                   </button>
                   <label className="rp-upravy__velikost">
                     <span>Velikost</span>
@@ -318,8 +318,8 @@ export function Plocha({ data }: { data: DataPanelu }) {
                       ))}
                     </select>
                   </label>
-                  <button type="button" data-akce="odebrat" className="rp-upravy__odebrat" onClick={() => odeberWidget(p.id)}>
-                    Odebrat<span className="sr-only"> widget {w.nazev}</span>
+                  <button type="button" data-akce="odebrat" aria-label={`Odebrat widget ${w.nazev}`} className="rp-upravy__odebrat" onClick={() => odeberWidget(p.id)}>
+                    Odebrat
                   </button>
                 </div>
               ) : null}
@@ -344,8 +344,8 @@ export function Plocha({ data }: { data: DataPanelu }) {
                     <strong>{WIDGETY[id].nazev}</strong>
                     <span className="rp-pozn">{WIDGETY[id].popis}</span>
                   </span>
-                  <button type="button" className="rp-tlacitko rp-tlacitko--vedlejsi" onClick={() => pridejWidget(id)}>
-                    Přidat<span className="sr-only"> widget {WIDGETY[id].nazev}</span>
+                  <button type="button" aria-label={`Přidat widget ${WIDGETY[id].nazev}`} className="rp-tlacitko rp-tlacitko--vedlejsi" onClick={() => pridejWidget(id)}>
+                    Přidat
                   </button>
                 </li>
               ))}
