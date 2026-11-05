@@ -7,8 +7,23 @@ import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
  * Boční navigace administrace. Na širokém displeji je to lepivý panel s vlastním posuvníkem.
  * Na telefonu ji otevře tlačítko Menu jako vysouvací panel přes obsah: Esc a tlačítko Zavřít
  * ho zavřou, fokus se vrátí na tlačítko Menu, po přechodu na jinou stránku se zavře sám.
+ * Administrace obce přidává značku nahoru a kartu dolů (`zahlavi`, `paticka`), správa CodeKom ne.
  */
-export function RozbalovaciNavigace({ popisek, aktualni, children }: { popisek: string; aktualni?: string; children: ReactNode }) {
+export function RozbalovaciNavigace({
+  popisek,
+  aktualni,
+  zahlavi,
+  paticka,
+  children,
+}: {
+  popisek: string
+  aktualni?: string
+  /** Volitelná značka nad menu (znak a název obce). */
+  zahlavi?: ReactNode
+  /** Volitelná karta pod menu. */
+  paticka?: ReactNode
+  children: ReactNode
+}) {
   const id = useId()
   const tlacitko = useRef<HTMLButtonElement>(null)
   const panel = useRef<HTMLDivElement>(null)
@@ -60,7 +75,9 @@ export function RozbalovaciNavigace({ popisek, aktualni, children }: { popisek: 
             Zavřít
           </button>
         </div>
-        {children}
+        {zahlavi}
+        {zahlavi || paticka ? <div className="admin__navigace-seznam">{children}</div> : children}
+        {paticka}
       </div>
     </nav>
   )

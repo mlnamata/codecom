@@ -14,9 +14,29 @@
   --rp-akcent: var(--primary, #1d4ed8);
   --rp-akcent-jemny: var(--primary-subtle, #eff6ff);
   --rp-na-akcentu: var(--on-primary, #ffffff);
-  --rp-ok: #15803d;
-  --rp-varovani: #b45309;
-  --rp-porucha: #b91c1c;
+  --rp-ok: var(--a-zelena-text, #15803d);
+  --rp-varovani: var(--a-zluta-text, #b45309);
+  --rp-porucha: var(--a-cervena-text, #b91c1c);
+  /* Štítky stavu a mapa: tokeny vzhledu administrace (admin-obec.css), jinak světlé výchozí barvy. */
+  --rp-stitek-linka: var(--a-linka-silna, #cbd5e1);
+  --rp-stitek-pozadi: var(--a-karta-2, #f1f5f9);
+  --rp-stitek-text: var(--a-text-2, #1e293b);
+  --rp-ok-pozadi: var(--a-zelena-jemna, #ecfdf3);
+  --rp-ok-linka: var(--a-zelena-linka, #a6e3bd);
+  --rp-varovani-pozadi: var(--a-zluta-jemna, #fff7e6);
+  --rp-varovani-linka: var(--a-zluta-linka, #f5d08a);
+  --rp-porucha-pozadi: var(--a-cervena-jemna, #fef2f2);
+  --rp-porucha-linka: var(--a-cervena-linka, #f4b4ae);
+  --rp-mapa-pozadi: #eef5ea;
+  --rp-mapa-les: #cfe4c4;
+  --rp-mapa-potok: #6fa8dc;
+  --rp-mapa-silnice: #ffffff;
+  --rp-mapa-naves: #e3ecd9;
+  --rp-mapa-naves-linka: #b9cba8;
+  --rp-mapa-text: #1e293b;
+  --rp-znacka: #1e293b;
+  --rp-znacka-okraj: #ffffff;
+  --rp-fokus-mapy: #111827;
   color: var(--rp-text);
   font-size: 15px;
 }
@@ -303,17 +323,17 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--rp-stitek-linka);
   border-radius: 999px;
-  background: #f1f5f9;
-  color: #1e293b;
+  background: var(--rp-stitek-pozadi);
+  color: var(--rp-stitek-text);
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
 }
-.rp-stitek--ok { border-color: #a6e3bd; background: #ecfdf3; color: #075e2f; }
-.rp-stitek--varovani { border-color: #f5d08a; background: #fff7e6; color: #7a4e00; }
-.rp-stitek--porucha { border-color: #f4b4ae; background: #fef2f2; color: #9b1c13; }
+.rp-stitek--ok { border-color: var(--rp-ok-linka); background: var(--rp-ok-pozadi); color: var(--rp-ok); }
+.rp-stitek--varovani { border-color: var(--rp-varovani-linka); background: var(--rp-varovani-pozadi); color: var(--rp-varovani); }
+.rp-stitek--porucha { border-color: var(--rp-porucha-linka); background: var(--rp-porucha-pozadi); color: var(--rp-porucha); }
 
 /* Grafy */
 .rp-graf {
@@ -546,19 +566,20 @@
   border: 1px solid var(--rp-linka);
   border-radius: 12px;
 }
-.rp-mapa__pozadi { fill: #eef5ea; }
-.rp-mapa__les { fill: #cfe4c4; }
-.rp-mapa__potok { fill: none; stroke: #6fa8dc; stroke-width: 14; stroke-linecap: round; }
-.rp-mapa__silnice { fill: none; stroke: #ffffff; stroke-width: 16; stroke-linecap: round; }
-.rp-mapa__naves { fill: #e3ecd9; stroke: #b9cba8; stroke-width: 2; }
-.rp-mapa__popisek { fill: #1e293b; font-size: 24px; }
+.rp-mapa__pozadi { fill: var(--rp-mapa-pozadi); }
+.rp-mapa__les { fill: var(--rp-mapa-les); }
+.rp-mapa__potok { fill: none; stroke: var(--rp-mapa-potok); stroke-width: 14; stroke-linecap: round; }
+.rp-mapa__silnice { fill: none; stroke: var(--rp-mapa-silnice); stroke-width: 16; stroke-linecap: round; }
+.rp-mapa__naves { fill: var(--rp-mapa-naves); stroke: var(--rp-mapa-naves-linka); stroke-width: 2; }
+.rp-mapa__popisek { fill: var(--rp-mapa-text); font-size: 24px; }
 .rp-mapa a { cursor: pointer; }
 .rp-mapa a:focus-visible { outline: none; }
-.rp-mapa a:focus-visible .rp-znacka__kruh { stroke: #111827; stroke-width: 6; }
-.rp-znacka { color: #ffffff; }
-.rp-znacka__kruh { fill: #1e293b; stroke: #ffffff; stroke-width: 3; }
-.rp-znacka.je-vybrana .rp-znacka__kruh { fill: var(--rp-akcent); stroke: #111827; stroke-width: 4; }
-.rp-znacka__vykricnik { fill: var(--rp-porucha); stroke: #ffffff; stroke-width: 2; }
+.rp-mapa a:focus-visible .rp-znacka__kruh { stroke: var(--rp-fokus-mapy); stroke-width: 6; }
+.rp-znacka { color: var(--rp-znacka-okraj); }
+.rp-znacka__kruh { fill: var(--rp-znacka); stroke: var(--rp-znacka-okraj); stroke-width: 3; }
+.rp-znacka.je-vybrana { color: var(--rp-na-akcentu); }
+.rp-znacka.je-vybrana .rp-znacka__kruh { fill: var(--rp-akcent); stroke: var(--rp-fokus-mapy); stroke-width: 4; }
+.rp-znacka__vykricnik { fill: var(--rp-porucha); stroke: var(--rp-znacka-okraj); stroke-width: 2; }
 .rp-znacka--varovani .rp-znacka__vykricnik { fill: #d97706; }
 .rp-seznam button {
   display: flex;
@@ -672,4 +693,18 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .rp-kamera__obraz img { transition: none; }
+}
+
+/* Tmavý vzhled administrace (admin-obec.css): tmavá mapa se světlými značkami. */
+.admin-obec:not([data-vzhled="svetly"]) .rp {
+  --rp-mapa-pozadi: #142420;
+  --rp-mapa-les: #1d3a2c;
+  --rp-mapa-potok: #3f7fbf;
+  --rp-mapa-silnice: #3a4275;
+  --rp-mapa-naves: #22362c;
+  --rp-mapa-naves-linka: #3d5a48;
+  --rp-mapa-text: #eef0fb;
+  --rp-znacka: #eef0fb;
+  --rp-znacka-okraj: #151933;
+  --rp-fokus-mapy: #ffffff;
 }

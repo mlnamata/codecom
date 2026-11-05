@@ -2,8 +2,10 @@
 
 import { usePathname } from 'next/navigation'
 import { useState, type ReactNode } from 'react'
-import { NAZEV_UROVNE, staci, type Uroven } from '@/ukazka/uroven'
+import { ZnakObce } from '@/sablony/sdilene/ZnakObce'
+import { NAZEV_UROVNE, PRINCIP_UROVNE, UROVNE, staci, type Uroven } from '@/ukazka/uroven'
 import { RozbalovaciNavigace } from '../RozbalovaciNavigace'
+import { HledaniVMenu, normalizuj, useHledani } from './Ram'
 
 const Z = '/ukazka/administrace'
 
@@ -224,16 +226,20 @@ const SKUPINY: { nadpis: string; id: string; polozky: { nazev: string; href: str
   },
 ]
 
-function Skupina({ skupina, uroven, cesta }: { skupina: (typeof SKUPINY)[number]; uroven: Uroven; cesta: string }) {
+function Skupina({ skupina, uroven, cesta, dotaz }: { skupina: (typeof SKUPINY)[number]; uroven: Uroven; cesta: string; dotaz: string }) {
   const [otevrena, setOtevrena] = useState(true)
   const idSeznamu = `${skupina.id}-seznam`
+  const polozky = dotaz ? skupina.polozky.filter((p) => normalizuj(p.nazev).includes(dotaz)) : skupina.polozky
+  if (polozky.length === 0) return null
+  // Při hledání jsou skupiny s nálezy vždy rozbalené.
+  const rozbaleno = otevrena || dotaz !== ''
   return (
     <div className="admin__sekce">
       <button
         type="button"
         id={skupina.id}
         className="admin__skupina"
-        aria-expanded={otevrena}
+        aria-expanded={rozbaleno}
         aria-controls={idSeznamu}
         onClick={() => setOtevrena((o) => !o)}
       >
@@ -242,8 +248,8 @@ function Skupina({ skupina, uroven, cesta }: { skupina: (typeof SKUPINY)[number]
           <polyline points="6 9 12 15 18 9" />
         </svg>
       </button>
-      <ul id={idSeznamu} aria-labelledby={skupina.id} hidden={!otevrena}>
-        {skupina.polozky.map((p) => {
+      <ul id={idSeznamu} aria-labelledby={skupina.id} hidden={!rozbaleno}>
+        {polozky.map((p) => {
           const odemceno = staci(uroven, p.od)
           return (
             <li key={p.href}>
@@ -270,14 +276,72 @@ function Skupina({ skupina, uroven, cesta }: { skupina: (typeof SKUPINY)[number]
   )
 }
 
-export function Navigace({ uroven }: { uroven: Uroven }) {
-  const cesta = usePathname()
-  const aktualni = SKUPINY.flatMap((s) => s.polozky).find((p) => p.href === cesta)?.nazev
+/** Pole hledání v horní liště nad položkami tohoto menu. */
+export function HledaniAdministrace() {
+  return <HledaniVMenu nazvy={SKUPINY.flatMap((s) => s.polozky)} />
+}
+
+/** Údaje pro kartu pod menu: předplatné obce a úroveň zvolená v ukázce. */
+export interface KartaPredplatneho {
+  urovenPredplatneho: Uroven | null
+  stavPredplatneho: string | null
+}
+
+function Karta({ uroven, karta }: { uroven: Uroven; karta: KartaPredplatneho }) {
+  const dalsi = UROVNE[UROVNE.indexOf(uroven) + 1]
   return (
-    <RozbalovaciNavigace popisek="Administrace" aktualni={aktualni}>
+    <section className="admin__karta" aria-labelledby="admin-karta-nadpis">
+      <span className="admin__karta-ikona" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z" />
+        </svg>
+      </span>
+      <h2 id="admin-karta-nadpis">Úroveň {NAZEV_UROVNE[uroven]}</h2>
+      <p>
+        {PRINCIP_UROVNE[uroven]}.
+        {karta.urovenPredplatneho ? ` Předplatné obce: ${NAZEV_UROVNE[karta.urovenPredplatneho]}${karta.stavPredplatneho ? `, ${karta.stavPredplatneho}` : ''}.` : ''}
+      </p>
+      {dalsi ? (
+        <a className="admin__karta-akce" href={`?uroven=${dalsi}`}>
+          Vyzkoušet úroveň {NAZEV_UROVNE[dalsi]}
+        </a>
+      ) : (
+        <a className="admin__karta-akce" href="/ukazka/administrace/predplatne">
+          Předplatné a faktury
+        </a>
+      )}
+      <p className="admin__karta-pozn">Ukázka, data se po restartu vrátí</p>
+    </section>
+  )
+}
+
+export function Navigace({ uroven, karta }: { uroven: Uroven; karta: KartaPredplatneho }) {
+  const cesta = usePathname()
+  const { dotaz } = useHledani()
+  const n = normalizuj(dotaz)
+  const aktualni = SKUPINY.flatMap((s) => s.polozky).find((p) => p.href === cesta)?.nazev
+  const nic = n !== '' && !SKUPINY.some((s) => s.polozky.some((p) => normalizuj(p.nazev).includes(n)))
+  return (
+    <RozbalovaciNavigace
+      popisek="Administrace"
+      aktualni={aktualni}
+      zahlavi={
+        <p className="admin__znacka">
+          <a href="/ukazka/administrace">
+            <ZnakObce velikost={32} />
+            <span>
+              <strong>Javoří Lhota</strong>
+              <span>Administrace obce</span>
+            </span>
+          </a>
+        </p>
+      }
+      paticka={<Karta uroven={uroven} karta={karta} />}
+    >
       {SKUPINY.map((s) => (
-        <Skupina key={s.id} skupina={s} uroven={uroven} cesta={cesta} />
+        <Skupina key={s.id} skupina={s} uroven={uroven} cesta={cesta} dotaz={n} />
       ))}
+      {nic ? <p className="admin__nic">V menu nic neodpovídá hledání „{dotaz}“.</p> : null}
     </RozbalovaciNavigace>
   )
 }
