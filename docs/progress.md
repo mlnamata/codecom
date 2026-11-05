@@ -4,6 +4,7 @@ Přehled pro instance Claude, které pracují na repozitáři současně (pravid
 
 | Úkol | Oblast souborů | Stav | Poznámka |
 | --- | --- | --- | --- |
+| Vzhled administrace obce jako SaaS dashboard (tmavý a světlý režim, fialový akcent, menu s ikonami, horní lišta s hledáním, přehled s grafy) | `apps/web/src/app/ukazka/admin.css`, `apps/web/src/app/ukazka/admin-obec.css`, `apps/web/src/app/ukazka/administrace/{layout,page,Navigace,Ram}.tsx`, `RozbalovaciNavigace.tsx`, `tests/a11y/axe.spec.ts` | rozpracováno | agent vzhledu administrace; `panel/` nechává agentovi řídicího panelu, v `Navigace.tsx` mění jen komponenty, ne seznam položek |
 | Řídicí panel obce v administraci jako upravitelná plocha s widgety (přidat, odebrat, přesunout, velikost) | `apps/web/src/app/ukazka/administrace/panel`, `apps/web/src/app/ukazka/panel`, `Navigace.tsx`, `tests/e2e/panel.spec.ts` | rozpracováno | agent řídicího panelu; stará adresa `/ukazka/panel` přesměruje |
 | Přepracování vzhledu šablony 07 Capella (jen fotka v úvodu, jednodušší záhlaví, bez kresby hranice) | `apps/web/src/sablony/hranice` | hotovo | agent šablony 07; snímky 375, 768 a 1280 px prošly |
 | Dotažení šablon 11 Antares, 12 Regulus a 13 Procyon (fotky místo kreseb, cíle, 375 px) | `apps/web/src/sablony/{radnice,kolonada,mlyn}` | hotovo | agent šablon 11 až 13; plánek parcel Procyonu nahradila fotka, stav parcel je v seznamu |
