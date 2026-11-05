@@ -64,6 +64,21 @@ test('axe: ukázka administrace', async ({ page }) => {
   }
 })
 
+/** Všechny obrazovky administrace obce v tmavém i světlém vzhledu (výchozí podle prefers-color-scheme). */
+const OBRAZOVKY_ADMINISTRACE = ['', 'panel', 'posta', 'rozhlas', 'aktuality', 'deska', 'krize', 'zavady', 'schvalovani', 'poplatky', 'smlouvy', 'prepazka', 'stranky', 'skladatel', 'vzhled', 'podweby', 'asistent', 'chytra-obec', 'komunita', 'majetek', 'extranet', 'uzivatele', 'predplatne']
+
+for (const [rezim, schema] of [['tmavy', 'dark'], ['svetly', 'light']] as const) {
+  test(`axe: administrace ve vzhledu ${rezim}`, async ({ page }) => {
+    test.setTimeout(180_000)
+    await page.emulateMedia({ colorScheme: schema })
+    for (const o of OBRAZOVKY_ADMINISTRACE) {
+      await page.goto(`/ukazka/administrace/${o}?uroven=advance`)
+      await expect(page.locator('.admin-obec')).toHaveAttribute('data-vzhled', rezim)
+      await zkontroluj(page, `${rezim} ${o || 'přehled'}`)
+    }
+  })
+}
+
 const OBRAZOVKY_UROVNI = ['stranky', 'skladatel', 'schvalovani', 'vzhled', 'podweby', 'asistent', 'uzivatele', 'predplatne']
 
 for (const uroven of ['zaklad', 'pokrocily', 'advance']) {
@@ -92,4 +107,18 @@ test('axe: řídicí panel v administraci, i v režimu úprav', async ({ page })
   await page.getByRole('button', { name: 'Upravit plochu' }).click()
   await page.getByRole('button', { name: 'Odebrat widget Kamera' }).click()
   await zkontroluj(page, 'řídicí panel v režimu úprav')
+})
+
+test('axe: řídicí panel v tmavém vzhledu administrace, i v režimu úprav', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' })
+  await page.goto('/ukazka/administrace/panel')
+  await page.evaluate(() => window.localStorage.clear())
+  await page.reload()
+  await expect(page.locator('.admin-obec')).toHaveAttribute('data-vzhled', 'tmavy')
+  await zkontroluj(page, 'řídicí panel tmavý')
+  await page.getByRole('button', { name: 'Zobrazit jako seznam' }).click()
+  await zkontroluj(page, 'řídicí panel tmavý, mapa jako seznam')
+  await page.getByRole('button', { name: 'Upravit plochu' }).click()
+  await page.getByRole('button', { name: 'Odebrat widget Kamera' }).click()
+  await zkontroluj(page, 'řídicí panel tmavý v režimu úprav')
 })
