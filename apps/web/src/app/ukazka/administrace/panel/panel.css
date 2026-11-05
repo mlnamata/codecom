@@ -14,6 +14,16 @@
   --rp-akcent: var(--primary, #1d4ed8);
   --rp-akcent-jemny: var(--primary-subtle, #eff6ff);
   --rp-na-akcentu: var(--on-primary, #ffffff);
+  /* Hlavní tlačítko: v administraci obce zelená ze znaku obce s bílým textem. */
+  --rp-tlacitko: var(--a-akcent-tlacitko, var(--primary, #1d4ed8));
+  --rp-tlacitko-hover: var(--a-akcent-tlacitko-hover, #1e40af);
+  --rp-na-tlacitku: var(--a-na-akcentu, #ffffff);
+  --rp-linka-pole: var(--a-linka-pole, #64748b);
+  --rp-tecka-ok: var(--a-zelena, #15803d);
+  --rp-tecka-varovani: var(--a-zluta, #b45309);
+  --rp-tecka-porucha: var(--a-cervena, #b91c1c);
+  --rp-r: var(--a-r, 6px);
+  --rp-r-velke: var(--a-r-velke, 8px);
   --rp-ok: var(--a-zelena-text, #15803d);
   --rp-varovani: var(--a-zluta-text, #b45309);
   --rp-porucha: var(--a-cervena-text, #b91c1c);
@@ -38,7 +48,7 @@
   --rp-znacka-okraj: #ffffff;
   --rp-fokus-mapy: #111827;
   color: var(--rp-text);
-  font-size: 15px;
+  font-size: 16px;
 }
 .rp *,
 .rp *::before,
@@ -55,7 +65,7 @@
 }
 .rp-pozn {
   color: var(--rp-tlumeny);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 /* Záhlaví stránky */
@@ -80,16 +90,15 @@
 }
 .rp-napoveda {
   margin: 0 0 16px;
-  padding: 12px 16px;
-  border: 1px solid var(--rp-akcent);
-  border-radius: 12px;
-  background: var(--rp-akcent-jemny);
+  padding: 8px 16px;
+  border-left: 3px solid var(--rp-linka-pole);
+  background: var(--rp-karta-2);
   color: var(--rp-text);
 }
 .rp-prazdna {
   padding: 32px 16px;
   border: 1px dashed var(--rp-linka-silna);
-  border-radius: 16px;
+  border-radius: var(--rp-r-velke);
   text-align: center;
 }
 .rp-fallback {
@@ -104,23 +113,30 @@
   justify-content: center;
   min-height: 44px;
   padding: 0 16px;
-  border: 1px solid var(--rp-akcent);
-  border-radius: 10px;
-  background: var(--rp-akcent);
-  color: var(--rp-na-akcentu);
+  border: 1px solid var(--rp-tlacitko);
+  border-radius: var(--rp-r);
+  background: var(--rp-tlacitko);
+  color: var(--rp-na-tlacitku);
   font: inherit;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
 }
 .rp .rp-tlacitko:hover {
+  border-color: var(--rp-tlacitko-hover);
+  background: var(--rp-tlacitko-hover);
   text-decoration: none;
-  filter: brightness(1.08);
 }
 .rp .rp-tlacitko--vedlejsi {
   border-color: var(--rp-linka-silna);
-  background: var(--rp-karta);
+  background: transparent;
   color: var(--rp-text);
+  font-weight: 400;
+}
+.rp .rp-tlacitko--vedlejsi:hover {
+  border-color: var(--rp-linka-pole);
+  background: var(--rp-karta-2);
 }
 .rp .rp-tlacitko:disabled {
   border-color: var(--rp-linka);
@@ -154,11 +170,11 @@
 .rp-widget {
   container-type: inline-size;
   min-width: 0;
-  padding: 20px;
+  padding: 12px 20px 20px;
   border: 1px solid var(--rp-linka);
-  border-radius: 16px;
+  border-radius: var(--rp-r-velke);
   background: var(--rp-karta);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: none;
 }
 .rp-widget:focus-visible {
   outline: 2px solid var(--rp-akcent);
@@ -169,7 +185,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 12px;
+  min-height: 32px;
+  margin: 0 -20px 16px;
+  padding: 0 20px 12px;
+  border-bottom: 1px solid var(--rp-linka);
 }
 .admin .stranka .rp-widget__hlava h2 {
   margin: 0;
@@ -204,9 +223,9 @@
   min-height: 44px;
   padding: 0 12px;
   border: 1px solid var(--rp-linka-silna);
-  border-radius: 10px;
+  border-radius: var(--rp-r);
   color: var(--rp-tlumeny);
-  font-size: 13px;
+  font-size: 14px;
   cursor: grab;
   user-select: none;
 }
@@ -216,18 +235,18 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin: 0 0 16px;
-  padding: 12px;
-  border-radius: 12px;
-  background: var(--rp-karta-2);
+  margin: 0 -20px 16px;
+  padding: 0 20px 12px;
+  border-bottom: 1px solid var(--rp-linka);
+  background: transparent;
 }
 .rp-upravy button,
 .rp-upravy select {
   min-height: 44px;
   padding: 0 12px;
   border: 1px solid var(--rp-linka-silna);
-  border-radius: 10px;
-  background: var(--rp-karta);
+  border-radius: var(--rp-r);
+  background: transparent;
   color: var(--rp-text);
   font: inherit;
   font-size: 14px;
@@ -252,11 +271,10 @@
 
 /* Nabídka Přidat widget */
 .rp-pridat {
-  margin-top: 16px;
-  padding: 20px;
-  border: 1px dashed var(--rp-akcent);
-  border-radius: 16px;
-  background: var(--rp-karta);
+  margin-top: 24px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--rp-linka-silna);
+  background: transparent;
 }
 .admin .stranka .rp-pridat h2 {
   margin: 0 0 12px;
@@ -275,9 +293,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px;
+  padding: 8px 12px;
   border: 1px solid var(--rp-linka);
-  border-radius: 12px;
+  border-radius: var(--rp-r-velke);
 }
 .rp-pridat li > span {
   display: grid;
@@ -294,21 +312,26 @@
   font-variant-numeric: tabular-nums;
 }
 .rp-cislo--mensi { font-size: 20px; }
-.rp-souhrn {
+/* Souhrn v řádku: čísla oddělená svislou linkou, žádné krabice */
+.rp .rp-souhrn {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px 0;
+  max-width: none;
+  margin: 0 0 0 -20px;
+  padding: 4px 0;
+  /* Linka na začátku každého řádku se ořízne, zůstanou jen linky mezi čísly. */
+  overflow: hidden;
 }
 .rp-souhrn > div {
-  padding: 12px 16px;
-  border: 1px solid var(--rp-linka);
-  border-radius: 12px;
-  background: var(--rp-karta-2);
+  min-width: 0;
+  margin-left: -1px;
+  padding: 0 20px;
+  border-left: 1px solid var(--rp-linka);
 }
 .rp-souhrn dt {
   color: var(--rp-tlumeny);
-  font-size: 13px;
+  font-size: 14px;
 }
 .rp-souhrn dd { margin: 0; }
 .rp-velka-cisla {
@@ -318,22 +341,30 @@
 }
 .rp-velka-cisla p { margin: 0 0 8px; }
 
-/* Štítky stavu: vždy slovo, barva jen doplňuje */
+/* Stav: slovo s malou tečkou v barvě stavu, ne pilulka */
 .rp-stitek {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
-  border: 1px solid var(--rp-stitek-linka);
-  border-radius: 999px;
-  background: var(--rp-stitek-pozadi);
+  gap: 6px;
   color: var(--rp-stitek-text);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
   white-space: nowrap;
 }
-.rp-stitek--ok { border-color: var(--rp-ok-linka); background: var(--rp-ok-pozadi); color: var(--rp-ok); }
-.rp-stitek--varovani { border-color: var(--rp-varovani-linka); background: var(--rp-varovani-pozadi); color: var(--rp-varovani); }
-.rp-stitek--porucha { border-color: var(--rp-porucha-linka); background: var(--rp-porucha-pozadi); color: var(--rp-porucha); }
+.rp-stitek::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--rp-linka-pole);
+}
+.rp-stitek--ok { color: var(--rp-ok); }
+.rp-stitek--ok::before { background: var(--rp-tecka-ok); }
+.rp-stitek--varovani { color: var(--rp-varovani); }
+.rp-stitek--varovani::before { background: var(--rp-tecka-varovani); }
+.rp-stitek--porucha { color: var(--rp-porucha); font-weight: 600; }
+.rp-stitek--porucha::before { background: var(--rp-tecka-porucha); }
 
 /* Grafy */
 .rp-graf {
@@ -342,8 +373,8 @@
   height: 160px;
 }
 .rp-graf__mrizka { stroke: var(--rp-linka); stroke-width: 0.3; }
-.rp-graf__sloupec { fill: var(--rp-akcent); opacity: 0.45; }
-.rp-graf__sloupec--dnes { opacity: 1; }
+.rp-graf__sloupec { fill: var(--rp-linka-pole); }
+.rp-graf__sloupec--dnes { fill: var(--rp-akcent); }
 .rp-graf__osa {
   display: flex;
   justify-content: space-around;
@@ -377,15 +408,15 @@
   position: relative;
   display: block;
   grid-column: 1 / -1;
-  height: 8px;
-  border-radius: 4px;
+  height: 6px;
+  border-radius: 1px;
   background: var(--rp-karta-2);
 }
 .rp-pruh > span:first-child {
   display: block;
   height: 100%;
-  border-radius: 4px;
-  background: var(--rp-akcent);
+  border-radius: 1px;
+  background: var(--rp-linka-pole);
 }
 .rp-pruh > span.je-pod { background: var(--rp-varovani); }
 .rp-pruh__cil {
@@ -395,23 +426,12 @@
   height: 14px;
   background: var(--rp-text);
 }
-.rp-prstenec-obal {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.rp-souhrn-parkovani {
+  margin: 0;
 }
-.rp-prstenec-obal p { margin: 0; }
-.rp-prstenec {
-  width: 88px;
-  height: 88px;
-  transform: rotate(-90deg);
+.rp-souhrn-parkovani .rp-pozn {
+  display: block;
 }
-.rp-prstenec circle {
-  fill: none;
-  stroke-width: 4;
-}
-.rp-prstenec__podklad { stroke: var(--rp-karta-2); }
-.rp-prstenec__hodnota { stroke: var(--rp-akcent); stroke-linecap: round; }
 
 /* Seznamy ve widgetech */
 .rp-budovy,
@@ -443,11 +463,10 @@
 }
 .rp-upozorneni {
   margin: 8px 0;
-  padding: 8px 12px;
-  border-left: 3px solid var(--rp-porucha);
-  border-radius: 4px;
-  background: var(--rp-karta-2);
-  font-size: 14px;
+  padding: 4px 12px;
+  border-left: 3px solid var(--rp-tecka-porucha);
+  background: transparent;
+  font-size: 15px;
 }
 .rp-mistnosti li {
   display: grid;
@@ -526,29 +545,57 @@
 .rp-zaznam ul { margin: 0; padding-left: 18px; }
 
 /* Mapa */
+/* Vrstvy mapy: zaškrtávací políčka v řádku, přepínač seznamu jako obrysové tlačítko */
 .rp-vrstvy {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  gap: 8px 16px;
   margin-top: 8px;
+}
+.rp-vrstvy__volby {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.rp-vrstvy__volby label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.rp-vrstvy__volby input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--rp-tlacitko);
 }
 .rp-vrstvy button {
   min-height: 44px;
-  padding: 0 14px;
+  padding: 0 12px;
   border: 1px solid var(--rp-linka-silna);
-  border-radius: 999px;
-  background: var(--rp-karta);
+  border-radius: var(--rp-r);
+  background: transparent;
   color: var(--rp-text);
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
 }
-.rp-vrstvy button[aria-pressed="true"] {
-  border-color: var(--rp-akcent);
-  background: var(--rp-akcent);
-  color: var(--rp-na-akcentu);
+.rp-vrstvy button:hover {
+  border-color: var(--rp-linka-pole);
+  background: var(--rp-karta-2);
 }
-.rp-vrstvy button[aria-pressed="true"]::before { content: "✓ "; }
+.rp-vrstvy button[aria-pressed="true"] {
+  border-color: var(--rp-text);
+  background: var(--rp-karta-2);
+  font-weight: 600;
+}
 .rp-vrstvy__seznam { margin-left: auto; }
 .rp-mapa-rozvrzeni {
   display: grid;
@@ -564,7 +611,7 @@
   width: 100%;
   height: auto;
   border: 1px solid var(--rp-linka);
-  border-radius: 12px;
+  border-radius: var(--rp-r-velke);
 }
 .rp-mapa__pozadi { fill: var(--rp-mapa-pozadi); }
 .rp-mapa__les { fill: var(--rp-mapa-les); }
@@ -596,12 +643,12 @@
   text-align: left;
   cursor: pointer;
 }
-.rp-seznam button[aria-pressed="true"] { background: var(--rp-akcent-jemny); }
+.rp-seznam button[aria-pressed="true"] { background: var(--rp-karta-2); box-shadow: inset 3px 0 0 var(--rp-akcent); font-weight: 600; }
 .rp-detail {
   padding: 16px;
   border: 1px solid var(--rp-linka);
-  border-radius: 12px;
-  background: var(--rp-karta-2);
+  border-radius: var(--rp-r-velke);
+  background: transparent;
 }
 .rp-detail:focus-visible { outline: 2px solid var(--rp-akcent); }
 .rp-detail h3 { margin: 0 0 4px; font-size: 18px; }
@@ -613,7 +660,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 9;
-  border-radius: 12px;
+  border-radius: var(--rp-r);
   background: #0f172a;
 }
 .rp-kamera__obraz img {
@@ -626,8 +673,8 @@
 .rp-kamera__ai,
 .rp-kamera__zive {
   position: absolute;
-  padding: 2px 8px;
-  border-radius: 999px;
+  padding: 2px 6px;
+  border-radius: 2px;
   background: rgba(0, 0, 0, 0.75);
   color: #ffffff;
   font-size: 12px;
@@ -650,12 +697,12 @@
 .rp-pole select {
   min-height: 44px;
   padding: 0 12px;
-  border: 1px solid var(--rp-linka-silna);
-  border-radius: 10px;
-  background: var(--rp-karta);
+  border: 1px solid var(--rp-linka-pole);
+  border-radius: var(--rp-r);
+  background: transparent;
   color: var(--rp-text);
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
 }
 .rp-ovladani button:disabled {
@@ -670,10 +717,9 @@
 }
 .rp-pole label { font-weight: 600; }
 .rp-klic {
-  padding: 8px 12px;
-  border-left: 3px solid var(--rp-ok);
-  border-radius: 4px;
-  background: var(--rp-karta-2);
+  padding: 4px 12px;
+  border-left: 3px solid var(--rp-tecka-ok);
+  background: transparent;
 }
 .rp-velky-stav {
   display: flex;
@@ -695,16 +741,28 @@
   .rp-kamera__obraz img { transition: none; }
 }
 
-/* Tmavý vzhled administrace (admin-obec.css): tmavá mapa se světlými značkami. */
+/* Administrace obce (admin-obec.css): střídmá mapa jako katastrální podklad, bez sytých barev. */
+.admin-obec .rp {
+  --rp-mapa-pozadi: #f3f2ee;
+  --rp-mapa-les: #dfe6d9;
+  --rp-mapa-potok: #8fb1c9;
+  --rp-mapa-silnice: #ffffff;
+  --rp-mapa-naves: #e9e8e2;
+  --rp-mapa-naves-linka: #c9c6bb;
+  --rp-mapa-text: #1c1c1b;
+  --rp-znacka: #1c1c1b;
+  --rp-znacka-okraj: #ffffff;
+  --rp-fokus-mapy: #1c1c1b;
+}
 .admin-obec:not([data-vzhled="svetly"]) .rp {
-  --rp-mapa-pozadi: #142420;
-  --rp-mapa-les: #1d3a2c;
-  --rp-mapa-potok: #3f7fbf;
-  --rp-mapa-silnice: #3a4275;
-  --rp-mapa-naves: #22362c;
-  --rp-mapa-naves-linka: #3d5a48;
-  --rp-mapa-text: #eef0fb;
-  --rp-znacka: #eef0fb;
-  --rp-znacka-okraj: #151933;
-  --rp-fokus-mapy: #ffffff;
+  --rp-mapa-pozadi: #222221;
+  --rp-mapa-les: #2a3029;
+  --rp-mapa-potok: #4f6f86;
+  --rp-mapa-silnice: #3a3a37;
+  --rp-mapa-naves: #2b2b29;
+  --rp-mapa-naves-linka: #4a4a46;
+  --rp-mapa-text: #ebe9e3;
+  --rp-znacka: #ebe9e3;
+  --rp-znacka-okraj: #1c1c1b;
+  --rp-fokus-mapy: #f0cf65;
 }

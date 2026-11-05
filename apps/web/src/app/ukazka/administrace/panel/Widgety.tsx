@@ -238,12 +238,16 @@ export function WidgetMapa({ data, zamky }: { data: DataPanelu; zamky: Zamky }) 
   return (
     <>
       <p className="rp-pozn">Data k {aktualizovano}. Klikněte na kameru, čidlo nebo zámek.</p>
-      <div className="rp-vrstvy" role="group" aria-label="Vrstvy mapy">
-        {VRSTVY.map((v) => (
-          <button key={v.druh} type="button" aria-pressed={vrstvy.has(v.druh)} onClick={() => prepniVrstvu(v.druh)}>
-            {v.nazev}
-          </button>
-        ))}
+      <div className="rp-vrstvy">
+        <fieldset className="rp-vrstvy__volby">
+          <legend className="sr-only">Vrstvy mapy</legend>
+          {VRSTVY.map((v) => (
+            <label key={v.druh}>
+              <input type="checkbox" checked={vrstvy.has(v.druh)} onChange={() => prepniVrstvu(v.druh)} />
+              {v.nazev}
+            </label>
+          ))}
+        </fieldset>
         <button type="button" className="rp-vrstvy__seznam" aria-pressed={jakoSeznam} onClick={() => setJakoSeznam((s) => !s)}>
           Zobrazit jako seznam
         </button>
@@ -646,29 +650,16 @@ export function WidgetOdjezdy({ data }: { data: DataPanelu }) {
   )
 }
 
-/** Prstenec obsazenosti: procento je i jako text, prstenec jen doplňuje. */
-function Prstenec({ podil }: { podil: number }) {
-  const r = 15.9155
-  return (
-    <svg className="rp-prstenec" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
-      <circle cx="18" cy="18" r={r} className="rp-prstenec__podklad" />
-      <circle cx="18" cy="18" r={r} className="rp-prstenec__hodnota" strokeDasharray={`${Math.round(podil * 100)} 100`} />
-    </svg>
-  )
-}
-
 export function WidgetParkovani({ data }: { data: DataPanelu }) {
   const kapacita = data.parkovani.reduce((s, p) => s + p.kapacita, 0)
   const volno = data.parkovani.reduce((s, p) => s + p.volno, 0)
   return (
     <>
-      <div className="rp-prstenec-obal">
-        <Prstenec podil={kapacita ? (kapacita - volno) / kapacita : 0} />
-        <p>
-          <span className="rp-cislo">{volno}</span>
-          <span className="rp-pozn">volných míst z {kapacita}</span>
-        </p>
-      </div>
+      {/* Souhrn číslem, obsazenost jednotlivých parkovišť ukazují pruhy pod ním. */}
+      <p className="rp-souhrn-parkovani">
+        <span className="rp-cislo">{volno}</span>
+        <span className="rp-pozn">volných míst z {kapacita}</span>
+      </p>
       <ul className="rp-parkovani">
         {data.parkovani.map((p) => (
           <li key={p.id}>

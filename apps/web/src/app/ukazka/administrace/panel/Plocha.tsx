@@ -234,7 +234,7 @@ export function Plocha({ data }: { data: DataPanelu }) {
               Obnovit výchozí rozložení
             </button>
           ) : null}
-          <button type="button" className="rp-tlacitko" onClick={prepniUpravy}>
+          <button type="button" className={upravuje ? 'rp-tlacitko' : 'rp-tlacitko rp-tlacitko--vedlejsi'} onClick={prepniUpravy}>
             {upravuje ? 'Hotovo' : 'Upravit plochu'}
           </button>
         </div>
