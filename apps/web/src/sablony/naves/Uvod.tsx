@@ -9,12 +9,12 @@ export function Uvod({ banner }: { banner: ReactNode; foto: boolean }) {
   return (
     <>
       {banner}
-      <div style={{ position: "relative" }}>
-        <Foto sablona="naves" styl={{ position: "absolute", inset: "0 0 auto 0", width: "100%", height: "600px", display: "block" }} />
-        {' '}
+      <div className="naves-uvod" style={{ position: "relative", isolation: "isolate" }}>
         <Hlavicka />
         {' '}
-        <main id="obsah" tabIndex={-1} style={{ position: "relative", maxWidth: "1240px", margin: "0 auto", padding: "300px clamp(16px, 4vw, 32px) 64px", display: "flex", flexWrap: "wrap", gap: "24px", alignItems: "flex-start" }}>
+        <main id="obsah" tabIndex={-1} style={{ maxWidth: "1240px", margin: "0 auto", padding: "300px clamp(16px, 4vw, 32px) 64px", display: "flex", flexWrap: "wrap", gap: "24px", alignItems: "flex-start" }}>
+          {/* Fotka je v main kvůli oblastem stránky, polohou ale leží pod záhlavím i obsahem vnějšího bloku. */}
+          <Foto sablona="naves" styl={{ position: "absolute", inset: "0 0 auto 0", width: "100%", height: "600px", display: "block", zIndex: -1 }} />
           <aside aria-label="Rychlé odkazy a počasí" className="m-odkazy" style={{ flex: "1 1 240px", minWidth: "0", display: "flex", flexDirection: "column", gap: "16px" }}>
             <nav className="on-primary" aria-labelledby="obec-menu" style={{ borderRadius: "16px", background: "var(--primary)", color: "var(--on-primary)", padding: "8px" }}>
               <h2 id="obec-menu" className="sr">Rychlá navigace</h2>

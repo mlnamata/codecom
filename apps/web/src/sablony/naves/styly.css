@@ -40,3 +40,5 @@
 .sablona-naves .m-center > section:first-child { order:-3 }
 .sablona-naves .m-odkazy { order:-2 }
 }
+/* Fotka úvodu je uvnitř main (oblasti stránky), záhlaví nad ní proto dostane plnou plochu samo. */
+.sablona-naves .naves-uvod > header { position:relative;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax) }
