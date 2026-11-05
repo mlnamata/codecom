@@ -114,7 +114,7 @@ function PlosnyGraf({ dny, hodnoty, popis }: { dny: string[]; hodnoty: number[];
         <svg className="graf" viewBox="0 0 600 200" preserveAspectRatio="none" role="img" aria-label={popis}>
           <defs>
             <linearGradient id="plocha-vypln" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--a-graf-1)" stopOpacity="0.55" />
+              <stop offset="0%" stopColor="var(--a-graf-1)" stopOpacity="0.28" />
               <stop offset="100%" stopColor="var(--a-graf-1)" stopOpacity="0.02" />
             </linearGradient>
           </defs>
