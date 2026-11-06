@@ -178,7 +178,7 @@ export function PoplatkyKlient() {
   const uhraditHotove = (p: PlatcePoplatku) => {
     setPlatci(platci.map((pol) => (pol.id === p.id ? { ...pol, stav: 'uhrazeno' } : pol)))
     const novyDoklad: PokladniDoklad = {
-      id: `d-${Date.now()}`,
+      id: `d-${doklady.length + 1}`,
       cisloDokladu: `PPD-2026/${143 + doklady.length}`,
       typ: 'prijem',
       datum: 'Právě teď',
@@ -203,7 +203,7 @@ export function PoplatkyKlient() {
     }
     const prefix = typDokladu === 'prijem' ? 'PPD' : 'VPD'
     const novy: PokladniDoklad = {
-      id: `d-${Date.now()}`,
+      id: `d-${doklady.length + 1}`,
       cisloDokladu: `${prefix}-2026/${143 + doklady.length}`,
       typ: typDokladu,
       datum: 'Právě teď',

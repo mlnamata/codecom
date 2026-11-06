@@ -38,7 +38,7 @@ export function RozbalovaciNavigace({
     panel.current?.querySelector<HTMLElement>('a, button')?.focus()
     const priKlavese = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setOtevreno(false)
+        setOtevrenoNa(null)
         tlacitko.current?.focus()
       }
     }

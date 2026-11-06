@@ -126,7 +126,8 @@ export function SmlouvyKlient() {
   const [vybranaSmlouvaWord, setVybranaSmlouvaWord] = useState<ObecniSmlouva | null>(null)
 
   const publikovatDoRegistru = (s: ObecniSmlouva) => {
-    const noveId = `ISRS-9941${Math.floor(100 + Math.random() * 899)}`
+    // Ukázkový identifikátor, odvozený z pořadí smlouvy, aby se při překreslení neměnil.
+    const noveId = `ISRS-UKAZKA-${smlouvy.findIndex((pol) => pol.id === s.id) + 1}`
     setSmlouvy(
       smlouvy.map((pol) =>
         pol.id === s.id ? { ...pol, stavRegistru: 'zverejneno', idRegistru: noveId } : pol,
