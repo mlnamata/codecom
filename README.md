@@ -2,7 +2,7 @@
 
 Platforma pro obce: web s úřední deskou, mobilní aplikace pro občany a úřad, digitální úřad, správa obecních budov (IoT) a AI asistent, který odpovídá z dokumentů obce. Pilot cílí na obce do 2 000 obyvatel v Plzeňském kraji.
 
-Projekt je ve fázi návrhu. V repozitáři jsou podklady, návrhy, rozpracovaný kód webu a prompty, podle kterých Claude Code postaví jednotlivé části. Texty, obsah ukázkové obce, fotky a snímky jsou připravené předem, takže Claude Code jen píše kód.
+Hotové MVP (klikací ukázka webu obce, administrace a firemní web) popisuje [`docs/mvp.md`](docs/mvp.md): co obsahuje, výsledky kontrol a co zbývá před ostrým provozem. V repozitáři jsou podklady, návrhy, rozpracovaný kód webu a prompty, podle kterých Claude Code postaví jednotlivé části. Texty, obsah ukázkové obce, fotky a snímky jsou připravené předem, takže Claude Code jen píše kód.
 
 ## Co kde je
 
